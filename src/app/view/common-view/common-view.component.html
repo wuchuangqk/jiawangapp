@@ -1,0 +1,22 @@
+<ion-header>
+  <ion-toolbar color="secondary">
+    <ion-title>
+      {{title}}
+    </ion-title>
+  </ion-toolbar>
+</ion-header>
+<ion-content>
+  <ion-refresher (ionRefresh)="doRefresh($event)">
+    <ion-refresher-content
+            pullingIcon="arrow-dropdown"
+            pullingText="下拉刷新"
+            refreshingSpinner="circles"
+            refreshingText="刷新...">
+    </ion-refresher-content>
+    <ion-refresher-content >
+    </ion-refresher-content>
+  </ion-refresher>
+    <h2>{{contentTitle}}</h2>
+    <div class="detail-content" [innerHTML]="content"></div>
+</ion-content>
+

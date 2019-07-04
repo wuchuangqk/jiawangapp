@@ -1,0 +1,64 @@
+  //修复登录跳转到首页底部显示登录页样式的问题
+  .icon-wrapper{
+    width: 48px;
+    height: 48px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    color: #ffffff;
+    .icon{
+      font-size: 30px;
+    }
+  }
+  .title-wrapper{
+    height: 48px;
+    box-sizing: border-box;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+  }
+  .weather{
+    display:flex;
+    padding: 0.5rem 1rem;
+    color:#676767;
+    background: #f5f0eb;
+    justify-content:space-between;
+  }
+  section.content{
+    .myRow{
+      display:flex;
+      flex-flow: row wrap;
+      align-content: flex-start;
+      .myCol{
+        flex: 0 0 33.3%;
+        display:flex;
+        justify-content:space-around;
+        flex-direction: column;
+        align-items:center;
+        .img{
+          width: 40px;
+          height:40px;
+          display:flex;
+          justify-content:center;
+          flex-direction: column;
+          align-items:center;
+          &-icon{
+            font-size: 3.5rem;
+          }
+        }
+        text-align:center;
+        padding:10px;
+        box-sizing: border-box;
+        border-right: 1px solid #eee;
+        border-bottom: 1px solid #eee;
+        img.my_icon{
+          width: 43px;
+          height:43px;
+          display:inline-block;
+        }
+        span{
+          font-size: 14px;
+        }
+      }
+    }
+  }

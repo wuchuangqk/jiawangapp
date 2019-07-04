@@ -1,0 +1,37 @@
+<ion-header>
+  <ion-toolbar color="secondary">
+    <ion-title>
+      {{title}}
+    </ion-title>
+  </ion-toolbar>
+</ion-header>
+<ion-content>
+  <section class="add-log">
+    <div class="add-log-header flex">
+      <div class="today-text">今天</div>
+      <div class="today">{{today}}</div>
+      <div>
+        <p>{{day}}</p>
+        <p>{{dateFormmat}}</p>
+      </div>
+    </div>
+    <ion-item>
+      <ion-label>日期</ion-label>
+      <!--          2019-06-02 18:57:20 -->
+      <ion-datetime (ngModelChange)="ngModelChange($event)" type="datetime-local" displayFormat="YYYY-MM-DD" pickerFormat="YYYY-MM-DD" doneText="确定" [(ngModel)]="payload.date" cancelText="取消"></ion-datetime>
+    </ion-item>
+    <div class="add-log-title">上午日志</div>
+    <ion-item>
+      <ion-textarea placeholder="请填写上午日志" [(ngModel)]="payload.morning"></ion-textarea>
+    </ion-item>
+    <div class="add-log-title">下午日志</div>
+    <ion-item>
+      <ion-textarea placeholder="请填写下午日志" [(ngModel)]="payload.afternoon"></ion-textarea>
+    </ion-item>
+  </section>
+</ion-content>
+<ion-footer>
+  <div style="padding:0.3rem;">
+    <ion-button expand="full" (click)="submit()" mode="ios">保存</ion-button>
+  </div>
+</ion-footer>

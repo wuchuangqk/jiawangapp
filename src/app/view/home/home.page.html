@@ -1,0 +1,36 @@
+<ion-header>
+  <ion-toolbar color="secondary">
+    <ion-title>
+      {{title}}
+    </ion-title>
+  </ion-toolbar>
+</ion-header>
+
+<ion-content padding>
+  <ion-refresher (ionRefresh)="doRefresh($event)">
+    <ion-refresher-content
+            pullingIcon="arrow-dropdown"
+            pullingText="下拉刷新"
+            refreshingSpinner="circles"
+            refreshingText="刷新...">
+    </ion-refresher-content>
+    <ion-refresher-content >
+    </ion-refresher-content>
+  </ion-refresher>
+
+  <section class="content">
+    <div class="myRow default-color">
+      <div  *ngFor="let item of itemList" class="myCol" (click)="nav(item.name,{url:item.url||'',title:item.title})">
+        <ion-badge *ngIf="item.bage" color="danger" style="position: absolute; margin-left: 2rem;margin-top: -2rem">
+          {{item.bage}}
+        </ion-badge>
+        <div class="img" [ngStyle]="{color:item.color}" >
+          <ion-icon class="img-icon" [name]="item.icon"></ion-icon>
+        </div>
+        <div class="text">
+          <span class="default-color">{{item.title}}</span>
+        </div>
+      </div>
+    </div>
+  </section>
+</ion-content>

@@ -1,0 +1,29 @@
+// App Styles
+// ----------------------------------------------------------------------------
+// Put style rules here that you want to apply to the entire application. These
+// styles are for the entire app and not just one component. Additionally, this
+// file can hold Sass mixins, functions, and placeholder classes to be imported
+// and used throughout the application.
+html{
+  font-size:10px;
+}
+@import "styles/placeholder";
+@import "styles/reset";
+@import "styles/scrollbar";
+@import "styles/structure";
+@import "styles/common";
+@import "styles/media";
+@import "styles/scroll";
+@import "styles/rectangle";
+@import "styles/card";
+@import "styles/color";
+@import "styles/margin";
+@import "styles/flex";
+@import "styles/segment";
+@import "styles/staff";
+
+
+.swiper-slide{
+  display: block;
+}
+

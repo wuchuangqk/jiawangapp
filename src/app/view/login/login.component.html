@@ -1,0 +1,14 @@
+<div class="login">
+    <img src="assets/images/login/logo.png" alt="#">
+    <ion-list inset>
+        <ion-item>
+            <ion-label>用户名:</ion-label>
+            <ion-input [(ngModel)]="username"  placeholder="请输入系统帐号" type="text"></ion-input>
+        </ion-item>
+        <ion-item>
+            <ion-label>密&nbsp;&nbsp;&nbsp;&nbsp;码:</ion-label>
+            <ion-input [(ngModel)]="password" placeholder="请输入登录密码" type="password"></ion-input>
+        </ion-item>
+    </ion-list>
+        <div class="btn" (click)="login()">登录</div>
+</div>

@@ -1,0 +1,54 @@
+.danger{
+    color:red;
+}
+.title-success{
+    color: #0aa5a8;
+}
+ion-card img {
+    display: block;
+    width: 100%;
+    height:auto;
+}
+.ellipsis{
+    overflow: hidden;
+    text-overflow:ellipsis;
+    white-space: nowrap;
+}
+.toolbar-title{
+    color:#15a9ac;
+}
+.badge{
+    display:inline-block;
+    //background: #5cb85c;
+    border-radius:5px;
+    padding:3px;
+    color:#fff;
+    box-sizing: border-box;
+}
+.outline{
+    display:inline-block;
+    border: 1px solid #eee;
+    border-radius:5px;
+    padding: 3px;
+    box-sizing: border-box;
+}
+footer{
+    font-size:1rem;
+    color:gray;
+    text-align:center;
+}
+.segment-md .segment-button{
+    opacity:1;
+}
+.font-bold{
+    font-weight:bold;
+}
+.text-center{
+    text-align:center;
+}
+.text-black{
+    color:#000;
+}
+.default-color{
+    color:#999999 !important;
+}

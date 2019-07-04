@@ -1,0 +1,58 @@
+<ion-header>
+  <ion-toolbar color="secondary">
+    <ion-title>
+      {{title}}
+    </ion-title>
+  </ion-toolbar>
+</ion-header>
+
+
+<ion-content>
+  <ion-refresher (ionRefresh)="doRefresh($event)">
+    <ion-refresher-content
+            pullingIcon="arrow-dropdown"
+            pullingText="下拉刷新"
+            refreshingSpinner="circles"
+            refreshingText="刷新...">
+    </ion-refresher-content>
+    <ion-refresher-content >
+    </ion-refresher-content>
+  </ion-refresher>
+  <section class="log-list" *ngFor="let _item of list">
+    <div class="log-list-title primary">
+      <div> {{_item.d}} </div>
+    </div>
+    <ion-list class="my-list">
+      <ion-item *ngFor="let item of _item.arr">
+        <ion-avatar item-start>
+          <div class="my-avatar">
+            <p>{{item.d}}</p>
+            <div></div>
+            <p>{{item.week}}</p>
+          </div>
+        </ion-avatar>
+        <div class="log-content">
+          <p>
+            <!--
+                <ion-icon name="sunny"></ion-icon>
+            -->
+            <strong>上午: </strong>
+            <span>{{item.morning||'未填写'}}</span>
+          </p>
+          <div></div>
+          <p>
+            <strong>下午: </strong>
+            <span>{{item.afternoon||'未填写'}}</span>
+          </p>
+        </div>
+      </ion-item>
+    </ion-list>
+
+  </section>
+
+  <ion-fab vertical="bottom" horizontal="end" slot="fixed">
+    <ion-fab-button (click)="nav('work-diary/add',{title:'a',url:'b'})">
+      <ion-icon name="add"></ion-icon>
+    </ion-fab-button>
+  </ion-fab>
+</ion-content>

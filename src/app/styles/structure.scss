@@ -1,0 +1,66 @@
+.myContent{
+    overflow-x: auto;
+    table{
+        tr{
+            td,th{
+                border: 1px solid silver;
+                padding: 3px;
+                white-space:nowrap;
+                text-align:center;
+            }
+        }
+    }
+    p{
+        //text-indent:2em;
+        font-size: 15px;
+        line-height: 30px;
+    }
+    .card-header{
+        text-align:center;
+    }
+    .card-content{
+        margin-top:1px;
+    }
+}
+.col{
+    font-size: 1.4rem;
+}
+[col-3]{
+    white-space:nowrap;
+}
+.my-list{
+    padding-top:5px;
+    color:#b5b5b5;
+    &-title{
+        h2{
+            font-size: 1.8rem;
+            font-family:"Microsoft YaHei";
+            line-height:2.5rem;
+        }
+    }
+    &-sub{
+        color:#b5b5b5;
+        &-top{
+            span{
+                font-size: 1.5rem;
+                line-height: 2.5rem;;
+            }
+            &-last{
+                margin-left:1rem;
+            }
+        }
+    }
+}
+.card-header{
+    .wrapper{
+        margin:0 auto;
+        h2{
+            font-size: 1.5rem;
+            opacity:0.9;
+        }
+        h2.text-black{
+            color:#000;
+        }
+    }
+}
+
