@@ -14,7 +14,9 @@ import { HttpClientModule } from '@angular/common/http';
 import {FormsModule} from '@angular/forms';
 import {NoticeComponent} from './view/notice/notice.component';
 import {CommonViewComponent} from './view/common-view/common-view.component';
-import {HashLocationStrategy, LocationStrategy} from '@angular/common';
+import {DetailComponent} from './view/detail/detail.component';
+import {DocumentHandleComponent} from './view/document-handle/document-handle.component';
+import {CommonComponentsModule} from './common-components/common-components.module';
 
 @NgModule({
 
@@ -22,11 +24,14 @@ import {HashLocationStrategy, LocationStrategy} from '@angular/common';
         AppComponent,
         NoticeComponent,
         CommonViewComponent,
+        DetailComponent,
+        DocumentHandleComponent,
     ],
     entryComponents: [],
     imports: [
         BrowserModule,
         HttpClientModule,
+        CommonComponentsModule,
         IonicModule.forRoot(
             {
                 backButtonText: 'aa',

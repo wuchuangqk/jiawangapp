@@ -38,10 +38,12 @@ export class BasePage implements OnInit {
       }
       return new Promise(((resolve) => {
         this.http.get('/api/v2' + url, data).then((response: Iresponse) => {
-            if (response.status_code === '200') {
-                resolve(response);
-            } else {
-                this.handleErr(response);
+            if (response !== undefined) {
+                if (response.status_code === '200') {
+                    resolve(response);
+                } else {
+                    this.handleErr(response);
+                }
             }
         });
       }));

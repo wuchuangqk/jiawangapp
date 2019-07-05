@@ -3,6 +3,7 @@ import {HttpService} from '../../service/http.service';
 import {ActivatedRoute, Router} from '@angular/router';
 import {DialogService} from '../../service/dialog.service';
 import {DetailBasePage} from '../../base/detail-base-page';
+import {DomSanitizer} from '@angular/platform-browser';
 
 @Component({
   selector: 'app-common-view',
@@ -16,9 +17,10 @@ export class CommonViewComponent extends DetailBasePage implements OnInit {
       public http: HttpService,
       public router: Router,
       public dialogService: DialogService,
+      public sanitizer: DomSanitizer,
       public route?: ActivatedRoute,
   ) {
-    super(http, router, dialogService, route );
+    super(http, router, dialogService, sanitizer );
     this.title = this.query('title');
     this.url = this.query('url');
     this.id = this.query('id');
@@ -26,7 +28,7 @@ export class CommonViewComponent extends DetailBasePage implements OnInit {
   }
 
   ngOnInit() {
-    this.getDetail();
+    this.getDetail({});
   }
 
 }

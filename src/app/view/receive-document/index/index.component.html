@@ -1,5 +1,7 @@
 <ion-header>
   <ion-toolbar color="secondary">
+    <app-back></app-back>
+    <ion-title>
     <div class="segment-wrapper">
       <ion-segment (ngModelChange)="segmentChange($event)" [(ngModel)]="index">
         <ion-segment-button *ngFor="let item of menuList;let i=index" [value]="i">
@@ -7,6 +9,7 @@
         </ion-segment-button>
       </ion-segment>
     </div>
+    </ion-title>
   </ion-toolbar>
 </ion-header>
 
@@ -31,7 +34,7 @@
           <ion-item *ngIf="itemList.length<=0" >
             <p class="primary">无数据！</p>
           </ion-item>
-          <ion-item *ngFor="let item of itemList" (click)="nav('DetailPage',{title:'收文系统',url:payload.url, document_type:0,id:item.id,handle_status:item.handle_status})">
+          <ion-item *ngFor="let item of itemList" (click)="nav('detail',{title:'收文系统',url:'/documents/slist', document_type:0,id:item.id,handle_status:item.handle_status})">
             <section>
               <div class="my-list-title">
                 <h2  [ngClass]="item.read=='0'?'':'primary'">
@@ -54,7 +57,7 @@
           <ion-item *ngIf="itemList.length<=0" >
             <p class="primary">无数据！</p>
           </ion-item>
-          <ion-item *ngFor="let item of shenPiList" (click)="nav('DetailPage',{title:'收文系统',isShenPi:true,url:payload.url, document_type:0,id:item.id,handle_status:item.handle_status})">
+          <ion-item *ngFor="let item of shenPiList" (click)="nav('detail',{title:'收文系统',isShenPi:true,url:'/documents/slist', document_type:0,id:item.id,handle_status:item.handle_status})">
             <section>
               <div class="my-list-title">
                 <h2  [ngClass]="item.read=='0'?'':'primary'">

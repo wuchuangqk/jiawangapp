@@ -1,0 +1,100 @@
+//retry-view .retryview {
+//  width: 100%;
+//  height: 100%;
+//  background: #f5f0eb;
+//}
+//
+//retry-view .retryview-title {
+//  color: #d2d2d2;
+//}
+//
+//.detail-style {
+//  /* 这段主要是为了详情中图片自适应 */
+//}
+
+.detail-style div {
+  background: #f5f0eb;
+  line-height: 22px;
+  line-height: 1.5;
+  font-family: 微软雅黑,宋体;
+  font-size: 18px;
+  word-wrap: break-word;
+  background-color: #ffffff;
+  color: #616161;
+  margin: 0px;
+  white-sapce: normal;
+  clear: both;
+  padding: 10px 10px;
+  /*padding:3px 5%;*/
+  max-width: 100%;
+}
+
+//.detail-style
+fieldset{
+  border-color: #ff0000;
+  border-width: 1px;
+}
+
+.detail-style table {
+  width: 100%;
+}
+
+.detail-style legend {
+  color: #007AFF;
+}
+
+.detail-style ul {
+  list-style-type: none;
+  margin: 6px;
+  padding: 5px;
+}
+
+.detail-style em {
+  display: inline-block;
+  font-weight: bold;
+  font-style: normal;
+  vertical-align: middle;
+}
+
+.detail-style attach {
+  color: blue;
+  text-decoration: underline;
+}
+
+.detail-style label {
+  width: 80px;
+  font-size: 18px;
+  font-weight: bold;
+  margin-right: 6px;
+}
+
+.detail-style li {
+  border-bottom: 1px dashed gray;
+}
+
+.detail-style h1 {
+  padding-top: 1em;
+  text-align: left;
+  font-family: default;
+  font-size: 20px;
+  line-height: 20px;
+  color: #000000;
+  font-weight: normal;
+  margin: 0;
+}
+
+.detail-style h2 {
+  padding-top: 1em;
+  text-align: left;
+  font-family: default;
+  font-size: 12px;
+  line-height: 10px;
+  color: #949494;
+  font-weight: normal;
+  margin-top: 15px;
+  padding: 0;
+}
+.detail-style img {
+  width: 100%;
+  display: block;
+}

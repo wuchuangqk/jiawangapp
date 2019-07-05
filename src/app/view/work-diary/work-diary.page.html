@@ -1,5 +1,6 @@
 <ion-header>
   <ion-toolbar color="secondary">
+    <app-back></app-back>
     <ion-title>
       {{title}}
     </ion-title>
@@ -51,7 +52,7 @@
   </section>
 
   <ion-fab vertical="bottom" horizontal="end" slot="fixed">
-    <ion-fab-button (click)="nav('work-diary/add',{title:'a',url:'b'})">
+    <ion-fab-button (click)="nav('work-diary/add',{title:'添加工作日志',url:'b'})">
       <ion-icon name="add"></ion-icon>
     </ion-fab-button>
   </ion-fab>

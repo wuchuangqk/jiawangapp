@@ -31,6 +31,7 @@ export class HttpService {
   }
   public get(url: string, data): Promise<any> {
     return this.httpRequest.get(url, data).toPromise().catch((error) => {
+      // alert(1);
       this.handleError(error);
     });
   }
@@ -40,6 +41,7 @@ export class HttpService {
     });
   }
   private handleError(error): void {
+      // console.log(error.status);
     this.dialogService.toast(this.failCodeMap.get(error.status).msg);
   }
 }
