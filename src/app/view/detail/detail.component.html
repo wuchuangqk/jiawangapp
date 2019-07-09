@@ -4,7 +4,10 @@
     <ion-title>
       {{title}}
     </ion-title>
-    <div class="title-end" (click)="nav('document-handle',{title:'收发文办理'})" slot="end">办理</div>
+    <div class="title-end"  *ngIf="detail.control==='1'&&!isShenPi" (click)="nav('document-handle',{title:'收发文办理',id:id})" slot="end">办理</div>
+    <div  *ngIf="isShenPi&&detail.control==='0'" slot="end" (click)="nav('document-approve',{ title:'收文审批',id:id })">
+      审批
+    </div>
   </ion-toolbar>
 </ion-header>
 <ion-content>

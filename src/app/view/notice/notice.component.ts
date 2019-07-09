@@ -22,5 +22,8 @@ export class NoticeComponent extends ListBasePage implements OnInit {
   ngOnInit() {
     this.getListData();
   }
+  ionViewDidLeave(){
+
+  }
 }
 

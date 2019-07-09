@@ -1,0 +1,10 @@
+.staff{
+  width: 100%;
+  &-item{
+    display: flex;
+    justify-content: space-between;
+  }
+}
+ion-icon {
+  color: #a2a4ab;
+}

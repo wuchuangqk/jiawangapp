@@ -6,6 +6,7 @@ import { StatusBar } from '@ionic-native/status-bar/ngx';
 import { AppMinimize } from '@ionic-native/app-minimize/ngx';
 import {Subscription} from 'rxjs';
 import { Events } from '@ionic/angular';
+import {AppConfig} from './app.config';
 
 @Component({
   selector: 'app-root',
@@ -40,10 +41,10 @@ export class AppComponent {
   initializeApp() {
     this.initRouterListen();
     this.platform.ready().then(() => {
+        this.splashScreen.hide();
         this.statusBar.styleLightContent();
         //styleLightContent 字体显示成白色
         this.statusBar.backgroundColorByHexString('#0cd1e8');
-        this.splashScreen.hide();
         this.registerBackButtonAction(); // 注册返回按键事件
         this.platform.resume.subscribe(); // 弹出框
     });
@@ -53,7 +54,7 @@ export class AppComponent {
   registerBackButtonAction() {
     this.customBackActionSubscription = this.platform.backButton.subscribe(() => {
       if (this.backButtonPressed) {
-        this.appMinimize.minimize();
+        // this.appMinimize.minimize();
       } else {
         this.toastCtrl.create({
           message: '再按一次退出应用'
@@ -70,6 +71,7 @@ export class AppComponent {
           message: this.url
         }).then(() => {
           // console.log(event.url);
+          this.events.publish(AppConfig.ActivatedRoute.ActivatedRouteChange);
         });
       }
     });

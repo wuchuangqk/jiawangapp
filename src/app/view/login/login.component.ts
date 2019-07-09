@@ -14,9 +14,9 @@ import {Router} from '@angular/router';
 })
 export class LoginComponent extends BasePage implements OnInit {
     public name: any;
-    username: string;
+    username = 'meilinhui';
     userid: number;
-    password: string;
+    password = '12345678';
     num: number;
 
     constructor(

@@ -12,7 +12,7 @@ import {DialogService} from '../../service/dialog.service';
 export class WorkDiaryPage extends BasePage implements OnInit {
 private itemList = [];
 private url = '';
-private list = [];
+public list = [];
 dateSet: Set<string>;
   constructor(
       public http: HttpService,

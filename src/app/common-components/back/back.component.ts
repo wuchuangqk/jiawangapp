@@ -1,4 +1,4 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit,Output,EventEmitter } from '@angular/core';
 import { NavController } from '@ionic/angular';
 @Component({
   selector: 'app-back',
@@ -6,7 +6,7 @@ import { NavController } from '@ionic/angular';
   styleUrls: ['./back.component.scss'],
 })
 export class BackComponent implements OnInit {
-
+  @Output() back = new EventEmitter();
   constructor(
       public navController: NavController
   ) { }
@@ -14,6 +14,7 @@ export class BackComponent implements OnInit {
   ngOnInit() {}
   goBack() {
     this.navController.back();
+    this.back.emit();
   }
 
 }

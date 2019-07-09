@@ -1,0 +1,19 @@
+<ion-header>
+  <ion-toolbar color="secondary">
+    <app-back></app-back>
+    <ion-title>
+      {{title}}
+    </ion-title>
+  </ion-toolbar>
+</ion-header>
+<ion-content>
+
+    <ion-item>
+        <ion-textarea placeholder="请输入意见" [(ngModel)]="payload.morning"></ion-textarea>
+    </ion-item>
+    <!--  eventName 表示监听 事件名称-->
+    <app-staff (click)="go('getStaffs', selectedStaff)" title="选择流程名单" eventName="getStaffs" [(selectedStaff)]="selectedStaff"></app-staff>
+    <app-staff (click)="go('get', _selectedStaff)" title="选择查看名单" eventName="get" [(selectedStaff)]="_selectedStaff"></app-staff>
+
+    <ion-button expand="full" (click)="save(payload.morning)">提交</ion-button>
+</ion-content>

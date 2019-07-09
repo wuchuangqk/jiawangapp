@@ -15,11 +15,11 @@ export class IndexComponent extends BasePage implements OnInit {
     @ViewChild(IonSlides) slides: IonSlides;
     itemList = [];
     shenPiList = [];
-    private menuList = [
+    public menuList = [
         { title: '收文系统' },
         { title: '收文审核' }
     ];
-    private index = 0;
+    public index = 0;
     constructor(
         public http: HttpService,
         public router: Router,

@@ -4,6 +4,8 @@ import {HttpService} from '../../service/http.service';
 import {ActivatedRoute, Router} from '@angular/router';
 import {DialogService} from '../../service/dialog.service';
 import { DomSanitizer } from '@angular/platform-browser';
+import {Events} from '@ionic/angular';
+import {AppConfig} from '../../app.config';
 
 @Component({
   selector: 'app-detail',
@@ -12,6 +14,7 @@ import { DomSanitizer } from '@angular/platform-browser';
 })
 export class DetailComponent  extends DetailBasePage implements OnInit {
   public title = '详情';
+  public isShenPi: boolean;
   public payload: {
     document_type: string
   };
@@ -20,15 +23,20 @@ export class DetailComponent  extends DetailBasePage implements OnInit {
       public router: Router,
       public dialogService: DialogService,
       public sanitizer: DomSanitizer,
+      public events: Events,
       public route?: ActivatedRoute,
   ) {
     super( http, router, dialogService, sanitizer);
     this.url = this.query('url');
     this.id = this.query('id');
+    this.isShenPi = this.getQueryParams().isShenPi;
     this.payload.document_type = this.query('document_type');
   }
 
   ngOnInit() {
     this.getDetail(this.payload);
+    this.events.subscribe(AppConfig.Document.DocumentDetail, () => {
+      this.getDetail(this.payload);
+    });
   }
 }

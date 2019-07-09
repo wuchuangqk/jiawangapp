@@ -1,0 +1,13 @@
+<ion-item>
+  <div class="staff">
+    <p class="staff-title">{{title}}</p>
+    <section class="staff-item">
+        <section class="staff-item-wrapper">
+            <app-circle-text *ngFor="let item of selectedStaff" [name]="item.name"></app-circle-text>
+        </section>
+        <div class="staff-item-icon">
+            <ion-icon size="large" slot="end" name="add-circle-outline"></ion-icon>
+        </div>
+    </section>
+  </div>
+</ion-item>

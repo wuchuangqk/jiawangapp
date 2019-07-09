@@ -12,9 +12,9 @@ import {DatePipe} from '@angular/common';
   styleUrls: ['./add.component.scss'],
 })
 export class AddComponent extends BasePage implements OnInit {
-  private today: number;
-  private dateFormmat: string;
-  private day: string;
+  public today: number;
+  public dateFormmat: string;
+  public day: string;
   public payload = {
     url: '/work_logs/add',
     date: '',

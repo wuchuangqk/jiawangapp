@@ -23,13 +23,17 @@ export class BasePage implements OnInit {
     }
   }
     nav(path, queryParams?) {
-        this.router.navigate([path], { queryParams});
+        return this.router.navigate([path], { queryParams});
     }
     query(name ) {
         return this.route.snapshot.queryParams[name];
     }
-
-
+    getQueryParams() {
+        return this.route.snapshot.queryParams;
+    }
+    getParams() {
+        return this.route.snapshot.params;
+    }
 
 
   public  request(url, data ): Promise < Iresponse > {
@@ -65,6 +69,8 @@ export class BasePage implements OnInit {
   public handleErr(data: Iresponse) {
       if (data.status_code === '10000') {
           this.dialogService.toast(data.msg);
+      } else if (data.status_code === '30000') {
+          this.dialogService.alert(data.msg);
       }
   }
 }

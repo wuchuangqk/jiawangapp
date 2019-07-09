@@ -2,13 +2,13 @@ import { Injectable } from '@angular/core';
 import { HttpClient } from '@angular/common/http';
 import {Observable} from 'rxjs';
 import { UtilService } from './util.service';
-
+import { environment } from '../../environments/environment.prod';
 
 @Injectable({
   providedIn: 'root'
 })
 export class HttpRequestService {
-  public BaseUrl = '';
+  public BaseUrl = environment.host;
   private configUrl = 'assets/config.json';
   // public BaseUrl:string='http://192.168.1.7:7007/api/v2';
   private SECERET_KEY = 'com.yuangsong.102515';

@@ -17,6 +17,7 @@ import {CommonViewComponent} from './view/common-view/common-view.component';
 import {DetailComponent} from './view/detail/detail.component';
 import {DocumentHandleComponent} from './view/document-handle/document-handle.component';
 import {CommonComponentsModule} from './common-components/common-components.module';
+import {DocumentApproveComponent} from './view/document-approve/document-approve.component';
 
 @NgModule({
 
@@ -26,6 +27,7 @@ import {CommonComponentsModule} from './common-components/common-components.modu
         CommonViewComponent,
         DetailComponent,
         DocumentHandleComponent,
+        DocumentApproveComponent,
     ],
     entryComponents: [],
     imports: [

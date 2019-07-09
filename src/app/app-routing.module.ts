@@ -4,6 +4,7 @@ import {NoticeComponent} from './view/notice/notice.component';
 import {CommonViewComponent} from './view/common-view/common-view.component';
 import {DetailComponent} from './view/detail/detail.component';
 import {DocumentHandleComponent} from './view/document-handle/document-handle.component';
+import {DocumentApproveComponent} from './view/document-approve/document-approve.component';
 
 const routes: Routes = [
   { path: '', redirectTo: 'login', pathMatch: 'full' },
@@ -18,6 +19,7 @@ const routes: Routes = [
   { path: 'receive-document', loadChildren: './view/receive-document/receive-document.module#ReceiveDocumentModule' },
   { path: 'send-document', loadChildren: './view/send-document/send-document.module#SendDocumentModule' },
   { path: 'document-handle', component: DocumentHandleComponent },
+  { path: 'document-approve', component: DocumentApproveComponent },
 
 
 ];

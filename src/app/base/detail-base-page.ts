@@ -6,12 +6,16 @@ import {BasePage} from './base-page';
 import {DomSanitizer, SafeHtml} from '@angular/platform-browser';
 interface IDetail {
     content: string;
+    control?: string;
 }
 export class DetailBasePage extends BasePage {
     public payload = {};
     public url: string;
     public id: string;
-    public detail: IDetail;
+    public detail: IDetail = {
+        content: '',
+        control: ''
+};
     public content: SafeHtml = '';
   constructor(
       public http: HttpService,
