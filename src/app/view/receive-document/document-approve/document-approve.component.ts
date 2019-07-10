@@ -1,7 +1,7 @@
 import { Component, OnInit } from '@angular/core';
-import {BasePage} from '../../base/base-page';
-import {HttpService} from '../../service/http.service';
-import {DialogService} from '../../service/dialog.service';
+import {BasePage} from '../../../base/base-page';
+import {HttpService} from '../../../service/http.service';
+import {DialogService} from '../../../service/dialog.service';
 import {ActivatedRoute, Router} from '@angular/router';
 import {NavController} from '@ionic/angular';
 
@@ -24,7 +24,7 @@ export class DocumentApproveComponent extends BasePage implements OnInit {
       public navController: NavController,
       public route?: ActivatedRoute,
   ) {
-    super(http, router, dialogService);
+    super(http, router, navController, dialogService);
     this.title = this.query('title');
     this.id = this.query('id');
   }

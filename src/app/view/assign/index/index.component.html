@@ -1,0 +1,100 @@
+<ion-header>
+  <ion-toolbar color="secondary">
+    <app-back></app-back>
+    <ion-title>
+      <div class="segment-wrapper">
+        <ion-segment mode="ios" color="white" small (ngModelChange)="ngModelChange($event)" [(ngModel)]="index">
+          <ion-segment-button *ngFor="let item of menuList" [value]="item.index">
+            {{item.name}}
+          </ion-segment-button>
+        </ion-segment>
+      </div>
+    </ion-title>
+  </ion-toolbar>
+</ion-header>
+
+<ion-content>
+  <ion-refresher (ionRefresh)="doRefresh($event)">
+    <ion-refresher-content
+            pullingIcon="arrow-dropdown"
+            pullingText="下拉刷新"
+            refreshingSpinner="circles"
+            refreshingText="刷新...">
+    </ion-refresher-content>
+  </ion-refresher>
+  <section>
+
+    <ion-slides (ionSlideWillChange)="change()">
+      <ion-slide>
+        <ion-list class="my-list">
+          <ion-item *ngIf="backlogList.length<1">
+            <p class="primary">无数据! </p>
+          </ion-item>
+          <ion-item *ngFor="let item of backlogList" (click)="nav('detail',{title:'收文系统',url:'/letter/list/', handleUrl:'/letter/handle_letter',document_type:1,id:item.id,handle_status:item.handle_status})">
+            <section>
+
+              <div class="my-list-title">
+                <h2>{{item.title}}</h2>
+              </div>
+              <div class="my-list-sub">
+                <div class="my-list-sub-top">
+                  <ion-grid>
+                    <ion-row>
+                      <ion-col col-6>督办类别：{{item.letterType}} </ion-col>
+                      <ion-col col-6>办理事项：{{item.letterSource}}</ion-col>
+                    </ion-row>
+                  </ion-grid>
+                </div>
+                <div class="my-list-sub-top">
+                  <ion-grid>
+                    <ion-row>
+                      <ion-col col-6>填报日期:{{item.fillDate}}</ion-col>
+                      <ion-col col-6>最迟办理:{{item.latestDate}}</ion-col>
+                    </ion-row>
+                  </ion-grid>
+                </div>
+              </div>
+            </section>
+          </ion-item>
+        </ion-list>
+      </ion-slide>
+      <ion-slide>
+        <ion-list class="my-list">
+          <ion-item *ngFor="let item of doneList" (click)="nav('detail',{title:'已办事项', id:item.id, url:'/letter/list/' })">
+            <section>
+
+            <div class="my-list-title">
+              <h2>{{item.title}}</h2>
+            </div>
+
+            <div class="my-list-sub">
+              <div class="my-list-sub-top">
+                <ion-grid>
+                  <ion-row>
+                    <ion-col col-6>督办类别：{{item.letterType}} </ion-col>
+                    <ion-col col-6>办理事项：{{item.letterSource}}</ion-col>
+                  </ion-row>
+                </ion-grid>
+              </div>
+              <div class="my-list-sub-top">
+                <ion-grid>
+                  <ion-row>
+                    <ion-col col-6>填报日期:{{item.fillDate}}</ion-col>
+                    <ion-col col-6>最迟办理:{{item.latestDate}}</ion-col>
+                  </ion-row>
+                </ion-grid>
+              </div>
+            </div>
+            </section>
+          </ion-item>
+        </ion-list>
+      </ion-slide>
+    </ion-slides>
+
+  </section>
+  <ion-fab vertical="bottom" horizontal="end" slot="fixed">
+    <ion-fab-button (click)="nav('assign/add',{title:'添加工作日志',url:'b'})">
+      <ion-icon name="add"></ion-icon>
+    </ion-fab-button>
+  </ion-fab>
+</ion-content>

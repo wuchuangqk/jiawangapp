@@ -23,12 +23,12 @@ export class LoginComponent extends BasePage implements OnInit {
         public http: HttpService,
         public router: Router,
         public dialogService: DialogService,
+        public navController: NavController,
         private events: Events,
-        private navController: NavController,
         private platform: Platform,
         private alertController: AlertController,
     ) {
-        super(http, router, dialogService);
+        super(http, router, navController, dialogService);
         // this.name = this.router.query('name');
         this.platform.ready().then(() => {
         });

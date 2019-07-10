@@ -37,7 +37,7 @@ export class StaffSelectComponent extends BasePage implements OnInit, OnDestroy 
         public navController: NavController,
         public route?: ActivatedRoute,
     ) {
-        super(http, router, dialogService);
+        super(http, router, navController, dialogService);
         // this.callback = this.query('callback');
         this.isSelectOne = this.query('isSelectOne') === 'true' ? true : false;
         console.log(this.isSelectOne);

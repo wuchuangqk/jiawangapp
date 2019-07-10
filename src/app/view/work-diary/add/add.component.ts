@@ -5,6 +5,8 @@ import {ActivatedRoute, Router} from '@angular/router';
 import {DialogService} from '../../../service/dialog.service';
 import { DateProvider } from '../../../service/Date';
 import {DatePipe} from '@angular/common';
+import { NavController } from '@ionic/angular';
+
 
 @Component({
   selector: 'app-add',
@@ -25,11 +27,12 @@ export class AddComponent extends BasePage implements OnInit {
   constructor(
       public http: HttpService,
       public router: Router,
+      public navController: NavController,
       public dialogService: DialogService,
       private dateProvider: DateProvider,
       public route?: ActivatedRoute,
   ) {
-      super(http, router, dialogService);
+      super(http, router, navController, dialogService);
       this.title = this.query('title');
     // this.url = this.query('url');
 

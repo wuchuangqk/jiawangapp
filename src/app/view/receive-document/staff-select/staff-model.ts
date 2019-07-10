@@ -30,9 +30,9 @@ export class Staff {
 
             if (s.name.length <= 2) {
                 s.circleText = s.name;
-            } else if (s.name.length == 3) {
+            } else if (s.name.length ===  3) {
                 s.circleText = s.name.substring(1);
-            } else if (s.name.length == 4) {
+            } else if (s.name.length === 4) {
                 s.circleText = s.name.substring(2);
             } else {
                 s.circleText = s.name.substring(0, 2);

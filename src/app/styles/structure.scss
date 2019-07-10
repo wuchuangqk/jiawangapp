@@ -4,16 +4,15 @@
         tr{
             td,th{
                 border: 1px solid silver;
-                padding: 3px;
+                padding: 0.3rem;
                 white-space:nowrap;
                 text-align:center;
             }
         }
     }
     p{
-        //text-indent:2em;
-        font-size: 15px;
-        line-height: 30px;
+        font-size: 1.5rem;
+        line-height: 3rem;
     }
     .card-header{
         text-align:center;
@@ -39,13 +38,12 @@
         }
     }
     &-sub{
+        padding-bottom: 1rem;
         color:#b5b5b5;
         &-top{
-            span{
-                font-size: 1.5rem;
-                line-height: 2.5rem;;
-            }
-            &-last{
+            font-size: 1.5rem;
+            line-height: 1.5rem;;
+            span:last-child{
                 margin-left:1rem;
             }
         }

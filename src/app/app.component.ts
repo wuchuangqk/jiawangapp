@@ -18,12 +18,12 @@ export class AppComponent {
   customBackActionSubscription: Subscription;
   url;
   constructor(
-      private platform: Platform,
-      private splashScreen: SplashScreen,
-      private statusBar: StatusBar,
-      private router: Router,
-      private appMinimize: AppMinimize,
-      private events: Events,
+      public platform: Platform,
+      public splashScreen: SplashScreen,
+      public statusBar: StatusBar,
+      public router: Router,
+      public appMinimize: AppMinimize,
+      public events: Events,
       public navController: NavController, // 导航控制器
       public toastCtrl: ToastController,
   ) {
@@ -31,7 +31,7 @@ export class AppComponent {
     // this.isLogin();
   }
 
-  private isLogin() {
+  public isLogin() {
     if (!localStorage.isLogin) {
       this.navController.navigateRoot('login');
     } else {
@@ -43,7 +43,7 @@ export class AppComponent {
     this.platform.ready().then(() => {
         this.splashScreen.hide();
         this.statusBar.styleLightContent();
-        //styleLightContent 字体显示成白色
+        // styleLightContent 字体显示成白色
         this.statusBar.backgroundColorByHexString('#0cd1e8');
         this.registerBackButtonAction(); // 注册返回按键事件
         this.platform.resume.subscribe(); // 弹出框

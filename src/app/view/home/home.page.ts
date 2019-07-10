@@ -4,6 +4,8 @@ import {BasePage} from '../../base/base-page';
 import { HomeModel } from './home.page.model';
 import {DialogService} from '../../service/dialog.service';
 import {Router} from '@angular/router';
+import { NavController } from '@ionic/angular';
+
 
 interface IConfig {
     url: string;
@@ -21,8 +23,9 @@ export class HomePage extends BasePage {
         public http: HttpService,
         public router: Router,
         public dialogService: DialogService,
+        public navController: NavController,
     ) {
-        super( http, router, dialogService);
+        super( http, router, navController, dialogService);
     }
 
 }

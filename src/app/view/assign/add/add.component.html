@@ -1,0 +1,53 @@
+<ion-header>
+  <ion-toolbar color="secondary">
+    <app-back></app-back>
+    <ion-title>
+      {{title}}
+    </ion-title>
+  </ion-toolbar>
+</ion-header>
+
+<ion-content class="bg-style add-style">
+  <ion-item>
+    <ion-label class="prefix-title">标题</ion-label>
+    <ion-input placeholder="请输入标题" [(ngModel)]="params.lettertitle"></ion-input>
+  </ion-item>
+  <ion-item>
+    <ion-label class="prefix-title">办理事项</ion-label>
+    <ion-select cancelText="取消" okText="确定" [(ngModel)]="params.lettersource">
+      <ion-select-option *ngFor="let item of banLiShiXiang" [value]="item.name">{{item.name}}</ion-select-option>
+    </ion-select>
+  </ion-item>
+  <ion-item>
+    <ion-label class="prefix-title">督办类别</ion-label>
+    <ion-select cancelText="取消" okText="确定" [(ngModel)]="params.lettertype">
+      <ion-select-option *ngFor="let item of duBanCatogray" [value]="item.name">{{item.name}}</ion-select-option>
+    </ion-select>
+  </ion-item>
+  <ion-item>
+    <ion-label>拟交办日期</ion-label>
+    <ion-datetime (ngModelChange)="ngModelChange($event)" type="datetime-local" displayFormat="YYYY-MM-DD HH:mm" pickerFormat="YYYY-MM-DD HH:mm" doneText="确定" [(ngModel)]="fillDate" cancelText="取消"></ion-datetime>
+  </ion-item>
+  <ion-item>
+    <ion-label>办结期限</ion-label>
+    <ion-datetime (ngModelChange)="ngModelChange($event)" type="datetime-local" displayFormat="YYYY-MM-DD HH:mm" pickerFormat="YYYY-MM-DD HH:mm" doneText="确定" [(ngModel)]="latestDate" cancelText="取消"></ion-datetime>
+  </ion-item>
+  <ion-item>
+    <ion-label class="prefix-title">拟办意见</ion-label>
+    <ion-textarea placeholder="拟办意见" [(ngModel)]="params.contactemail"></ion-textarea>
+  </ion-item>
+  <ion-item>
+    <ion-label class="prefix-title">内容</ion-label>
+    <ion-textarea placeholder="请输入内容" [(ngModel)]="params.lettercontent"></ion-textarea>
+  </ion-item>
+  <app-staff (click)="go('getSt', selectedStaff,true)" title="选择流程名单" eventName="getSt" [(selectedStaff)]="selectedStaff"></app-staff>
+  <app-staff (click)="go('getSta', _selectedStaff,false)" title="选择流程名单" eventName="getSta" [(selectedStaff)]="_selectedStaff"></app-staff>
+</ion-content>
+
+<ion-footer>
+  <div style="padding: 1.5rem; display: flex;">
+    <ion-button (click)="save()" style="flex: 1">
+      保  存
+    </ion-button>
+  </div>
+</ion-footer>

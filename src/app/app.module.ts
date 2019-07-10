@@ -14,10 +14,10 @@ import { HttpClientModule } from '@angular/common/http';
 import {FormsModule} from '@angular/forms';
 import {NoticeComponent} from './view/notice/notice.component';
 import {CommonViewComponent} from './view/common-view/common-view.component';
-import {DetailComponent} from './view/detail/detail.component';
-import {DocumentHandleComponent} from './view/document-handle/document-handle.component';
+import {DetailComponent} from './view/receive-document/detail/detail.component';
+import {DocumentHandleComponent} from './view/receive-document/document-handle/document-handle.component';
 import {CommonComponentsModule} from './common-components/common-components.module';
-import {DocumentApproveComponent} from './view/document-approve/document-approve.component';
+import {DocumentApproveComponent} from './view/receive-document/document-approve/document-approve.component';
 
 @NgModule({
 

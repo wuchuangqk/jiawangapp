@@ -1,10 +1,10 @@
 import { Component, OnInit } from '@angular/core';
-import {BasePage} from '../../base/base-page';
-import {HttpService} from '../../service/http.service';
+import {BasePage} from '../../../base/base-page';
+import {HttpService} from '../../../service/http.service';
 import {ActivatedRoute, Router} from '@angular/router';
-import {DialogService} from '../../service/dialog.service';
+import {DialogService} from '../../../service/dialog.service';
 import {Events, NavController} from '@ionic/angular';
-import {AppConfig} from '../../app.config';
+import {AppConfig} from '../../../app.config';
 
 @Component({
   selector: 'app-document-handle',
@@ -12,8 +12,10 @@ import {AppConfig} from '../../app.config';
   styleUrls: ['./document-handle.component.scss'],
 })
 export class DocumentHandleComponent extends BasePage implements OnInit {
+  public url = '';
   payload = {
-    morning: ''
+    morning: '',
+    url: ''
   };
   documentType: string;
   id: string;
@@ -26,9 +28,11 @@ export class DocumentHandleComponent extends BasePage implements OnInit {
       public navController: NavController,
       public route?: ActivatedRoute,
   ) {
-    super(http, router, dialogService);
+    super(http, router, navController, dialogService);
     this.title = this.query('title');
     this.id = this.query('id');
+    this.url = this.query('handleUrl');
+    this.documentType = this.query('document_type');
   }
 
   ngOnInit() {
@@ -61,7 +65,7 @@ export class DocumentHandleComponent extends BasePage implements OnInit {
     this.dialogService.toast('正在提交数据...');
     const params = new Map<string, string>();
     const payload: any = {
-      url: '/documents/handle_document',
+      url: this.url,
       id: this.id
     };
     if (this.documentType === '1') {// 发文才需要finish字段 0：直接保存 1：文件签发

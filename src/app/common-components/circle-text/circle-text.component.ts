@@ -7,7 +7,7 @@ import { Component, OnInit , Input} from '@angular/core';
 })
 export class CircleTextComponent implements OnInit {
   @Input() name: string;
-  private _name: string;
+  public _name: string;
   constructor() {
   }
 

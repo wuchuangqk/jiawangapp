@@ -1,4 +1,5 @@
 import { OnInit } from '@angular/core';
+import { NavController } from '@ionic/angular';
 import { HttpService } from '../service/http.service';
 import { DialogService } from '../service/dialog.service';
 import {ActivatedRoute, Router} from '@angular/router';
@@ -8,6 +9,7 @@ export class BasePage implements OnInit {
   constructor(
       public http: HttpService,
       public router: Router,
+      public navController: NavController,
       public dialogService: DialogService,
       public route?: ActivatedRoute,
   ) {
@@ -70,7 +72,9 @@ export class BasePage implements OnInit {
       if (data.status_code === '10000') {
           this.dialogService.toast(data.msg);
       } else if (data.status_code === '30000') {
-          this.dialogService.alert(data.msg);
+          this.dialogService.alert(data.msg, () => {
+              this.navController.navigateRoot('login');
+          });
       }
   }
 }

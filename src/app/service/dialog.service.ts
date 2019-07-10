@@ -12,9 +12,20 @@ export class DialogService {
       private loadingController: LoadingController,
   ) {
   }
-  async alert(message: string) {
+  async alert(message: string, backFn?: Function) {
     const alert = await this.alertController.create({
-      message
+      message,
+      buttons: [
+        {
+          text: '确定',
+          role: 'cancel',
+          handler: () => {
+              if (backFn) {
+                  backFn();
+              }
+          }
+        }
+      ]
     });
     alert.present();
   }

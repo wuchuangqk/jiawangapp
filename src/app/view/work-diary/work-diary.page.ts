@@ -3,6 +3,8 @@ import {BasePage} from '../../base/base-page';
 import {ActivatedRoute, Router} from '@angular/router';
 import {HttpService} from '../../service/http.service';
 import {DialogService} from '../../service/dialog.service';
+import { NavController } from '@ionic/angular';
+
 
 @Component({
   selector: 'app-work-diary',
@@ -17,13 +19,13 @@ dateSet: Set<string>;
   constructor(
       public http: HttpService,
       public router: Router,
+      public navController: NavController,
       public dialogService: DialogService,
       public route?: ActivatedRoute,
   ) {
-      super(http, router, dialogService, route );
+      super(http, router, navController, dialogService, route );
       this.title = this.query('title');
       this.url = this.query('url');
-
   }
 
   ngOnInit() {
