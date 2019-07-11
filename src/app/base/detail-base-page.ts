@@ -42,7 +42,7 @@ export class DetailBasePage extends BasePage {
       super.doRefresh(event);
       this.getDetail(this.payload);
   }
-    private transform(content): SafeHtml {
+    public transform(content): SafeHtml {
         return this.sanitizer.bypassSecurityTrustHtml(content);
     }
 }

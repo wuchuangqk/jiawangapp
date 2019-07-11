@@ -1,0 +1,37 @@
+<ion-header>
+  <ion-toolbar color="secondary">
+    <app-back slot="start"></app-back>
+    <ion-title>
+      {{title}}
+    </ion-title>
+  </ion-toolbar>
+</ion-header>
+<ion-content>
+
+  <ion-refresher (ionRefresh)="doRefresh($event)">
+    <ion-refresher-content
+            pullingIcon="arrow-dropdown"
+            pullingText="下拉刷新"
+            refreshingSpinner="circles"
+            refreshingText="刷新...">
+    </ion-refresher-content>
+    <ion-refresher-content >
+    </ion-refresher-content>
+  </ion-refresher>
+
+  <section>
+    <div class="detail-style" [innerHTML]="content"></div>
+    <ion-item>
+      <ion-textarea placeholder="请输入意见"  [(ngModel)]="payload.option"></ion-textarea>
+    </ion-item>
+      <app-staff (click)="go('getSt', selectedStaff,false)" title="选择下级处理人" eventName="getSt" [(selectedStaff)]="selectedStaff"></app-staff>
+  </section>
+</ion-content>
+
+<ion-footer>
+  <ion-toolbar>
+    <ion-button expand="full" size="small" (click)="save()" style="flex: 1">
+      保  存
+    </ion-button>
+  </ion-toolbar>
+</ion-footer>

@@ -61,3 +61,8 @@
         }
     }
 }
+ion-item{
+    &>section{
+        width: 100%;
+    }
+}

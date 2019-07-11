@@ -1,0 +1,67 @@
+<ion-header>
+  <ion-toolbar color="secondary">
+    <app-back></app-back>
+    <ion-title>
+      {{title}}
+    </ion-title>
+  </ion-toolbar>
+</ion-header>
+
+
+<ion-content class="bg-style add-style">
+
+
+    <ion-item>
+        <ion-label>申请部门</ion-label>
+        <ion-select [(ngModel)]="params.zgbumen" cancelText="取消" okText="确定">
+            <ion-select-option *ngFor="let item of qjtypeList" [value]="item.id">{{item.name}}</ion-select-option>
+        </ion-select>
+    </ion-item>
+    <ion-item>
+        <ion-label>购置类型</ion-label>
+        <ion-input placeholder="请输入购置类型" [(ngModel)]="params.zgtype"></ion-input>
+    </ion-item>
+    <ion-item>
+        <ion-label>资产名称</ion-label>
+        <ion-input placeholder="请输入资产名称" [(ngModel)]="params.zgmc"></ion-input>
+    </ion-item>
+    <ion-item>
+        <ion-label>规格型号</ion-label>
+        <ion-input placeholder="请输入规格型号" [(ngModel)]="params.zgxh"></ion-input>
+    </ion-item>
+    <ion-item>
+        <ion-label>数量</ion-label>
+        <ion-input type="number" placeholder="请输入数量" [(ngModel)]="params.zgsl"></ion-input>
+    </ion-item>
+    <ion-item>
+        <ion-label>预算金额(元)</ion-label>
+        <ion-input type="number" placeholder="请输入预算金额" [(ngModel)]="params.ysje"></ion-input>
+    </ion-item>
+    <ion-item>
+        <ion-label>申请日期</ion-label>
+        <ion-datetime type="datetime-local" displayFormat="YYYY-MM-DD" pickerFormat="YYYY-MM-DD" doneText="确定" [(ngModel)]="params.zgtime" cancelText="取消"></ion-datetime>
+    </ion-item>
+    <ion-item>
+        <ion-label>购置理由</ion-label>
+        <ion-textarea placeholder="请输入原因" [(ngModel)]="params.zgyy"></ion-textarea>
+    </ion-item>
+  
+
+
+
+
+
+  <app-staff (click)="go('getSt', selectedStaff,false)" title="选择审批人" eventName="getSt" [(selectedStaff)]="selectedStaff"></app-staff>
+</ion-content>
+
+
+
+
+
+<ion-footer>
+  <ion-toolbar>
+    <ion-button expand="full" size="small" (click)="save()" style="flex: 1">
+      保  存
+    </ion-button>
+  </ion-toolbar>
+</ion-footer>

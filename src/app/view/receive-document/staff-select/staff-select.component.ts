@@ -148,16 +148,16 @@ export class StaffSelectComponent extends BasePage implements OnInit, OnDestroy 
     }
 
     staffItemClick(isSelected, item) {
-        this.cancelSelectAll();
         item.isSelected = isSelected;
         if (this.isSelectOne) {
+            this.cancelSelectAll();
             if (item.isSelected) {
                 this.selectedStaff = [item];
             } else {
                 this.selectedStaff = [];
             }
         } else {
-            item.isSelected ? this.addStaff(item) : this.deleteStaff(item);
+            item.isSelected && !this.isContains(item) ? this.addStaff(item) : this.deleteStaff(item);
             this.isSelectedAll = this.isSelectAll();
         }
     }

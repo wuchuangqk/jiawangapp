@@ -21,6 +21,11 @@ const routes: Routes = [
   { path: 'document-handle', component: DocumentHandleComponent },
   { path: 'document-approve', component: DocumentApproveComponent },
   { path: 'assign', loadChildren: './view/assign/assign.module#AssignModule' },
+  { path: 'leave', loadChildren: './view/leave/leave.module#LeaveModule' },
+  { path: 'overtime-work', loadChildren: './view/overtime-work/overtime-work.module#OvertimeWorkModule' },
+  { path: 'go-out', loadChildren: './view/go-out/go-out.module#GoOutModule' },
+  { path: 'synthesize', loadChildren: './view/synthesize/synthesize.module#SynthesizeModule' },
+  { path: 'property', loadChildren: './view/property/property.module#PropertyModule' },
 
 
 ];
