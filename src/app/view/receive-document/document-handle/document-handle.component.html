@@ -13,6 +13,10 @@
   </ion-item>
 <!--  eventName 表示监听 事件名称-->
   <app-staff (click)="go('getStaffs')" title="添加名单" eventName="getStaffs" [(selectedStaff)]="selectedStaff"></app-staff>
-  <ion-button expand="full" (click)="save(payload.morning)">提交</ion-button>
 </ion-content>
+<ion-footer>
+    <ion-toolbar>
+      <ion-button size="small" expand="full" (click)="save(payload.morning)">提交</ion-button>
+    </ion-toolbar>
+</ion-footer>
 

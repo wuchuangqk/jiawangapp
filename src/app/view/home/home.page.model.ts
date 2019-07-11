@@ -6,7 +6,7 @@ export class HomeModel {
         { icon: 'send', color: '#fa7c92', name: 'send-document', title: '发文系统' },
         { icon: 'ios-chatbubbles', color: '#7dc6ff', name: 'notice', title: '工作交流', url: '/work_dynamics/list' },
         { icon: 'ios-people', color: '#fbbd6d', name: 'assign', title: '交办督办督查' },
-        { icon: 'ios-calendar-outline', color: '#b2d76a', name: 'QingJiaShenPiPage', title: '请假审批' },
+        { icon: 'calendar', color: '#b2d76a', name: 'QingJiaShenPiPage', title: '请假审批' },
         { icon: 'ios-alarm', color: '#c1a6f0', name: 'JiaBanShenPiPage', title: '加班审批' },
         { icon: 'md-pin', color: '#a3bdb9', name: 'WaiChuShenPiPage', title: '外出审批' },
         { icon: 'logo-twitch', color: '#6cd7ff', name: 'ZongHeShenPiPage', title: '综合审批' },

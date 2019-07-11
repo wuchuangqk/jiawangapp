@@ -56,6 +56,7 @@ export class StaffSelectComponent extends BasePage implements OnInit, OnDestroy 
         });
     }
     goBack() {
+        localStorage.num = Number(localStorage.num) - 1;
         this.navController.back();
     }
     goB() {
@@ -66,7 +67,7 @@ export class StaffSelectComponent extends BasePage implements OnInit, OnDestroy 
     }
     ngOnDestroy() {
         // 取消事件订阅
-        this.events.unsubscribe(this.eventName);
+        // this.events.unsubscribe(this.eventName);
     }
     getList() {
         this.request('/staffs/list', {
@@ -147,6 +148,7 @@ export class StaffSelectComponent extends BasePage implements OnInit, OnDestroy 
     }
 
     staffItemClick(isSelected, item) {
+        this.cancelSelectAll();
         item.isSelected = isSelected;
         if (this.isSelectOne) {
             if (item.isSelected) {
@@ -163,6 +165,12 @@ export class StaffSelectComponent extends BasePage implements OnInit, OnDestroy 
         // 判断是否全部选中
         return this.staffArray.every((item) => {
             return item.isSelected;
+        });
+    }
+    cancelSelectAll() {
+        this.staffArray = this.staffArray.map((item) => {
+            item.isSelected = false;
+            return item;
         });
     }
     checkIfSelectAll() {

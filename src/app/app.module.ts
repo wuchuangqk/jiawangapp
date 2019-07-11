@@ -36,7 +36,7 @@ import {DocumentApproveComponent} from './view/receive-document/document-approve
         CommonComponentsModule,
         IonicModule.forRoot(
             {
-                backButtonText: 'aa',
+                backButtonText: '',
                 mode: 'ios',
             }
         ), AppRoutingModule, FormsModule],

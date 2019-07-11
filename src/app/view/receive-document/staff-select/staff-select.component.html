@@ -1,11 +1,13 @@
 <ion-header>
   <ion-toolbar color="secondary">
-<!--    <app-back></app-back>-->
+    <!--    <app-back></app-back>-->
     <ion-icon (click)="goBack()" style="font-size: 30px" name="arrow-back"></ion-icon>
     <ion-title>
       {{title}}
     </ion-title>
-    <span slot="end" (click)="goB()" style="font-size: 20px" name="arrow-back">确定</span>
+    <!--    <ion-buttons slot="end">-->
+    <!--      <ion-back-button defaultHref="home"></ion-back-button>-->
+    <!--    </ion-buttons>-->
   </ion-toolbar>
 </ion-header>
 <ion-content class="bg-style">
@@ -15,13 +17,13 @@
     <ion-label>全选</ion-label>
   </ion-item>
 
-<!--  <div *ngIf="hasSelectedAllButton" style="margin-top: 2rem;"></div>-->
+  <!--  <div *ngIf="hasSelectedAllButton" style="margin-top: 2rem;"></div>-->
 
   <ion-list class="list-style">
     <!--选择部门-->
-    <ion-item ion-item *ngFor="let item of contact.departArray" (click)="departItemClick(item)">
+    <ion-item ion-item *ngFor="let item of contact.departArray" detail (click)="departItemClick(item)">
       {{item.name}}
-      <span item-right>{{item.staff_num}}</span>
+      <span slot="end">{{item.staff_num}}</span>
     </ion-item>
     <div style="margin-top: 2rem;"></div>
     <!--选择人-->
@@ -35,8 +37,13 @@
 
     </ion-item>
   </ion-list>
-
 </ion-content>
-<ion-button>
-  <app-circle-text *ngFor="let item of selectedStaff" [name]="item.name"></app-circle-text>
-</ion-button>
+<ion-footer>
+  <ion-toolbar>
+    <div class="footer-staff-wrapper">
+      <app-circle-text *ngFor="let item of selectedStaff" [name]="item.name"></app-circle-text>
+    </div>
+    <ion-button slot="end" size="small" (click)="goB()">确定</ion-button>
+  </ion-toolbar>
+</ion-footer>
+

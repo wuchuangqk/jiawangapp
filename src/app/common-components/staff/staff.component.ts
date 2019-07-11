@@ -24,7 +24,7 @@ export class StaffComponent implements OnInit {
 
   ngOnDestroy() {
     // 取消事件订阅
-    this.events.unsubscribe('getStaffs');
+    this.events.unsubscribe(this.eventName);
   }
 
 }

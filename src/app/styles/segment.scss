@@ -4,20 +4,21 @@
 .segment-wrapper{
   width: 100%;
   margin: 0 auto;
-}
-ion-segment ion-segment-button{
-  border: 1px solid #ffffff;
-  color: #ffffff;
-  line-height: 1.5rem;
-  height: 1.5rem;
-  background: transparent;
-}
+  ion-segment[mode=ios]{
+    ion-segment-button{
+      border: 1px solid #ffffff;
+      color: #ffffff !important;
+      line-height: 1.5rem;
+      height: 1.5rem;
+      background: transparent;
+    }
 
-ion-segment-button.segment-button-checked{
-  background: #ffffff;
-  color: #0cd1e8;
+    ion-segment-button.segment-button-checked{
+      background: #ffffff !important;
+      color: #0cd1e8 !important;
+    }
+    ion-segment-button:not(:first-child){
+      border-left: none;
+    }
+  }
 }
-ion-segment ion-segment-button:not(:first-child){
-  border-left: none;
-}
-
