@@ -14,11 +14,13 @@ import {AppConfig} from '../../../app.config';
 export class DocumentHandleComponent extends BasePage implements OnInit {
   public url = '';
   payload = {
-    morning: '',
-    url: ''
+    opinion: '',
+    url: '',
+    staff_ids: '',
+    id: '',
+    document_type: '0',
   };
   documentType: string;
-  id: string;
   selectedStaff = [];
   constructor(
       public http: HttpService,
@@ -30,57 +32,32 @@ export class DocumentHandleComponent extends BasePage implements OnInit {
   ) {
     super(http, router, navController, dialogService);
     this.title = this.query('title');
-    this.id = this.query('id');
-    this.url = this.query('handleUrl');
+    this.payload.id = this.query('id');
+    this.payload.url = this.query('handleUrl');
     this.documentType = this.query('document_type');
   }
 
   ngOnInit() {
   }
 
-
-  save(opinion: string) {
-    // return;
-    // if (this.isEmpty(opinion)) {
-    //   this._dialog.presentToast('请填写意见');
-    //   return;
-    // }
-
-    let ids = '';
-    // if (this.documentType == '1') {//发文保存需要判断是否选人
-    //   //发文最后一个人才需要判断是否选人
-    //   if (this.documentDetail.last == '1' && this.contactView.selectedStaff.length == 0) {
-    //     this._dialog.presentToast('请添加名单后继续');
-    //     return;
-    //   }
-    // }
-
-    const size = this.selectedStaff.length;
-    this.selectedStaff.forEach((value, index, array) => {
-      ids += value.id;
-      if (index < size - 1) {
-        ids += ',';
-      }
-    });
+  getIds(arr): string {
+    return  arr.map(item => item.id).join(',');
+  }
+  save() {
+    if (!this.payload.opinion) {
+      this.dialogService.toast('请输入意见！');
+      return ;
+    }
+    this.payload.staff_ids = this.getIds(this.selectedStaff);
     this.dialogService.toast('正在提交数据...');
-    const params = new Map<string, string>();
-    const payload: any = {
-      url: this.url,
-      id: this.id
-    };
-    if (this.documentType === '1') {// 发文才需要finish字段 0：直接保存 1：文件签发
-      payload.finish = '0';
-    }
-
-    if (ids.length > 0) {
-      payload.staff_ids = ids;
-    }
-    payload.document_type = this.documentType || 0;
-    params.set('opinion', opinion);
-    payload.opinion = opinion;
-    this.setRequest(payload.url, payload).then((res) => {
+    this.payload.document_type = this.documentType || '0';
+    this.setRequest(this.payload.url, this.payload).then((res) => {
       this.dialogService.toast('提交成功');
       this.events.publish(AppConfig.Document.DocumentDetail);
+      this.events.publish(AppConfig.Document.DocumentList);
+      this.events.publish(AppConfig.Home.Badge);
+      this.events.publish(AppConfig.Assign.List);
+      this.events.publish(AppConfig.Assign.DoneList);
       this.navController.back();
     });
   }

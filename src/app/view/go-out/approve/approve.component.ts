@@ -72,8 +72,10 @@ export class ApproveComponent  extends DetailBasePage implements OnInit {
     }
     this.dialogService.toast('正在提交数据...');
     this.setRequest(this.payload.url, this.payload).then((res) => {
-        this.dialogService.toast('提交成功');
-        this.navController.back();
-      });
+      this.dialogService.toast('提交成功');
+      this.events.publish(AppConfig.GoOut.List);
+      this.events.publish(AppConfig.GoOut.ShenPiList);
+      this.navController.back();
+    });
   }
 }

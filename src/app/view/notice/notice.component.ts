@@ -1,21 +1,23 @@
-import { Component, OnInit } from '@angular/core';
+import {Component, OnDestroy, OnInit} from '@angular/core';
 import {HttpService} from '../../service/http.service';
 import {DialogService} from '../../service/dialog.service';
 import {ActivatedRoute, Router} from '@angular/router';
 import {ListBasePage} from '../../base/list-base-page';
-import { NavController } from '@ionic/angular';
+import {Events, NavController} from '@ionic/angular';
+import {AppConfig} from '../../app.config';
 
 @Component({
   selector: 'app-notice',
   templateUrl: './notice.component.html',
   styleUrls: ['./notice.component.scss'],
 })
-export class NoticeComponent extends ListBasePage implements OnInit {
+export class NoticeComponent extends ListBasePage implements OnInit, OnDestroy {
   constructor(
       public http: HttpService,
       public router: Router,
       public dialogService: DialogService,
       public navController: NavController,
+      public events: Events,
       public route?: ActivatedRoute,
   ) {
     super(http, router, dialogService, navController);
@@ -23,10 +25,13 @@ export class NoticeComponent extends ListBasePage implements OnInit {
     this.url = this.query('url');
   }
   ngOnInit() {
+    this.events.subscribe(AppConfig.Notice.List, () => {
+      this.getListData();
+    });
     this.getListData();
   }
-  ionViewDidLeave() {
-
+  ngOnDestroy() {
+    this.events.unsubscribe(AppConfig.Notice.List);
   }
 }
 

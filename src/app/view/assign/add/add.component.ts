@@ -4,7 +4,8 @@ import {HttpService} from '../../../service/http.service';
 import {ActivatedRoute, Router} from '@angular/router';
 import {DialogService} from '../../../service/dialog.service';
 import { DateProvider } from '../../../service/Date';
-import {NavController} from '@ionic/angular';
+import {Events, NavController} from '@ionic/angular';
+import {AppConfig} from '../../../app.config';
 
 @Component({
     selector: 'app-add',
@@ -46,6 +47,7 @@ export class AddComponent extends BasePage implements OnInit {
         public dialogService: DialogService,
         public navController: NavController,
         public dateProvider: DateProvider,
+        public events: Events,
         public route?: ActivatedRoute,
     ) {
         super(http, router,  navController, dialogService);
@@ -131,6 +133,7 @@ export class AddComponent extends BasePage implements OnInit {
         }
         this.setRequest(this.params.url, this.params).then((res) => {
             this.dialogService.toast('提交成功');
+            this.events.publish(AppConfig.Assign.List);
             this.navController.back();
         });
     }

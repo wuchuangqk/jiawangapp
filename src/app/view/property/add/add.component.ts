@@ -5,7 +5,8 @@ import {ActivatedRoute, Router} from '@angular/router';
 import {DialogService} from '../../../service/dialog.service';
 import { DateProvider } from '../../../service/Date';
 import { DatePipe } from '@angular/common';
-import {NavController} from '@ionic/angular';
+import {Events, NavController} from '@ionic/angular';
+import {AppConfig} from '../../../app.config';
 
 @Component({
     selector: 'app-add',
@@ -24,8 +25,8 @@ export class AddComponent extends BasePage implements OnInit {
         zgtype: '',
         zgmc: '',
         zgxh: '',
-        zgsl: 0,
-        ysje: 0,
+        zgsl: '',
+        ysje: '',
         zgyy: '',
     };
     constructor(
@@ -34,6 +35,7 @@ export class AddComponent extends BasePage implements OnInit {
         public dialogService: DialogService,
         public navController: NavController,
         public dateProvider: DateProvider,
+        public events: Events,
         public route?: ActivatedRoute,
     ) {
         super(http, router,  navController, dialogService);
@@ -96,6 +98,9 @@ export class AddComponent extends BasePage implements OnInit {
             return;
         }
         this.setRequest('/zhigou/zhigou_add', this.params).then((res) => {
+            this.dialogService.toast('申请成功！');
+            this.events.publish(AppConfig.Property.List);
+            this.events.publish(AppConfig.Property.ShenPiList);
             this.navController.back();
         });
     }

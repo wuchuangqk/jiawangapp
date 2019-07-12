@@ -1,9 +1,11 @@
-import { Component, OnInit} from '@angular/core';
+import {Component, OnDestroy, OnInit} from '@angular/core';
 import {BasePage} from '../../../base/base-page';
 import {HttpService} from '../../../service/http.service';
 import {ActivatedRoute, Router} from '@angular/router';
 import {DialogService} from '../../../service/dialog.service';
-import { NavController } from '@ionic/angular';
+import {Events, NavController} from '@ionic/angular';
+import {App} from '@ionic/pro';
+import {AppConfig} from '../../../app.config';
 
 
 
@@ -12,13 +14,14 @@ import { NavController } from '@ionic/angular';
     templateUrl: './index.component.html',
     styleUrls: ['./index.component.scss'],
 })
-export class IndexComponent extends BasePage implements OnInit {
+export class IndexComponent extends BasePage implements OnInit,OnDestroy {
     itemList = [];
     constructor(
         public http: HttpService,
         public router: Router,
         public navController: NavController,
         public dialogService: DialogService,
+        public events: Events,
         public route?: ActivatedRoute,
     ) {
         super(http, router, navController, dialogService);
@@ -27,8 +30,15 @@ export class IndexComponent extends BasePage implements OnInit {
 
     }
     ngOnInit() {
+        this.events.subscribe(AppConfig.Document.DocumentList, () => {
+            this.getDocumentList();
+        });
         this.getDocumentList();
     }
+    ngOnDestroy(): void {
+        this.events.unsubscribe(AppConfig.Document.DocumentList);
+    }
+
     getDocumentList() {
         this.request('/documents/flist', {
             document_type: 1

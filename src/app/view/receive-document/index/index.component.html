@@ -54,7 +54,7 @@
       </ion-slide>
       <ion-slide>
         <ion-list class="my-list">
-          <ion-item *ngIf="itemList.length<=0" >
+          <ion-item *ngIf="shenPiList.length<=0" >
             <p class="primary">无数据！</p>
           </ion-item>
           <ion-item *ngFor="let item of shenPiList" (click)="nav('detail',{title:'收文系统',isShenPi:true,url:'/documents/slist', document_type:0,id:item.id,handle_status:item.handle_status})">

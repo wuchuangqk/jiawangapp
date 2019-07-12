@@ -3,7 +3,8 @@ import {BasePage} from '../../../base/base-page';
 import {HttpService} from '../../../service/http.service';
 import {DialogService} from '../../../service/dialog.service';
 import {ActivatedRoute, Router} from '@angular/router';
-import {NavController} from '@ionic/angular';
+import {Events, NavController} from '@ionic/angular';
+import {AppConfig} from '../../../app.config';
 
 @Component({
   selector: 'app-document-approve',
@@ -22,6 +23,7 @@ export class DocumentApproveComponent extends BasePage implements OnInit {
       public router: Router,
       public dialogService: DialogService,
       public navController: NavController,
+      public events: Events,
       public route?: ActivatedRoute,
   ) {
     super(http, router, navController, dialogService);
@@ -68,6 +70,9 @@ export class DocumentApproveComponent extends BasePage implements OnInit {
     payload.opinion = opinion;
     this.setRequest(payload.url, payload).then((res) => {
       this.dialogService.alert('审批完毕!');
+      this.events.publish(AppConfig.Document.DocumentShenPiList);
+      this.events.publish(AppConfig.Document.DocumentDetail);
+      this.events.publish(AppConfig.Home.Badge);
       this.navController.back();
     });
   }

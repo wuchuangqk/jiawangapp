@@ -5,7 +5,8 @@ import {ActivatedRoute, Router} from '@angular/router';
 import {DialogService} from '../../../service/dialog.service';
 import { DateProvider } from '../../../service/Date';
 import { DatePipe } from '@angular/common';
-import {NavController} from '@ionic/angular';
+import {Events, NavController} from '@ionic/angular';
+import {AppConfig} from '../../../app.config';
 
 @Component({
     selector: 'app-add',
@@ -36,6 +37,7 @@ export class AddComponent extends BasePage implements OnInit {
         public dialogService: DialogService,
         public navController: NavController,
         public dateProvider: DateProvider,
+        public events: Events,
         public route?: ActivatedRoute,
     ) {
         super(http, router,  navController, dialogService);
@@ -105,6 +107,8 @@ export class AddComponent extends BasePage implements OnInit {
         this.params.qjstime = this.dateProvider.DateTimeFormat(new Date(this.params.qjstime));
         this.params.qjetime = this.dateProvider.DateTimeFormat(new Date(this.params.qjetime));
         this.setRequest('/qingjia/qingjia_add', this.params).then((res) => {
+            this.events.publish(AppConfig.Leave.ShenPiList);
+            this.events.publish(AppConfig.Leave.List);
             this.navController.back();
         });
     }

@@ -5,7 +5,9 @@ import {ActivatedRoute, Router} from '@angular/router';
 import {DialogService} from '../../../service/dialog.service';
 import { DateProvider } from '../../../service/Date';
 import { DatePipe } from '@angular/common';
-import {NavController} from '@ionic/angular';
+import {Events, NavController} from '@ionic/angular';
+import {App} from '@ionic/pro';
+import {AppConfig} from '../../../app.config';
 
 @Component({
     selector: 'app-add',
@@ -23,9 +25,9 @@ export class AddComponent extends BasePage implements OnInit {
         qjstime: '',
         // 结束时间
         qjetime: '',
-        // 加班事由
+        // 外出事由
         qjyy: '',
-        // 加班类别
+        // 外出类别
         qjtype: '事假',
         // 处理人名单
         staff_ids: '',
@@ -39,6 +41,7 @@ export class AddComponent extends BasePage implements OnInit {
         public dialogService: DialogService,
         public navController: NavController,
         public dateProvider: DateProvider,
+        public events: Events,
         public route?: ActivatedRoute,
     ) {
         super(http, router,  navController, dialogService);
@@ -73,16 +76,16 @@ export class AddComponent extends BasePage implements OnInit {
     // 检查参数
     private checkParams(params): boolean {
         if (!params.qjstime) {
-            this.dialogService.toast('请选择加班开始时间!');
+            this.dialogService.toast('请选择外出开始时间!');
             return false;
         } else if (!params.qjetime) {
-            this.dialogService.toast('请选择加班结束时间!');
+            this.dialogService.toast('请选择外出结束时间!');
             return false;
         } else if (!params.qjyy) {
-            this.dialogService.toast('请输入加班事由!');
+            this.dialogService.toast('请输入外出事由!');
             return false;
         } else if (!params.qjtype) {
-            this.dialogService.toast('请输入加班类型!');
+            this.dialogService.toast('请输入外出类型!');
             return false;
         } else if (!params.staff_ids) {
             this.dialogService.toast('请选择审批人!');
@@ -101,6 +104,8 @@ export class AddComponent extends BasePage implements OnInit {
         this.params.qjstime = this.dateProvider.DateTimeFormat(new Date(this.params.qjstime));
         this.params.qjetime = this.dateProvider.DateTimeFormat(new Date(this.params.qjetime));
         this.setRequest('/waichu/waichu_add', this.params).then((res) => {
+            this.events.publish(AppConfig.GoOut.List);
+            this.events.publish(AppConfig.GoOut.ShenPiList);
             this.navController.back();
         });
     }

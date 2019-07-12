@@ -1,4 +1,4 @@
-import { Component, OnInit } from '@angular/core';
+import {Component, OnDestroy, OnInit} from '@angular/core';
 import {DetailBasePage} from '../../../base/detail-base-page';
 import {HttpService} from '../../../service/http.service';
 import {ActivatedRoute, Router} from '@angular/router';
@@ -14,9 +14,10 @@ import { NavController } from '@ionic/angular';
   templateUrl: './detail.component.html',
   styleUrls: ['./detail.component.scss'],
 })
-export class DetailComponent  extends DetailBasePage implements OnInit {
+export class DetailComponent  extends DetailBasePage implements OnInit, OnDestroy {
   public title = '详情';
   public isShenPi: boolean;
+  public handle_status: string;
   public handleUrl: string;
   public payload: {
     document_type: string
@@ -33,6 +34,7 @@ export class DetailComponent  extends DetailBasePage implements OnInit {
     super( http, router, dialogService, sanitizer, navController);
     this.url = this.query('url');
     this.handleUrl = this.query('handleUrl');
+    this.handle_status = this.query('handle_status');
     this.id = this.query('id');
     this.isShenPi = this.getQueryParams().isShenPi;
     this.payload.document_type = this.query('document_type');
@@ -42,6 +44,10 @@ export class DetailComponent  extends DetailBasePage implements OnInit {
     this.getDetail(this.payload);
     this.events.subscribe(AppConfig.Document.DocumentDetail, () => {
       this.getDetail(this.payload);
+      this.handle_status = '0';
     });
+  }
+  ngOnDestroy(): void {
+    this.events.unsubscribe(AppConfig.Document.DocumentDetail);
   }
 }
