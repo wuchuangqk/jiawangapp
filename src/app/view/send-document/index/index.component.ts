@@ -4,7 +4,6 @@ import {HttpService} from '../../../service/http.service';
 import {ActivatedRoute, Router} from '@angular/router';
 import {DialogService} from '../../../service/dialog.service';
 import {Events, NavController} from '@ionic/angular';
-import {App} from '@ionic/pro';
 import {AppConfig} from '../../../app.config';
 
 

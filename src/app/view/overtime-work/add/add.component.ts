@@ -6,7 +6,6 @@ import {DialogService} from '../../../service/dialog.service';
 import { DateProvider } from '../../../service/Date';
 import { DatePipe } from '@angular/common';
 import {Events, NavController} from '@ionic/angular';
-import {App} from '@ionic/pro';
 import {AppConfig} from '../../../app.config';
 
 @Component({

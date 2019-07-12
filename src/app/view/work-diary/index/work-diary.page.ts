@@ -1,9 +1,10 @@
-import { Component, OnInit } from '@angular/core';
-import {BasePage} from '../../base/base-page';
+import {Component, OnDestroy, OnInit} from '@angular/core';
+import {BasePage} from '../../../base/base-page';
 import {ActivatedRoute, Router} from '@angular/router';
-import {HttpService} from '../../service/http.service';
-import {DialogService} from '../../service/dialog.service';
-import { NavController } from '@ionic/angular';
+import {HttpService} from '../../../service/http.service';
+import {DialogService} from '../../../service/dialog.service';
+import {Events, NavController} from '@ionic/angular';
+import {AppConfig} from '../../../app.config';
 
 
 @Component({
@@ -11,7 +12,7 @@ import { NavController } from '@ionic/angular';
   templateUrl: './work-diary.page.html',
   styleUrls: ['./work-diary.page.scss'],
 })
-export class WorkDiaryPage extends BasePage implements OnInit {
+export class WorkDiaryPage extends BasePage implements OnInit, OnDestroy {
 private itemList = [];
 private url = '';
 public list = [];
@@ -21,6 +22,7 @@ dateSet: Set<string>;
       public router: Router,
       public navController: NavController,
       public dialogService: DialogService,
+      public events: Events,
       public route?: ActivatedRoute,
   ) {
       super(http, router, navController, dialogService, route );
@@ -30,7 +32,14 @@ dateSet: Set<string>;
 
   ngOnInit() {
     this.getList();
+    this.events.subscribe(AppConfig.WorkDiary.List, () => {
+       this.getList();
+     });
   }
+  ngOnDestroy(): void {
+    this.events.unsubscribe(AppConfig.WorkDiary.List);
+  }
+
   getList() {
     this.list = [];
     return  this.request(this.url, {

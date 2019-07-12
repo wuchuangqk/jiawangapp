@@ -5,7 +5,8 @@ import {ActivatedRoute, Router} from '@angular/router';
 import {DialogService} from '../../../service/dialog.service';
 import { DateProvider } from '../../../service/Date';
 import {DatePipe} from '@angular/common';
-import { NavController } from '@ionic/angular';
+import {Events, NavController} from '@ionic/angular';
+import {AppConfig} from '../../../app.config';
 
 
 @Component({
@@ -30,6 +31,7 @@ export class AddComponent extends BasePage implements OnInit {
       public navController: NavController,
       public dialogService: DialogService,
       private dateProvider: DateProvider,
+      public events: Events,
       public route?: ActivatedRoute,
   ) {
       super(http, router, navController, dialogService);
@@ -60,7 +62,8 @@ export class AddComponent extends BasePage implements OnInit {
       this.payload.date = datePipe.transform(this.payload.date, 'yyyy-MM-dd');
       this.setRequest(this.payload.url, this.payload).then(() => {
           this.dialogService.toast('添加工作日志成功！');
-          history.go(-1);
+          this.events.publish(AppConfig.WorkDiary.List);
+          this.navController.back();
       });
   }
 }

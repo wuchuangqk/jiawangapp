@@ -7,6 +7,9 @@ export class AppConfig {
       Badge: 'HomeBagde'
     };
 
+    public  static WorkDiary = {
+        List: 'WorkDiaryList'
+    };
     public  static Property = {
         List: 'PropertyList',
         ShenPiList: 'PropertyShenPiList'

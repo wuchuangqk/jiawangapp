@@ -3,7 +3,6 @@ import {BasePage} from '../../../base/base-page';
 import {HttpService} from '../../../service/http.service';
 import {ActivatedRoute, Router} from '@angular/router';
 import {DialogService} from '../../../service/dialog.service';
-import { DateProvider } from '../../../service/Date';
 import {Events, IonSlides} from '@ionic/angular';
 import { NavController } from '@ionic/angular';
 import {AppConfig} from '../../../app.config';
