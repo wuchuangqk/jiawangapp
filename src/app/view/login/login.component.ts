@@ -47,6 +47,7 @@ export class LoginComponent extends BasePage implements OnInit {
         }).then((res) => {
             localStorage.access_token = res.data.access_token;
             this.dialogService.dismiss();
+            localStorage.isLogin = 1;
             this.navController.navigateRoot('home');
         });
 

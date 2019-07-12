@@ -28,7 +28,7 @@ export class AppComponent {
       public toastCtrl: ToastController,
   ) {
     this.initializeApp();
-    // this.isLogin();
+    this.isLogin();
   }
 
   public isLogin() {
@@ -53,14 +53,25 @@ export class AppComponent {
 
   registerBackButtonAction() {
     this.customBackActionSubscription = this.platform.backButton.subscribe(() => {
-      if (this.backButtonPressed) {
-        // this.appMinimize.minimize();
+
+      if (this.url === '/home' || this.url === '/login' || this.url === '/camera') {
+        if (this.backButtonPressed) {
+          this.appMinimize.minimize();
+        } else {
+          this.backButtonPressed = true;
+        }
       } else {
-        this.toastCtrl.create({
-          message: '再按一次退出应用'
-        });
-        this.backButtonPressed = true;
+        this.navController.back();
       }
+
+      // if (this.backButtonPressed) {
+      //    this.appMinimize.minimize();
+      // } else {
+      //   this.toastCtrl.create({
+      //     message: '再按一次退出应用'
+      //   });
+      //   this.backButtonPressed = true;
+      // }
     });
   }
   initRouterListen() {
