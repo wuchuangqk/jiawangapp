@@ -6,6 +6,7 @@ import { IonicModule, IonicRouteStrategy } from '@ionic/angular';
 import { SplashScreen } from '@ionic-native/splash-screen/ngx';
 import { StatusBar } from '@ionic-native/status-bar/ngx';
 import { AppMinimize } from '@ionic-native/app-minimize/ngx';
+import { Device } from '@ionic-native/device/ngx';
 
 import { AppComponent } from './app.component';
 import { AppRoutingModule } from './app-routing.module';
@@ -18,6 +19,7 @@ import {DetailComponent} from './view/receive-document/detail/detail.component';
 import {DocumentHandleComponent} from './view/receive-document/document-handle/document-handle.component';
 import {CommonComponentsModule} from './common-components/common-components.module';
 import {DocumentApproveComponent} from './view/receive-document/document-approve/document-approve.component';
+import {JPush} from '@jiguang-ionic/jpush/ngx';
 
 @NgModule({
 
@@ -45,6 +47,8 @@ import {DocumentApproveComponent} from './view/receive-document/document-approve
         StatusBar,
         SplashScreen,
         AppMinimize,
+        Device,
+        JPush,
         { provide: RouteReuseStrategy, useClass: IonicRouteStrategy },
         // { provide: HashLocationStrategy, useClass: LocationStrategy }
     ],

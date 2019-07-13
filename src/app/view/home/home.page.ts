@@ -6,6 +6,7 @@ import {DialogService} from '../../service/dialog.service';
 import {Router} from '@angular/router';
 import {Events, NavController} from '@ionic/angular';
 import {AppConfig} from '../../app.config';
+// import {JPushModel} from './jPush.model';
 
 
 interface IConfig {
@@ -26,6 +27,7 @@ export class HomePage extends BasePage {
         public dialogService: DialogService,
         public navController: NavController,
         public events: Events,
+        // public jPushModel: JPushModel,
     ) {
         super( http, router, navController, dialogService);
     }

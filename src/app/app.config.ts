@@ -2,7 +2,6 @@ export class AppConfig {
     public static  Permissions = {
      WRITE_EXTERNAL_STORAGE: 'WRITE_EXTERNAL_STORAGE'
     };
-
     public  static Home = {
       Badge: 'HomeBagde'
     };
@@ -46,4 +45,5 @@ export class AppConfig {
     public  static ActivatedRoute = {
         ActivatedRouteChange: 'ActivatedRouteChange'
     };
+    public static JPushOpenNotification = 'JPushOpenNotification';
 }
