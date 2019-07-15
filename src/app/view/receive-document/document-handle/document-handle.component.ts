@@ -5,6 +5,7 @@ import {ActivatedRoute, Router} from '@angular/router';
 import {DialogService} from '../../../service/dialog.service';
 import {Events, NavController} from '@ionic/angular';
 import {AppConfig} from '../../../app.config';
+import {json} from '@angular-devkit/core';
 
 @Component({
   selector: 'app-document-handle',
@@ -51,7 +52,9 @@ export class DocumentHandleComponent extends BasePage implements OnInit {
     this.payload.staff_ids = this.getIds(this.selectedStaff);
     this.dialogService.toast('正在提交数据...');
     this.payload.document_type = this.documentType || '0';
+    this.dialogService.alert(JSON.stringify(this.payload));
     this.setRequest(this.payload.url, this.payload).then((res) => {
+      this.dialogService.alert(JSON.stringify(res));
       this.dialogService.toast('提交成功');
       this.events.publish(AppConfig.Document.DocumentDetail);
       this.events.publish(AppConfig.Document.DocumentList);

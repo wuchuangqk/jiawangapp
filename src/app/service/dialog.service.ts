@@ -12,13 +12,17 @@ export class DialogService {
       private loadingController: LoadingController,
   ) {
   }
-  async alert(message: string, backFn?: Function) {
+  async alert(message: string, backFn?, header?: string, text?: string) {
     const alert = await this.alertController.create({
+      header: header || null,
       message,
       buttons: [
         {
-          text: '确定',
-          role: 'cancel',
+          text: '取消',
+          role: 'cancel'
+        },
+        {
+          text: text || '确定',
           handler: () => {
               if (backFn) {
                   backFn();

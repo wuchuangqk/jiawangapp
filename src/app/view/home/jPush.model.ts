@@ -16,6 +16,21 @@ export class JPushModel {
     init() {
         return this.jPush.init();
     }
+    isPushStopped() {
+        return this.jPush.isPushStopped();
+    }
+    resumePush() {
+        return  this.isPushStopped().then((res) => {
+            if (res == 1) {
+                return this.jPush.resumePush();
+            } else {
+
+            }
+        });
+    }
+    stopPush() {
+        return this.jPush.stopPush();
+    }
     getPersonAlias() {
         const ua = JSON.parse(localStorage.userInfo);
         const alias = ua.pushid.replace(/-/g, '');
@@ -37,7 +52,7 @@ export class JPushModel {
         return this.router.navigate([path], { queryParams});
     }
     handleAndroid(json) {
-        console.log(JSON.stringify(json));
+        this.dialogService.alert(JSON.stringify(json));
         const dialogMsg = json.alert;
         const itemTitle = json.extras.title;
         const contentTitle = json.extras['cn.jpush.android.ALERT'];
@@ -49,45 +64,52 @@ export class JPushModel {
         } else {
             btnText = '确定';
         }
-        this.dialogService.alert('aa', () => {
+        alert(type);
+        this.dialogService.alert(contentTitle, () => {
             switch (type) {
                 case 'message': {
-                    this.nav('CommonViewPage', {
+                    this.nav('common_view', {
                         id,
                         title: itemTitle,
-                        url: '/notices/list/' + id,
+                        url: '/notices/list/',
                         contentTitle
                     });
                     break;
                 }
                 case 'article': {
-                    this.nav('DetailPage', {
+                    this.nav('detail', {
                         id,
                         title: '收发文系统',
                         url: '/documents/slist',
                         contentTitle,
                         document_type: 0,
+                        handle_status: 0,
+                        handleUrl: '/documents/handle_document',
                     });
                     break;
                 }
                 case 'fwtip': {
-                    this.nav('DetailPage', {
+                    this.nav('detail', {
                         id,
                         title: '发文系统',
                         url: '/documents/flist',
                         contentTitle,
                         document_type: 1,
+                        handle_status: 1,
+                        handleUrl: '/documents/handle_document',
                     });
                     break;
                 }
                 case 'swsh': {
-                    this.nav('DetailPage', {
+                    this.nav('detail', {
                         id,
                         title: '收文系统',
                         url: '/documents/slist',
                         contentTitle,
                         isShenPi: true,
+                        handle_status: 0,
                         document_type: 0,
+                        handleUrl: '/documents/handle_document',
                     });
                     break;
                 }
@@ -98,6 +120,6 @@ export class JPushModel {
                     });
                     break;
             }
-        });
+        }, itemTitle , '查看');
     }
 }

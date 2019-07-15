@@ -20,6 +20,19 @@ import {DocumentHandleComponent} from './view/receive-document/document-handle/d
 import {CommonComponentsModule} from './common-components/common-components.module';
 import {DocumentApproveComponent} from './view/receive-document/document-approve/document-approve.component';
 import {JPush} from '@jiguang-ionic/jpush/ngx';
+import {AppVersion} from '@ionic-native/app-version/ngx';
+import {PersionInfoComponent} from './view/persion-info/persion-info.component';
+import { NativeStorage } from '@ionic-native/native-storage/ngx';
+import {FileTransfer } from '@ionic-native/file-transfer/ngx';
+import {FileOpener} from '@ionic-native/file-opener/ngx';
+import {NativeService} from './service/NativeService';
+
+import { File} from '@ionic-native/file/ngx';
+import {AndroidPermissions} from '@ionic-native/android-permissions/ngx';
+
+
+
+
 
 @NgModule({
 
@@ -30,6 +43,7 @@ import {JPush} from '@jiguang-ionic/jpush/ngx';
         DetailComponent,
         DocumentHandleComponent,
         DocumentApproveComponent,
+        PersionInfoComponent,
     ],
     entryComponents: [],
     imports: [
@@ -48,7 +62,14 @@ import {JPush} from '@jiguang-ionic/jpush/ngx';
         SplashScreen,
         AppMinimize,
         Device,
+        AppVersion,
+        File,
+        AndroidPermissions,
+        NativeService,
+        NativeStorage,
         JPush,
+        FileTransfer,
+        FileOpener,
         { provide: RouteReuseStrategy, useClass: IonicRouteStrategy },
         // { provide: HashLocationStrategy, useClass: LocationStrategy }
     ],

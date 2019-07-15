@@ -1,0 +1,27 @@
+<ion-header>
+    <ion-toolbar color="secondary">
+        <app-back></app-back>
+        <ion-title>
+            {{title}}
+        </ion-title>
+    </ion-toolbar>
+</ion-header>
+<ion-content>
+    <div class="_userInfo">
+        <ion-card>
+            <ion-list>
+                <ion-item>姓名： {{userInfo.name}} </ion-item>
+                <ion-item>部门： {{userInfo.depart}} </ion-item>
+                <ion-item>职位： {{userInfo.position}} </ion-item>
+                <ion-item>
+                    <div class="flex-between">
+                        <span> App版本号：{{version}} </span>
+                    </div>
+                </ion-item>
+            </ion-list>
+        </ion-card>
+    </div>
+    <div style="padding:20px 20px;">
+        <ion-button  expand="full" (click)="logout()">退出</ion-button>
+    </div>
+</ion-content>

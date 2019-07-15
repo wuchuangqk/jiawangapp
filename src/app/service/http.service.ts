@@ -2,6 +2,7 @@ import { Injectable } from '@angular/core';
 import { HttpRequestService } from './http-request.service';
 import { Router } from '@angular/router';
 import { DialogService } from './dialog.service';
+import {catchError, timeout} from 'rxjs/operators';
 
 @Injectable({
   providedIn: 'root'
@@ -30,8 +31,8 @@ export class HttpService {
   ) {
   }
   public get(url: string, data): Promise<any> {
-    return this.httpRequest.get(url, data).toPromise().catch((error) => {
-      // alert(1);
+    return this.httpRequest.get(url, data)
+        .toPromise().catch((error) => {
       this.handleError(error);
     });
   }
@@ -42,6 +43,7 @@ export class HttpService {
   }
   private handleError(error): void {
       // console.log(error.status);
+    alert(error)
     this.dialogService.toast(this.failCodeMap.get(error.status).msg);
   }
 }
