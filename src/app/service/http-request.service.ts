@@ -30,6 +30,12 @@ export class HttpRequestService {
     return this.http.get(this.BaseUrl + url + '?' + temp2);
   }
   public post(url: string, data): Observable<any> {
-    return this.http.post(this.BaseUrl + url, this.utilService.handleParams(data,this.SECERET_KEY));
+    return this.http.post(this.BaseUrl + url, this.utilService.handleParams(data, this.SECERET_KEY)
+    );
+  }
+
+  public uploadFile(url: string, data, file): Observable<any> {
+    return this.http.post(this.BaseUrl + url, this.utilService.handleParams(data, this.SECERET_KEY, file)
+    );
   }
 }

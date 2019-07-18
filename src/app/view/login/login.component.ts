@@ -44,29 +44,31 @@ export class LoginComponent extends BasePage implements OnInit {
     ) {
         super(http, router, navController, dialogService);
         this.platform.ready().then(() => {
-            this.os = this.device.platform.toLowerCase();
-            this.getPackageName().then((packagename) => {
-                this.packagename = packagename;
-            });
-            this.getUuid((uuid) => {
-                 this.uuid = uuid;
-             });
-            // const jPushModel = new JPushModel(this.j);
-            // jPushModel.init();
-            // jPushModel.listenOpenNotification();
-            // jPushModel.getRegistrationID();
+            if (this.platform.is('android')) {
+                this.os = this.device.platform.toLowerCase();
+                this.getPackageName().then((packagename) => {
+                    this.packagename = packagename;
+                });
+                this.getUuid((uuid) => {
+                    this.uuid = uuid;
+                });
+            }
         });
     }
 
     ngOnInit() {
     }
     login() {
-        if (this.uuid) {
-            this.startLogin(this.uuid);
+        if (this.platform.is('android')) {
+            if (this.uuid) {
+                this.startLogin(this.uuid);
+            } else {
+                this.getUuid((uuid) => {
+                    this.startLogin(uuid);
+                });
+            }
         } else {
-            this.getUuid((uuid) => {
-                this.startLogin(uuid);
-            });
+            this.startLogin('1232333');
         }
     }
     startLogin(uuid) {

@@ -54,9 +54,13 @@ export class DialogService {
   async toast(message: string) {
     const toast = await this.toastController.create({
       message,
+      color: 'success',
       duration: 1000,
       position: 'top'
     });
+    // toast.onDidDismiss(() => {
+    //   console.log('toast被关闭之后执行');
+    // });
     toast.present();
   }
 }

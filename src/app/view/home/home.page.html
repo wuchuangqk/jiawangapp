@@ -1,5 +1,5 @@
 <ion-header>
-  <ion-toolbar color="secondary">
+  <ion-toolbar color="primary">
     <ion-title>
       {{title}}
     </ion-title>
@@ -23,7 +23,7 @@
 
   <section class="content">
     <div class="myRow default-color">
-      <div  *ngFor="let item of itemList" class="myCol" (click)="nav(item.name,{url:item.url||'',title:item.title})">
+      <div  *ngFor="let item of itemList" class="myCol" (click)="nav(item.name,{url:item.url||'',title:item.title,isAdd:item.isAdd||false})">
         <ion-badge *ngIf="item.bage" color="danger" style="position: absolute; margin-left: 2rem;margin-top: -2rem">
           {{item.bage}}
         </ion-badge>
@@ -36,4 +36,5 @@
       </div>
     </div>
   </section>
+  <app-cultural></app-cultural>
 </ion-content>

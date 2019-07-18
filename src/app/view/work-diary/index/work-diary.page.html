@@ -1,5 +1,5 @@
 <ion-header>
-  <ion-toolbar color="secondary">
+  <ion-toolbar color="primary">
     <app-back></app-back>
     <ion-title>
       {{title}}
@@ -25,18 +25,15 @@
     </div>
     <ion-list class="my-list">
       <ion-item *ngFor="let item of _item.arr">
-        <ion-avatar item-start>
+        <div slot="start">
           <div class="my-avatar">
             <p>{{item.d}}</p>
             <div></div>
             <p>{{item.week}}</p>
           </div>
-        </ion-avatar>
+        </div>
         <div class="log-content">
           <p>
-            <!--
-                <ion-icon name="sunny"></ion-icon>
-            -->
             <strong>上午: </strong>
             <span>{{item.morning||'未填写'}}</span>
           </p>

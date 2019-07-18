@@ -1,5 +1,5 @@
 <ion-header>
-  <ion-toolbar color="secondary">
+  <ion-toolbar color="primary">
     <app-back></app-back>
     <ion-title>
     <div class="segment-wrapper">
@@ -60,7 +60,9 @@
                   无数据！
                   </p>
               </ion-item>
-              <ion-item *ngFor="let item of shenPiList" (click)="nav('synthesize/approve',{url:'/zhsp/zhsp_detail',handleUrl: '/zhsp/shenpi_save',id:item.id,title:title,contentTitle:item.title,title:'事务审批'})">
+              <ion-item *ngFor="let item of shenPiList" (click)="nav('synthesize/approve',{
+              url:'/zhsp/zhsp_detail',handleUrl: '/zhsp/shenpi_save',
+              id:item.id,title:title,contentTitle:item.title,title:'事务审批'})">
                   <section>
                       <div class="my-list-title">
                           <h2>{{item.title}}</h2>

@@ -13,7 +13,6 @@ import { AppRoutingModule } from './app-routing.module';
 import { HttpService } from './service/http.service';
 import { HttpClientModule } from '@angular/common/http';
 import {FormsModule} from '@angular/forms';
-import {NoticeComponent} from './view/notice/notice.component';
 import {CommonViewComponent} from './view/common-view/common-view.component';
 import {DetailComponent} from './view/receive-document/detail/detail.component';
 import {DocumentHandleComponent} from './view/receive-document/document-handle/document-handle.component';
@@ -29,6 +28,12 @@ import {NativeService} from './service/NativeService';
 
 import { File} from '@ionic-native/file/ngx';
 import {AndroidPermissions} from '@ionic-native/android-permissions/ngx';
+import {Camera} from '@ionic-native/camera/ngx';
+import {ImagePicker} from '@ionic-native/image-picker/ngx';
+import {ImgUploadProvider} from './service/img-upload';
+import { FileChooser } from '@ionic-native/file-chooser/ngx';
+import {Base64} from '@ionic-native/base64/ngx';
+import { FilePath } from '@ionic-native/file-path/ngx';
 
 
 
@@ -38,7 +43,6 @@ import {AndroidPermissions} from '@ionic-native/android-permissions/ngx';
 
     declarations: [
         AppComponent,
-        NoticeComponent,
         CommonViewComponent,
         DetailComponent,
         DocumentHandleComponent,
@@ -67,9 +71,15 @@ import {AndroidPermissions} from '@ionic-native/android-permissions/ngx';
         AndroidPermissions,
         NativeService,
         NativeStorage,
+        Camera,
+        ImagePicker,
         JPush,
         FileTransfer,
         FileOpener,
+        ImgUploadProvider,
+        FileChooser,
+        Base64,
+        FilePath,
         { provide: RouteReuseStrategy, useClass: IonicRouteStrategy },
         // { provide: HashLocationStrategy, useClass: LocationStrategy }
     ],

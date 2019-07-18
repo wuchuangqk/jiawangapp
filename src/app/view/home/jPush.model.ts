@@ -36,8 +36,18 @@ export class JPushModel {
         const alias = ua.pushid.replace(/-/g, '');
         return alias;
     }
-    getRegistrationID() {
-        return  this.jPush.getRegistrationID();
+    getRegistrationID(callback?: Function) {
+        this.jPush.getRegistrationID().then((id) => {
+            if (id.length > 0) {
+               if (callback) {
+                   this.dialogService.toast(id);
+                   callback(id);
+               }
+           } else {
+                this.getRegistrationID();
+            }
+            // return id;
+        });
     }
     setAlias(alias) {
         return this.jPush.setAlias({ sequence: 100, alias});
@@ -52,7 +62,6 @@ export class JPushModel {
         return this.router.navigate([path], { queryParams});
     }
     handleAndroid(json) {
-        this.dialogService.alert(JSON.stringify(json));
         const dialogMsg = json.alert;
         const itemTitle = json.extras.title;
         const contentTitle = json.extras['cn.jpush.android.ALERT'];
@@ -64,7 +73,7 @@ export class JPushModel {
         } else {
             btnText = '确定';
         }
-        alert(type);
+        this.dialogService.alert(type);
         this.dialogService.alert(contentTitle, () => {
             switch (type) {
                 case 'message': {
@@ -113,12 +122,66 @@ export class JPushModel {
                     });
                     break;
                 }
-                case 'sign':
+                case 'sign': {
                     this.nav('SignDetailPage', {
                         id,
                         title: itemTitle
                     });
                     break;
+                }
+
+                case 'qingjiado': {// 请假审批
+                    this.nav('/leave/approve', {
+                        id,
+                        title: itemTitle,
+                        url: '/qingjia/shenpi_detail',
+                        contentTitle,
+                        handleUrl: '/qingjia/shenpi_save',
+                    });
+                    break;
+                }
+                case 'jiabando': {// 加班审批
+                    this.nav('/overtime-work/approve', {
+                        id,
+                        title: itemTitle,
+                        contentTitle,
+                        url: '/jiaban/shenpi_detail',
+                        handleUrl: '/jiaban/shenpi_save'
+                    });
+                    break;
+                }
+                // nav('go-out/approve',{
+                    // id:item.id,title:title,contentTitle:item.title,title:'外出审批'})
+                case 'waichudo': {// 外出审批
+                    this.nav('go-out/approve', {
+                        id,
+                        title: itemTitle,
+                        contentTitle,
+                        url: '/waichu/shenpi_detail',
+                        handleUrl: '/waichu/shenpi_save',
+                    });
+                    break;
+                }
+                case 'zhspdo': {// 综合审批审批
+                    this.nav('synthesize/approve', {
+                        id,
+                        title: itemTitle,
+                        contentTitle,
+                        url: '/zhsp/zhsp_detail',
+                        handleUrl: '/zhsp/shenpi_save',
+                    });
+                    break;
+                }
+                case 'zhigou': {// 综合审批审批
+                    this.nav('property/approve', {
+                        id,
+                        title: itemTitle,
+                        contentTitle,
+                        url: '/zhigou/zhigou_detail',
+                        handleUrl: '/zhigou/shenpi_save',
+                    });
+                    break;
+                }
             }
         }, itemTitle , '查看');
     }

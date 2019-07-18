@@ -29,17 +29,24 @@
 }
 .my-list{
     padding-top:5px;
+    width: 100%;
     color:#b5b5b5;
     &-title{
         h2{
+            display: block;
+            width: 100%;
             font-size: 1.8rem;
-            font-family:"Microsoft YaHei";
+            //font-family:"Microsoft YaHei";
             line-height:2.5rem;
+            //overflow: hidden;
+            //text-overflow:ellipsis;
+            //white-space: nowrap;
         }
     }
     &-sub{
         padding-bottom: 1rem;
         color:#b5b5b5;
+        width: 100%;
         &-top{
             font-size: 1.5rem;
             line-height: 1.5rem;;

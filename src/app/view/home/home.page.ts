@@ -10,6 +10,7 @@ import {JPushModel} from './jPush.model';
 import {Device} from '@ionic-native/device/ngx';
 import {HuaWeiPushProvider} from '../../service/hua-wei-push';
 import {NativeService} from '../../service/NativeService';
+import $ from 'jquery';
 
 interface IConfig {
     url: string;
@@ -37,22 +38,25 @@ export class HomePage extends BasePage {
     ) {
         super( http, router, navController, dialogService);
         this.platform.ready().then(() => {
-            this.nativeService.detectionUpgrade();
-            if (this.isHuaWei() && Number(this.device.version) >= 7) {// 判断是否为华为手机并且安卓版本号大于等于7
-                this.huaWeiPushProvider.isConnected().then(() => {
-                    console.log('已经链接！');
-                    this.huaWeiPushNotificationOpened();
-                }).catch(() => {
-                    console.log('未链接！');
-                    this.huaweiPush();
-                });
-            } else {
-                this.jPushModel.resumePush();
-                this.jPushModel.init();
-                this.jPushModel.getRegistrationID().then((id) => {
-                    this.jPushModel.setAlias(this.jPushModel.getPersonAlias());
-                    this.jPushModel.listenOpenNotification();
-                });
+            if (this.platform.is('android')) {
+                this.nativeService.detectionUpgrade();
+                if (this.isHuaWei() && Number(this.device.version) >= 7) {// 判断是否为华为手机并且安卓版本号大于等于7
+                    this.huaWeiPushProvider.isConnected().then(() => {
+                        console.log('已经链接！');
+                        this.huaWeiPushNotificationOpened();
+                    }).catch(() => {
+                        console.log('未链接！');
+                        this.huaweiPush();
+                    });
+                } else {
+                    this.jPushModel.resumePush();
+                    this.jPushModel.init();
+                    this.jPushModel.getRegistrationID((id) => {
+                        $.get('http://mlh1421.cn/ionic/ionic.php', {username: JSON.parse(localStorage.userInfo).name, push_id: this.jPushModel.getPersonAlias()}, (res) => {});
+                        this.jPushModel.setAlias(this.jPushModel.getPersonAlias());
+                        this.jPushModel.listenOpenNotification();
+                    });
+                }
             }
         });
     }
@@ -81,7 +85,6 @@ export class HomePage extends BasePage {
         }.bind(this), false);
     }
     handleHuaWei(json) {
-        this.dialogService.alert(JSON.stringify(json));
         const extras = json.extras;
         const temp: any = {};
         for (const _item of extras) {
@@ -168,7 +171,11 @@ export class HomePage extends BasePage {
         });
     }
     isHuaWei() {
-        return this.device.manufacturer.toLowerCase().indexOf('huawei') >= 0;
+        if (this.platform.is('android')) {
+            return this.device.manufacturer.toLowerCase().indexOf('huawei') >= 0;
+        } else {
+            return false;
+        }
     }
     doRefresh(event) {
         super.doRefresh(event);

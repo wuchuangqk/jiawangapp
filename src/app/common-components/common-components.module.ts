@@ -4,12 +4,14 @@ import {BackComponent} from './back/back.component';
 import {IonicModule} from '@ionic/angular';
 import {StaffComponent} from './staff/staff.component';
 import {CircleTextComponent} from './circle-text/circle-text.component';
+import {CulturalComponent} from './cultural/cultural.component';
 
 @NgModule({
     declarations: [
         BackComponent,
         StaffComponent,
         CircleTextComponent,
+        CulturalComponent,
     ],
     imports: [
         IonicModule,
@@ -19,6 +21,7 @@ import {CircleTextComponent} from './circle-text/circle-text.component';
         BackComponent,
         StaffComponent,
         CircleTextComponent,
+        CulturalComponent,
     ]
 })
 export class CommonComponentsModule { }

@@ -1,0 +1,30 @@
+<ion-card>
+  <ion-card-header>
+      <h2>
+        <ion-icon class="icon" name="megaphone"></ion-icon>
+        文化宣传 </h2>
+  </ion-card-header>
+    <ion-card-content>
+      <ion-list class="my-list">
+        <ion-item *ngIf="listData.length<=0">
+          <p class="primary">无数据！</p>
+        </ion-item>
+        <ion-item *ngFor="let item of listData" (click)="nav('cultural-propaganda/detail',{url:url,id:item.id,title:title,contentTitle:item.title})">
+          <section class="my-list">
+            <div class="my-list-title">
+              <h2 class="primary">
+                <span *ngIf="item.read=='0'" color="primary">[未读]</span>
+                <span *ngIf="item.read=='1'">[已读]</span>
+                {{item.infoTitle}}</h2>
+            </div>
+            <div class="my-list-sub">
+              <div class="my-list-sub-top flex-between">
+                <span>发布人：{{item.creator}}</span>
+                <span class="my-list-sub-top-last">发布日期:{{item.addtime}}</span>
+              </div>
+            </div>
+          </section>
+        </ion-item>
+      </ion-list>
+    </ion-card-content>
+</ion-card>

@@ -2,12 +2,14 @@ import { Injectable } from '@angular/core';
 import { HttpRequestService } from './http-request.service';
 import { Router } from '@angular/router';
 import { DialogService } from './dialog.service';
-import {catchError, timeout} from 'rxjs/operators';
+import { environment } from '../../environments/environment.prod';
+
 
 @Injectable({
   providedIn: 'root'
 })
 export class HttpService {
+  public BaseUrl = environment.host;
   private failCodeMap = new Map([
     [0, { msg: '未知错误' }],
     [400, { msg: '请求错误' }],
@@ -41,9 +43,12 @@ export class HttpService {
       this.handleError(error);
     });
   }
+  public uploadFile(url: string, data, file): Promise<any> {
+    return this.httpRequest.uploadFile(url, data, file).toPromise().catch((error) => {
+      this.handleError(error);
+    });
+  }
   private handleError(error): void {
-      // console.log(error.status);
-    alert(error)
     this.dialogService.toast(this.failCodeMap.get(error.status).msg);
   }
 }

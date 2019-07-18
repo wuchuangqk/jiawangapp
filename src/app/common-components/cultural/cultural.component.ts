@@ -1,17 +1,20 @@
 import {Component, OnDestroy, OnInit} from '@angular/core';
-import {HttpService} from '../../service/http.service';
-import {DialogService} from '../../service/dialog.service';
-import {ActivatedRoute, Router} from '@angular/router';
+import {BasePage} from '../../base/base-page';
+import { AppConfig} from '../../app.config';
 import {ListBasePage} from '../../base/list-base-page';
-import {Events, NavController} from '@ionic/angular';
-import {AppConfig} from '../../app.config';
+import {HttpService} from '../../service/http.service';
+import {ActivatedRoute, Router} from '@angular/router';
+import {DialogService} from '../../service/dialog.service';
+import {NavController} from '@ionic/angular';
+import { Events } from '@ionic/angular';
 
 @Component({
-  selector: 'app-notice',
-  templateUrl: './notice.component.html',
-  styleUrls: ['./notice.component.scss'],
+  selector: 'app-cultural',
+  templateUrl: './cultural.component.html',
+  styleUrls: ['./cultural.component.scss'],
 })
-export class NoticeComponent extends ListBasePage implements OnInit, OnDestroy {
+export class CulturalComponent extends ListBasePage implements OnInit, OnDestroy {
+
   constructor(
       public http: HttpService,
       public router: Router,
@@ -21,8 +24,7 @@ export class NoticeComponent extends ListBasePage implements OnInit, OnDestroy {
       public route?: ActivatedRoute,
   ) {
     super(http, router, dialogService, navController);
-    this.title = this.query('title');
-    this.url = this.query('url');
+    this.url = '/notices/wenxuan_list';
   }
   ngOnInit() {
     this.events.subscribe(AppConfig.Notice.List, () => {
@@ -33,5 +35,6 @@ export class NoticeComponent extends ListBasePage implements OnInit, OnDestroy {
   ngOnDestroy() {
     this.events.unsubscribe(AppConfig.Notice.List);
   }
-}
 
+
+}

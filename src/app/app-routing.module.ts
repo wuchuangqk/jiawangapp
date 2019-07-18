@@ -1,6 +1,5 @@
 import { NgModule } from '@angular/core';
 import { PreloadAllModules, RouterModule, Routes } from '@angular/router';
-import {NoticeComponent} from './view/notice/notice.component';
 import {CommonViewComponent} from './view/common-view/common-view.component';
 import {DetailComponent} from './view/receive-document/detail/detail.component';
 import {DocumentHandleComponent} from './view/receive-document/document-handle/document-handle.component';
@@ -12,8 +11,6 @@ const routes: Routes = [
   { path: 'home', loadChildren: './view/home/home.module#HomePageModule'
   },
   { path: 'login', loadChildren: './view/login/login.module#LoginPageModule'},
-
-  { path: 'notice', component: NoticeComponent },
   { path: 'persion-info', component: PersionInfoComponent },
   { path: 'common_view', component: CommonViewComponent },
   { path: 'detail', component: DetailComponent },
@@ -28,6 +25,8 @@ const routes: Routes = [
   { path: 'go-out', loadChildren: './view/go-out/go-out.module#GoOutModule' },
   { path: 'synthesize', loadChildren: './view/synthesize/synthesize.module#SynthesizeModule' },
   { path: 'property', loadChildren: './view/property/property.module#PropertyModule' },
+  { path: 'notice', loadChildren: './view/notice/notice.module#NoticeModule' },
+  { path: 'cultural-propaganda', loadChildren: './view/cultural-propaganda/cultural-propaganda.module#CulturalPropagandaModule' },
 
 
 ];

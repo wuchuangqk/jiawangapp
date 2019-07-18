@@ -48,12 +48,15 @@ export class PersionInfoComponent extends BasePage implements OnInit {
   }
   logout() {
     localStorage.clear();
-
-    if (this.isHuaWei() && Number(this.device.version) >= 7) {// 判断是否为华为手机并且安卓版本号大于等于7
-      this.huaWeiPushProvider.stop();
-      navigator["app"].exitApp();
+    if (this.platform.is('android')) {
+      if (this.isHuaWei() && Number(this.device.version) >= 7) {// 判断是否为华为手机并且安卓版本号大于等于7
+        this.huaWeiPushProvider.stop();
+        navigator["app"].exitApp();
+      } else {
+        this.jPushModel.stopPush();
+        this.navController.navigateRoot('login');
+      }
     } else {
-      this.jPushModel.stopPush();
       this.navController.navigateRoot('login');
     }
   }

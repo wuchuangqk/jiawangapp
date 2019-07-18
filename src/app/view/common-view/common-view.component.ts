@@ -33,12 +33,12 @@ export class CommonViewComponent extends DetailBasePage implements OnInit, OnDes
     }
 
     ngOnInit() {
-        this.getDetail({});
-        this.events.publish(AppConfig.Notice.List);
-        this.events.publish(AppConfig.Home.Badge);
+        this.getDetail({}).then(() => {
+            this.events.publish(AppConfig.Notice.List);
+            this.events.publish(AppConfig.Home.Badge);
+        });
     }
     ngOnDestroy() {
-        this.events.unsubscribe(AppConfig.Notice.List);
     }
 
 }

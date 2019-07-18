@@ -1,0 +1,39 @@
+<ion-header>
+    <ion-toolbar color="primary">
+        <app-back></app-back>
+        <ion-title>
+            添加文化宣传
+        </ion-title>
+    </ion-toolbar>
+</ion-header>
+<ion-content>
+    <ion-item>
+        <ion-label>标题：</ion-label>
+        <ion-input [(ngModel)]="params.infoTitle"></ion-input>
+    </ion-item>
+
+    <ion-item>
+        <ion-label>类别：</ion-label>
+        <ion-select [(ngModel)]="params.infoType">
+            <ion-select-option value="1">文化</ion-select-option>
+            <ion-select-option value="2">宣传</ion-select-option>
+        </ion-select>
+    </ion-item>
+    <ion-item>
+        <ion-label>内容：</ion-label>
+        <ion-textarea rows="20" placeholder="请输入内容" [(ngModel)]="params.infoContent"></ion-textarea>
+    </ion-item>
+
+
+<!--    <section class="img-wrapper">-->
+<!--        <div class="header-image" *ngFor="let item of imgArr" tappable [ngStyle]="{'background-image': 'url('+item+')'}">-->
+<!--        </div>-->
+<!--        <ion-button color="light" (click)="presentActionSheet()">选择文件</ion-button>-->
+<!--        <div>{{fileUrl}}</div>-->
+<!--    </section>-->
+</ion-content>
+<ion-footer>
+    <ion-toolbar>
+        <ion-button expand="full" (click)="submit()">提交</ion-button>
+    </ion-toolbar>
+</ion-footer>

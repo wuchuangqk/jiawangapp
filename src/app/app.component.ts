@@ -28,7 +28,7 @@ export class AppComponent {
       public toastCtrl: ToastController,
   ) {
     this.initializeApp();
-    this.isLogin();
+    // this.isLogin();
   }
 
   public isLogin() {
@@ -44,7 +44,7 @@ export class AppComponent {
         this.splashScreen.hide();
         this.statusBar.styleLightContent();
         // styleLightContent 字体显示成白色
-        this.statusBar.backgroundColorByHexString('#0cd1e8');
+        this.statusBar.backgroundColorByHexString('#3880ff');
         this.registerBackButtonAction(); // 注册返回按键事件
         this.platform.resume.subscribe(); // 弹出框
     });

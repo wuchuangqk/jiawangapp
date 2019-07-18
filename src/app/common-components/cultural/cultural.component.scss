@@ -1,0 +1,30 @@
+.sc-ion-card-ios-h {
+  margin-left: unset;
+  margin-right: unset;
+  -webkit-margin-start: 0;
+  margin-inline-start: 0;
+  -webkit-margin-end: 0;
+  margin-inline-end: 0;
+}
+ion-card-header{
+  border-bottom:1px solid #eeeeee;
+  padding: 1rem 0 0 1rem;
+  h2{
+    font-size: 1.8rem;
+    color: #6cd7ff;
+    .icon{
+      vertical-align: bottom;
+    }
+  }
+}
+.my-list-sub{
+  margin-top: 1rem;
+}
+.card-content-ios {
+  padding-left: unset;
+  padding-right: unset;
+  -webkit-padding-start: 0px;
+  padding-inline-start: 0px;
+  -webkit-padding-end: 5px;
+  padding-inline-end: 0px;
+}
