@@ -5,6 +5,7 @@ import {DetailComponent} from './view/receive-document/detail/detail.component';
 import {DocumentHandleComponent} from './view/receive-document/document-handle/document-handle.component';
 import {DocumentApproveComponent} from './view/receive-document/document-approve/document-approve.component';
 import {PersionInfoComponent} from './view/persion-info/persion-info.component';
+import {FeedbackComponent} from './view/feedback/feedback.component';
 
 const routes: Routes = [
   { path: '', redirectTo: 'login', pathMatch: 'full' },
@@ -14,6 +15,7 @@ const routes: Routes = [
   { path: 'persion-info', component: PersionInfoComponent },
   { path: 'common_view', component: CommonViewComponent },
   { path: 'detail', component: DetailComponent },
+  { path: 'feedback', component: FeedbackComponent },
   { path: 'work-diary', loadChildren: './view/work-diary/work-diary.module#WorkDiaryModule' },
   { path: 'receive-document', loadChildren: './view/receive-document/receive-document.module#ReceiveDocumentModule' },
   { path: 'send-document', loadChildren: './view/send-document/send-document.module#SendDocumentModule' },

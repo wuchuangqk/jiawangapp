@@ -14,7 +14,7 @@ import {Events, NavController} from '@ionic/angular';
     styleUrls: ['./staff-select.component.scss'],
 })
 export class StaffSelectComponent extends BasePage implements OnInit, OnDestroy {
-    title = '选择联系人';
+    title = '';
     isSelectOne = false;
     departId = '0000';
     public eventName: string;
@@ -42,6 +42,7 @@ export class StaffSelectComponent extends BasePage implements OnInit, OnDestroy 
         this.isSelectOne = this.query('isSelectOne') === 'true' ? true : false;
         console.log(this.isSelectOne);
         this.eventName = this.query('eventName');
+        this.title = this.query('title');
     }
 
     ngOnInit() {
@@ -134,6 +135,7 @@ export class StaffSelectComponent extends BasePage implements OnInit, OnDestroy 
     }
     departItemClick(item: Depart) {
         console.log(this.isSelectOne);
+        this.title="";
         this.nav(`/receive-document/staff-select/${item.id}`, {
             is_root: false,
             depart_id: item.id,

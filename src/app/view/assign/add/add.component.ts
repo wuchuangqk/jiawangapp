@@ -87,7 +87,7 @@ export class AddComponent extends BasePage implements OnInit {
     go( eventName, selectedStaff, isSelectOne) {
         localStorage.num = 0;
         this.nav('/receive-document/staff-select/0000', {
-            title: 'aaa', url: 'bbb', depart_id: '0000',
+            title: '选择人员', url: 'bbb', depart_id: '0000',
             isSelectOne,
             eventName,
             selected_staff : JSON.stringify(selectedStaff),

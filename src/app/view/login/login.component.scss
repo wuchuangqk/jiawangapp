@@ -47,17 +47,19 @@
   .item-md{
     //background: transparent;
   }
-  .btn{
-    width: 80%;
-    height:3rem;
-    margin:1.5rem auto;
-    color:#fff;
-    border:1px solid #fff;
-    border-radius:5px;
-    text-align:center;
-    line-height:3rem;
-    font-size:1.6rem;
-    background:transparent;
+  .btn-wrapper{
+    .btn{
+      width: 80%;
+      height:3rem;
+      margin:3rem auto;
+      color:#fff;
+      border:1px solid #fff;
+      border-radius:5px;
+      text-align:center;
+      line-height:3rem;
+      font-size:1.6rem;
+      background:transparent;
+    }
   }
   .logo{
     text-align:center;

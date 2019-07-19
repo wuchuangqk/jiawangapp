@@ -7,7 +7,7 @@ import sryptoJs from 'crypto-js';
 export class UtilService {
   constructor() { }
 
-  public handleParams(data, SECERET_KEY, file?): FormData {
+  public handleParams(data, SECERET_KEY): FormData {
     data.access_token = localStorage.access_token;
     data.timestamp = new Date().getTime() + '';
     const signature = this.hamcsha1(this.sortParams(data), SECERET_KEY);
@@ -15,9 +15,6 @@ export class UtilService {
     const formData = new FormData();
     for (const i in data) {
       formData.append(i, encodeURIComponent(data[i]));
-    }
-    if (file) {
-      formData.append('file', file);
     }
     return formData;
   }

@@ -13,7 +13,7 @@ import {AppConfig} from '../../../app.config';
     templateUrl: './index.component.html',
     styleUrls: ['./index.component.scss'],
 })
-export class IndexComponent extends BasePage implements OnInit,OnDestroy {
+export class IndexComponent extends BasePage implements OnInit, OnDestroy {
     itemList = [];
     constructor(
         public http: HttpService,
@@ -44,5 +44,9 @@ export class IndexComponent extends BasePage implements OnInit,OnDestroy {
         }).then((res) => {
             this.itemList = res.data;
         });
+    }
+    doRefresh(event) {
+        super.doRefresh(event);
+        this.getDocumentList();
     }
 }

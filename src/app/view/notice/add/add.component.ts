@@ -50,7 +50,7 @@ export class AddComponent extends BasePage implements OnInit{
         if (!this.checkParams()) {
             return;
         }
-        this.imgUploadProvider.startUpload('/notices/notices_add', this.params, this.fileUrl).then((res) => {
+        this.http.uploadFile('/notices/notices_add', this.params, this.fileUrl).then((res) => {
             this.dialogService.alert('上传成功后回调：' + JSON.stringify(res), () => {
                 this.event.publish(AppConfig.Notice.List);
                 this.navController.back();

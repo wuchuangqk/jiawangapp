@@ -43,8 +43,8 @@ export class HttpService {
       this.handleError(error);
     });
   }
-  public uploadFile(url: string, data, file): Promise<any> {
-    return this.httpRequest.uploadFile(url, data, file).toPromise().catch((error) => {
+  public uploadFile(url: string, data, filePath): Promise<any> {
+    return this.httpRequest.uploadFile(url, data, filePath).catch((error) => {
       this.handleError(error);
     });
   }

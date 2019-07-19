@@ -40,7 +40,6 @@ export class LoginComponent extends BasePage implements OnInit {
         private nativeStorage: NativeStorage,
         private alertController: AlertController,
         private huaWeiPushProvider: HuaWeiPushProvider,
-        public jPushModel: JPushModel,
     ) {
         super(http, router, navController, dialogService);
         this.platform.ready().then(() => {
@@ -59,6 +58,7 @@ export class LoginComponent extends BasePage implements OnInit {
     ngOnInit() {
     }
     login() {
+        this.dialogService.loading();
         if (this.platform.is('android')) {
             if (this.uuid) {
                 this.startLogin(this.uuid);

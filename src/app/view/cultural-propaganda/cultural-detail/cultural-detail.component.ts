@@ -24,13 +24,14 @@ export class CulturalDetailComponent extends DetailBasePage implements OnInit {
     super(http, router, dialogService, sanitizer, navController);
     this.id = this.query('id');
     this.title = '文化宣传';
+    this.url = this.query('url');
+    console.log(this.url);
   }
 
   ngOnInit() {
-    this.request(`/notices/wenxuan_detail/${this.id}`, {}).then((res) => {
+    this.request(`${this.url}/${this.id}`, {}).then((res) => {
       this.contentTitle = res.data.infoTitle;
       this.content = this.transform(res.data.content);
     });
   }
-
 }

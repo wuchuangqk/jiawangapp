@@ -44,6 +44,7 @@ export class DetailComponent  extends DetailBasePage implements OnInit, OnDestro
     this.getDetail(this.payload);
     this.events.subscribe(AppConfig.Document.DocumentDetail, () => {
       this.getDetail(this.payload);
+      this.isShenPi = false;
       this.handle_status = '0';
     });
   }

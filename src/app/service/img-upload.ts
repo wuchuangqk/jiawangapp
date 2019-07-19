@@ -9,6 +9,7 @@ import { FileChooser } from '@ionic-native/file-chooser/ngx';
 import { UtilService } from './util.service';
 import { FilePath } from '@ionic-native/file-path/ngx';
 import {HttpService} from './http.service';
+import {File} from '@ionic-native/file/ngx';
 
 @Injectable()
 export class ImgUploadProvider {
@@ -25,13 +26,13 @@ export class ImgUploadProvider {
     private fileChooser: FileChooser,
     private utilService: UtilService,
     private filePath: FilePath,
+    private file: File,
     private httpService: HttpService,
   ) {
 
   }
   upload(filePath, uploadUrl, params?) {
     this.utilService.handleParams(params, this.SECERET_KEY);
-    this.dialogService.alert(JSON.stringify(params));
     const options: FileUploadOptions = {
       fileKey: 'file',
       params,
@@ -142,11 +143,6 @@ export class ImgUploadProvider {
     }));
   }
   startUpload(url, data, fileUrl?) {
-      if (fileUrl) {
-        return  this.upload(fileUrl, this.httpService.BaseUrl + '/api/v2' + url, data);
-      } else {
-        return  this.httpService.post('/api/v2' + url, data);
-      }
   }
   presentAlert() {
     this.dialogService.alert('只能选择一张图片作为头像哦', () => {}, '上传失败');

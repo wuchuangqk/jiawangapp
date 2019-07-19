@@ -16,7 +16,11 @@ export class DocumentApproveComponent extends BasePage implements OnInit {
   public _selectedStaff = [];
   public id: string;
   public payload = {
-    morning: ''
+    opinion: '',
+    url: '/documents/shenhe_docment',
+    id: '',
+    staff_ids: '',
+    staff_viewids: ''
   };
   constructor(
       public http: HttpService,
@@ -28,14 +32,14 @@ export class DocumentApproveComponent extends BasePage implements OnInit {
   ) {
     super(http, router, navController, dialogService);
     this.title = this.query('title');
-    this.id = this.query('id');
+    this.payload.id = this.query('id');
   }
 
   ngOnInit() {}
   go( eventName, selectedStaff) {
     localStorage.num = 0;
     this.nav('/receive-document/staff-select/0000', {
-      title: 'aaa', url: 'bbb', depart_id: '0000',
+      title: '选择人员', url: 'bbb', depart_id: '0000',
       isSelectOne: false,
       eventName,
       selected_staff : JSON.stringify(selectedStaff),
@@ -50,25 +54,27 @@ export class DocumentApproveComponent extends BasePage implements OnInit {
    * 保存
    * @param opinions
    */
-  save(opinion: string) {
+  public checkParams(): boolean {
+    if (!this.payload.opinion) {
+        this.dialogService.toast('请输入意见！');
+        return false;
+    }
+    return true;
+  }
+  save() {
     const staff_ids = this.getIds(this.selectedStaff);
     const staff_viewids = this.getIds(this._selectedStaff);
 
-    const params = new Map<string, string>();
-    const payload: any = {
-      url: '/documents/shenhe_docment',
-      id: this.id
-    };
-
     if (staff_ids.length > 0) {
-      payload.staff_ids = staff_ids;
+      this.payload.staff_ids = staff_ids;
     }
     if (staff_viewids.length > 0) {
-      payload.staff_viewids = staff_viewids;
+      this.payload.staff_viewids = staff_viewids;
     }
-    params.set('opinion', opinion);
-    payload.opinion = opinion;
-    this.setRequest(payload.url, payload).then((res) => {
+    if (!this.checkParams()) {
+      return;
+    }
+    this.setRequest(this.payload.url, this.payload).then((res) => {
       this.dialogService.alert('审批完毕!');
       this.events.publish(AppConfig.Document.DocumentShenPiList);
       this.events.publish(AppConfig.Document.DocumentDetail);

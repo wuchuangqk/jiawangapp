@@ -35,6 +35,7 @@ export class DocumentHandleComponent extends BasePage implements OnInit {
     this.title = this.query('title');
     this.payload.id = this.query('id');
     this.payload.url = this.query('handleUrl');
+    console.log(this.payload.url);
     this.documentType = this.query('document_type');
   }
 
@@ -52,9 +53,7 @@ export class DocumentHandleComponent extends BasePage implements OnInit {
     this.payload.staff_ids = this.getIds(this.selectedStaff);
     this.dialogService.toast('正在提交数据...');
     this.payload.document_type = this.documentType || '0';
-    this.dialogService.alert(JSON.stringify(this.payload));
     this.setRequest(this.payload.url, this.payload).then((res) => {
-      this.dialogService.alert(JSON.stringify(res));
       this.dialogService.toast('提交成功');
       this.events.publish(AppConfig.Document.DocumentDetail);
       this.events.publish(AppConfig.Document.DocumentList);
@@ -69,7 +68,7 @@ export class DocumentHandleComponent extends BasePage implements OnInit {
   go(eventName) {
     localStorage.num = 0;
     this.nav('/receive-document/staff-select/0000', {
-      title: 'aaa', url: 'bbb', depart_id: '0000',
+      title: '选择人员', url: 'bbb', depart_id: '0000',
         isSelectOne: false,
       eventName,
       selected_staff : JSON.stringify(this.selectedStaff),

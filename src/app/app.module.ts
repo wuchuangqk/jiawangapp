@@ -34,6 +34,7 @@ import {ImgUploadProvider} from './service/img-upload';
 import { FileChooser } from '@ionic-native/file-chooser/ngx';
 import {Base64} from '@ionic-native/base64/ngx';
 import { FilePath } from '@ionic-native/file-path/ngx';
+import {FeedbackComponent} from './view/feedback/feedback.component';
 
 
 
@@ -48,6 +49,7 @@ import { FilePath } from '@ionic-native/file-path/ngx';
         DocumentHandleComponent,
         DocumentApproveComponent,
         PersionInfoComponent,
+        FeedbackComponent,
     ],
     entryComponents: [],
     imports: [

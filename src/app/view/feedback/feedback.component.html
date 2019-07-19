@@ -1,0 +1,14 @@
+<ion-header>
+    <ion-toolbar color="primary">
+        <app-back></app-back>
+        <ion-title>
+            问题反馈
+        </ion-title>
+    </ion-toolbar>
+</ion-header>
+<ion-content>
+    <ion-textarea [(ngModel)]="content" placeholder="请输入........"></ion-textarea>
+    <div style="padding:20px 20px;">
+        <ion-button  expand="full" (click)="submit()">退出</ion-button>
+    </div>
+</ion-content>

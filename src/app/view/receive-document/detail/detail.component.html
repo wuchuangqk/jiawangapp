@@ -5,7 +5,7 @@
       {{title}}
     </ion-title>
     <div class="title-end"  *ngIf="handle_status==='1'&&!isShenPi" (click)="nav('document-handle',{title:'收发文办理',id:id,handleUrl:handleUrl,document_type:payload.document_type})" slot="end">办理</div>
-    <div  *ngIf="isShenPi&&detail.control==='0'" slot="end" (click)="nav('document-approve',{ title:'收文审批',id:id })">
+    <div class="title-end"  *ngIf="isShenPi" slot="end" (click)="nav('document-approve',{ title:'收文审批',id:id })">
       审批
     </div>
   </ion-toolbar>
