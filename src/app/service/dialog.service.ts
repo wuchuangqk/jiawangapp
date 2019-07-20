@@ -33,10 +33,11 @@ export class DialogService {
     });
     alert.present();
   }
-  async loading() {
+  async loading(message?: string) {
     this.isLoading = true;
     return await this.loadingController.create({
-        duration: 1500
+        duration: 30000,
+      message
     }).then(a => {
       a.present().then(() => {
         console.log('presented');

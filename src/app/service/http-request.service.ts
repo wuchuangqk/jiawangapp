@@ -52,7 +52,6 @@ export class HttpRequestService {
     for (const i in data) {
       formData.append(i, encodeURIComponent(data[i]));
     }
-
     return new Promise(((resolve, reject) => {
       if (filePath) {
         filePath = 'file://' + filePath;
@@ -62,9 +61,9 @@ export class HttpRequestService {
             const reader = new FileReader();
             reader.onloadend = () => {
               const imgBlob = new Blob([reader.result], {type: blob.type});
-              alert(Object.prototype.toString.call(data));
+              // alert(Object.prototype.toString.call(data));
               formData.append('file', imgBlob, (blob as any).name);
-              this.http.post(this.BaseUrl + '/api/v2' + url, formData).toPromise().then((res) => {
+              this.http.post(this.BaseUrl + url, formData).toPromise().then((res) => {
                 resolve(res);
               }).catch(error => {
                 reject(error);
@@ -72,8 +71,13 @@ export class HttpRequestService {
             };
             reader.readAsArrayBuffer(blob);
           });
-        })
-            .catch(error => alert('报错了，日了狗----->' + JSON.stringify(error)));
+        }).catch(error => alert('报错了，日了狗----->' + JSON.stringify(error)));
+      } else {
+        this.http.post(this.BaseUrl + url, formData).toPromise().then((res) => {
+          resolve(res);
+        }).catch((error) => {
+          reject(error);
+        });
       }
     }));
   }

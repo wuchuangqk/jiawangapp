@@ -20,12 +20,12 @@ import { NativeStorage } from '@ionic-native/native-storage/ngx';
 })
 export class LoginComponent extends BasePage implements OnInit {
     public name: any;
-    username = 'meilinhui';
+    username = '';
     userid: number;
     public packagename: string;
     public uuid: string;
     public os: string;
-    password = '12345678';
+    password = '';
     num: number;
 
     constructor(

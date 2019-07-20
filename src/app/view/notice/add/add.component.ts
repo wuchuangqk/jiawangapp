@@ -50,8 +50,10 @@ export class AddComponent extends BasePage implements OnInit{
         if (!this.checkParams()) {
             return;
         }
-        this.http.uploadFile('/notices/notices_add', this.params, this.fileUrl).then((res) => {
-            this.dialogService.alert('上传成功后回调：' + JSON.stringify(res), () => {
+        this.dialogService.loading('正在提交，请稍后！');
+        this.uploadFile('/notices/notices_add', this.params, this.fileUrl).then((res) => {
+            this.dialogService.dismiss();
+            this.dialogService.alert('提交成功！', () => {
                 this.event.publish(AppConfig.Notice.List);
                 this.navController.back();
             });
@@ -59,7 +61,6 @@ export class AddComponent extends BasePage implements OnInit{
     }
     presentActionSheet() {
         this.imgUploadProvider.presentAction().then((url) => {
-            this.dialogService.alert('地址：' + JSON.stringify(url));
             this.fileUrl = url;
         });
     }

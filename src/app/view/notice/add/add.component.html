@@ -13,7 +13,7 @@
     </ion-item>
     <ion-item>
         <ion-label>内容：</ion-label>
-        <ion-textarea placeholder="请输入内容" rows="20" [(ngModel)]="params.noticecontent"></ion-textarea>
+        <ion-textarea placeholder="请输入内容" rows="10" [(ngModel)]="params.noticecontent"></ion-textarea>
     </ion-item>
     <section class="img-wrapper">
         <div class="header-image" *ngFor="let item of imgArr" tappable [ngStyle]="{'background-image': 'url('+item+')'}">
