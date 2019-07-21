@@ -10,6 +10,7 @@ import {JPushModel} from './jPush.model';
 import {Device} from '@ionic-native/device/ngx';
 import {HuaWeiPushProvider} from '../../service/hua-wei-push';
 import {NativeService} from '../../service/NativeService';
+import { Badge } from '@ionic-native/badge/ngx';
 import $ from 'jquery';
 
 interface IConfig {
@@ -35,6 +36,7 @@ export class HomePage extends BasePage {
         public jPushModel: JPushModel,
         public huaWeiPushProvider: HuaWeiPushProvider,
         public nativeService: NativeService,
+        public badge:Badge,
     ) {
         super( http, router, navController, dialogService);
         this.platform.ready().then(() => {

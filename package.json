@@ -23,6 +23,7 @@
     "@ionic-native/android-permissions": "^5.10.0",
     "@ionic-native/app-minimize": "^5.9.0",
     "@ionic-native/app-version": "^5.10.0",
+    "@ionic-native/badge": "^5.10.0",
     "@ionic-native/base64": "^5.10.0",
     "@ionic-native/camera": "^5.10.0",
     "@ionic-native/core": "^5.0.0",

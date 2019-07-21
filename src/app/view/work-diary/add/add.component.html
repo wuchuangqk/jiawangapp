@@ -17,15 +17,15 @@
       </div>
     </div>
     <ion-item>
-      <ion-label>日期</ion-label>
+      <ion-label>日期：</ion-label>
       <!--          2019-06-02 18:57:20 -->
       <ion-datetime (ngModelChange)="ngModelChange($event)" type="datetime-local" displayFormat="YYYY-MM-DD" pickerFormat="YYYY-MM-DD" doneText="确定" [(ngModel)]="payload.date" cancelText="取消"></ion-datetime>
     </ion-item>
-    <div class="add-log-title">上午日志</div>
+    <div class="add-log-title">上午日志：</div>
     <ion-item>
       <ion-textarea placeholder="请填写上午日志" [(ngModel)]="payload.morning"></ion-textarea>
     </ion-item>
-    <div class="add-log-title">下午日志</div>
+    <div class="add-log-title">下午日志：</div>
     <ion-item>
       <ion-textarea placeholder="请填写下午日志" [(ngModel)]="payload.afternoon"></ion-textarea>
     </ion-item>

@@ -7,8 +7,10 @@
     </ion-toolbar>
 </ion-header>
 <ion-content>
-    <ion-textarea [(ngModel)]="content" placeholder="请输入........"></ion-textarea>
+    <ion-item>
+        <ion-textarea [(ngModel)]="content" placeholder="请输入您要反馈的问题........"></ion-textarea>
+    </ion-item>
     <div style="padding:20px 20px;">
-        <ion-button  expand="full" (click)="submit()">退出</ion-button>
+        <ion-button  expand="full" (click)="submit()">提交</ion-button>
     </div>
 </ion-content>

@@ -29,9 +29,24 @@ export class AddComponent extends BasePage implements OnInit {
     }
 
     ngOnInit() {}
+    public checkParams(): boolean {
+        if (!this.params.infoTitle) {
+            this.dialogService.toast('请输入标题！');
+            return false;
+        } else if (!this.params.infoContent) {
+            this.dialogService.toast('请输入内容！');
+            return false;
+        }
+        return true;
+    }
     public submit() {
+        if (!this.checkParams()) {
+            return ;
+        }
+        this.dialogService.loading('正在提交，请稍后....');
         this.setRequest('/notices/wenxuan_add', this.params).then((res) => {
-             this.dialogService.alert('上传成功后回调：' + JSON.stringify(res),()=>{
+            this.dialogService.dismiss();
+            this.dialogService.alert('提交成功！', () => {
                 this.navController.back();
              });
         });

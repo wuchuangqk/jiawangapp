@@ -35,7 +35,8 @@ import { FileChooser } from '@ionic-native/file-chooser/ngx';
 import {Base64} from '@ionic-native/base64/ngx';
 import { FilePath } from '@ionic-native/file-path/ngx';
 import {FeedbackComponent} from './view/feedback/feedback.component';
-
+// import {Badge} from '@ionic-native/badge';
+import { Badge } from '@ionic-native/badge/ngx';
 
 
 
@@ -82,6 +83,7 @@ import {FeedbackComponent} from './view/feedback/feedback.component';
         FileChooser,
         Base64,
         FilePath,
+        Badge,
         { provide: RouteReuseStrategy, useClass: IonicRouteStrategy },
         // { provide: HashLocationStrategy, useClass: LocationStrategy }
     ],
