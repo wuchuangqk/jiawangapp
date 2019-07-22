@@ -57,7 +57,20 @@ export class LoginComponent extends BasePage implements OnInit {
 
     ngOnInit() {
     }
+    public checkParams():boolean{
+        if(!this.username){
+            this.dialogService.toast("请输入用户名！");
+            return false;
+        }else if(!this.password){
+            this.dialogService.toast("请输入密码！");
+            return false;
+        }
+        return true;
+    }
     login() {
+        if(!this.checkParams()){
+            return;
+        }
         this.dialogService.loading();
         if (this.platform.is('android')) {
             if (this.uuid) {

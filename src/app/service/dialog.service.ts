@@ -55,7 +55,6 @@ export class DialogService {
   async toast(message: string) {
     const toast = await this.toastController.create({
       message,
-      color: 'success',
       duration: 1000,
       position: 'top'
     });
