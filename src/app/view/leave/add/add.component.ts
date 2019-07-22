@@ -7,6 +7,7 @@ import { DateProvider } from '../../../service/Date';
 import { DatePipe } from '@angular/common';
 import {Events, NavController} from '@ionic/angular';
 import {AppConfig} from '../../../app.config';
+import {ImgUploadProvider} from '../../../service/img-upload';
 
 @Component({
     selector: 'app-add',
@@ -14,6 +15,9 @@ import {AppConfig} from '../../../app.config';
     styleUrls: ['./add.component.scss'],
 })
 export class AddComponent extends BasePage implements OnInit {
+    public imgArr = [];
+    public photo = '';
+    public fileUrl: any = '';
     public selectedStaff = [];
     // 提交的参数
     // 督办类别
@@ -38,6 +42,7 @@ export class AddComponent extends BasePage implements OnInit {
         public navController: NavController,
         public dateProvider: DateProvider,
         public events: Events,
+        public imgUploadProvider: ImgUploadProvider,
         public route?: ActivatedRoute,
     ) {
         super(http, router,  navController, dialogService);
@@ -76,6 +81,14 @@ export class AddComponent extends BasePage implements OnInit {
         });
     }
 
+    presentActionSheet() {
+        this.imgUploadProvider.presentAction().then((url) => {
+            this.fileUrl = url;
+        });
+    }
+
+
+
     // 检查参数
     private checkParams(params): boolean {
         if (!params.qjstime) {
@@ -106,7 +119,9 @@ export class AddComponent extends BasePage implements OnInit {
         }
         this.params.qjstime = this.dateProvider.DateTimeFormat(new Date(this.params.qjstime));
         this.params.qjetime = this.dateProvider.DateTimeFormat(new Date(this.params.qjetime));
-        this.setRequest('/qingjia/qingjia_add', this.params).then((res) => {
+        this.dialogService.loading('正在提交，请稍候....');
+        this.uploadFile('/qingjia/qingjia_add', this.params, this.fileUrl).then((res) => {
+            this.dialogService.dismiss();
             this.events.publish(AppConfig.Leave.ShenPiList);
             this.events.publish(AppConfig.Leave.List);
             this.navController.back();

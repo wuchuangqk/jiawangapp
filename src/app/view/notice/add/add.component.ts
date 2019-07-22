@@ -16,8 +16,8 @@ import {AppConfig} from '../../../app.config';
 export class AddComponent extends BasePage implements OnInit{
     public imgArr = [];
     public photo = '';
-    public avatar: any;
     public fileUrl: any = '';
+    public avatar: any;
     params = {
         noticetitle: '',
         noticecontent: '',

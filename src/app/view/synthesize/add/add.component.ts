@@ -7,6 +7,7 @@ import { DateProvider } from '../../../service/Date';
 import { DatePipe } from '@angular/common';
 import {Events, NavController} from '@ionic/angular';
 import {AppConfig} from '../../../app.config';
+import {ImgUploadProvider} from '../../../service/img-upload';
 
 @Component({
     selector: 'app-add',
@@ -14,6 +15,9 @@ import {AppConfig} from '../../../app.config';
     styleUrls: ['./add.component.scss'],
 })
 export class AddComponent extends BasePage implements OnInit {
+    public imgArr = [];
+    public photo = '';
+    public fileUrl: any = '';
     public selectedStaff = [];
     // 提交的参数
     // 督办类别
@@ -38,6 +42,7 @@ export class AddComponent extends BasePage implements OnInit {
         public navController: NavController,
         public dateProvider: DateProvider,
         public events: Events,
+        public imgUploadProvider: ImgUploadProvider,
         public route?: ActivatedRoute,
     ) {
         super(http, router,  navController, dialogService);
@@ -64,7 +69,11 @@ export class AddComponent extends BasePage implements OnInit {
     ngModelChange(e) {
         console.log(e);
     }
-
+    presentActionSheet() {
+        this.imgUploadProvider.presentAction().then((url) => {
+            this.fileUrl = url;
+        });
+    }
     go( eventName, selectedStaff, isSelectOne) {
         localStorage.num = 0;
         this.nav('/receive-document/staff-select/0000', {
@@ -106,10 +115,14 @@ export class AddComponent extends BasePage implements OnInit {
         }
         this.params.qjstime = this.dateProvider.DateTimeFormat(new Date(this.params.qjstime));
         this.params.qjetime = this.dateProvider.DateTimeFormat(new Date(this.params.qjetime));
-        this.setRequest('/zhsp/zhsp_add', this.params).then((res) => {
-            this.events.publish(AppConfig.Synthesize.List);
-            this.events.publish(AppConfig.Synthesize.ShenPiList);
-            this.navController.back();
+        this.dialogService.loading('正在提交，请稍后.....');
+        this.uploadFile('/zhsp/zhsp_add', this.params, this.fileUrl).then((res) => {
+            this.dialogService.dismiss();
+            this.dialogService.alert('提交成功！', () => {
+                this.events.publish(AppConfig.Synthesize.List);
+                this.events.publish(AppConfig.Synthesize.ShenPiList);
+                this.navController.back();
+            });
         });
     }
 }

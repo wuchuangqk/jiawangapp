@@ -6,6 +6,7 @@ import {DialogService} from '../../../service/dialog.service';
 import { DateProvider } from '../../../service/Date';
 import {Events, NavController} from '@ionic/angular';
 import {AppConfig} from '../../../app.config';
+import {ImgUploadProvider} from '../../../service/img-upload';
 
 @Component({
     selector: 'app-add',
@@ -17,6 +18,9 @@ export class AddComponent extends BasePage implements OnInit {
     public latestDate: '';
     public selectedStaff = [];
     public _selectedStaff = [];
+    public imgArr = [];
+    public photo = '';
+    public fileUrl: any = '';
     // 提交的参数
     public params: any = {
         url: '/letter/letteradd',
@@ -48,6 +52,7 @@ export class AddComponent extends BasePage implements OnInit {
         public navController: NavController,
         public dateProvider: DateProvider,
         public events: Events,
+        public imgUploadProvider: ImgUploadProvider,
         public route?: ActivatedRoute,
     ) {
         super(http, router,  navController, dialogService);
@@ -94,6 +99,11 @@ export class AddComponent extends BasePage implements OnInit {
             selectedStaff : JSON.stringify(selectedStaff)
         });
     }
+    presentActionSheet() {
+        this.imgUploadProvider.presentAction().then((url) => {
+            this.fileUrl = url;
+        });
+    }
 
 
     /**
@@ -131,10 +141,16 @@ export class AddComponent extends BasePage implements OnInit {
         if (this.latestDate) {
             this.params.latestDate = this.dateProvider.DateTimeFormat(new Date(this.latestDate));
         }
-        this.setRequest(this.params.url, this.params).then((res) => {
-            this.dialogService.toast('提交成功');
-            this.events.publish(AppConfig.Assign.List);
-            this.navController.back();
+
+
+        this.dialogService.loading('正在提交，请稍后！');
+        this.uploadFile(this.params.url, this.params, this.fileUrl).then((res) => {
+            this.dialogService.dismiss();
+            this.dialogService.alert('提交成功！', () => {
+                this.events.publish(AppConfig.Notice.List);
+                this.events.publish(AppConfig.Assign.List);
+                this.navController.back();
+            });
         });
     }
 }
