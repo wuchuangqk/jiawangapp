@@ -76,7 +76,7 @@ export class JPushModel {
         this.dialogService.alert(contentTitle, () => {
             switch (type) {
                 case 'message': {
-                    this.nav('common_view', {
+                    this.nav(`common_view/${id}`, {
                         id,
                         title: itemTitle,
                         url: '/notices/list/',

@@ -13,7 +13,7 @@ const routes: Routes = [
   },
   { path: 'login', loadChildren: './view/login/login.module#LoginPageModule'},
   { path: 'persion-info', component: PersionInfoComponent },
-  { path: 'common_view', component: CommonViewComponent },
+  { path: 'common_view/:id', component: CommonViewComponent },
   { path: 'detail', component: DetailComponent },
   { path: 'feedback', component: FeedbackComponent },
   { path: 'work-diary', loadChildren: './view/work-diary/work-diary.module#WorkDiaryModule' },
