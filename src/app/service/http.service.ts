@@ -3,6 +3,10 @@ import { HttpRequestService } from './http-request.service';
 import { Router } from '@angular/router';
 import { DialogService } from './dialog.service';
 import { environment } from '../../environments/environment.prod';
+import {NavController, Platform} from '@ionic/angular';
+import {Device} from '@ionic-native/device/ngx';
+import {HuaWeiPushProvider} from './hua-wei-push';
+import {JPushModel} from '../view/home/jPush.model';
 
 
 @Injectable({
@@ -29,7 +33,12 @@ export class HttpService {
   constructor(
       private httpRequest: HttpRequestService,
       private router: Router,
+      private platform: Platform,
+      private device: Device,
+      private huaWeiPushProvider: HuaWeiPushProvider,
       private dialogService: DialogService,
+      private jPushModel: JPushModel,
+      private navController: NavController,
   ) {
   }
   public get(url: string, data): Promise<any> {
@@ -51,4 +60,24 @@ export class HttpService {
   private handleError(error): void {
     this.dialogService.toast(this.failCodeMap.get(error.status).msg);
   }
+
+  logout() {
+    localStorage.clear();
+    if (this.platform.is('android')) {
+      if (this.isHuaWei() && Number(this.device.version) >= 7) {// 判断是否为华为手机并且安卓版本号大于等于7
+        this.huaWeiPushProvider.stop();
+        navigator["app"].exitApp();
+      } else {
+        this.jPushModel.stopPush();
+        this.navController.navigateRoot('login');
+      }
+    } else {
+      this.navController.navigateRoot('login');
+    }
+  }
+  isHuaWei() {
+    return this.device.manufacturer.toLowerCase().indexOf('huawei') >= 0;
+  }
+
+
 }

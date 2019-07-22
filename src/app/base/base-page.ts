@@ -79,7 +79,8 @@ export class BasePage implements OnInit {
           this.dialogService.toast(data.msg);
       } else if (data.status_code === '30000') {
           this.dialogService.alert(data.msg, () => {
-              this.navController.navigateRoot('login');
+              // this.navController.navigateRoot('login');
+              this.http.logout();
           });
       } else if (data.status_code === '30002') {
           this.dialogService.toast('参数错误！');
