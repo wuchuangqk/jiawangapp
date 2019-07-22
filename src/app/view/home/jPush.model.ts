@@ -72,7 +72,7 @@ export class JPushModel {
         } else {
             btnText = '确定';
         }
-        this.dialogService.alert(type);
+        // this.dialogService.alert(type);
         this.dialogService.alert(contentTitle, () => {
             switch (type) {
                 case 'message': {
