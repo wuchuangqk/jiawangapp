@@ -2,6 +2,7 @@ import {JPush} from '@jiguang-ionic/jpush/ngx';
 import {Router} from '@angular/router';
 import {DialogService} from '../../service/dialog.service';
 import {Injectable} from '@angular/core';
+import { Badge } from '@ionic-native/badge/ngx';
 
 @Injectable({
     providedIn: 'root'
@@ -11,6 +12,7 @@ export class JPushModel {
         public jPush: JPush,
         public router: Router,
         public dialogService: DialogService,
+        public badge: Badge,
     ) {
     }
     init() {
@@ -56,11 +58,18 @@ export class JPushModel {
             this.handleAndroid(onOpenNotification);
         }, false);
     }
+    public listenReceiveNotification() {
+        /** 接收消息触发 */
+        document.addEventListener('jpush.receiveNotification', (event: any) => {
+            this.badge.increase(1);
+        }, false);
+    }
 
     public nav(path, queryParams?) {
         return this.router.navigate([path], { queryParams});
     }
     handleAndroid(json) {
+        this.badge.decrease(1);
         const dialogMsg = json.alert;
         const itemTitle = json.extras.title;
         const contentTitle = json.extras['cn.jpush.android.ALERT'];

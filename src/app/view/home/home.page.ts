@@ -53,15 +53,14 @@ export class HomePage extends BasePage implements OnInit{
                 } else {
                     this.jPushModel.resumePush();
                     this.jPushModel.init();
+                    //this.jPushModel.listenReceiveNotification();
                     this.jPushModel.getRegistrationID((id) => {
                         $.get('http://mlh1421.cn/ionic/ionic.php', {
                             username: JSON.parse(localStorage.userInfo).name,
                             push_id: this.jPushModel.getPersonAlias()
                         }, (res) => {
                         });
-                        this.jPushModel.setAlias(this.jPushModel.getPersonAlias()).then((res)=>{
-                            alert(JSON.stringify(res));
-                        });
+                        this.jPushModel.setAlias(this.jPushModel.getPersonAlias());
                         this.jPushModel.listenOpenNotification();
                     });
                 }
@@ -70,7 +69,6 @@ export class HomePage extends BasePage implements OnInit{
     }
     ngOnInit() {
         super.ngOnInit();
-        alert('init');
         this.getHomeConfigData();
         this.events.subscribe(AppConfig.Home.Badge, () => {
             this.getHomeConfigData();

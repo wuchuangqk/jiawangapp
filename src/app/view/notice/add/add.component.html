@@ -21,6 +21,16 @@
         <ion-button color="light" (click)="presentActionSheet()">选择附件</ion-button>
         <div>{{fileUrl}}</div>
     </section>
+    <div
+         class="upload-file ion-color ion-color-light ios button button-solid ion-activatable ion-focusable hydrated"
+    >
+        <input type="file"  (change)="fileChange($event)" class="input-file">
+        <span class="tip">选择附件</span>
+    </div>
+    <div class="preview">
+        <button type="button" name="button">预览</button>
+    </div>
+
 </ion-content>
 <ion-footer>
     <ion-toolbar>

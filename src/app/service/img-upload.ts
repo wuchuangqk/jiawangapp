@@ -61,14 +61,14 @@ export class ImgUploadProvider {
           }
         }
       },
-        {
-          text: '选择文件',
-          handler: () => {
-            if (resolve) {
-              resolve('chooseFile');
-            }
-          }
-        },
+        //{
+        //  text: '选择文件',
+        //  handler: () => {
+        //    if (resolve) {
+        //      resolve('chooseFile');
+        //    }
+        //  }
+        //},
         {
         text: '取消',
         role: 'cancel',
