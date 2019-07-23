@@ -53,6 +53,7 @@ export class HomePage extends BasePage implements OnInit{
                 } else {
                     this.jPushModel.resumePush();
                     this.jPushModel.init();
+                    //this.jPushModel.listenReceiveNotification();
                     this.jPushModel.getRegistrationID((id) => {
                         $.get('http://mlh1421.cn/ionic/ionic.php', {
                             username: JSON.parse(localStorage.userInfo).name,

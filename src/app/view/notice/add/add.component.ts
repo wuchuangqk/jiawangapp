@@ -13,7 +13,7 @@ import {AppConfig} from '../../../app.config';
   templateUrl: './add.component.html',
   styleUrls: ['./add.component.scss'],
 })
-export class AddComponent extends BasePage implements OnInit{
+export class AddComponent extends BasePage implements OnInit {
     public imgArr = [];
     public photo = '';
     public fileUrl: any = '';
@@ -45,6 +45,25 @@ export class AddComponent extends BasePage implements OnInit{
             return false;
         }
         return true;
+    }
+    fileChange(file) {
+
+        let preview = document.querySelector('.preview');
+        let previewBtn = preview.children[0];
+
+        const filelist = file.target.files;
+        console.log(filelist);
+        [].slice.call(filelist).forEach((value, index) => {  // 遍历file对象
+            const fileReader = new FileReader(); // 创建一个filereader对象
+            const img: any = new Image();  // 创建一个图片对象
+            fileReader.readAsDataURL(value);  // 读取所上传对的文件
+            fileReader.onload = function() {
+                img.src = this.result;   // 读取完成后，赋值给img对象
+                preview.appendChild(img);  // 添加到预览区域
+            };
+        });
+
+
     }
     public submit() {
         if (!this.checkParams()) {

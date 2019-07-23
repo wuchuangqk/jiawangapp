@@ -1,5 +1,5 @@
 <?xml version='1.0' encoding='utf-8'?>
-<widget android-packageName="com.cn.yuansong" build="1.9" id="com.cn.yuansong" ios-CFBundleIdentifier="VTVX3T7R4F" ios-CFBundleVersion="8" version="1.71" xmlns="http://www.w3.org/ns/widgets" xmlns:cdv="http://cordova.apache.org/ns/1.0">
+<widget android-packageName="com.cn.yuansong" build="9" id="com.cn.yuansong" ios-CFBundleIdentifier="VTVX3T7R4F" ios-CFBundleVersion="16" version="1.71" xmlns="http://www.w3.org/ns/widgets" xmlns:cdv="http://cordova.apache.org/ns/1.0">
     <name>铜山城投OA</name>
     <description>An awesome Ionic/Cordova app.</description>
     <author email="hi@ionicframework.com" href="http://ionicframework.com/">Ionic Framework Team</author>
@@ -50,9 +50,6 @@
     <platform name="ios">
         <allow-intent href="itms:*" />
         <allow-intent href="itms-apps:*" />
-        <config-file parent="NSCameraUsageDescription" platform="ios" target="*-Info.plist">
-            <string>You can take photos</string>
-        </config-file>
         <icon height="57" src="resources/ios/icon/icon.png" width="57" />
         <icon height="114" src="resources/ios/icon/icon@2x.png" width="114" />
         <icon height="40" src="resources/ios/icon/icon-40.png" width="40" />
@@ -105,7 +102,6 @@
     <plugin name="cordova-plugin-android-permissions" spec="~1.0.0" />
     <plugin name="cordova-plugin-telerik-imagepicker" spec="~2.3.3" />
     <engine name="android" spec="~7.1.4" />
-    <engine name="ios" spec="~4.3.1" />
     <plugin name="cordova-plugin-camera" spec="~4.0.3" />
     <plugin name="cordova-plugin-app-version" spec="~0.1.9" />
     <plugin name="cordova-plugin-file" spec="~6.0.2" />
@@ -114,4 +110,6 @@
         <variable name="ANDROID_SUPPORT_V4_VERSION" value="27.+" />
     </plugin>
     <plugin name="cordova-plugin-filechooser" spec="~1.2.0" />
+    <plugin name="cordova-plugin-badge" spec="~0.8.8" />
+    <engine name="ios" spec="~4.3.1" />
 </widget>
