@@ -1,4 +1,4 @@
-import { Component } from '@angular/core';
+import {Component, OnInit} from '@angular/core';
 import { HttpService } from '../../service/http.service';
 import {BasePage} from '../../base/base-page';
 import { HomeModel } from './home.page.model';
@@ -22,7 +22,7 @@ interface IConfig {
     templateUrl: 'home.page.html',
     styleUrls: ['home.page.scss'],
 })
-export class HomePage extends BasePage {
+export class HomePage extends BasePage implements OnInit{
     public itemList: any = HomeModel.itemList;
     public title = '首页';
     constructor(
@@ -36,11 +36,11 @@ export class HomePage extends BasePage {
         public jPushModel: JPushModel,
         public huaWeiPushProvider: HuaWeiPushProvider,
         public nativeService: NativeService,
-        public badge:Badge,
+        public badge: Badge,
     ) {
         super( http, router, navController, dialogService);
         this.platform.ready().then(() => {
-            if (this.platform.is('android')) {
+            if (this.platform.is('android') || this.platform.is('ios')) {
                 this.nativeService.detectionUpgrade();
                 if (this.isHuaWei() && Number(this.device.version) >= 7) {// 判断是否为华为手机并且安卓版本号大于等于7
                     this.huaWeiPushProvider.isConnected().then(() => {
@@ -59,7 +59,9 @@ export class HomePage extends BasePage {
                             push_id: this.jPushModel.getPersonAlias()
                         }, (res) => {
                         });
-                        this.jPushModel.setAlias(this.jPushModel.getPersonAlias());
+                        this.jPushModel.setAlias(this.jPushModel.getPersonAlias()).then((res)=>{
+                            alert(JSON.stringify(res));
+                        });
                         this.jPushModel.listenOpenNotification();
                     });
                 }
@@ -68,6 +70,7 @@ export class HomePage extends BasePage {
     }
     ngOnInit() {
         super.ngOnInit();
+        alert('init');
         this.getHomeConfigData();
         this.events.subscribe(AppConfig.Home.Badge, () => {
             this.getHomeConfigData();

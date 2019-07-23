@@ -91,9 +91,7 @@ export class ImgUploadProvider {
         if (images.length > 1) {
           reject('0');
         } else if (images.length === 1) {
-          this.avatar = images[0].slice(7);
-          resolve(this.avatar);
-          // resolve(images[0].slice(7));
+          resolve(images[0]);
         }
       }, error => {
         reject('Error: ' + error);
@@ -114,15 +112,12 @@ export class ImgUploadProvider {
       saveToPhotoAlbum: true,
     };
     return this.camera.getPicture(options).then(image => {
-      // this.avatar = image.slice(7);
-      // return this.avatar;
-      return image.replace('file://', '');
+      return image;
     }, error => {
       console.log('Error: ' + error);
     });
   }
   presentAction() {
-    // url = '/api/v2' + url;
     return new Promise(((resolve) => {
       this.presentActionSheet((res) => {
         if (res === 'takePhoto') {
@@ -134,8 +129,7 @@ export class ImgUploadProvider {
             resolve(res);
           });
         } else if (res === 'chooseFile') {
-          this.chooseFile().then((res) => {
-            const url = res.slice(7);
+          this.chooseFile().then((url) => {
             resolve(url);
           });
         }

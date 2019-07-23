@@ -54,7 +54,10 @@ export class HttpRequestService {
     }
     return new Promise(((resolve, reject) => {
       if (filePath) {
-        filePath = 'file://' + filePath;
+        if (filePath.slice(7) != 'file://') {
+          filePath = 'file://' + filePath;
+        }
+        alert(filePath);
         this.file.resolveLocalFilesystemUrl(filePath).then((entry: any) => {
           entry.file(file => {
             const blob: Blob = file as Blob;
