@@ -15,7 +15,7 @@ import {ImgUploadProvider} from '../../../service/img-upload';
     styleUrls: ['./add.component.scss'],
 })
 export class AddComponent extends BasePage implements OnInit {
-    public imgArr = [];
+    public fileArray = [];
     public photo = '';
     public fileUrl: any = '';
     public selectedStaff = [];
@@ -65,14 +65,12 @@ export class AddComponent extends BasePage implements OnInit {
         });
     }
 
+    getFileArray(fileArray) {
+        this.fileArray = fileArray;
+    }
 
     ngModelChange(e) {
         console.log(e);
-    }
-    presentActionSheet() {
-        this.imgUploadProvider.presentAction().then((url) => {
-            this.fileUrl = url;
-        });
     }
     go( eventName, selectedStaff, isSelectOne) {
         localStorage.num = 0;
@@ -116,7 +114,7 @@ export class AddComponent extends BasePage implements OnInit {
         this.params.qjstime = this.dateProvider.DateTimeFormat(new Date(this.params.qjstime));
         this.params.qjetime = this.dateProvider.DateTimeFormat(new Date(this.params.qjetime));
         this.dialogService.loading('正在提交，请稍后.....');
-        this.uploadFile('/zhsp/zhsp_add', this.params, this.fileUrl).then((res) => {
+        this.uploadFiles('/zhsp/zhsp_add', this.params, this.fileArray).then((res) => {
             this.dialogService.dismiss();
             this.dialogService.alert('提交成功！', () => {
                 this.events.publish(AppConfig.Synthesize.List);

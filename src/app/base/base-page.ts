@@ -71,6 +71,12 @@ export class BasePage implements OnInit {
             this.handleErr(error);
         });
     }
+
+    public uploadFiles(url: string, data, files) {
+        return  this.http.uploadFiles('/api/v2' + url, data, files).catch((error) => {
+            this.handleErr(error);
+        });
+    }
     public doRefresh(event) {
         event.target.complete();
     }

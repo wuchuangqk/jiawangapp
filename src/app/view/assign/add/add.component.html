@@ -9,45 +9,40 @@
 
 <ion-content class="bg-style add-style">
   <ion-item>
-    <ion-label class="prefix-title">标题</ion-label>
+    <ion-label class="prefix-title">标题：</ion-label>
     <ion-input placeholder="请输入标题" [(ngModel)]="params.lettertitle"></ion-input>
   </ion-item>
   <ion-item>
-    <ion-label class="prefix-title">办理事项</ion-label>
+    <ion-label class="prefix-title">办理事项：</ion-label>
     <ion-select cancelText="取消" okText="确定" [(ngModel)]="params.lettersource">
       <ion-select-option *ngFor="let item of banLiShiXiang" [value]="item.name">{{item.name}}</ion-select-option>
     </ion-select>
   </ion-item>
   <ion-item>
-    <ion-label class="prefix-title">督办类别</ion-label>
+    <ion-label class="prefix-title">督办类别：</ion-label>
     <ion-select cancelText="取消" okText="确定" [(ngModel)]="params.lettertype">
       <ion-select-option *ngFor="let item of duBanCatogray" [value]="item.name">{{item.name}}</ion-select-option>
     </ion-select>
   </ion-item>
   <ion-item>
-    <ion-label>拟交办日期</ion-label>
+    <ion-label>拟交办日期：</ion-label>
     <ion-datetime (ngModelChange)="ngModelChange($event)" type="datetime-local" displayFormat="YYYY-MM-DD HH:mm" pickerFormat="YYYY-MM-DD HH:mm" doneText="确定" [(ngModel)]="fillDate" cancelText="取消"></ion-datetime>
   </ion-item>
   <ion-item>
-    <ion-label>办结期限</ion-label>
+    <ion-label>办结期限：</ion-label>
     <ion-datetime (ngModelChange)="ngModelChange($event)" type="datetime-local" displayFormat="YYYY-MM-DD HH:mm" pickerFormat="YYYY-MM-DD HH:mm" doneText="确定" [(ngModel)]="latestDate" cancelText="取消"></ion-datetime>
   </ion-item>
   <ion-item>
-    <ion-label class="prefix-title">拟办意见</ion-label>
+    <ion-label class="prefix-title">拟办意见：</ion-label>
     <ion-textarea placeholder="拟办意见" [(ngModel)]="params.contactemail"></ion-textarea>
   </ion-item>
   <ion-item>
-    <ion-label class="prefix-title">内容</ion-label>
+    <ion-label class="prefix-title">内容：</ion-label>
     <ion-textarea placeholder="请输入内容" [(ngModel)]="params.lettercontent"></ion-textarea>
   </ion-item>
   <app-staff (click)="go('getSt', selectedStaff,true)" title="责任人" eventName="getSt" [(selectedStaff)]="selectedStaff"></app-staff>
   <app-staff (click)="go('getSta', _selectedStaff,false)" title="配合人" eventName="getSta" [(selectedStaff)]="_selectedStaff"></app-staff>
-  <section class="img-wrapper">
-    <div class="header-image" *ngFor="let item of imgArr" tappable [ngStyle]="{'background-image': 'url('+item+')'}">
-    </div>
-    <ion-button color="light" (click)="presentActionSheet()">选择附件</ion-button>
-    <div>{{fileUrl}}</div>
-  </section>
+  <app-file-viewer (getFileArray)="getFileArray($event)"></app-file-viewer>
 </ion-content>
 
 <ion-footer>

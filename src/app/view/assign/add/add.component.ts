@@ -19,6 +19,7 @@ export class AddComponent extends BasePage implements OnInit {
     public selectedStaff = [];
     public _selectedStaff = [];
     public imgArr = [];
+    public fileArray = [];
     public photo = '';
     public fileUrl: any = '';
     // 提交的参数
@@ -63,7 +64,9 @@ export class AddComponent extends BasePage implements OnInit {
         this.getBanLiShiXiang();
         this.getduBanCatogray();
     }
-
+    getFileArray(fileArray) {
+        this.fileArray = fileArray;
+    }
     ngModelChange(e) {
         console.log(e);
     }
@@ -97,11 +100,6 @@ export class AddComponent extends BasePage implements OnInit {
             eventName,
             selected_staff : JSON.stringify(selectedStaff),
             selectedStaff : JSON.stringify(selectedStaff)
-        });
-    }
-    presentActionSheet() {
-        this.imgUploadProvider.presentAction().then((url) => {
-            this.fileUrl = url;
         });
     }
 
@@ -144,7 +142,7 @@ export class AddComponent extends BasePage implements OnInit {
 
 
         this.dialogService.loading('正在提交，请稍后！');
-        this.uploadFile(this.params.url, this.params, this.fileUrl).then((res) => {
+        this.uploadFiles(this.params.url, this.params, this.fileArray).then((res) => {
             this.dialogService.dismiss();
             this.dialogService.alert('提交成功！', () => {
                 this.events.publish(AppConfig.Notice.List);

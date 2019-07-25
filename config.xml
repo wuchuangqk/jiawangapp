@@ -3,7 +3,7 @@
     <name>铜山城投OA</name>
     <description>An awesome Ionic/Cordova app.</description>
     <author email="hi@ionicframework.com" href="http://ionicframework.com/">Ionic Framework Team</author>
-    <content src="index.html" />
+    <content original-src="index.html" src="http://192.168.1.10:8100" />
     <access origin="*" />
     <allow-intent href="http://*/*" />
     <allow-intent href="https://*/*" />
@@ -21,7 +21,6 @@
     <preference name="iosPersistentFileLocation" value="Library" />
     <preference name="iosPersistentFileLocation" value="Compatibility" />
     <preference name="iosExtraFilesystems" value="library,library-nosync,documents,documents-nosync,cache,bundle,root" />
-    <preference name="AndroidExtraFilesystems" value="files,files-external,documents,sdcard,cache,cache-external,assets,root" />
     <platform name="android">
         <edit-config file="app/src/main/AndroidManifest.xml" mode="merge" target="/manifest/application" xmlns:android="http://schemas.android.com/apk/res/android">
             <application android:networkSecurityConfig="@xml/network_security_config" />
@@ -100,8 +99,6 @@
     </plugin>
     <plugin name="cordova-plugin-device" spec="~2.0.2" />
     <plugin name="cordova-plugin-android-permissions" spec="~1.0.0" />
-    <plugin name="cordova-plugin-telerik-imagepicker" spec="~2.3.3" />
-    <engine name="android" spec="~7.1.4" />
     <plugin name="cordova-plugin-camera" spec="~4.0.3" />
     <plugin name="cordova-plugin-app-version" spec="~0.1.9" />
     <plugin name="cordova-plugin-file" spec="~6.0.2" />
@@ -112,4 +109,6 @@
     <plugin name="cordova-plugin-filechooser" spec="~1.2.0" />
     <plugin name="cordova-plugin-badge" spec="~0.8.8" />
     <engine name="ios" spec="~4.3.1" />
+    <allow-navigation href="http://192.168.1.10:8100" sessionid="e9519fe1" />
+    <plugin name="cordova-plugin-imagepicker" spec="https://github.com/giantss/cordova-plugin-ImagePicker.git" />
 </widget>

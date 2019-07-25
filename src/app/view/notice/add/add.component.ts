@@ -17,7 +17,9 @@ export class AddComponent extends BasePage implements OnInit {
     public imgArr = [];
     public photo = '';
     public fileUrl: any = '';
+    public files = [];
     public avatar: any;
+    public fileArray = [];
     params = {
         noticetitle: '',
         noticecontent: '',
@@ -46,41 +48,20 @@ export class AddComponent extends BasePage implements OnInit {
         }
         return true;
     }
-    fileChange(file) {
-
-        let preview = document.querySelector('.preview');
-        let previewBtn = preview.children[0];
-
-        const filelist = file.target.files;
-        console.log(filelist);
-        [].slice.call(filelist).forEach((value, index) => {  // 遍历file对象
-            const fileReader = new FileReader(); // 创建一个filereader对象
-            const img: any = new Image();  // 创建一个图片对象
-            fileReader.readAsDataURL(value);  // 读取所上传对的文件
-            fileReader.onload = function() {
-                img.src = this.result;   // 读取完成后，赋值给img对象
-                preview.appendChild(img);  // 添加到预览区域
-            };
-        });
-
-
+    getFileArray(fileArray) {
+        this.fileArray = fileArray;
     }
     public submit() {
         if (!this.checkParams()) {
             return;
         }
         this.dialogService.loading('正在提交，请稍后！');
-        this.uploadFile('/notices/notices_add', this.params, this.fileUrl).then((res) => {
+        this.uploadFiles('/notices/notices_add', this.params, this.fileArray).then((res) => {
             this.dialogService.dismiss();
             this.dialogService.alert('提交成功！', () => {
                 this.event.publish(AppConfig.Notice.List);
                 this.navController.back();
             });
-        });
-    }
-    presentActionSheet() {
-        this.imgUploadProvider.presentAction().then((url) => {
-            this.fileUrl = url;
         });
     }
 }

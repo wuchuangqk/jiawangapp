@@ -15,22 +15,7 @@
         <ion-label>内容：</ion-label>
         <ion-textarea placeholder="请输入内容" rows="10" [(ngModel)]="params.noticecontent"></ion-textarea>
     </ion-item>
-    <section class="img-wrapper">
-        <div class="header-image" *ngFor="let item of imgArr" tappable [ngStyle]="{'background-image': 'url('+item+')'}">
-        </div>
-        <ion-button color="light" (click)="presentActionSheet()">选择附件</ion-button>
-        <div>{{fileUrl}}</div>
-    </section>
-    <div
-         class="upload-file ion-color ion-color-light ios button button-solid ion-activatable ion-focusable hydrated"
-    >
-        <input type="file"  (change)="fileChange($event)" class="input-file">
-        <span class="tip">选择附件</span>
-    </div>
-    <div class="preview">
-        <button type="button" name="button">预览</button>
-    </div>
-
+    <app-file-viewer (getFileArray)="getFileArray($event)"></app-file-viewer>
 </ion-content>
 <ion-footer>
     <ion-toolbar>

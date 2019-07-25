@@ -5,6 +5,7 @@ import {IonicModule} from '@ionic/angular';
 import {StaffComponent} from './staff/staff.component';
 import {CircleTextComponent} from './circle-text/circle-text.component';
 import {CulturalComponent} from './cultural/cultural.component';
+import {FileViewerComponent} from './file-viewer/file-viewer.component';
 
 @NgModule({
     declarations: [
@@ -12,6 +13,7 @@ import {CulturalComponent} from './cultural/cultural.component';
         StaffComponent,
         CircleTextComponent,
         CulturalComponent,
+        FileViewerComponent,
     ],
     imports: [
         IonicModule,
@@ -22,6 +24,7 @@ import {CulturalComponent} from './cultural/cultural.component';
         StaffComponent,
         CircleTextComponent,
         CulturalComponent,
+        FileViewerComponent,
     ]
 })
 export class CommonComponentsModule { }

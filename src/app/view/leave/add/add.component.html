@@ -28,14 +28,7 @@
     <ion-textarea placeholder="请输入请假事由" [(ngModel)]="params.qjyy"></ion-textarea>
   </ion-item>
   <app-staff (click)="go('getSt', selectedStaff,false)" title="选择审批人" eventName="getSt" [(selectedStaff)]="selectedStaff"></app-staff>
-
-  <section class="img-wrapper">
-    <div class="header-image" *ngFor="let item of imgArr" tappable [ngStyle]="{'background-image': 'url('+item+')'}">
-    </div>
-    <ion-button color="light" (click)="presentActionSheet()">选择附件</ion-button>
-    <div>{{fileUrl}}</div>
-  </section>
-
+  <app-file-viewer (getFileArray)="getFileArray($event)"></app-file-viewer>
 </ion-content>
 
 

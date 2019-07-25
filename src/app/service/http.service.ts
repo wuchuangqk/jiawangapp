@@ -57,6 +57,11 @@ export class HttpService {
       this.handleError(error);
     });
   }
+  public uploadFiles(url: string, data, files): Promise<any> {
+    return this.httpRequest.uploadFiles(url, data, files).toPromise().catch((error) => {
+      this.handleError(error);
+    });
+  }
   private handleError(error): void {
     this.dialogService.toast(this.failCodeMap.get(error.status).msg);
   }

@@ -15,7 +15,6 @@ import {ImgUploadProvider} from '../../../service/img-upload';
     styleUrls: ['./add.component.scss'],
 })
 export class AddComponent extends BasePage implements OnInit {
-    public imgArr = [];
     public photo = '';
     public fileUrl: any = '';
     public selectedStaff = [];
@@ -35,6 +34,7 @@ export class AddComponent extends BasePage implements OnInit {
         // 处理人名单
         staff_ids: ''
     };
+    public fileArray = [];
     constructor(
         public http: HttpService,
         public router: Router,
@@ -80,14 +80,9 @@ export class AddComponent extends BasePage implements OnInit {
             selectedStaff : JSON.stringify(selectedStaff)
         });
     }
-
-    presentActionSheet() {
-        this.imgUploadProvider.presentAction().then((url) => {
-            this.fileUrl = url;
-        });
+    getFileArray(fileArray) {
+        this.fileArray = fileArray;
     }
-
-
 
     // 检查参数
     private checkParams(params): boolean {
@@ -120,7 +115,7 @@ export class AddComponent extends BasePage implements OnInit {
         this.params.qjstime = this.dateProvider.DateTimeFormat(new Date(this.params.qjstime));
         this.params.qjetime = this.dateProvider.DateTimeFormat(new Date(this.params.qjetime));
         this.dialogService.loading('正在提交，请稍候....');
-        this.uploadFile('/qingjia/qingjia_add', this.params, this.fileUrl).then((res) => {
+        this.uploadFiles('/qingjia/qingjia_add', this.params, this.fileArray).then((res) => {
             this.dialogService.dismiss();
             this.events.publish(AppConfig.Leave.ShenPiList);
             this.events.publish(AppConfig.Leave.List);
