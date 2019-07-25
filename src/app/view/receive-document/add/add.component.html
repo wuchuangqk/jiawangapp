@@ -1,0 +1,62 @@
+<ion-header>
+    <ion-toolbar color="primary">
+        <app-back></app-back>
+        <ion-title>
+            {{title}}
+        </ion-title>
+    </ion-toolbar>
+</ion-header>
+<ion-content>
+    <ion-item>
+        <ion-label>收文标题：</ion-label>
+        <ion-input placeholder="请输入标题" [(ngModel)]="params.docTitle"></ion-input>
+    </ion-item>
+    <ion-item>
+        <ion-label>收文编号：</ion-label>
+        <ion-input [(ngModel)]="params.docCode"></ion-input>
+    </ion-item>
+    <ion-item>
+        <ion-label>来文日期：</ion-label>
+        <ion-datetime type="datetime-local" displayFormat="YYYY-MM-DD" pickerFormat="YYYY-MM-DD" doneText="确定" [(ngModel)]="params.receiptDate" cancelText="取消"></ion-datetime>
+    </ion-item>
+    <ion-item>
+        <ion-label>来文单位：</ion-label>
+        <ion-input [(ngModel)]="params.receiptUnit"></ion-input>
+    </ion-item>
+    <ion-item>
+        <ion-label>等级：</ion-label>
+        <ion-select [(ngModel)]="params.docLevel">
+            <ion-select-option *ngFor="let item of docLevelList" [value]="item.name">{{item.name}}</ion-select-option>
+        </ion-select>
+    </ion-item>
+    <ion-item>
+        <ion-label>保管期限：</ion-label>
+        <ion-select [(ngModel)]="params.storePeriod">
+            <ion-select-option *ngFor="let item of storePeriodList" [value]="item.name">{{item.name}}</ion-select-option>
+        </ion-select>
+    </ion-item>
+
+    <ion-item>
+        <ion-label>来文类型：</ion-label>
+        <ion-select [(ngModel)]="params.receiptType">
+            <ion-select-option *ngFor="let item of receiptTypeList" [value]="item.name">{{item.name}}</ion-select-option>
+        </ion-select>
+    </ion-item>
+
+    <ion-item>
+        <ion-label>归档分类：</ion-label>
+        <ion-select [(ngModel)]="params.archiveType">
+            <ion-select-option *ngFor="let item of archiveTypeList" [value]="item.name">{{item.name}}</ion-select-option>
+        </ion-select>
+    </ion-item>
+    <ion-item>
+        <ion-label>收文内容：</ion-label>
+        <ion-textarea placeholder="请输入内容" rows="10" [(ngModel)]="params.receiptContent"></ion-textarea>
+    </ion-item>
+    <app-staff (click)="go('getStaffs')" title="选择审核人" eventName="getStaffs" [(selectedStaff)]="selectedStaff"></app-staff>
+</ion-content>
+<ion-footer>
+    <ion-toolbar>
+        <ion-button expand="full" (click)="submit()">提交</ion-button>
+    </ion-toolbar>
+</ion-footer>

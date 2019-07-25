@@ -68,7 +68,7 @@ export class PersionInfoComponent extends BasePage implements OnInit {
       this.version = version;
     });
   }
-  submit(){
-    this.nav('feedback')
+  submit() {
+    this.nav('feedback');
   }
 }

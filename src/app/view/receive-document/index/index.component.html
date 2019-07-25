@@ -77,5 +77,10 @@
         </ion-list>
       </ion-slide>
     </ion-slides>
+    <ion-fab vertical="bottom" horizontal="end" slot="fixed">
+      <ion-fab-button (click)="nav('receive-document/add',{title:'添加收文',url:'b'})">
+        <ion-icon name="add"></ion-icon>
+      </ion-fab-button>
+    </ion-fab>
   </section>
 </ion-content>

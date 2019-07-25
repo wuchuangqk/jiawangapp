@@ -12,7 +12,7 @@ import {AppConfig} from '../../../app.config';
   styleUrls: ['./index.component.scss'],
 })
 export class IndexComponent extends ListBasePage implements OnInit, OnDestroy {
-  public isAdd = false;
+  public addUrl: string;
   constructor(
       public http: HttpService,
       public router: Router,
@@ -25,8 +25,8 @@ export class IndexComponent extends ListBasePage implements OnInit, OnDestroy {
     this.title = this.query('title');
     this.url = this.query('url');
 
-    this.isAdd = this.query('isAdd') === 'true' ? true : false;
-    console.log(this.isAdd);
+    this.addUrl = this.query('addUrl');
+    console.log(this.addUrl);
   }
   ngOnInit() {
     this.events.subscribe(AppConfig.Notice.List, () => {

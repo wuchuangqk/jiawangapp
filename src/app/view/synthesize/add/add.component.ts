@@ -7,7 +7,6 @@ import { DateProvider } from '../../../service/Date';
 import { DatePipe } from '@angular/common';
 import {Events, NavController} from '@ionic/angular';
 import {AppConfig} from '../../../app.config';
-import {ImgUploadProvider} from '../../../service/img-upload';
 
 @Component({
     selector: 'app-add',
@@ -17,7 +16,6 @@ import {ImgUploadProvider} from '../../../service/img-upload';
 export class AddComponent extends BasePage implements OnInit {
     public fileArray = [];
     public photo = '';
-    public fileUrl: any = '';
     public selectedStaff = [];
     // 提交的参数
     // 督办类别
@@ -42,7 +40,6 @@ export class AddComponent extends BasePage implements OnInit {
         public navController: NavController,
         public dateProvider: DateProvider,
         public events: Events,
-        public imgUploadProvider: ImgUploadProvider,
         public route?: ActivatedRoute,
     ) {
         super(http, router,  navController, dialogService);

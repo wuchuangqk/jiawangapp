@@ -6,7 +6,6 @@ import {DialogService} from '../../../service/dialog.service';
 import { DateProvider } from '../../../service/Date';
 import {Events, NavController} from '@ionic/angular';
 import {AppConfig} from '../../../app.config';
-import {ImgUploadProvider} from '../../../service/img-upload';
 
 @Component({
     selector: 'app-add',
@@ -18,10 +17,8 @@ export class AddComponent extends BasePage implements OnInit {
     public latestDate: '';
     public selectedStaff = [];
     public _selectedStaff = [];
-    public imgArr = [];
     public fileArray = [];
     public photo = '';
-    public fileUrl: any = '';
     // 提交的参数
     public params: any = {
         url: '/letter/letteradd',
@@ -40,9 +37,7 @@ export class AddComponent extends BasePage implements OnInit {
     public duBanCatogray = [];
     // 办理事项
     public banLiShiXiang = [];
-    public showContactTitle = '责任人';
     public title = '新增交办';
-    public documentType: string;
     public type: string;
     public opinions = [];
     public id: string;
@@ -53,7 +48,6 @@ export class AddComponent extends BasePage implements OnInit {
         public navController: NavController,
         public dateProvider: DateProvider,
         public events: Events,
-        public imgUploadProvider: ImgUploadProvider,
         public route?: ActivatedRoute,
     ) {
         super(http, router,  navController, dialogService);

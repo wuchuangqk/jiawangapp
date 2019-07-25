@@ -8,9 +8,7 @@ import {Router} from '@angular/router';
 import {HuaWeiPushProvider} from '../../service/hua-wei-push';
 import { Device } from '@ionic-native/device/ngx';
 import * as $ from 'jquery';
-import {JPushModel} from '../home/jPush.model';
 import {AppVersion} from '@ionic-native/app-version/ngx';
-// import { Storage } from "@ionic/storage";
 import { NativeStorage } from '@ionic-native/native-storage/ngx';
 
 @Component({
@@ -21,7 +19,6 @@ import { NativeStorage } from '@ionic-native/native-storage/ngx';
 export class LoginComponent extends BasePage implements OnInit {
     public name: any;
     username = '';
-    userid: number;
     public packagename: string;
     public uuid: string;
     public os: string;
@@ -57,18 +54,18 @@ export class LoginComponent extends BasePage implements OnInit {
 
     ngOnInit() {
     }
-    public checkParams():boolean{
-        if(!this.username){
-            this.dialogService.toast("请输入用户名！");
+    public checkParams(): boolean {
+        if (!this.username) {
+            this.dialogService.toast('请输入用户名！');
             return false;
-        }else if(!this.password){
-            this.dialogService.toast("请输入密码！");
+        } else if (!this.password) {
+            this.dialogService.toast('请输入密码！');
             return false;
         }
         return true;
     }
     login() {
-        if(!this.checkParams()){
+        if (!this.checkParams()) {
             return;
         }
         this.dialogService.loading();

@@ -22,7 +22,7 @@ interface IConfig {
     templateUrl: 'home.page.html',
     styleUrls: ['home.page.scss'],
 })
-export class HomePage extends BasePage implements OnInit{
+export class HomePage extends BasePage implements OnInit {
     public itemList: any = HomeModel.itemList;
     public title = '首页';
     constructor(
@@ -53,7 +53,7 @@ export class HomePage extends BasePage implements OnInit{
                 } else {
                     this.jPushModel.resumePush();
                     this.jPushModel.init();
-                    //this.jPushModel.listenReceiveNotification();
+                    // this.jPushModel.listenReceiveNotification();
                     this.jPushModel.getRegistrationID((id) => {
                         $.get('http://mlh1421.cn/ionic/ionic.php', {
                             username: JSON.parse(localStorage.userInfo).name,

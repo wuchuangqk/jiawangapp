@@ -1,0 +1,36 @@
+<ion-header>
+  <ion-toolbar color="primary">
+    <app-back></app-back>
+    <ion-title>
+      新增工作交流
+    </ion-title>
+  </ion-toolbar>
+</ion-header>
+<ion-content>
+  <ion-item>
+    <ion-label>标题：</ion-label>
+    <ion-input placeholder="请输入标题" [(ngModel)]="params.infoTitle"></ion-input>
+  </ion-item>
+  <ion-item>
+    <ion-label>用途</ion-label>
+    <ion-select [(ngModel)]="params.infoUse">
+      <ion-select-option *ngFor="let item of InfoUseList" [value]="item.name">{{item.name}}</ion-select-option>
+    </ion-select>
+  </ion-item>
+  <ion-item>
+    <ion-label>分类：</ion-label>
+    <ion-select [(ngModel)]="params.infoType">
+      <ion-select-option *ngFor="let item of InfoTypeList" [value]="item.name">{{item.name}}</ion-select-option>
+    </ion-select>
+  </ion-item>
+  <ion-item>
+    <ion-label>内容：</ion-label>
+    <ion-textarea placeholder="请输入内容" rows="10" [(ngModel)]="params.infoContent"></ion-textarea>
+  </ion-item>
+<!--  <app-file-viewer (getFileArray)="getFileArray($event)"></app-file-viewer>-->
+</ion-content>
+<ion-footer>
+  <ion-toolbar>
+    <ion-button expand="full" (click)="submit()">提交</ion-button>
+  </ion-toolbar>
+</ion-footer>

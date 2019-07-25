@@ -7,11 +7,13 @@ import {AddComponent} from './add/add.component';
 import {FormsModule} from '@angular/forms';
 import {CommonComponentsModule} from '../../common-components/common-components.module';
 import {IonicModule} from '@ionic/angular';
+import {ExchangeAddComponent} from './exchange-add/exchange-add.component';
 
 @NgModule({
   declarations: [
     IndexComponent,
     AddComponent,
+      ExchangeAddComponent,
   ],
   imports: [
     CommonModule,

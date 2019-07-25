@@ -7,11 +7,13 @@ import {IonicModule} from '@ionic/angular';
 import {FormsModule} from '@angular/forms';
 import {CommonComponentsModule} from '../../common-components/common-components.module';
 import {StaffSelectComponent} from './staff-select/staff-select.component';
+import {AddComponent} from './add/add.component';
 
 @NgModule({
   declarations: [
     IndexComponent,
     StaffSelectComponent,
+      AddComponent,
   ],
   imports: [
     CommonComponentsModule,

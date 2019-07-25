@@ -12,7 +12,6 @@ import {DialogService} from '../../../service/dialog.service';
 })
 export class AddComponent extends BasePage implements OnInit {
     public photo = '';
-    public fileUrl: any = '';
     params = {
         infoTitle: '',
         infoType: '1',

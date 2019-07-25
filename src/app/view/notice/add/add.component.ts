@@ -1,7 +1,6 @@
-import {Component, OnDestroy, OnInit} from '@angular/core';
+import {Component, OnInit} from '@angular/core';
 import {ImgUploadProvider} from '../../../service/img-upload';
 import {HttpService} from '../../../service/http.service';
-import { Base64 } from '@ionic-native/base64/ngx';
 import {BasePage} from '../../../base/base-page';
 import {ActivatedRoute, Router} from '@angular/router';
 import {Events, NavController} from '@ionic/angular';
@@ -14,11 +13,8 @@ import {AppConfig} from '../../../app.config';
   styleUrls: ['./add.component.scss'],
 })
 export class AddComponent extends BasePage implements OnInit {
-    public imgArr = [];
     public photo = '';
-    public fileUrl: any = '';
     public files = [];
-    public avatar: any;
     public fileArray = [];
     params = {
         noticetitle: '',

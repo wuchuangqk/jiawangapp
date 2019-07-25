@@ -10,7 +10,7 @@ export class FileViewerComponent implements OnInit {
     public imgArr = [];
     public photo = '';
     public fileUrl: any = '';
-    public fileArr=[];
+    public fileArr = [];
     public files = [];
     public avatar: any;
     @Output() getFileArray = new EventEmitter();
@@ -29,9 +29,9 @@ export class FileViewerComponent implements OnInit {
     presentActionSheet() {
         this.imgUploadProvider.presentAction().then((fileArr: object[]) => {
             if (Object.prototype.toString.call(fileArr) === '[object Array]') {
-                this.fileArr=this.fileArr.concat(fileArr);
+                this.fileArr = this.fileArr.concat(fileArr);
                 this.getFileArray.emit(this.fileArr);
-                fileArr.forEach((file:any) => {
+                fileArr.forEach((file: any) => {
                     this.tran(file.file).then((res) => {
                         this.imgArr.push(res);
                     });
