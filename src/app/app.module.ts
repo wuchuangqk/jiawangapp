@@ -60,6 +60,7 @@ import { Badge } from '@ionic-native/badge/ngx';
         IonicModule.forRoot(
             {
                 backButtonText: '',
+                okText:'确定',
                 mode: 'ios',
             }
         ), AppRoutingModule, FormsModule],

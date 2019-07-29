@@ -25,27 +25,27 @@
     </ion-item>
     <ion-item>
         <ion-label>等级：</ion-label>
-        <ion-select [(ngModel)]="params.docLevel">
+        <ion-select  cancelText="取消" okText="确定" [(ngModel)]="params.docLevel">
             <ion-select-option *ngFor="let item of docLevelList" [value]="item.name">{{item.name}}</ion-select-option>
         </ion-select>
     </ion-item>
     <ion-item>
         <ion-label>保管期限：</ion-label>
-        <ion-select [(ngModel)]="params.storePeriod">
+        <ion-select  cancelText="取消" okText="确定" [(ngModel)]="params.storePeriod">
             <ion-select-option *ngFor="let item of storePeriodList" [value]="item.name">{{item.name}}</ion-select-option>
         </ion-select>
     </ion-item>
 
     <ion-item>
         <ion-label>来文类型：</ion-label>
-        <ion-select [(ngModel)]="params.receiptType">
+        <ion-select  cancelText="取消" okText="确定" [(ngModel)]="params.receiptType">
             <ion-select-option *ngFor="let item of receiptTypeList" [value]="item.name">{{item.name}}</ion-select-option>
         </ion-select>
     </ion-item>
 
     <ion-item>
         <ion-label>归档分类：</ion-label>
-        <ion-select [(ngModel)]="params.archiveType">
+        <ion-select  cancelText="取消" okText="确定" [(ngModel)]="params.archiveType">
             <ion-select-option *ngFor="let item of archiveTypeList" [value]="item.name">{{item.name}}</ion-select-option>
         </ion-select>
     </ion-item>

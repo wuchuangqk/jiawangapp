@@ -14,7 +14,7 @@
 
     <ion-item>
         <ion-label>类别：</ion-label>
-        <ion-select [(ngModel)]="params.infoType">
+        <ion-select  cancelText="取消" okText="确定" [(ngModel)]="params.infoType">
             <ion-select-option value="1">文化</ion-select-option>
             <ion-select-option value="2">宣传</ion-select-option>
         </ion-select>
@@ -25,12 +25,12 @@
     </ion-item>
 
 
-<!--    <section class="img-wrapper">-->
-<!--        <div class="header-image" *ngFor="let item of imgArr" tappable [ngStyle]="{'background-image': 'url('+item+')'}">-->
-<!--        </div>-->
-<!--        <ion-button color="light" (click)="presentActionSheet()">选择文件</ion-button>-->
-<!--        <div>{{fileUrl}}</div>-->
-<!--    </section>-->
+    <!--    <section class="img-wrapper">-->
+    <!--        <div class="header-image" *ngFor="let item of imgArr" tappable [ngStyle]="{'background-image': 'url('+item+')'}">-->
+    <!--        </div>-->
+    <!--        <ion-button color="light" (click)="presentActionSheet()">选择文件</ion-button>-->
+    <!--        <div>{{fileUrl}}</div>-->
+    <!--    </section>-->
 </ion-content>
 <ion-footer>
     <ion-toolbar>

@@ -13,13 +13,13 @@
   </ion-item>
   <ion-item>
     <ion-label>用途</ion-label>
-    <ion-select [(ngModel)]="params.infoUse">
+    <ion-select  cancelText="取消" okText="确定" [(ngModel)]="params.infoUse">
       <ion-select-option *ngFor="let item of InfoUseList" [value]="item.name">{{item.name}}</ion-select-option>
     </ion-select>
   </ion-item>
   <ion-item>
     <ion-label>分类：</ion-label>
-    <ion-select [(ngModel)]="params.infoType">
+    <ion-select  cancelText="取消" okText="确定" [(ngModel)]="params.infoType">
       <ion-select-option *ngFor="let item of InfoTypeList" [value]="item.name">{{item.name}}</ion-select-option>
     </ion-select>
   </ion-item>
