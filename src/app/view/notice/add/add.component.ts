@@ -6,7 +6,6 @@ import {ActivatedRoute, Router} from '@angular/router';
 import {Events, NavController} from '@ionic/angular';
 import {DialogService} from '../../../service/dialog.service';
 import {AppConfig} from '../../../app.config';
-
 @Component({
   selector: 'app-add',
   templateUrl: './add.component.html',
@@ -33,7 +32,8 @@ export class AddComponent extends BasePage implements OnInit {
         this.title = this.query('title');
     }
 
-    ngOnInit() {}
+    ngOnInit() {
+    }
     private checkParams(): boolean {
         if (!this.params.noticetitle) {
             this.dialogService.toast('请输入标题！');
