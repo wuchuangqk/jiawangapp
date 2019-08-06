@@ -18,3 +18,20 @@
     margin:0 5px;
     //font-weight: 600;
 }
+
+div[scrollX=true], div[scrollY=true] {
+    position: relative;
+    overflow: hidden;
+
+    ::-webkit-scrollbar {
+        display: none;
+    }
+}
+
+div[scrollX=true] {
+    overflow-x: auto;
+}
+
+div[scrollY=true] {
+    overflow-y: auto;
+}
