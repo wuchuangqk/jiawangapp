@@ -1,3 +1,4 @@
+declare const BMap;
 export const MP = {
   init() {
     const AK = 'AFNGWoP3YTGstfhT6BQUcsm5xGodgTIv';

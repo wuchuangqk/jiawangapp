@@ -6,7 +6,10 @@ import { Component, OnInit } from '@angular/core';
   styleUrls: ['./index.component.scss'],
 })
 export class IndexComponent implements OnInit {
-nav(url: string) {
+    ngOnInit(): void {
+    }
 
-}
+  nav(url: string) {
+
+  }
 }

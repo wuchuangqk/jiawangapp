@@ -1,5 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { MP } from './map';
+// declare const BMap;
 
 @Component({
   selector: 'app-index',
