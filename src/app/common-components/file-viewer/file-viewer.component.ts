@@ -1,5 +1,6 @@
 import { Component, OnInit, Output, EventEmitter } from '@angular/core';
 import { ImgUploadProvider } from '../../service/img-upload';
+import {ActionSheetController} from '@ionic/angular';
 
 @Component({
     selector: 'app-file-viewer',
@@ -15,6 +16,7 @@ export class FileViewerComponent implements OnInit {
     public avatar: any;
     @Output() getFileArray = new EventEmitter();
     constructor(
+        public actionSheetCtrl: ActionSheetController,
         private imgUploadProvider: ImgUploadProvider,
     ) { }
 
@@ -26,6 +28,28 @@ export class FileViewerComponent implements OnInit {
             return true;
         }
     }
+    async _deletePresentActionSheet(index) {
+        const actionSheet = await this.actionSheetCtrl.create({
+            buttons: [
+                {
+                    text: '删除该文件',
+                    handler: () => {
+                        this.fileArr.splice(index, 1);
+                        this.imgArr.splice(index, 1);
+                        this.getFileArray.emit(this.fileArr);
+                    }
+                },
+                {
+                    text: '取消',
+                    role: 'cancel',
+                    handler: () => {
+                        console.log('cancel');
+                    }
+                }]
+        });
+        await actionSheet.present();
+    }
+
     presentActionSheet() {
         this.imgUploadProvider.presentAction().then((fileArr: object[]) => {
             if (Object.prototype.toString.call(fileArr) === '[object Array]') {

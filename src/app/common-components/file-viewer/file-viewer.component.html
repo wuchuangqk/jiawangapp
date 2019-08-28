@@ -1,8 +1,9 @@
 <section class="img-wrapper">
-  <div class="header-image" *ngFor="let item of imgArr" tappable [ngStyle]="{'background-image': 'url('+item+')'}">
+  <div class="header-image" *ngFor="let item of imgArr;let index = index" (press)="_deletePresentActionSheet(index)" tappable [ngStyle]="{'background-image': 'url('+item+')'}">
     <img [src]="item" alt="">
   </div>
-  <div class="header-image" tappable  (click)="presentActionSheet()">
+  <div class="header-image" tappable
+       (click)="presentActionSheet()">
     <ion-icon name="add" style="font-size:45px; color:#555;"></ion-icon>
   </div>
 </section>
