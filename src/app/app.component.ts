@@ -28,7 +28,7 @@ export class AppComponent {
       public toastCtrl: ToastController,
   ) {
     this.initializeApp();
-   // this.isLogin();
+    this.isLogin();
   }
 
   public isLogin() {
