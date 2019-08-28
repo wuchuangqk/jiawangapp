@@ -17,8 +17,9 @@ export class IndexComponent extends BasePage implements OnInit, OnDestroy {
     itemList = [];
     shenPiList = [];
     public menuList = [
-        { title: '事务管理' },
-        { title: '待我审批' }
+        { title: '我申请的' },
+        //{ title: '我已审批的' },
+        { title: '待我审批的' }
     ];
     public index = 0;
     constructor(

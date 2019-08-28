@@ -17,9 +17,11 @@ export class IndexComponent extends BasePage implements OnInit,OnDestroy {
     @ViewChild(IonSlides) slides: IonSlides;
     itemList = [];
     shenPiList = [];
+    myShenPiList = [];
     public menuList = [
-        { title: '请假管理' },
-        { title: '待我审批' }
+        { title: '我申请的' },
+        { title: '待我审批的' },
+        { title: '我已审批的' }
     ];
     public index = 0;
     constructor(
@@ -65,6 +67,8 @@ export class IndexComponent extends BasePage implements OnInit,OnDestroy {
             this.getDocumentList();
         } else if (this.index == 1) {
             this.getShenPiList();
+        }else if(this.index==2){
+            this.getMyShenPiList();
         }
     }
 
@@ -78,6 +82,12 @@ export class IndexComponent extends BasePage implements OnInit,OnDestroy {
     getShenPiList() {
         this.request('/qingjia/shenpi_list', {}).then((res) => {
             this.shenPiList = res.data;
+        });
+    }
+
+    getMyShenPiList() {
+        this.request('/qingjia/mylist', {}).then((res) => {
+            this.myShenPiList = res.data;
         });
     }
     doRefresh(event) {
