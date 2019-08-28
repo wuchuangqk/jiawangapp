@@ -15,24 +15,24 @@
     {{params.qjtype}}
   </ion-item>
   <ion-item>
-    <ion-label>用印日期：</ion-label>
+    <ion-label>计划使用时间起：</ion-label>
     <ion-datetime type="datetime-local" displayFormat="YYYY-MM-DD HH:mm" pickerFormat="YYYY-MM-DD HH:mm" doneText="确定" [(ngModel)]="params.qjstime" cancelText="取消"></ion-datetime>
   </ion-item>
   <ion-item>
-    <ion-label>用印份数：</ion-label>
-    <ion-input placeholder="请输入原因" [(ngModel)]="params.sl" type="number"></ion-input>
+    <ion-label>计划使用时间止：</ion-label>
+    <ion-datetime type="datetime-local" displayFormat="YYYY-MM-DD HH:mm" pickerFormat="YYYY-MM-DD HH:mm" doneText="确定" [(ngModel)]="params.qjetime" cancelText="取消"></ion-datetime>
   </ion-item>
   <ion-item>
-    <ion-label>发往单位：</ion-label>
-    <ion-input placeholder="请输入原因" [(ngModel)]="params.fwdw"></ion-input>
+    <ion-label>前往单位：</ion-label>
+    <ion-input placeholder="请输入前往单位" [(ngModel)]="params.fwdw"></ion-input>
   </ion-item>
   <ion-item>
-    <ion-label>材料名称用印事由：</ion-label>
-    <ion-textarea placeholder="请输入原因" [(ngModel)]="params.qjyy"></ion-textarea>
+    <ion-label>外出携带印章事由：</ion-label>
+    <ion-textarea placeholder="请输入外出携带印章事由" [(ngModel)]="params.qjyy"></ion-textarea>
   </ion-item>
   <ion-item>
-    <ion-label>经办人意见：</ion-label>
-    <ion-textarea placeholder="请填写经办人意见" [(ngModel)]="params.zbyj"></ion-textarea>
+    <ion-label>申请人意见：</ion-label>
+    <ion-textarea placeholder="请填写申请人意见" [(ngModel)]="params.zbyj"></ion-textarea>
   </ion-item>
   <ion-item>
     <ion-label>备注：</ion-label>
@@ -64,3 +64,4 @@
     </ion-button>
   </ion-toolbar>
 </ion-footer>
+

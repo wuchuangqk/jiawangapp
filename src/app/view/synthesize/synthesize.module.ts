@@ -9,11 +9,13 @@ import {ApproveComponent} from './approve/approve.component';
 import {IonicModule} from '@ionic/angular';
 import {FormsModule} from '@angular/forms';
 import {CommonComponentsModule} from '../../common-components/common-components.module';
+import {ZhspYinzhangAddComponent} from './zhsp-yinzhang-add/zhsp-yinzhang-add.component';
 
 @NgModule({
   declarations: [
     IndexComponent,
     AddComponent,
+    ZhspYinzhangAddComponent,
     DetailComponent,
     ApproveComponent,
   ],

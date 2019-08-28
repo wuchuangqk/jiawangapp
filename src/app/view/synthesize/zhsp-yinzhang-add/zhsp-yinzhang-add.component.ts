@@ -9,12 +9,13 @@ import {Events, NavController} from '@ionic/angular';
 import {AppConfig} from '../../../app.config';
 
 @Component({
-    selector: 'app-add',
-    templateUrl: './add.component.html',
-    styleUrls: ['./add.component.scss'],
+  selector: 'app-zhsp-yinzhang-add',
+  templateUrl: './zhsp-yinzhang-add.component.html',
+  styleUrls: ['./zhsp-yinzhang-add.component.scss'],
 })
-export class AddComponent extends BasePage implements OnInit {
-    public fileArray = [];
+export class ZhspYinzhangAddComponent extends BasePage implements OnInit {
+
+        public fileArray = [];
     public photo = '';
     public selectedStaff = [];
     // 提交的参数
@@ -22,19 +23,20 @@ export class AddComponent extends BasePage implements OnInit {
     public id: string;
     qjtypeList: [];
     params = {
-        // 用印日期
+        // 申请类型
+        qjtype: '外出携带印章审批',
+        // 用印名称
+        qjmc :'',
+
+        // 计划使用时间起
         qjstime: '',
-        // 用印份数
-        sl:1,
-        // 发往单位
-        fwdw: '',
-        // 结束时间
+        // 计划使用时间止
         qjetime: '',
-        // 材料名称用印事由
+        // 前往单位
+        fwdw: '',
+        // 外出携带印章事由
         qjyy: '',
-        // 申请类别
-        qjtype: '印章使用审批',
-        // 经办人意见
+        // 申请人意见
         zbyj:'',
         // 备注
         beizhu:'',
@@ -91,13 +93,16 @@ export class AddComponent extends BasePage implements OnInit {
     // 检查参数
     private checkParams(params): boolean {
         if (!params.qjstime) {
-            this.dialogService.toast('请选择用印日期!');
+            this.dialogService.toast('请选择计划使用时间起!');
+            return false;
+        }else if (!params.qjetime) {
+            this.dialogService.toast('请选择计划使用时间止!');
             return false;
         } else if (!params.qjyy) {
-            this.dialogService.toast('请输入材料名称用印事由!');
+            this.dialogService.toast('请输入外出携带印章事由!');
             return false;
         } else if (!params.zbyj) {
-            this.dialogService.toast('请输入经办人意见!');
+            this.dialogService.toast('请输入申请人意见!');
             return false;
         } else if (!params.staff_ids) {
             this.dialogService.toast('请选择审批人!');
@@ -116,7 +121,7 @@ export class AddComponent extends BasePage implements OnInit {
         this.params.qjstime = this.dateProvider.DateTimeFormat(new Date(this.params.qjstime));
         this.params.qjetime = this.dateProvider.DateTimeFormat(new Date(this.params.qjetime));
         this.dialogService.loading('正在提交，请稍后.....');
-        this.uploadFiles('/zhsp/zhsp_yinzhang_add', this.params, this.fileArray).then((res) => {
+        this.uploadFiles('/zhsp/zhsp_yinzhangout_add', this.params, this.fileArray).then((res) => {
             this.dialogService.dismiss();
             this.dialogService.alert('提交成功！', () => {
                 this.events.publish(AppConfig.Synthesize.List);
