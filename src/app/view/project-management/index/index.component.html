@@ -1,0 +1,48 @@
+<ion-header>
+    <ion-toolbar color="primary">
+        <app-back></app-back>
+        <ion-title>
+            项目管理
+        </ion-title>
+    </ion-toolbar>
+</ion-header>
+<ion-content>
+    <div>
+        <div style="width:100%" scrollX="true">
+            <div style="width: 100%;">
+                <div class="segment-wrapper">
+                    <ion-segment (ngModelChange)="getItem($event)" [(ngModel)]="index">
+                        <ion-segment-button *ngFor="let item of menuList;let i=index" [value]="i">
+                            {{item.name}}
+                        </ion-segment-button>
+                    </ion-segment>
+                </div>
+<!--                <div (click)="getItem(item.id)" *ngFor="let item of menuList;let i=index" [class]="item.id===index?'fl-active':'fl'" fl-active>-->
+<!--                    <p class="primary" no-margin>{{item.name}}</p>-->
+<!--                </div>-->
+            </div>
+        </div>
+    </div>
+    <ion-searchbar mode="ios" (ionInput)="getItems()"></ion-searchbar>
+
+    <div [ngSwitch]="index">
+        <div class="margin-top-5" *ngIf='index==0'>
+            <ion-list class="my-list">
+                <ion-item *ngFor="let item of projectList" (click)="nav('XiangMuGuanLiTetailPage',{pid:item.pid})">
+                    <section>
+                        <div class="my-list-title">
+                            <h2>{{item.name}}</h2>
+                        </div>
+                        <div class="my-list-sub">
+                            <div class="my-list-sub-top">
+                                <span> 分类:{{item.type}} </span>
+                                <span class="my-list-sub-top-last">发布日期：全体人员</span>
+                                <span class="my-list-sub-top-last">建设性质：新建</span>
+                            </div>
+                        </div>
+                    </section>
+                </ion-item>
+            </ion-list>
+        </div>
+    </div>
+</ion-content>

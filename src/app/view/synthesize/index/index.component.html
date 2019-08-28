@@ -76,12 +76,82 @@
                   </section>
               </ion-item>
           </ion-list>
+          
+      </ion-slide>
+      <ion-slide>
+          <ion-list class="my-list">
+              <ion-item *ngIf="myShenPiList.length<1">
+                  <p class="primary"> 无数据！ </p>
+              </ion-item>
+              <ion-item *ngFor="let item of myShenPiList" (click)="nav('synthesize/detail',{url:'/zhsp/zhsp_detail',id:item.id,title:title,contentTitle:item.title,title:'事务审批详情'})">
+                  <section>
+
+                  <div class="my-list-title">
+                      <h2  [ngClass]="item.qjstate=='已审批'?'primary':''">
+                          <span *ngIf="item.qjstate!=='已审批'" color="primary">[{{item.qjstate}}]</span>
+                          <span *ngIf="item.qjstate=='已审批'">[已审批]</span>
+                          {{item.title}}</h2>
+                  </div>
+                  <div class="my-list-sub">
+                      <div class="my-list-sub-top flex-between">
+                          <span>{{item.qjr}}</span>
+                          <span class="my-list-sub-top-last">{{item.qjstate}}</span>
+                      </div>
+                  </div>
+                  </section>
+              </ion-item>
+          </ion-list>          
       </ion-slide>
     </ion-slides>
   </section>
-    <ion-fab vertical="bottom" horizontal="end" slot="fixed">
-        <ion-fab-button (click)="nav('synthesize/add',{title:'事务申请',url:'b'})">
+    <!-- <ion-fab vertical="bottom" horizontal="end" slot="fixed">
+        <ion-fab-button
+        (click)="nav('synthesize/add',{title:'事务申请',url:'b'})"
+        >
             <ion-icon name="add"></ion-icon>
         </ion-fab-button>
+    </ion-fab> -->
+
+    <ion-fab slot="fixed" horizontal="end" vertical="bottom">
+        <ion-fab-button>
+            <ion-icon name="add"></ion-icon>
+        </ion-fab-button>
+        <ion-fab-list side="top">
+            <div class="custom-fab">
+                <ion-button color="secondary">
+                    印章使用审批
+                </ion-button>
+                <ion-fab-button
+                        (click)="nav('synthesize/add',{title:'印章使用审批',url:'b'})"
+                        color="secondary" size="small">
+                    <ion-icon name="add" style="color: #ffffff;"></ion-icon>
+                </ion-fab-button>
+            </div>
+            <div class="custom-fab">
+                <ion-button color="secondary">
+                    外出携带印章审批
+                </ion-button>
+                <ion-fab-button color="secondary"
+                                (click)="nav('synthesize/zhsp-yinzhang-add',{title:'外出携带印章审批申请',url:'b'})"
+                                size="small">
+                    <ion-icon name="add" style="color: #ffffff;"></ion-icon>
+                </ion-fab-button>
+            </div>
+        </ion-fab-list>
     </ion-fab>
+<!--    <ion-fab vertical="bottom" horizontal="end" slot="fixed">-->
+<!--    <ion-fab-button >-->
+<!--      <ion-icon name="add"></ion-icon>-->
+<!--    </ion-fab-button>-->
+<!--    <ion-fab-list side="top">-->
+<!--        <ion-fab-button (click)="nav('synthesize/add',{title:'事务申请',url:'b'})">-->
+<!--            <ion-icon name="logo-vimeo"></ion-icon>-->
+<!--            印章申请-->
+<!--        </ion-fab-button>-->
+<!--        <ion-fab-button>-->
+<!--            <ion-icon name="logo-facebook"></ion-icon>-->
+<!--            外出携带印章申请-->
+<!--        </ion-fab-button>-->
+<!--    </ion-fab-list>-->
+<!--  </ion-fab>-->
 </ion-content>

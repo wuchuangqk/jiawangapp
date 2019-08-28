@@ -22,14 +22,22 @@ export class AddComponent extends BasePage implements OnInit {
     public id: string;
     qjtypeList: [];
     params = {
-        // 开始时间
+        // 用印日期
         qjstime: '',
+        // 用印份数
+        sl:1,
+        // 发往单位
+        fwdw: '',
         // 结束时间
         qjetime: '',
-        // 事务事由
+        // 材料名称用印事由
         qjyy: '',
-        // 事务类别
-        qjtype: '事假',
+        // 申请类别
+        qjtype: '印章使用审批',
+        // 经办人意见
+        zbyj:'',
+        // 备注
+        beizhu:'',
         // 处理人名单
         staff_ids: ''
     };
@@ -83,16 +91,13 @@ export class AddComponent extends BasePage implements OnInit {
     // 检查参数
     private checkParams(params): boolean {
         if (!params.qjstime) {
-            this.dialogService.toast('请选择事务开始时间!');
-            return false;
-        } else if (!params.qjetime) {
-            this.dialogService.toast('请选择事务结束时间!');
+            this.dialogService.toast('请选择用印日期!');
             return false;
         } else if (!params.qjyy) {
-            this.dialogService.toast('请输入事务事由!');
+            this.dialogService.toast('请输入材料名称用印事由!');
             return false;
-        } else if (!params.qjtype) {
-            this.dialogService.toast('请输入事务类型!');
+        } else if (!params.zbyj) {
+            this.dialogService.toast('请输入经办人意见!');
             return false;
         } else if (!params.staff_ids) {
             this.dialogService.toast('请选择审批人!');
@@ -111,7 +116,7 @@ export class AddComponent extends BasePage implements OnInit {
         this.params.qjstime = this.dateProvider.DateTimeFormat(new Date(this.params.qjstime));
         this.params.qjetime = this.dateProvider.DateTimeFormat(new Date(this.params.qjetime));
         this.dialogService.loading('正在提交，请稍后.....');
-        this.uploadFiles('/zhsp/zhsp_add', this.params, this.fileArray).then((res) => {
+        this.uploadFiles('/zhsp/zhsp_yinzhang_add', this.params, this.fileArray).then((res) => {
             this.dialogService.dismiss();
             this.dialogService.alert('提交成功！', () => {
                 this.events.publish(AppConfig.Synthesize.List);
