@@ -307,10 +307,18 @@ export class HomePage extends BasePage implements OnInit {
     }
     getHomeConfigData() {
         this.request('/users/home_configure', {}).then((res) => {
-            this.itemList[0].bage = Number(res.data.tzgg);
-            this.itemList[2].bage = Number(res.data.sw);
-            this.itemList[3].bage = Number(res.data.fw);
-            this.itemList[4].bage = Number(res.data.gzdt);
+            this.itemList[0].bage = Number(res.data.tzgg);  //  通知公告
+            this.itemList[1].bage = Number(res.data.gzrz);  //  工作日志(该项没有推送)
+            this.itemList[2].bage = Number(res.data.sw);    //  收文系统
+            this.itemList[3].bage = Number(res.data.fw);    //  发文系统
+            this.itemList[4].bage = Number(res.data.gzdt);  //  工作交流
+            this.itemList[5].bage = Number(res.data.jbdb);  //  交办督办
+            this.itemList[6].bage = Number(res.data.qjsp);  //  请假审批
+            this.itemList[7].bage = Number(res.data.jbsp);  //  加班审批  
+            this.itemList[8].bage = Number(res.data.wcsp);  //  外出审批
+            this.itemList[9].bage = Number(res.data.zhsp);  //  综合审批
+            this.itemList[10].bage = Number(res.data.zcgz); //  资产购置
+            this.itemList[11].bage = Number(res.data.whxc); //  文化宣传
         }).catch((err) => {
             console.log(err);
         });
