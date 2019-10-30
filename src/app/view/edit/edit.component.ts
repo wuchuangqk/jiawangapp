@@ -1,11 +1,8 @@
 import {Component, OnInit} from '@angular/core';
-import {ImgUploadProvider} from '../../service/img-upload';
 import {HttpService} from '../../service/http.service';
-import {BasePage} from '../../base/base-page';
 import {ActivatedRoute, Router} from '@angular/router';
 import {Events, NavController} from '@ionic/angular';
 import {DialogService} from '../../service/dialog.service';
-import {AppConfig} from '../../app.config';
 import {DetailBasePage} from '../../base/detail-base-page';
 import {DomSanitizer} from '@angular/platform-browser';
 @Component({
@@ -34,7 +31,7 @@ export class EditComponent extends DetailBasePage implements OnInit {
         this.title = this.query('title');
         this.url = this.query('url');
         this.id = this.query('id');
-        // this.contentTitle = this.query('contentTitle');
+        this.params.title = this.query('contentTitle');
         this.title = this.query('title');
     }
 
@@ -42,10 +39,10 @@ export class EditComponent extends DetailBasePage implements OnInit {
         this.getDetail({});
     }
     private checkParams(): boolean {
-        if (!this.params.noticetitle) {
+        if (!this.params.title) {
             this.dialogService.toast('请输入标题！');
             return false;
-        } else if (!this.params.noticecontent) {
+        } else if (!this.params.content) {
             this.dialogService.toast('请输入内容');
             return false;
         }
