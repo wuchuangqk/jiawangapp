@@ -20,7 +20,7 @@ import {ExchangeAddComponent} from './exchange-add/exchange-add.component';
     IonicModule,
     FormsModule,
     CommonComponentsModule,
-    NoticeRoutingModule
+    NoticeRoutingModule,
   ]
 })
 export class NoticeModule { }

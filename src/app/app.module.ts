@@ -36,8 +36,9 @@ import {Base64} from '@ionic-native/base64/ngx';
 import { FilePath } from '@ionic-native/file-path/ngx';
 import {FeedbackComponent} from './view/feedback/feedback.component';
 import { Badge } from '@ionic-native/badge/ngx';
+import { EditComponent} from './view/edit/edit.component';
 import 'hammerjs';
-
+import { QuillModule } from 'ngx-quill'
 
 
 @NgModule({
@@ -45,6 +46,7 @@ import 'hammerjs';
     declarations: [
         AppComponent,
         CommonViewComponent,
+        EditComponent,
         DetailComponent,
         DocumentHandleComponent,
         DocumentApproveComponent,
@@ -56,6 +58,7 @@ import 'hammerjs';
         BrowserModule,
         HttpClientModule,
         CommonComponentsModule,
+        QuillModule.forRoot(),
         IonicModule.forRoot(
             {
                 backButtonText: '',

@@ -40,5 +40,15 @@ export class CommonViewComponent extends DetailBasePage implements OnInit, OnDes
     }
     ngOnDestroy() {
     }
+    edit(e){
+        console.log(this.title);
+        console.log(this.url);
+        console.log(this.id);
+        this.nav('edit/'+this.id,{
+            title:this.title,
+            url:this.url,
+            id:this.id
+        })
+    }
 
 }
