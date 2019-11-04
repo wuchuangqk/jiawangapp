@@ -37,6 +37,13 @@ export class ExchangeViewComponent extends DetailBasePage implements OnInit, OnD
     }
 
     ngOnInit() {
+        this.events.subscribe(AppConfig.Exchange.view, () => {
+            this.GetCommitList();
+            this.getDetail({}).then(() => {
+                this.events.publish(AppConfig.Notice.List);
+                this.events.publish(AppConfig.Home.Badge);
+            });
+        });
         this.GetCommitList();
         this.getDetail({}).then(() => {
             this.events.publish(AppConfig.Notice.List);
@@ -49,7 +56,7 @@ export class ExchangeViewComponent extends DetailBasePage implements OnInit, OnD
         console.log(this.title);
         console.log(this.url);
         console.log(this.id);
-        this.nav('edit/' + this.id, {
+        this.nav('edit', {
             title: this.title,
             url: this.url,
             id: this.id

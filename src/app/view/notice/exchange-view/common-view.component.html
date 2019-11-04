@@ -1,22 +1,22 @@
 <ion-header>
     <ion-toolbar color="primary">
-<!--        <app-back></app-back>-->
+        <!--        <app-back></app-back>-->
         <ion-buttons slot="start">
             <ion-back-button></ion-back-button>
         </ion-buttons>
         <ion-title>
             {{title}}
         </ion-title>
-<!--        <ion-icon  (click)="edit($event)" mode="md" style="float: right;font-size: 28px;" name="create"></ion-icon>-->
+        <ion-icon  (click)="edit($event)" mode="md" style="float: right;font-size: 28px;" name="create"></ion-icon>
     </ion-toolbar>
 </ion-header>
 <ion-content>
     <ion-refresher (ionRefresh)="doRefresh($event)">
         <ion-refresher-content
-                                                                                          pullingIcon="arrow-dropdown"
-                                                                                          pullingText="下拉刷新"
-                                                                                          refreshingSpinner="circles"
-                                                                                          refreshingText="刷新...">
+                pullingIcon="arrow-dropdown"
+                pullingText="下拉刷新"
+                refreshingSpinner="circles"
+                refreshingText="刷新...">
         </ion-refresher-content>
         <ion-refresher-content >
         </ion-refresher-content>
