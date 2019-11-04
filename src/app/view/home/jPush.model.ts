@@ -93,6 +93,15 @@ export class JPushModel {
                     });
                     break;
                 }
+                case 'trendofwork': {
+                    this.nav(`notice/exchange-view/${id}`, {
+                        id,
+                        title: itemTitle,
+                        url: '/notices/list/',
+                        contentTitle
+                    });
+                    break;
+                }
                 case 'article': {
                     this.nav('detail', {
                         id,

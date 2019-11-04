@@ -18,6 +18,19 @@
     </ion-select>
   </ion-item>
   <ion-item>
+    <ion-label>权限</ion-label>
+    <ion-select   cancelText="取消" okText="确定" [(ngModel)]="params.roleType">
+        <ion-select-option *ngFor="let item of rolesList" [value]="item.value">{{item.label}}</ion-select-option>
+    </ion-select>
+  </ion-item>
+  <ion-item *ngIf="params.roleType===2">
+    <ion-label>选择科室</ion-label>
+    <ion-select  multiple cancelText="取消" okText="确定" [(ngModel)]="keshiIds">
+        <ion-select-option *ngFor="let item of keShiList" [value]="item.id">{{item.name}}</ion-select-option>
+    </ion-select>
+  </ion-item>
+  <app-staff *ngIf="params.roleType===3" (click)="go('getStaffs')" title="选择人员" eventName="getStaffs" [(selectedStaff)]="selectedStaff"></app-staff>
+  <ion-item>
     <ion-label>分类：</ion-label>
     <ion-select  cancelText="取消" okText="确定" [(ngModel)]="params.infoType">
       <ion-select-option *ngFor="let item of InfoTypeList" [value]="item.name">{{item.name}}</ion-select-option>
@@ -27,7 +40,8 @@
     <ion-label>内容：</ion-label>
     <ion-textarea placeholder="请输入内容" rows="10" [(ngModel)]="params.infoContent"></ion-textarea>
   </ion-item>
-<!--  <app-file-viewer (getFileArray)="getFileArray($event)"></app-file-viewer>-->
+
+    <app-file-viewer (getFileArray)="getFileArray($event)"></app-file-viewer>
 </ion-content>
 <ion-footer>
   <ion-toolbar>

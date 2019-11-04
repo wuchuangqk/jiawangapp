@@ -123,6 +123,15 @@ export class HomePage extends BasePage implements OnInit {
                     });
                     break;
                 }
+                case 'trendofwork': {
+                    this.nav(`notice/exchange-view/${id}`, {
+                        id,
+                        title: itemTitle,
+                        url: '/notices/list/',
+                        contentTitle
+                    });
+                    break;
+                }
                 case 'article': {
                     this.nav('detail', {
                         id,
@@ -314,7 +323,7 @@ export class HomePage extends BasePage implements OnInit {
             this.itemList[4].bage = Number(res.data.gzdt);  //  工作交流
             this.itemList[5].bage = Number(res.data.jbdb);  //  交办督办
             this.itemList[6].bage = Number(res.data.qjsp);  //  请假审批
-            this.itemList[7].bage = Number(res.data.jbsp);  //  加班审批  
+            this.itemList[7].bage = Number(res.data.jbsp);  //  加班审批
             this.itemList[8].bage = Number(res.data.wcsp);  //  外出审批
             this.itemList[9].bage = Number(res.data.zhsp);  //  综合审批
             this.itemList[10].bage = Number(res.data.zcgz); //  资产购置
