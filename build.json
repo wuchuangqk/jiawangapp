@@ -3,6 +3,7 @@
     "debug": {
       "codeSignIdentity": "iPhone Developer",
       "developmentTeam": "VTVX3T7R4F",
+      "packageType": "app-store",
       "build":"1.5"
     },
     "release": {
