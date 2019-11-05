@@ -68,7 +68,7 @@ export class LoginComponent extends BasePage implements OnInit {
         if (!this.checkParams()) {
             return;
         }
-        this.dialogService.loading();
+        // this.dialogService.loading();
         if (this.platform.is('android')) {
             if (this.uuid) {
                 this.startLogin(this.uuid);
