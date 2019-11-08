@@ -37,6 +37,9 @@ export class AppConfig {
     public  static Notice = {
         List: 'NoticeList'
     };
+    public static Exchange = {
+        view: 'ExchangeView'
+    };
     public  static Document = {
         DocumentDetail: 'DocumentDetail',
         DocumentList: 'DocumentList',

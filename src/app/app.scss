@@ -27,14 +27,16 @@ html{
 @import "styles/swiper";
 @import "styles/common-view";
 
-@import '../../node_modules/zx-editor/dist/css/zx-editor.min.css';
-
-.zx-editor *{
-  font-size: 1.5rem;
-}
-
+@import "styles/animate.css";
 .swiper-slide{
   display: block;
 }
-
+//隐藏富文本编辑头部
+.ql-toolbar{
+  display: none;
+}
+[contenteditable] {
+  -webkit-user-select: text;
+  user-select: text;
+}
 

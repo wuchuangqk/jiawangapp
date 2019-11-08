@@ -1,0 +1,32 @@
+<ion-header>
+    <ion-toolbar color="primary">
+        <ion-buttons slot="start">
+            <ion-back-button></ion-back-button>
+        </ion-buttons>
+        <ion-title>
+            编辑内容
+        </ion-title>
+    </ion-toolbar>
+</ion-header>
+<ion-content>
+    <ion-refresher (ionRefresh)="doRefresh($event)">
+        <ion-refresher-content
+                pullingIcon="arrow-dropdown"
+                pullingText="下拉刷新"
+                refreshingSpinner="circles"
+                refreshingText="刷新...">
+        </ion-refresher-content>
+        <ion-refresher-content >
+        </ion-refresher-content>
+    </ion-refresher>
+
+    <div>
+        <h2>{{contentTitle}}</h2>
+        <quill-editor [(ngModel)]="content"></quill-editor>
+    </div>
+</ion-content>
+<ion-footer>
+    <ion-toolbar>
+            <ion-button size="default" expand="full" (click)="submit()" type="primary">保存</ion-button>
+    </ion-toolbar>
+</ion-footer>

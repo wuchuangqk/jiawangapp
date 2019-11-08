@@ -1,0 +1,58 @@
+<ion-header>
+    <ion-toolbar color="primary">
+        <!--        <app-back></app-back>-->
+        <ion-buttons slot="start">
+            <ion-back-button></ion-back-button>
+        </ion-buttons>
+        <ion-title>
+            {{title}}
+        </ion-title>
+        <ion-icon  (click)="edit($event)" mode="md" style="float: right;font-size: 28px;" name="create"></ion-icon>
+    </ion-toolbar>
+</ion-header>
+<ion-content>
+    <ion-refresher (ionRefresh)="doRefresh($event)">
+        <ion-refresher-content
+                pullingIcon="arrow-dropdown"
+                pullingText="下拉刷新"
+                refreshingSpinner="circles"
+                refreshingText="刷新...">
+        </ion-refresher-content>
+        <ion-refresher-content >
+        </ion-refresher-content>
+    </ion-refresher>
+    <h2>{{contentTitle}}</h2>
+    <div class="detail-content" [innerHTML]="content"></div>
+    <div class="commit" *ngIf="commitList.length>0">
+        <ion-card style="margin:20px 0 0 0;">
+            <ion-card-header style="padding:5px">
+                <h4 style="margin:5px;font-size:15px">所有回复</h4>
+            </ion-card-header>
+            <ion-card-content style="padding:5px;">
+                <ion-list>
+                    <ion-item *ngFor="let item of commitList">
+                        <div style="width:100%;font-size:13px;">
+                            <div class="flex-between" style="padding:5px 0;color:#666;">
+                                <div style="color:#4c8dff;" class="flex-between">
+                                    <ion-icon style="font-size:13px;" name="contact"></ion-icon>
+                                    <span>&nbsp;&nbsp;{{item.username}}</span>
+                                </div>
+                                <div>{{item.time}}</div>
+                            </div>
+                            <div style="padding:5px;color:#666;">{{item.conent}}</div>
+                        </div>
+                    </ion-item>
+                </ion-list>
+            </ion-card-content>
+        </ion-card>
+    </div>
+</ion-content>
+<ion-footer>
+    <ion-toolbar>
+        <div class="flex-between" style="margin-bottom: 5px;">
+            <ion-textarea style="font-size: 1.5rem;" [rows]="flag?4:1" (ionFocus)="flag=true" (ionBlur)="flag=false" [(ngModel)]="infoTitle" clearOnEdit="true"></ion-textarea>
+            <ion-icon name="md-send" color="primary" (click)="submit()" style="padding: 10px;font-size: 30px"></ion-icon>
+        </div>
+    </ion-toolbar>
+</ion-footer>
+

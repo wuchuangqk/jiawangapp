@@ -14,6 +14,7 @@
     <ion-item>
         <ion-label>内容：</ion-label>
         <ion-textarea placeholder="请输入内容" rows="10" [(ngModel)]="params.noticecontent"></ion-textarea>
+<!--        <quill-editor [(ngModel)]="params.noticecontent"></quill-editor>-->
     </ion-item>
     <app-file-viewer (getFileArray)="getFileArray($event)"></app-file-viewer>
 </ion-content>

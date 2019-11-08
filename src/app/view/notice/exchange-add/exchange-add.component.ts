@@ -21,9 +21,21 @@ export class ExchangeAddComponent extends BasePage implements OnInit {
     infoType: '',
     // 内容
     infoContent: '',
+    roleType: 1,
+    ids: ''
   };
+    public fileArray = [];
+ public keshiIds = [];
+  public selectedStaff = [];
   public InfoUseList = [];
   public InfoTypeList = [];
+  public keShiList = [];
+  public rolesList = [
+      {value: 1, label: '全部' },
+      {value: 2, label: '科室' },
+      {value: 3, label: '个人' },
+      {value: 4, label: '私人' }
+  ];
   constructor(
       public http: HttpService,
       public router: Router,
@@ -38,11 +50,27 @@ export class ExchangeAddComponent extends BasePage implements OnInit {
   ngOnInit() {
     this.GetInfoType();
     this.GetInfoUse();
+    this.GetDartName();
   }
   // 用途
   private GetInfoUse() {
     this.request('/work_dynamics/GetInfoUse', {}).then((res) => {
       this.InfoUseList = res.data;
+    });
+  }
+  go(eventName) {
+    localStorage.num = 0;
+    this.nav('/receive-document/staff-select/0000', {
+      title: '选择人员', url: 'bbb', depart_id: '0000',
+      isSelectOne: false,
+      eventName,
+      selected_staff : JSON.stringify(this.selectedStaff),
+      selectedStaff : JSON.stringify(this.selectedStaff)
+    });
+  }
+  private GetDartName() {
+    this.request('/work_dynamics/GetDartName', {}).then((res) => {
+      this.keShiList = res.data;
     });
   }
   private GetInfoType() {
@@ -60,12 +88,28 @@ export class ExchangeAddComponent extends BasePage implements OnInit {
     }
     return true;
   }
-  public submit() {
-    if (!this.checkParams()) {
+    getFileArray(fileArray) {
+        this.fileArray = fileArray;
+    }
+    public submit() {
+      this.params.ids = '';
+      if (this.params.roleType === 2) {
+      this.params.ids = this.keshiIds.join(',');
+    } else if (this.params.roleType === 3) {
+          const idsArr = [];
+          for (const item of this.selectedStaff) {
+            idsArr.push(item.id);
+          }
+          this.params.ids = idsArr.join(',');
+    } else {
+          this.params.ids = '';
+      }
+      if (!this.checkParams()) {
       return;
     }
-    this.dialogService.loading('正在提交，请稍后！');
-    this.setRequest('/work_dynamics/add', this.params).then((res) => {
+      // 如果选择科室
+      this.dialogService.loading('正在提交，请稍后！');
+      this.uploadFiles('/work_dynamics/add', this.params, this.fileArray).then((res) => {
       this.dialogService.dismiss();
       this.dialogService.alert('提交成功！', () => {
         this.event.publish(AppConfig.Notice.List);

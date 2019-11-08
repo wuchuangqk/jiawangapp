@@ -8,19 +8,21 @@ import {FormsModule} from '@angular/forms';
 import {CommonComponentsModule} from '../../common-components/common-components.module';
 import {IonicModule} from '@ionic/angular';
 import {ExchangeAddComponent} from './exchange-add/exchange-add.component';
+import {ExchangeViewComponent} from './exchange-view/common-view.component';
 
 @NgModule({
   declarations: [
     IndexComponent,
     AddComponent,
       ExchangeAddComponent,
+      ExchangeViewComponent,
   ],
   imports: [
     CommonModule,
     IonicModule,
     FormsModule,
     CommonComponentsModule,
-    NoticeRoutingModule
+    NoticeRoutingModule,
   ]
 })
 export class NoticeModule { }

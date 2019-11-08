@@ -12,7 +12,7 @@
 </ion-header>
 
 <ion-content padding>
-  <ion-refresher (ionRefresh)="doRefresh($event)">
+  <ion-refresher slot="fixed" (ionRefresh)="doRefresh($event)">
     <ion-refresher-content
             pullingIcon="arrow-dropdown"
             pullingText="下拉刷新"
@@ -26,7 +26,7 @@
     <ion-item *ngIf="listData.length<=0">
       <p class="primary">无数据！</p>
     </ion-item>
-    <ion-item *ngFor="let item of listData" (click)="nav('common_view/'+item.id,{url:url,id:item.id,title:title,contentTitle:item.title})">
+    <ion-item *ngFor="let item of listData" (click)="nav(isCanCommit?'notice/exchange-view/'+item.id:'common_view/'+item.id,{url:url,id:item.id,title:title,contentTitle:item.title})">
       <div class="my-list">
 
       <div class="my-list-title">

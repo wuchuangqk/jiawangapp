@@ -13,6 +13,7 @@ import {AppConfig} from '../../../app.config';
 })
 export class IndexComponent extends ListBasePage implements OnInit, OnDestroy {
   public addUrl: string;
+  public isCanCommit: boolean;
   constructor(
       public http: HttpService,
       public router: Router,
@@ -24,6 +25,8 @@ export class IndexComponent extends ListBasePage implements OnInit, OnDestroy {
     super(http, router, dialogService, navController);
     this.title = this.query('title');
     this.url = this.query('url');
+    this.isCanCommit = this.query('isCanCommit') === 'true' ? true : false;
+    console.log(this.isCanCommit);
 
     this.addUrl = this.query('addUrl');
     console.log(this.addUrl);

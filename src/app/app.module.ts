@@ -26,6 +26,7 @@ import {FileTransfer } from '@ionic-native/file-transfer/ngx';
 import {FileOpener} from '@ionic-native/file-opener/ngx';
 import {NativeService} from './service/NativeService';
 
+
 import { File} from '@ionic-native/file/ngx';
 import {AndroidPermissions} from '@ionic-native/android-permissions/ngx';
 import {Camera} from '@ionic-native/camera/ngx';
@@ -37,7 +38,8 @@ import { FilePath } from '@ionic-native/file-path/ngx';
 import {FeedbackComponent} from './view/feedback/feedback.component';
 import { Badge } from '@ionic-native/badge/ngx';
 import 'hammerjs';
-
+import { QuillModule } from 'ngx-quill';
+import {EditComponent } from './view/edit/edit.component';
 
 
 @NgModule({
@@ -49,6 +51,7 @@ import 'hammerjs';
         DocumentHandleComponent,
         DocumentApproveComponent,
         PersionInfoComponent,
+        EditComponent,
         FeedbackComponent,
     ],
     entryComponents: [],
@@ -56,6 +59,18 @@ import 'hammerjs';
         BrowserModule,
         HttpClientModule,
         CommonComponentsModule,
+        QuillModule.forRoot(
+            {
+                modules: {
+                    // syntax: true,
+                    toolbar: [
+                        // ['bold', 'italic', 'underline', 'strike'],        // toggled buttons
+                        // [{ header: 1 }, { header: 2 }],
+                        // ['blockquote', 'code-block'],
+                    ]
+                }
+            }
+        ),
         IonicModule.forRoot(
             {
                 backButtonText: '',

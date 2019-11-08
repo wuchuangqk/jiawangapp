@@ -23,7 +23,7 @@
 
   <section class="content">
     <div class="myRow default-color">
-      <div  *ngFor="let item of itemList" class="myCol" (click)="nav(item.name,{url:item.url||'',title:item.title,addUrl:item.addUrl})">
+      <div  *ngFor="let item of itemList" class="myCol" (click)="nav(item.name,{url:item.url||'',title:item.title,addUrl:item.addUrl,isCanCommit:item.isCanCommit})">
         <ion-badge *ngIf="item.bage" color="danger" style="position: absolute; margin-left: 2rem;margin-top: -2rem">
           {{item.bage}}
         </ion-badge>
