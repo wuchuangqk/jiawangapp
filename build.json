@@ -4,7 +4,13 @@
       "codeSignIdentity": "iPhone Developer",
       "developmentTeam": "VTVX3T7R4F",
       "packageType": "app-store",
-      "build":"1.5"
+      "build":"1.5",
+            "automaticProvisioning": true,
+      "buildFlag": [
+        "EMBEDDED_CONTENT_CONTAINS_SWIFT = YES",
+        "ALWAYS_EMBED_SWIFT_STANDARD_LIBRARIES=NO",
+        "LD_RUNPATH_SEARCH_PATHS = \"@executable_path/Frameworks\""
+      ]
     },
     "release": {
       "codeSignIdentity": "iPhone Developer",
