@@ -50,15 +50,15 @@ export class ImgUploadProvider {
                     }
                 }
             },
-            {
-                text: '从相册选择',
-                role: 'chooseFromAlbum',
-                handler: () => {
-                    if (resolve) {
-                        resolve('chooseFromAlbum');
-                    }
-                }
-            },
+            // {
+            //     text: '从相册选择',
+            //     role: 'chooseFromAlbum',
+            //     handler: () => {
+            //         if (resolve) {
+            //             resolve('chooseFromAlbum');
+            //         }
+            //     }
+            // },
             {
                 text: '选择文件',
                 handler: () => {

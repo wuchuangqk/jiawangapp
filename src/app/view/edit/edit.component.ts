@@ -48,5 +48,4 @@ export class EditComponent extends BasePage implements OnInit {
       this.content = res.data.content;
     });
   }
-
 }

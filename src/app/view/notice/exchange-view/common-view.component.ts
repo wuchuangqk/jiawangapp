@@ -45,7 +45,7 @@ export class ExchangeViewComponent extends DetailBasePage implements OnInit, OnD
             });
         });
         this.GetCommitList();
-        this.getDetail({}).then(() => {
+        this.getDetail({}).then((res) => {
             this.events.publish(AppConfig.Notice.List);
             this.events.publish(AppConfig.Home.Badge);
         });

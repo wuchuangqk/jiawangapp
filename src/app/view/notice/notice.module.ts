@@ -9,11 +9,15 @@ import {CommonComponentsModule} from '../../common-components/common-components.
 import {IonicModule} from '@ionic/angular';
 import {ExchangeAddComponent} from './exchange-add/exchange-add.component';
 import {ExchangeViewComponent} from './exchange-view/common-view.component';
+import {CommentListComponent} from './comment-list/comment-list.component';
+import {AddCommentComponent} from './add-comment/add-comment.component';
 
 @NgModule({
   declarations: [
-    IndexComponent,
-    AddComponent,
+      IndexComponent,
+      AddComponent,
+      AddCommentComponent,
+      CommentListComponent,
       ExchangeAddComponent,
       ExchangeViewComponent,
   ],

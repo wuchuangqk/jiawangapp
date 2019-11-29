@@ -28,12 +28,19 @@ html{
 @import "styles/common-view";
 
 @import "styles/animate.css";
+@import 'styles/quill.core.scss';
+@import 'styles/quill.snow.scss';
+@import 'styles/quill.bubble.scss';
 .swiper-slide{
   display: block;
 }
 //隐藏富文本编辑头部
 .ql-toolbar{
   display: none;
+}
+
+.ql-container.ql-snow {
+ border: 0 solid #ffffff;
 }
 [contenteditable] {
   -webkit-user-select: text;

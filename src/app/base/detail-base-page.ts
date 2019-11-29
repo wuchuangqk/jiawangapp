@@ -20,6 +20,7 @@ export class DetailBasePage extends BasePage {
         finish: '',
 };
     public content: SafeHtml = '';
+    public comment_num: any;
   constructor(
       public http: HttpService,
       public router: Router,
@@ -33,6 +34,10 @@ export class DetailBasePage extends BasePage {
   public async getDetail(data) {
     const res = (await this.request(this.url + '/' + this.id, data));
     this.detail = res.data;
+    console.log(res.data);
+    if (res.data) {
+          this.comment_num = res.data.comment_num;
+      }
     if (res.data.json) {
         this.detail.control = '1';
     }

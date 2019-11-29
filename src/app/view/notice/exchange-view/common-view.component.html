@@ -23,35 +23,15 @@
     </ion-refresher>
     <h2>{{contentTitle}}</h2>
     <div class="detail-content" [innerHTML]="content"></div>
-    <div class="commit" *ngIf="commitList.length>0">
-        <ion-card style="margin:20px 0 0 0;">
-            <ion-card-header style="padding:5px">
-                <h4 style="margin:5px;font-size:15px">所有回复</h4>
-            </ion-card-header>
-            <ion-card-content style="padding:5px;">
-                <ion-list>
-                    <ion-item *ngFor="let item of commitList">
-                        <div style="width:100%;font-size:13px;">
-                            <div class="flex-between" style="padding:5px 0;color:#666;">
-                                <div style="color:#4c8dff;" class="flex-between">
-                                    <ion-icon style="font-size:13px;" name="contact"></ion-icon>
-                                    <span>&nbsp;&nbsp;{{item.username}}</span>
-                                </div>
-                                <div>{{item.time}}</div>
-                            </div>
-                            <div style="padding:5px;color:#666;">{{item.conent}}</div>
-                        </div>
-                    </ion-item>
-                </ion-list>
-            </ion-card-content>
-        </ion-card>
-    </div>
 </ion-content>
 <ion-footer>
     <ion-toolbar>
+<!--        [rows]="flag?4:1" (ionFocus)="flag=true" (ionBlur)="flag=false"-->
         <div class="flex-between" style="margin-bottom: 5px;">
-            <ion-textarea style="font-size: 1.5rem;" [rows]="flag?4:1" (ionFocus)="flag=true" (ionBlur)="flag=false" [(ngModel)]="infoTitle" clearOnEdit="true"></ion-textarea>
-            <ion-icon name="md-send" color="primary" (click)="submit()" style="padding: 10px;font-size: 30px"></ion-icon>
+            <div>&nbsp;</div>
+            <ion-button color="light" (click)="nav('notice/comment-list/'+id,{id:id})" size="small">评论 ({{comment_num||0}})</ion-button>
+<!--            <ion-textarea style="font-size: 1.5rem;" [(ngModel)]="infoTitle" clearOnEdit="true"></ion-textarea>-->
+<!--            <ion-icon name="md-send" color="primary" (click)="submit()" style="padding: 10px;font-size: 30px"></ion-icon>-->
         </div>
     </ion-toolbar>
 </ion-footer>
