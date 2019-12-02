@@ -1,0 +1,37 @@
+
+<ion-header>
+    <ion-toolbar color="primary">
+        <app-back></app-back>
+        <ion-title>
+            他人日志
+        </ion-title>
+    </ion-toolbar>
+</ion-header>
+<ion-content>
+    <div>
+        <!--    <ion-item *ngFor="let item of selectedStaff" detail (click)="nav('work-diary/staff-work-diary',{title:item.name+'的工作日志',url:'b'})">-->
+        <!--        <div class="staff">-->
+        <!--            <p class="staff-title">{{item.name}}</p>-->
+        <!--        </div>-->
+        <!--    </ion-item>-->
+        <ion-list class="list-style">
+            <!--选择部门-->
+            <ion-item ion-item *ngFor="let item of departArray" (click)=" nav('work-diary/view-staff-work-diary/' + item.id, {title: '添加工作日志', departid: item.id})" detail>
+                {{item.name}}
+                <span slot="end">{{item.staff_num}}</span>
+            </ion-item>
+            <div style="margin-top: 2rem;"></div>
+            <!--选择人-->
+            <ion-item  *ngFor="let item of staffArray;let i = index" (click)="cc(item)">
+                <div>
+                    <app-circle-text [name]="item.name"></app-circle-text>
+                    <ion-label class="main-title">
+                        <span>{{item.name}}</span>
+                        <p>{{item.position}}</p>
+                    </ion-label>
+                </div>
+            </ion-item>
+        </ion-list>
+    </div>
+</ion-content>
+

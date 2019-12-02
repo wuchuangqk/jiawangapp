@@ -1,0 +1,26 @@
+.staff{
+  width: 100%;
+  padding:0 0 1rem 0;
+  &-item{
+    display: flex;
+    justify-content: space-between;
+    &-wrapper{
+      display: flex;
+      justify-content: space-between;
+    }
+  }
+}
+ion-icon {
+  color: #a2a4ab;
+}
+ion-item{
+  &>div{
+    display: flex;
+    justify-content: space-between;
+    align-content: center;
+    padding: 10px;
+    ion-label{
+      padding-left: 10px;
+    }
+  }
+}

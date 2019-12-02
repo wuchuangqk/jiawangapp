@@ -1,26 +1,21 @@
-import {Component, OnDestroy, OnInit} from '@angular/core';
-import {BasePage} from '../../../base/base-page';
-import {ActivatedRoute, Router} from '@angular/router';
+import { Component, OnInit } from '@angular/core';
 import {HttpService} from '../../../service/http.service';
-import {DialogService} from '../../../service/dialog.service';
+import {ActivatedRoute, Router} from '@angular/router';
 import {Events, NavController} from '@ionic/angular';
+import {DialogService} from '../../../service/dialog.service';
 import {AppConfig} from '../../../app.config';
-import {DatePipe} from '@angular/common';
-import {forEach} from '@angular-devkit/schematics';
-import {path} from '@angular-devkit/core';
-
+import {BasePage} from '../../../base/base-page';
 
 @Component({
-  selector: 'app-work-diary',
-  templateUrl: './work-diary.page.html',
-  styleUrls: ['./work-diary.page.scss'],
+  selector: 'app-staff-work-diary',
+  templateUrl: './staff-work-diary.component.html',
+  styleUrls: ['./staff-work-diary.component.scss'],
 })
-export class WorkDiaryPage extends BasePage implements OnInit, OnDestroy {
+export class StaffWorkDiaryComponent extends BasePage implements OnInit {
   private itemList = [];
   private url = '';
   public list = [];
-  public special = 0;
-  public departid = 0;
+  private userid;
   public payload = {
     url: '/work_logs/adds',
     date: '',
@@ -46,9 +41,8 @@ export class WorkDiaryPage extends BasePage implements OnInit, OnDestroy {
     super(http, router, navController, dialogService, route );
     this.title = this.query('title');
     this.url = this.query('url');
+    this.userid = this.query('userid');
     this.flag = false;
-
-    this.special = Number(JSON.parse(localStorage.userInfo).special);
   }
   save() {
     // const datePipe = new DatePipe('en-US');
@@ -80,20 +74,16 @@ export class WorkDiaryPage extends BasePage implements OnInit, OnDestroy {
     this.flag = true;
   }
   ngOnInit() {
-    this.departid = JSON.parse(localStorage.userInfo).departid;
     this.getList();
-    this.events.subscribe(AppConfig.WorkDiary.List, () => {
-      this.getList();
-    });
-  }
-  ngOnDestroy(): void {
-    this.events.unsubscribe(AppConfig.WorkDiary.List);
+    // this.events.subscribe(AppConfig.WorkDiary.List, () => {
+    //   this.getList();
+    // });
   }
 
   getList() {
     this.list = [];
-    return  this.request(this.url, {
-      type: 0
+    return  this.request('/work_logs/GetUserLog', {
+      userid: this.userid
     }).then((response) => {
       this.itemList = response.data.daily;
       this.week = response.data.week;
@@ -121,12 +111,5 @@ export class WorkDiaryPage extends BasePage implements OnInit, OnDestroy {
       });
     });
   }
-  selectDepart() {
-    if (this.special === 2) {
-      this.nav('work-diary/view-staff-work-diary/' + this.departid, {title: '添加工作日志', departid: this.departid });
-    } else if (this.special === 3) {
 
-      this.nav('work-diary/view-staff-work-diary/' + 3, {title: '添加工作日志', departid: 3 });
-    }
-  }
 }

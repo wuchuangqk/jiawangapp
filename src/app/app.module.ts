@@ -40,6 +40,7 @@ import { Badge } from '@ionic-native/badge/ngx';
 import 'hammerjs';
 import { QuillModule } from 'ngx-quill';
 import {EditComponent } from './view/edit/edit.component';
+import { AutoresizeTextareaDirective } from './autoresize-textarea.directive';
 
 
 @NgModule({
@@ -53,6 +54,7 @@ import {EditComponent } from './view/edit/edit.component';
         PersionInfoComponent,
         EditComponent,
         FeedbackComponent,
+        AutoresizeTextareaDirective,
     ],
     entryComponents: [],
     imports: [

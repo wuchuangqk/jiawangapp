@@ -4,7 +4,6 @@
     <ion-title>
       {{title}}
     </ion-title>
-    <ion-icon *ngIf="flag" class="animated flipInX" (click)="save()" style="font-size: 38px" slot="end" name="checkmark"></ion-icon>
   </ion-toolbar>
 </ion-header>
 
@@ -34,7 +33,9 @@
           </div>
         </div>
         <div class="log-content">
-          <ion-textarea  auto-grow [(ngModel)]="item.morning" (ionBlur)="ionBlur(item)" (ionFocus)="ionFocus(item)"></ion-textarea>
+            <section>
+              {{item.morning}}
+            </section>
         </div>
       </ion-item>
       <ion-item>
@@ -44,17 +45,10 @@
           </div>
         </div>
         <div class="log-content">
-          <ion-textarea auto-grow [(ngModel)]="week.zlogs"></ion-textarea>
+            {{week.zlogs}}
         </div>
       </ion-item>
     </ion-list>
-
   </section>
 
-  <ion-fab *ngIf="special==2||special==3" vertical="bottom" horizontal="end" slot="fixed">
-    <ion-fab-button (click)="selectDepart()">
-<!--      <ion-icon name="add"></ion-icon>-->
-      <ion-icon name="contacts"></ion-icon>
-    </ion-fab-button>
-  </ion-fab>
 </ion-content>
