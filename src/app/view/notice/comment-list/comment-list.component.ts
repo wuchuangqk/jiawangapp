@@ -7,6 +7,7 @@ import {DialogService} from '../../../service/dialog.service';
 // import { Keyboard } from '@ionic-native/keyboard';
 import { ElementRef } from '@angular/core';
 import {AppConfig} from '../../../app.config';
+import autosize from './autosize';
 
 @Component({
   selector: 'app-comment-list',
@@ -40,6 +41,11 @@ export class CommentListComponent extends BasePage implements OnInit {
   }
 
   ngOnInit() {
+    const textareas = document.getElementsByTagName('textarea');
+    autosize(textareas);
+    for (let i = 0; i < textareas.length; i++) {
+      textareas[i].style.minHeight = '60px';
+    }
   }
   press(item) {
     console.log(item);

@@ -43,8 +43,10 @@
     <div class="flex-between" style="margin-bottom: 5px;">
 <!--      <div>&nbsp;</div>-->
 <!--      <ion-button color="light" (click)="nav('notice/comment-list/'+id)" size="small">评论(1520)</ion-button>-->
-                  <textarea id="textarea" [placeholder]="placeholder" style="font-size: 1rem;" [(ngModel)]="infoTitle" clearOnEdit="true"></textarea>
-                  <ion-icon name="md-send" color="primary" (click)="submit()" style="padding: 10px;font-size: 30px"></ion-icon>
+        <textarea id="textarea" [placeholder]="placeholder" style="font-size: 1.4rem;" [(ngModel)]="infoTitle" clearOnEdit="true"></textarea>
+        <div style="height: inherit;display: flex;align-items: baseline">
+            <ion-icon name="md-send" color="primary" (click)="submit()" style="padding: 10px;font-size: 30px"></ion-icon>
+        </div>
     </div>
   </ion-toolbar>
 </ion-footer>
