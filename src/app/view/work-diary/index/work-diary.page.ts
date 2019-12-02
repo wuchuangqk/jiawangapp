@@ -47,8 +47,7 @@ export class WorkDiaryPage extends BasePage implements OnInit, OnDestroy {
     this.title = this.query('title');
     this.url = this.query('url');
     this.flag = false;
-
-    this.special = Number(JSON.parse(localStorage.userInfo).special);
+    // this.special = Number(JSON.parse(localStorage.userInfo).special);
   }
   save() {
     // const datePipe = new DatePipe('en-US');
@@ -81,6 +80,7 @@ export class WorkDiaryPage extends BasePage implements OnInit, OnDestroy {
   }
   ngOnInit() {
     this.departid = JSON.parse(localStorage.userInfo).departid;
+    this.getuserspecial();
     this.getList();
     this.events.subscribe(AppConfig.WorkDiary.List, () => {
       this.getList();
@@ -89,7 +89,12 @@ export class WorkDiaryPage extends BasePage implements OnInit, OnDestroy {
   ngOnDestroy(): void {
     this.events.unsubscribe(AppConfig.WorkDiary.List);
   }
-
+  getuserspecial() {
+    const userid = JSON.parse(localStorage.userInfo).id;
+    this.request('/users/getuserspecial', {userid}).then((res) => {
+     this.special = Number(res.data.special) || 0;
+   });
+  }
   getList() {
     this.list = [];
     return  this.request(this.url, {
@@ -125,7 +130,6 @@ export class WorkDiaryPage extends BasePage implements OnInit, OnDestroy {
     if (this.special === 2) {
       this.nav('work-diary/view-staff-work-diary/' + this.departid, {title: '添加工作日志', departid: this.departid });
     } else if (this.special === 3) {
-
       this.nav('work-diary/view-staff-work-diary/' + 3, {title: '添加工作日志', departid: 3 });
     }
   }
