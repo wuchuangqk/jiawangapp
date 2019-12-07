@@ -19,7 +19,7 @@ export class WorkDiaryPage extends BasePage implements OnInit, OnDestroy {
   private itemList = [];
   private url = '';
   public list = [];
-  public special = 0;
+  public special = false;
   public departid = 0;
   public payload = {
     url: '/work_logs/adds',
@@ -92,7 +92,7 @@ export class WorkDiaryPage extends BasePage implements OnInit, OnDestroy {
   getuserspecial() {
     const userid = JSON.parse(localStorage.userInfo).id;
     this.request('/users/getuserspecial', {userid}).then((res) => {
-     this.special = Number(res.data.special) || 0;
+     this.special = res.data.special;
    });
   }
   getList() {
@@ -127,10 +127,10 @@ export class WorkDiaryPage extends BasePage implements OnInit, OnDestroy {
     });
   }
   selectDepart() {
-    if (this.special === 2) {
-      this.nav('work-diary/view-staff-work-diary/' + this.departid, {title: '添加工作日志', departid: this.departid });
-    } else if (this.special === 3) {
-      this.nav('work-diary/view-staff-work-diary/' + 3, {title: '添加工作日志', departid: 3 });
-    }
+    // if (this.special === 2) {
+    //   this.nav('work-diary/view-staff-work-diary/' + this.departid, {title: '添加工作日志', departid: this.departid });
+    // } else if (this.special === 3) {
+      this.nav('work-diary/view-staff-work-diary/' + 3, {title: '添加工作日志', departid: 3, isDepart: true });
+    // }
   }
 }

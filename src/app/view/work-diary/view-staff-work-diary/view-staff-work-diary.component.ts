@@ -14,8 +14,9 @@ export class ViewStaffWorkDiaryComponent extends BasePage implements OnInit {
   public staffArray = [];
   public departArray = [];
   public departid: number;
+   public isDepart: true; // 是部门还是人
 
-  public special = 0;
+  // public special = 0;
   public selectedStaff: any[] = [
     {
       name: '张山',
@@ -37,7 +38,10 @@ export class ViewStaffWorkDiaryComponent extends BasePage implements OnInit {
     super(http, router, navController, dialogService, route );
 
     this.departid = this.query('departid') || 0;
-    this.special = Number(JSON.parse(localStorage.userInfo).special);
+    this.isDepart = (this.query('isDepart') === 'true') ? true : false;
+    console.log('是否为个人');
+    console.log(this.isDepart);
+    // this.special = Number(JSON.parse(localStorage.userInfo).special);
 
   }
 
@@ -46,15 +50,26 @@ export class ViewStaffWorkDiaryComponent extends BasePage implements OnInit {
   }
   cc(item) {
     console.log(item);
-    this.nav('work-diary/staff-work-diary', {title: item.name + '的工作日志', userid: item.id});
+    this.nav('work-diary/staff-work-diary', {title: item.name + '的工作日志', userid: item.id, isDepart: false});
   }
   getList() {
-    this.request('/staffs/list', {
-      depart_id: this.departid
-    }).then((res) => {
-      this.staffArray = res.data.staffs;
-      this.departArray = res.data.departs;
-    });
+    if (this.isDepart) {
+      const userid = JSON.parse(localStorage.userInfo).id;
+      this.request('/users/getdepartlist/' + userid, {
+      }).then((res) => {
+        console.log(res);
+        // this.staffArray = res.data.staffs;
+        this.departArray = res.data;
+      });
+    } else {
+      this.request('/staffs/list', {
+        depart_id: this.departid
+      }).then((res) => {
+        console.log(res);
+        this.staffArray = res.data.staffs;
+        this.departArray = [];
+      });
+    }
   }
 
 }

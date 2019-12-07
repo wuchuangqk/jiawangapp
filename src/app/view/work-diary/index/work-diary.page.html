@@ -51,7 +51,9 @@
 
   </section>
 
-  <ion-fab *ngIf="special==2||special==3" vertical="bottom" horizontal="end" slot="fixed">
+<!--  *ngIf="special"-->
+  <ion-fab
+           vertical="bottom" horizontal="end" slot="fixed">
     <ion-fab-button (click)="selectDepart()">
 <!--      <ion-icon name="add"></ion-icon>-->
       <ion-icon name="contacts"></ion-icon>

@@ -16,7 +16,7 @@
         <!--    </ion-item>-->
         <ion-list class="list-style">
             <!--选择部门-->
-            <ion-item ion-item *ngFor="let item of departArray" (click)=" nav('work-diary/view-staff-work-diary/' + item.id, {title: '添加工作日志', departid: item.id})" detail>
+            <ion-item ion-item *ngFor="let item of departArray" (click)=" nav('work-diary/view-staff-work-diary/' + item.id, {title: '添加工作日志', departid: item.id,isDepart:false})" detail>
                 {{item.name}}
                 <span slot="end">{{item.staff_num}}</span>
             </ion-item>
