@@ -18,14 +18,8 @@ export class ViewStaffWorkDiaryComponent extends BasePage implements OnInit {
 
   // public special = 0;
   public selectedStaff: any[] = [
-    {
-      name: '张山',
-      uid: 1
-    },
-    {
-      name: '李四',
-      uid: 2
-    }
+    {name: '张山', uid: 1},
+    {name: '李四', uid: 2}
   ];
   constructor(
       public http: HttpService,
