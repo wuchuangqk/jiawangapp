@@ -14,13 +14,10 @@ export class ViewStaffWorkDiaryComponent extends BasePage implements OnInit {
   public staffArray = [];
   public departArray = [];
   public departid: number;
-   public isDepart: true; // 是部门还是人
+   public isDepart = true; // 是部门还是人
 
   // public special = 0;
-  public selectedStaff: any[] = [
-    {name: '张山', uid: 1},
-    {name: '李四', uid: 2}
-  ];
+  public selectedStaff: any[] = [];
   constructor(
       public http: HttpService,
       public router: Router,
@@ -43,7 +40,6 @@ export class ViewStaffWorkDiaryComponent extends BasePage implements OnInit {
       this.getList();
   }
   cc(item) {
-    console.log(item);
     this.nav('work-diary/staff-work-diary', {title: item.name + '的工作日志', userid: item.id, isDepart: false});
   }
   getList() {
@@ -51,7 +47,6 @@ export class ViewStaffWorkDiaryComponent extends BasePage implements OnInit {
       const userid = JSON.parse(localStorage.userInfo).id;
       this.request('/users/getdepartlist/' + userid, {
       }).then((res) => {
-        console.log(res);
         // this.staffArray = res.data.staffs;
         this.departArray = res.data;
       });
@@ -59,7 +54,6 @@ export class ViewStaffWorkDiaryComponent extends BasePage implements OnInit {
       this.request('/staffs/list', {
         depart_id: this.departid
       }).then((res) => {
-        console.log(res);
         this.staffArray = res.data.staffs;
         this.departArray = [];
       });
