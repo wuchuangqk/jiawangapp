@@ -11,6 +11,7 @@ export class HomeModel {
         { icon: 'md-pin', color: '#a3bdb9', name: 'go-out', title: '外出审批' },
         { icon: 'logo-twitch', color: '#6cd7ff', name: 'synthesize', title: '综合审批' },
         { icon: 'ios-folder', color: '#6cd7ff', name: 'property', title: '资产购置' },
+        { icon: 'ios-folder', color: '#6cd7ff', name: 'finance-detail', title: '资产明细' },
         { icon: 'megaphone', color: '#6cd7ff', name: 'cultural-propaganda', title: '文化宣传', url: '/notices/wenxuan_list' },
        // { icon: 'ios-briefcase-outline', color: '#b6c3b9', name: '', title: '项目库' },
        // { icon: 'ios-create', color: '#b0b7bd', name: 'project-management', title: '项目管理' },

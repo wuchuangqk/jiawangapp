@@ -44,8 +44,7 @@ export class ViewStaffWorkDiaryComponent extends BasePage implements OnInit {
   }
   getList() {
     if (this.isDepart) {
-      const userid = JSON.parse(localStorage.userInfo).id;
-      this.request('/users/getdepartlist/' + userid, {
+      this.request('/users/getdepartlist', {
       }).then((res) => {
         // this.staffArray = res.data.staffs;
         this.departArray = res.data;

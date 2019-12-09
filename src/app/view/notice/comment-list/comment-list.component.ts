@@ -31,16 +31,19 @@ export class CommentListComponent extends BasePage implements OnInit {
       public navController: NavController,
       public dialogService: DialogService,
       public elRef: ElementRef,
+      public events: Events,
       private event: Events,
       public route?: ActivatedRoute,
   ) {
     super(http, router, navController, dialogService);
     this.id = this.query('id');
-    console.log(this.id);
     this.GetCommitList();
   }
 
   ngOnInit() {
+    this.events.subscribe(AppConfig.Exchange.commentList, () => {
+      this.GetCommitList();
+    });
     const textareas = document.getElementsByTagName('textarea');
     autosize(textareas);
     for (let i = 0; i < textareas.length; i++) {
@@ -61,8 +64,8 @@ export class CommentListComponent extends BasePage implements OnInit {
     el.focus();
     this.isHuiFu = true;
   }
-  addComment(item) {
-      this.nav('notice/comment-add/' + this.id, {id: this.id});
+  addComment(isHuiFu, item) {
+      this.nav('notice/comment-add/' + this.id, {id: this.id, isHuiFu, userId: item.usreid, workId: this.id});
   }
   GetCommitList() {
     this.request('/work_dynamics/commitlist', {item_id: this.id}).then((res) => {

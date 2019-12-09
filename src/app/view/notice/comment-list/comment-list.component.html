@@ -7,7 +7,7 @@
     <ion-title>
       评论列表
     </ion-title>
-<!--    <ion-icon  (click)="addComment($event)" mode="md" style="float: right;font-size: 28px;" name="add"></ion-icon>-->
+    <ion-icon  (click)="addComment(1,{})" mode="md" style="float: right;font-size: 28px;" name="add"></ion-icon>
   </ion-toolbar>
 </ion-header>
 <ion-content>
@@ -28,8 +28,19 @@
                                   <div>{{item.time}}</div>
                               </div>
                               <div style="padding:5px;color:#666;">
-                                  {{item.conent}}
+                                  <div class="flex-between">
+                                      <div style="max-width: 90%">
+                                          {{item.conent}}
+                                      </div>
+                                      <a style="color: #4c8dff" (click)="addComment(2,item)">回复</a>
+                                  </div>
                               </div>
+                          <div class="my-list-sub">
+                              <div *ngFor="let file of item.files;let i=index;" class="my-list-sub">
+                                  <a [href]="file.url">{{i+1}}、{{file.name}}</a>
+                                  <!--                            <span class="my-list-sub-top-last">{{item.jiage}}</span>-->
+                              </div>
+                          </div>
                           </div>
                       </ion-item>
                   </ion-list>

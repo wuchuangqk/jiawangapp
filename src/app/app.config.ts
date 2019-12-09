@@ -38,13 +38,17 @@ export class AppConfig {
         List: 'NoticeList'
     };
     public static Exchange = {
-        view: 'ExchangeView'
+        view: 'ExchangeView',
+        commentList: 'commentList'
     };
     public  static Document = {
         DocumentDetail: 'DocumentDetail',
         DocumentList: 'DocumentList',
         DocumentShenPiList: 'DocumentShenPiList'
     };
+    public static FinanceDetail = {
+        list: 'FinanceDetailList'
+};
     public  static ActivatedRoute = {
         ActivatedRouteChange: 'ActivatedRouteChange'
     };

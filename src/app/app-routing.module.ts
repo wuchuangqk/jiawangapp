@@ -40,6 +40,8 @@ const routes: Routes = [
     {path: 'asset-statistics', loadChildren: './view/asset-statistics/asset-statistics.module#AssetStatisticsModule'},
     // 融资还款
     {path: 'finance-reimbursement', loadChildren: './view/finance-reimbursement/finance-reimbursement.module#FinanceReimbursementModule'},
+    // 资产明细
+    {path: 'finance-detail', loadChildren: './view/finance-detail/finance-detail.module#FinanceDetailModule'},
 
 
 ];

@@ -4,7 +4,7 @@
       <ion-back-button></ion-back-button>
     </ion-buttons>
     <ion-title>
-      新增评论
+      {{title}}
     </ion-title>
   </ion-toolbar>
 </ion-header>
@@ -12,7 +12,7 @@
 <div>
   <ion-item>
     <ion-label>内容：</ion-label>
-    <ion-textarea placeholder="请输入内容" rows="10" [(ngModel)]="params.noticecontent"></ion-textarea>
+    <ion-textarea [placeholder]="placeholder" rows="10" [(ngModel)]="params.noticecontent"></ion-textarea>
     <!--        <quill-editor [(ngModel)]="params.noticecontent"></quill-editor>-->
   </ion-item>
   <app-file-viewer (getFileArray)="getFileArray($event)"></app-file-viewer>

@@ -1,0 +1,68 @@
+<ion-header>
+    <ion-toolbar color="primary">
+        <app-back></app-back>
+        <ion-title>
+            {{title}}
+        </ion-title>
+    </ion-toolbar>
+</ion-header>
+
+
+<ion-content class="bg-style add-style">
+    <ion-item>
+        <ion-label>申请部门：</ion-label>
+        <ion-select [(ngModel)]="params.bumen" cancelText="取消" okText="确定">
+            <ion-select-option *ngFor="let item of qjtypeList" [value]="item.id">{{item.name}}</ion-select-option>
+        </ion-select>
+    </ion-item>
+    <ion-item>
+        <ion-label>序号：</ion-label>
+        <ion-input [(ngModel)]="params.xuhao_one"></ion-input>
+    </ion-item>
+
+    <ion-item>
+        <ion-label>区域：</ion-label>
+        <ion-input [(ngModel)]="params.quyu"></ion-input>
+    </ion-item>
+    <ion-item>
+        <ion-label>序号：</ion-label>
+        <ion-input [(ngModel)]="params.xuhao_two"></ion-input>
+    </ion-item>
+    <ion-item>
+        <ion-label>物品名称：</ion-label>
+        <ion-input [(ngModel)]="params.wupinMC"></ion-input>
+    </ion-item>
+    <ion-item>
+        <ion-label>数量：</ion-label>
+        <ion-input type="number" [(ngModel)]="params.shuliang"></ion-input>
+    </ion-item>
+    <ion-item>
+        <ion-label>颜色：</ion-label>
+        <ion-input [(ngModel)]="params.yanse"></ion-input>
+    </ion-item>
+    <ion-item>
+        <ion-label>规格：</ion-label>
+        <ion-input [(ngModel)]="params.guige"></ion-input>
+    </ion-item>
+    <ion-item>
+        <ion-label>价格：</ion-label>
+        <ion-input [(ngModel)]="params.jiage"></ion-input>
+    </ion-item>
+    <ion-item>
+        <ion-label>时间：</ion-label>
+        <ion-datetime type="datetime-local" displayFormat="YYYY-MM-DD" pickerFormat="YYYY-MM-DD" doneText="确定" [(ngModel)]="params.shijian" cancelText="取消"></ion-datetime>
+    </ion-item>
+    <ion-item>
+        <ion-label>备注：</ion-label>
+        <ion-textarea placeholder="请输入备注" [(ngModel)]="params.beizhu"></ion-textarea>
+    </ion-item>
+</ion-content>
+
+
+<ion-footer>
+    <ion-toolbar>
+        <ion-button expand="full" (click)="save()" style="flex: 1">
+            保  存
+        </ion-button>
+    </ion-toolbar>
+</ion-footer>

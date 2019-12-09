@@ -1,0 +1,52 @@
+<ion-header>
+    <ion-toolbar color="primary">
+        <app-back></app-back>
+        <ion-title>
+            资产明细
+        </ion-title>
+    </ion-toolbar>
+</ion-header>
+
+
+
+
+
+<ion-content>
+    <ion-refresher (ionRefresh)="doRefresh($event)">
+        <ion-refresher-content
+                 pullingIcon="arrow-dropdown"
+                 pullingText="下拉刷新"
+                 refreshingSpinner="circles"
+                 refreshingText="刷新...">
+        </ion-refresher-content>
+    </ion-refresher>
+    <section>
+        <ion-list class="my-list">
+            <ion-item *ngIf="itemList.length<1">
+                <p class="primary"> 无数据！ </p>
+            </ion-item>
+            <ion-item *ngFor="let item of itemList" (click)="nav('finance-detail/detail',{url:'/zhigou/zhichan_detail',id:item.id,title:title,contentTitle:item.title,title:'请假审批详情'})">
+                <section>
+
+                    <div class="my-list-title">
+                        <h2>{{item.wupin}}</h2>
+                    </div>
+                    <div class="my-list-sub">
+                        <div class="my-list-sub-top flex-between">
+                            <span>
+                                <span>{{item.bumeng}}</span>
+                                <span>{{item.addtime}}</span>
+                            </span>
+                            <span class="my-list-sub-top-last">{{item.jiage}}</span>
+                        </div>
+                    </div>
+                </section>
+            </ion-item>
+        </ion-list>
+    </section>
+    <ion-fab vertical="bottom" horizontal="end" slot="fixed">
+        <ion-fab-button (click)="nav('finance-detail/add',{title:'资产添加',url:''})">
+            <ion-icon name="add"></ion-icon>
+        </ion-fab-button>
+    </ion-fab>
+</ion-content>
