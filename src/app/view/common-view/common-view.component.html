@@ -21,4 +21,18 @@
     <h2>{{contentTitle}}</h2>
     <div class="detail-content" [innerHTML]="content"></div>
 </ion-content>
+<ion-footer>
+  <ion-toolbar>
+    <div class="flex-between" style="margin-bottom: 5px;">
+      <div>&nbsp;</div>
+      <ion-button color="light" (click)="nav('read-list',{id:id,url:getReadUrl})" size="small">
+        <span>已读人数：</span>
+        <span text-bold>{{readNumber||0}}人</span>&nbsp;
+        <span>未读人数：</span>
+        <span text-bold>{{noReadNumber||0}}人</span>
+      </ion-button>
+    </div>
+  </ion-toolbar>
+</ion-footer>
+
 

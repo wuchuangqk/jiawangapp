@@ -16,6 +16,9 @@ import {AppConfig} from '../../app.config';
 export class CommonViewComponent extends DetailBasePage implements OnInit, OnDestroy {
     public contentTitle = '';
     public content = '';
+    public readNumber = 0; // 已读人数
+    public noReadNumber = 0; // 未读人数
+    public getReadUrl = '/notices/GetRead/';
     constructor(
         public http: HttpService,
         public router: Router,
@@ -33,6 +36,7 @@ export class CommonViewComponent extends DetailBasePage implements OnInit, OnDes
     }
 
     ngOnInit() {
+        this.getRead();
         this.getDetail({}).then(() => {
             this.events.publish(AppConfig.Notice.List);
             this.events.publish(AppConfig.Home.Badge);
@@ -40,15 +44,20 @@ export class CommonViewComponent extends DetailBasePage implements OnInit, OnDes
     }
     ngOnDestroy() {
     }
-    edit(e){
+    getRead() {
+        this.request(  this.getReadUrl + this.id, {}).then((res) => {
+                this.readNumber = res.data.hasreader.length;
+                this.noReadNumber = res.data.noreader.length;
+        });
+    }
+    edit(e) {
         console.log(this.title);
         console.log(this.url);
         console.log(this.id);
-        this.nav('edit/'+this.id,{
-            title:this.title,
-            url:this.url,
-            id:this.id
-        })
+        this.nav('edit/' + this.id, {
+            title: this.title,
+            url: this.url,
+            id: this.id
+        });
     }
-
 }

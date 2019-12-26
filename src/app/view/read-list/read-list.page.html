@@ -1,0 +1,46 @@
+<ion-header>
+    <ion-toolbar color="primary">
+        <app-back></app-back>
+        <ion-title>已读未读人员列表</ion-title>
+    </ion-toolbar>
+</ion-header>
+
+<ion-content>
+    <ion-card>
+        <ion-card-header>
+            <h4> 已读 </h4>
+        </ion-card-header>
+        <ion-card-content>
+            <ion-list>
+                <ion-item *ngFor="let item of readList">
+                    <div style="width:100%;">
+                        <div class="list-item">
+                            <span style="color:#000;"> {{item.username}} </span>
+                            <span>{{item.departname}}</span>
+                        </div>
+                        <div class="list-item">{{item.readtime}}</div>
+                    </div>
+                </ion-item>
+            </ion-list>
+        </ion-card-content>
+    </ion-card>
+
+    <ion-card style="margin-top:10px;">
+        <ion-card-header>
+            <h4> 未读 </h4>
+        </ion-card-header>
+        <ion-card-content>
+            <ion-list>
+                <ion-item *ngFor="let item of noReadList">
+                    <div style="width:100%;">
+                        <div class="list-item">
+                            <span style="color:#000;"> {{item.username}} </span>
+                            <span>{{item.departname}}</span>
+                        </div>
+                        <div class="list-item">{{item.readtime}}</div>
+                    </div>
+                </ion-item>
+            </ion-list>
+        </ion-card-content>
+    </ion-card>
+</ion-content>

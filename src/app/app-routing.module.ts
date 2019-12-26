@@ -42,6 +42,8 @@ const routes: Routes = [
     {path: 'finance-reimbursement', loadChildren: './view/finance-reimbursement/finance-reimbursement.module#FinanceReimbursementModule'},
     // 资产明细
     {path: 'finance-detail', loadChildren: './view/finance-detail/finance-detail.module#FinanceDetailModule'},
+  { path: 'read-list', loadChildren: './view/read-list/read-list.module#ReadListPageModule' },
+
 
 
 ];

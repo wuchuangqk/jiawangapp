@@ -20,6 +20,9 @@ export class ExchangeViewComponent extends DetailBasePage implements OnInit, OnD
     public infoTitle = '';
     public flag = false;
     public commitList = [];
+    public readNumber = 0; // 已读人数
+    public noReadNumber = 0; // 未读人数
+    public getReadUrl = '/work_dynamics/GetRead/';
     constructor(
         public http: HttpService,
         public router: Router,
@@ -45,6 +48,7 @@ export class ExchangeViewComponent extends DetailBasePage implements OnInit, OnD
             });
         });
         this.GetCommitList();
+        this.getReadNumber();
         this.getDetail({}).then((res) => {
             this.events.publish(AppConfig.Notice.List);
             this.events.publish(AppConfig.Home.Badge);
@@ -65,6 +69,12 @@ export class ExchangeViewComponent extends DetailBasePage implements OnInit, OnD
     GetCommitList() {
         this.request('/work_dynamics/commitlist', {item_id: this.id}).then((res) => {
             this.commitList = res.data;
+        });
+    }
+    getReadNumber() {
+        this.request(this.getReadUrl + this.id, {}).then((res) => {
+            this.readNumber = res.data.hasreader.length;
+            this.noReadNumber = res.data.noreader.length;
         });
     }
     submit() {

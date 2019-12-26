@@ -28,7 +28,15 @@
     <ion-toolbar>
 <!--        [rows]="flag?4:1" (ionFocus)="flag=true" (ionBlur)="flag=false"-->
         <div class="flex-between" style="margin-bottom: 5px;">
-            <div>&nbsp;</div>
+            <div>
+                <ion-button color="light" (click)="nav('read-list',{id:id,url:getReadUrl})" size="small">
+                    <span>已读人数：</span>
+                    <span text-bold>{{readNumber||0}}人</span>&nbsp;
+                    <span>未读人数：</span>
+                    <span text-bold>{{noReadNumber||0}}人</span>
+                </ion-button>
+
+            </div>
             <ion-button color="light" (click)="nav('notice/comment-list/'+id,{id:id})" size="small">评论 ({{comment_num||0}})</ion-button>
 <!--            <ion-textarea style="font-size: 1.5rem;" [(ngModel)]="infoTitle" clearOnEdit="true"></ion-textarea>-->
 <!--            <ion-icon name="md-send" color="primary" (click)="submit()" style="padding: 10px;font-size: 30px"></ion-icon>-->

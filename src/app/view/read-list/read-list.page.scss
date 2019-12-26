@@ -1,0 +1,22 @@
+.list-item{
+    display:flex;
+    width:100%;
+    font-size:1.3rem;
+    color:#666;
+    line-height:2.2rem;
+    justify-content:space-between;
+}
+.sc-ion-card-ios-h{
+    margin:0;
+}
+ion-card-header {
+    padding:5px;
+    h4{
+        font-size:1.5rem;
+        font-weight:bold;
+        color:#3880ff;
+    }
+}
+ion-card-content{
+    padding:5px;
+}
