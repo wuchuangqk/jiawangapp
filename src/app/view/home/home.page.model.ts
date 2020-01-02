@@ -13,6 +13,7 @@ export class HomeModel {
         { icon: 'ios-folder', color: '#6cd7ff', name: 'property', title: '资产购置' },
         { icon: 'ios-folder', color: '#6cd7ff', name: 'finance-detail', title: '资产明细' },
         { icon: 'megaphone', color: '#6cd7ff', name: 'cultural-propaganda', title: '文化宣传', url: '/notices/wenxuan_list' },
+        { icon: 'ios-create', color: '#b2d76a', name: 'archive-management', title: '档案管理' },
        // { icon: 'ios-briefcase-outline', color: '#b6c3b9', name: '', title: '项目库' },
        // { icon: 'ios-create', color: '#b0b7bd', name: 'project-management', title: '项目管理' },
        // { icon: 'ios-pricetags', color: '#89d4af', name: 'TouZiBaoBiaoPage', title: '投资报表'},
