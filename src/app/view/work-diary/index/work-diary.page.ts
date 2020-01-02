@@ -16,9 +16,10 @@ import {path} from '@angular-devkit/core';
   styleUrls: ['./work-diary.page.scss'],
 })
 export class WorkDiaryPage extends BasePage implements OnInit, OnDestroy {
-  private itemList = [];
+  public itemList = [];
   private url = '';
   public list = [];
+  public addtime = 0;
   public special = false;
   public departid = 0;
   public payload = {
@@ -55,8 +56,8 @@ export class WorkDiaryPage extends BasePage implements OnInit, OnDestroy {
     // this.dialogService.toast('已保存！');
     // this.payload.date = datePipe.transform(this.payload.date, 'yyyy-MM-dd');
     const params = [];
-    console.log(this.list[0].arr);
-    for (const item of this.list[0].arr) {
+    // console.log(this.list[0].arr);
+    for (const item of this.itemList) {
       params.push(item.morning);
     }
     params.push(this.week.zlogs);
@@ -78,6 +79,10 @@ export class WorkDiaryPage extends BasePage implements OnInit, OnDestroy {
   ionFocus(item) {
     this.flag = true;
   }
+  viewLog(num) {
+    this.addtime += num;
+    this.getList();
+  }
   ngOnInit() {
     this.departid = JSON.parse(localStorage.userInfo).departid;
     this.getuserspecial();
@@ -98,32 +103,17 @@ export class WorkDiaryPage extends BasePage implements OnInit, OnDestroy {
   getList() {
     this.list = [];
     return  this.request(this.url, {
+      addtime: this.addtime,
       type: 0
     }).then((response) => {
-      this.itemList = response.data.daily;
-      this.week = response.data.week;
-      this.dateSet = new Set<string>();
-      for (const item of this.itemList) {
-        const d = new Date(item.date);
-        this.dateSet.add( `${d.getFullYear()}-${d.getMonth() + 1}`);
-      }
-      this.dateSet.forEach((item) => {
-        const _temp: any = {};
-        _temp.date = item;
-        _temp.arr = [];
-        for (const _item of this.itemList) {
-          const d = new Date(_item.date);
-          const _date = `${d.getFullYear()}-${d.getMonth() + 1}`;
-          // _item.day = this.dateProvider.getFormatWeek(d);
-          _item.d = d.getDate();
-          _item.month = d.getMonth() + 1;
-          if (item === _date) {
-            _temp.d = `${d.getFullYear()}年${d.getMonth() + 1}月`;
-            _temp.arr.push(_item);
-          }
-        }
-        this.list.push(_temp);
-      });
+     this.itemList = response.data.daily;
+     this.week = response.data.week;
+     this.dateSet = new Set<string>();
+     this.itemList.forEach((item) => {
+       const d = new Date(item.date);
+       item.d = d.getDate();
+       item.month = d.getMonth() + 1;
+     });
     });
   }
   selectDepart() {
