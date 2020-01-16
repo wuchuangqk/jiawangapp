@@ -62,7 +62,9 @@ export class WorkDiaryPage extends BasePage implements OnInit, OnDestroy {
     }
     params.push(this.week.zlogs);
     const data = params.join('|||||');
-    // console.log(params);
+    // console.log(this.itemList);
+    console.log(params);
+    console.log(data);
     this.setRequest(this.payload.url, {data}).then(() => {
 
       this.getList();
