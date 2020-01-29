@@ -41,13 +41,15 @@ export class LoginComponent extends BasePage implements OnInit {
         super(http, router, navController, dialogService);
         this.platform.ready().then(() => {
             if (this.platform.is('android')) {
-                this.os = this.device.platform.toLowerCase();
-                this.getPackageName().then((packagename) => {
-                    this.packagename = packagename;
-                });
-                this.getUuid((uuid) => {
-                    this.uuid = uuid;
-                });
+                if (this.device.platform) {
+                    this.os = this.device.platform.toLowerCase();
+                    this.getPackageName().then((packagename) => {
+                        this.packagename = packagename;
+                    });
+                    this.getUuid((uuid) => {
+                        this.uuid = uuid;
+                    });
+                }
             }
         });
     }

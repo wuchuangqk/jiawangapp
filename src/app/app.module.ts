@@ -41,6 +41,7 @@ import 'hammerjs';
 import { QuillModule } from 'ngx-quill';
 import {EditComponent } from './view/edit/edit.component';
 import { AutoresizeTextareaDirective } from './autoresize-textarea.directive';
+import {NetworkSettingComponent} from './view/network-setting/network-setting.component';
 
 
 @NgModule({
@@ -54,6 +55,7 @@ import { AutoresizeTextareaDirective } from './autoresize-textarea.directive';
         PersionInfoComponent,
         EditComponent,
         FeedbackComponent,
+        NetworkSettingComponent,
         AutoresizeTextareaDirective,
     ],
     entryComponents: [],

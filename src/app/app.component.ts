@@ -7,6 +7,7 @@ import { AppMinimize } from '@ionic-native/app-minimize/ngx';
 import {Subscription} from 'rxjs';
 import { Events } from '@ionic/angular';
 import {AppConfig} from './app.config';
+import { Device } from '@ionic-native/device/ngx';
 
 @Component({
   selector: 'app-root',
@@ -24,11 +25,19 @@ export class AppComponent {
       public router: Router,
       public appMinimize: AppMinimize,
       public events: Events,
+      private device: Device,
       public navController: NavController, // 导航控制器
       public toastCtrl: ToastController,
   ) {
     this.initializeApp();
-    this.isLogin();
+    this.platform.ready().then(() => {
+      if (this.platform.is('android') || this.platform.is('ios')) {
+
+        if (this.device.platform) {
+          this.isLogin();
+        }
+      }
+    });
   }
 
   public isLogin() {
