@@ -42,6 +42,7 @@ import { QuillModule } from 'ngx-quill';
 import {EditComponent } from './view/edit/edit.component';
 import { AutoresizeTextareaDirective } from './autoresize-textarea.directive';
 import {NetworkSettingComponent} from './view/network-setting/network-setting.component';
+import { SQLite, SQLiteObject } from '@ionic-native/sqlite/ngx';
 
 
 @NgModule({
@@ -102,6 +103,7 @@ import {NetworkSettingComponent} from './view/network-setting/network-setting.co
         Base64,
         FilePath,
         Badge,
+        SQLite,
         { provide: RouteReuseStrategy, useClass: IonicRouteStrategy },
         // { provide: HashLocationStrategy, useClass: LocationStrategy }
     ],
