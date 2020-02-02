@@ -11,7 +11,7 @@ import {IndexedDBService} from './IndexedDBService';
     providedIn: 'root'
 })
 export class HttpRequestService {
-    public BaseUrl = localStorage.selectIp; //|| environment.host;
+    public BaseUrl = localStorage.selectIp|| environment.host;
     private configUrl = 'assets/config.json';
     private SECERET_KEY = 'com.yuangsong.102515';
     private CryptoJS: any;
@@ -28,7 +28,7 @@ export class HttpRequestService {
         return this.http.get(this.configUrl).toPromise();
     }
     setBaseUrl() {
-        this.BaseUrl = localStorage.selectIp;// || environment.host;
+        this.BaseUrl = localStorage.selectIp|| environment.host;
     }
 
     public get(url: string, data) {
