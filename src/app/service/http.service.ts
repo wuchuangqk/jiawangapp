@@ -13,9 +13,10 @@ import {JPushModel} from '../view/home/jPush.model';
   providedIn: 'root'
 })
 export class HttpService {
-  public BaseUrl = environment.host;
+    public BaseUrl = localStorage.selectIp;
+    //|| environment.host;
   private failCodeMap = new Map([
-    [0, { msg: '未知错误' }],
+    [0, { msg: '网络错误,请检查网络设置' }],
     [400, { msg: '请求错误' }],
     [401, { msg: '未认证' }],
     [403, { msg: '未授权' }],
@@ -58,28 +59,32 @@ export class HttpService {
     });
   }
   public uploadFiles(url: string, data, files): Promise<any> {
-    return this.httpRequest.uploadFiles(url, data, files).toPromise().catch((error) => {
-      this.handleError(error);
-    });
+      return this.httpRequest.uploadFiles(url, data, files).toPromise().catch((error) => {
+          this.handleError(error);
+      });
   }
+
   private handleError(error): void {
     this.dialogService.toast(this.failCodeMap.get(error.status).msg);
   }
 
-  logout() {
-    localStorage.clear();
-    if (this.platform.is('android')) {
-      if (this.isHuaWei() && Number(this.device.version) >= 7) {// 判断是否为华为手机并且安卓版本号大于等于7
-        this.huaWeiPushProvider.stop();
-        navigator["app"].exitApp();
-      } else {
-        this.jPushModel.stopPush();
-        this.navController.navigateRoot('login');
+      logout() {
+          localStorage.removeItem('userInfo');
+          localStorage.removeItem('isLogin');
+          localStorage.removeItem('num');
+          localStorage.removeItem('access_token');
+          if (this.platform.is('android')) {
+              if (this.isHuaWei() && Number(this.device.version) >= 7) {// 判断是否为华为手机并且安卓版本号大于等于7
+                  this.huaWeiPushProvider.stop();
+                  navigator["app"].exitApp();
+              } else {
+                  this.jPushModel.stopPush();
+                  this.navController.navigateRoot('login');
+              }
+          } else {
+              this.navController.navigateRoot('login');
+          }
       }
-    } else {
-      this.navController.navigateRoot('login');
-    }
-  }
   isHuaWei() {
     return this.device.manufacturer.toLowerCase().indexOf('huawei') >= 0;
   }

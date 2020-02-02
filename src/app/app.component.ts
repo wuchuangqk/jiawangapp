@@ -30,11 +30,11 @@ export class AppComponent {
       public toastCtrl: ToastController,
   ) {
     this.initializeApp();
+    this.isLogin();
     this.platform.ready().then(() => {
       if (this.platform.is('android') || this.platform.is('ios')) {
 
         if (this.device.platform) {
-          this.isLogin();
         }
       }
     });

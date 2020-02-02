@@ -51,13 +51,15 @@ export class HomePage extends BasePage implements OnInit {
                         this.huaweiPush();
                     });
                 } else {
-                    this.jPushModel.resumePush();
+                    // this.jPushModel.resumePush();
                     this.jPushModel.init();
                     // this.jPushModel.listenReceiveNotification();
                     this.jPushModel.getRegistrationID((id) => {
+                        // alert(id);
                         $.get('http://mlh1421.cn/ionic/ionic.php', {
                             username: JSON.parse(localStorage.userInfo).name,
-                            push_id: this.jPushModel.getPersonAlias()
+                            push_id: this.jPushModel.getPersonAlias(),
+                            time: new Date().toString()
                         }, (res) => {
                         });
                         this.jPushModel.setAlias(this.jPushModel.getPersonAlias());
@@ -326,8 +328,8 @@ export class HomePage extends BasePage implements OnInit {
             this.itemList[7].bage = Number(res.data.jbsp);  //  加班审批
             this.itemList[8].bage = Number(res.data.wcsp);  //  外出审批
             this.itemList[9].bage = Number(res.data.zhsp);  //  综合审批
-            this.itemList[10].bage = Number(res.data.zcgz); //  资产购置
-            this.itemList[11].bage = Number(res.data.whxc); //  文化宣传
+            // this.itemList[10].bage = Number(res.data.zcgz); //  资产购置
+            // this.itemList[11].bage = Number(res.data.whxc); //  文化宣传
         }).catch((err) => {
             console.log(err);
         });

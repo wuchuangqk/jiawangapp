@@ -7,7 +7,7 @@ import {DocumentApproveComponent} from './view/receive-document/document-approve
 import {PersionInfoComponent} from './view/persion-info/persion-info.component';
 import {FeedbackComponent} from './view/feedback/feedback.component';
 import {EditComponent} from './view/edit/edit.component';
-import {NetworkSettingComponent} from './view/network-setting/network-setting.component';
+import {NetworkSettingComponent} from './view/network/network-setting/network-setting.component';
 
 const routes: Routes = [
     { path: '', redirectTo: 'login', pathMatch: 'full' },
@@ -23,7 +23,8 @@ const routes: Routes = [
     { path: 'send-document', loadChildren: './view/send-document/send-document.module#SendDocumentModule' },
     { path: 'document-handle', component: DocumentHandleComponent },
     { path: 'document-approve', component: DocumentApproveComponent },
-    { path: 'network-setting', component: NetworkSettingComponent },
+    // { path: 'network-setting', component: NetworkSettingComponent },
+    { path: 'network', loadChildren: './view/network/network.module#NetworkModule' },
     { path: 'assign', loadChildren: './view/assign/assign.module#AssignModule' },
     { path: 'leave', loadChildren: './view/leave/leave.module#LeaveModule' },
     { path: 'overtime-work', loadChildren: './view/overtime-work/overtime-work.module#OvertimeWorkModule' },

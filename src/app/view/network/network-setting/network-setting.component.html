@@ -1,0 +1,29 @@
+<ion-header>
+  <ion-toolbar color="primary">
+      <app-back></app-back>
+    <ion-title>
+        网络设置
+    </ion-title>
+  </ion-toolbar>
+</ion-header>
+
+
+<ion-content>
+<ion-list>
+    <ion-radio-group (ionChange)="selectedChange($event)">
+    <ion-item *ngFor="let item of list">
+        <section class="flex">
+            <ion-radio [value]="item.id" [checked]="item.id==selected"></ion-radio>
+        <div class="list-item">
+            <h3>{{item.name}}</h3>
+            <p>{{item.ip}}</p>
+        </div>
+        </section>
+        <ion-icon name="information-circle-outline" style="color: #999999;z-index: 100000;" (click)="nav('network/view',{id:item.id })" slot="end"></ion-icon>
+    </ion-item>
+    </ion-radio-group>
+</ion-list>
+    <ion-button expand="full" (click)="nav('network/add')" style="flex: 1">新   增 </ion-button>
+</ion-content>
+
+

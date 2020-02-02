@@ -2,8 +2,9 @@ import { Component, OnInit } from '@angular/core';
 import {HttpService} from '../../../service/http.service';
 import {BasePage} from '../../../base/base-page';
 import {ActivatedRoute, Router} from '@angular/router';
-import {NavController} from '@ionic/angular';
+import {Events, NavController} from '@ionic/angular';
 import {DialogService} from '../../../service/dialog.service';
+import {AppConfig} from '../../../app.config';
 
 @Component({
   selector: 'app-add',
@@ -20,6 +21,7 @@ export class AddComponent extends BasePage implements OnInit {
     constructor(
         public http: HttpService,
         public router: Router,
+        public events: Events,
         public navController: NavController,
         public dialogService: DialogService,
         public route?: ActivatedRoute,
@@ -45,6 +47,7 @@ export class AddComponent extends BasePage implements OnInit {
         this.dialogService.loading('正在提交，请稍后....');
         this.setRequest('/notices/wenxuan_add', this.params).then((res) => {
             this.dialogService.dismiss();
+            this.events.publish(AppConfig.CulturalPropaganda.List);
             this.dialogService.alert('提交成功！', () => {
                 this.navController.back();
              });

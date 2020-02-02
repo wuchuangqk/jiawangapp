@@ -47,6 +47,7 @@
     "cordova-huawei-hms": "https://gitee.com/hui1421/cordova-huawei-hms.git",
     "cordova-ios": "5.0.1",
     "cordova-plugin-android-permissions": "^1.0.2",
+    "cordova-plugin-android-support-v4": "^21.0.1",
     "cordova-plugin-app-version": "^0.1.9",
     "cordova-plugin-appminimize": "^1.0.1",
     "cordova-plugin-badge": "^0.8.8",
@@ -58,16 +59,17 @@
     "cordova-plugin-filechooser": "^1.2.0",
     "cordova-plugin-ionic-keyboard": "^2.2.0",
     "cordova-plugin-ionic-webview": "^4.1.0",
-    "cordova-plugin-jcore": "^1.3.1",
+    "cordova-plugin-jcore": "1.2.3",
     "cordova-plugin-splashscreen": "^5.0.2",
     "cordova-plugin-statusbar": "^2.4.2",
     "cordova-plugin-whitelist": "1.3.4",
     "core-js": "^2.5.4",
     "crypto-js": "^3.1.9-1",
     "hammerjs": "^2.0.8",
-    "jpush-phonegap-plugin": "3.3.2",
+    "jpush-phonegap-plugin": "3.4.3",
     "jquery": "^3.4.1",
     "ngx-quill": "7.3.2",
+    "node-sass": "^4.13.1",
     "quill": "1.3.7",
     "rxjs": "~6.5.1",
     "tslib": "^1.9.0",
@@ -104,14 +106,14 @@
   "cordova": {
     "plugins": {
       "jpush-phonegap-plugin": {
-        "APP_KEY": "2dfbed0a944f7c616e5cc78c",
+        "APP_KEY": "a714c39251cf550cd7d82a9b",
         "CHANNEL": "developer-default"
       },
       "cordova-plugin-jcore": {},
       "cordova-huawei-hms": {
-        "APPID": "100875129",
-        "PACKAGENAME": "com.cn.yuansong",
-        "CPID": "100875129"
+        "APPID": "101682461",
+        "PACKAGENAME": "com.yuansong.oa",
+        "CPID": "101682461"
       },
       "cordova-plugin-whitelist": {},
       "cordova-plugin-statusbar": {},

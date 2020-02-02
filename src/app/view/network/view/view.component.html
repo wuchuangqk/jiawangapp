@@ -1,0 +1,38 @@
+<ion-header>
+  <ion-toolbar color="primary">
+    <app-back></app-back>
+    <ion-title>
+      编辑
+    </ion-title>
+
+    <ion-icon class="animated flipInX" (click)="save()" style="font-size: 38px" slot="end" name="checkmark"></ion-icon>
+  </ion-toolbar>
+</ion-header>
+
+
+<ion-content class="bg-style add-style">
+
+  <ion-item>
+    <ion-label>网络名称：</ion-label>
+    <ion-input placeholder="请输入" [(ngModel)]="params.name"></ion-input>
+  </ion-item>
+  <ion-item>
+    <ion-label>网络地址：</ion-label>
+    <ion-input placeholder="请输入" [(ngModel)]="params.ip"></ion-input>
+  </ion-item>
+
+
+
+</ion-content>
+
+
+
+
+
+<ion-footer>
+  <ion-toolbar>
+    <ion-button expand="full" (click)="delete()" style="flex: 1">
+      删   除
+    </ion-button>
+  </ion-toolbar>
+</ion-footer>

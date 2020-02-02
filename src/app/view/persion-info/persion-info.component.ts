@@ -47,11 +47,14 @@ export class PersionInfoComponent extends BasePage implements OnInit {
     }
   }
   logout() {
-    localStorage.clear();
-    if (this.platform.is('android')) {
+      localStorage.removeItem('userInfo');
+      localStorage.removeItem('isLogin');
+      localStorage.removeItem('num');
+      localStorage.removeItem('access_token');
+      if (this.platform.is('android')) {
       if (this.isHuaWei() && Number(this.device.version) >= 7) {// 判断是否为华为手机并且安卓版本号大于等于7
         this.huaWeiPushProvider.stop();
-        navigator["app"].exitApp();
+        navigator['app'].exitApp();
       } else {
         this.jPushModel.stopPush();
         this.navController.navigateRoot('login');

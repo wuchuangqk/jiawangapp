@@ -4,11 +4,14 @@ import {Observable} from 'rxjs';
 import { UtilService } from './util.service';
 import { environment } from '../../environments/environment.prod';
 import { File as IFile } from '@ionic-native/file/ngx';
+import {Events} from '@ionic/angular';
+import {AppConfig} from '../app.config';
+import {IndexedDBService} from './IndexedDBService';
 @Injectable({
     providedIn: 'root'
 })
 export class HttpRequestService {
-    public BaseUrl = environment.host;
+    public BaseUrl = localStorage.selectIp; //|| environment.host;
     private configUrl = 'assets/config.json';
     private SECERET_KEY = 'com.yuangsong.102515';
     private CryptoJS: any;
@@ -18,13 +21,18 @@ export class HttpRequestService {
         public file: IFile,
         private utilService: UtilService,
     ) {
+        this.setBaseUrl();
     }
 
     getConfig() {
         return this.http.get(this.configUrl).toPromise();
     }
+    setBaseUrl() {
+        this.BaseUrl = localStorage.selectIp;// || environment.host;
+    }
 
     public get(url: string, data) {
+        this.setBaseUrl();
         if (localStorage.access_token) {
             data.access_token = localStorage.access_token;
         }
@@ -34,10 +42,12 @@ export class HttpRequestService {
     }
 
     public post(url: string, data): Observable<any> {
+        this.setBaseUrl();
         return this.http.post(this.BaseUrl + url, this.utilService.handleParams(data, this.SECERET_KEY));
     }
 
     public uploadFiles(url: string, data, files) {
+        this.setBaseUrl();
         data.access_token = localStorage.access_token;
         data.timestamp = new Date().getTime() + '';
         const signature = this.utilService.hamcsha1(this.utilService.sortParams(data), this.SECERET_KEY);
@@ -55,6 +65,7 @@ export class HttpRequestService {
         return this.http.post(this.BaseUrl + url, formData);
     }
     public uploadFile(url: string, data, filePath) {
+        this.setBaseUrl();
         data.access_token = localStorage.access_token;
         data.timestamp = new Date().getTime() + '';
         const signature = this.utilService.hamcsha1(this.utilService.sortParams(data), this.SECERET_KEY);

@@ -25,7 +25,7 @@ export class IndexComponent extends ListBasePage implements OnInit, OnDestroy {
     this.url = this.query('url');
   }
   ngOnInit() {
-    this.events.subscribe(AppConfig.Notice.List, () => {
+    this.events.subscribe(AppConfig.CulturalPropaganda.List, () => {
       this.getListData();
     });
     this.getListData();

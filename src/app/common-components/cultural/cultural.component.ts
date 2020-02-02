@@ -27,7 +27,7 @@ export class CulturalComponent extends ListBasePage implements OnInit, OnDestroy
     this.url = '/notices/wenxuan_list';
   }
   ngOnInit() {
-    this.events.subscribe(AppConfig.Notice.List, () => {
+    this.events.subscribe(AppConfig.CulturalPropaganda.List, () => {
       this.getListData();
     });
     this.getListData();

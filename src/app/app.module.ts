@@ -41,8 +41,8 @@ import 'hammerjs';
 import { QuillModule } from 'ngx-quill';
 import {EditComponent } from './view/edit/edit.component';
 import { AutoresizeTextareaDirective } from './autoresize-textarea.directive';
-import {NetworkSettingComponent} from './view/network-setting/network-setting.component';
-import { SQLite, SQLiteObject } from '@ionic-native/sqlite/ngx';
+import {HashLocationStrategy, LocationStrategy} from '@angular/common';
+import {IndexedDBService} from './service/IndexedDBService';
 
 
 @NgModule({
@@ -56,7 +56,7 @@ import { SQLite, SQLiteObject } from '@ionic-native/sqlite/ngx';
         PersionInfoComponent,
         EditComponent,
         FeedbackComponent,
-        NetworkSettingComponent,
+        // NetworkSettingComponent,
         AutoresizeTextareaDirective,
     ],
     entryComponents: [],
@@ -103,9 +103,10 @@ import { SQLite, SQLiteObject } from '@ionic-native/sqlite/ngx';
         Base64,
         FilePath,
         Badge,
-        SQLite,
+        IndexedDBService,
         { provide: RouteReuseStrategy, useClass: IonicRouteStrategy },
         // { provide: HashLocationStrategy, useClass: LocationStrategy }
+        // {provide: LocationStrategy, useClass: HashLocationStrategy},
     ],
     bootstrap: [AppComponent]
 })

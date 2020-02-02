@@ -53,4 +53,14 @@ export class AppConfig {
         ActivatedRouteChange: 'ActivatedRouteChange'
     };
     public static JPushOpenNotification = 'JPushOpenNotification';
+    public static NetWork = {
+        list: 'networkListUpdate',
+        selectChange: 'selectChange'
+    };
+    /*
+    * 文化宣传
+    * */
+    public static CulturalPropaganda = {
+        List: 'CulturalPropagandaList'
+    };
 }
