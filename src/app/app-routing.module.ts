@@ -35,10 +35,8 @@ const routes: Routes = [
     { path: 'cultural-propaganda', loadChildren: './view/cultural-propaganda/cultural-propaganda.module#CulturalPropagandaModule' },
     { path: 'project-management', loadChildren: './view/project-management/project-management.module#ProjectManagementModule' },
     { path: 'full-map', loadChildren: './view/full-map/full-map.module#FullMapModule' },
-    {
-        path: 'decision-making-platform',
-        loadChildren: './view/decision-making-platform/decision-making-platform.module#DecisionMakingPlatformModule'
-    },
+    { path: 'tabs', loadChildren: './pages/tabs/tabs.module#TabsPageModule' },
+    { path: 'decision-making-platform', loadChildren: './view/decision-making-platform/decision-making-platform.module#DecisionMakingPlatformModule' },
     // 资产统计
     {path: 'asset-statistics', loadChildren: './view/asset-statistics/asset-statistics.module#AssetStatisticsModule'},
     // 融资还款

@@ -1,0 +1,24 @@
+<ion-header no-border>
+    <ion-toolbar color="">
+        <ion-title>
+            待办事项
+        </ion-title>
+    </ion-toolbar>
+</ion-header>
+<ion-content color="">
+    <app-lists [done]="false"></app-lists>
+    <!--
+    <ion-list color="">
+        <ion-item *ngFor="let list of whishesService.lists" detail color="" (click)="selectedList( list )">
+            <ion-label>{{ list.title }}</ion-label>
+            <ion-note slot="end" color="tertiary">{{ list.items.length }} items</ion-note>
+        </ion-item>
+    </ion-list>
+    -->
+
+    <ion-fab vertical="bottom" horizontal="end" slot="fixed">
+        <ion-fab-button color="tertiary" (click)="addList()">
+            <ion-icon name="add"></ion-icon>
+        </ion-fab-button>
+    </ion-fab>
+</ion-content>
