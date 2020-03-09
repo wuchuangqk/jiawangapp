@@ -11,14 +11,14 @@
 
     <ion-list color="">
         <ion-item color="">
-            <ion-label position="floating">New Item</ion-label>
+            <ion-label position="floating">新建</ion-label>
             <ion-input type="text" [(ngModel)]="itemName" (keyup.enter)="addItem()"></ion-input>
         </ion-item>
     </ion-list>
 
     <ion-list>
         <ion-list-header color="" *ngIf="list.items.length > 0">
-            <ion-text>Compiti da Fare</ion-text>
+            <ion-text>待办任务</ion-text>
         </ion-list-header>
         <ion-item-sliding *ngFor="let item of list.items; let i = index;" class="animated fadeInDown">
             <ion-item color="">

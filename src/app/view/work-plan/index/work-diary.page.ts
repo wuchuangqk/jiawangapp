@@ -23,7 +23,7 @@ export class WorkDiaryPage extends BasePage implements OnInit, OnDestroy {
   public special = false;
   public departid = 0;
   public payload = {
-    url: '/work_logs/adds',
+    url: '/workplan/adds',
     date: '',
     morning: ''
     // afternoon: '',
@@ -51,12 +51,18 @@ export class WorkDiaryPage extends BasePage implements OnInit, OnDestroy {
     // this.special = Number(JSON.parse(localStorage.userInfo).special);
   }
   save() {
+    // const datePipe = new DatePipe('en-US');
+    // console.log('获取焦点');
+    // this.dialogService.toast('已保存！');
+    // this.payload.date = datePipe.transform(this.payload.date, 'yyyy-MM-dd');
     const params = [];
+    // console.log(this.list[0].arr);
     for (const item of this.itemList) {
       params.push(item.morning);
     }
     params.push(this.week.zlogs);
     const data = params.join('|||||');
+    // console.log(this.itemList);
     console.log(params);
     console.log(data);
     const payload = {

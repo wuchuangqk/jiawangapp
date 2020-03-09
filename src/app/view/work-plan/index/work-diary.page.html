@@ -22,8 +22,8 @@
   </ion-refresher>
   <section class="log-list">
     <div class="log-list-title primary">
-      <ion-button shape="" (click)="viewLog(-1)" size="small">上周日志</ion-button>
-      <ion-button shape="" (click)="viewLog(1)" *ngIf="addtime<0" size="small">下周日志</ion-button>
+      <ion-button shape="" (click)="viewLog(-1)" size="small">上周计划</ion-button>
+      <ion-button shape="" (click)="viewLog(1)" size="small">下周计划</ion-button>
     </div>
     <ion-list class="my-list">
       <ion-item *ngFor="let item of itemList">
@@ -51,10 +51,4 @@
     </ion-list>
 
   </section>
-
-  <ion-fab vertical="bottom" horizontal="end" slot="fixed">
-    <ion-fab-button (click)="selectDepart()">
-      <ion-icon name="contacts"></ion-icon>
-    </ion-fab-button>
-  </ion-fab>
 </ion-content>
