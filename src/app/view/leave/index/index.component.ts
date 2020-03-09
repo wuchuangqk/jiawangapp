@@ -7,21 +7,25 @@ import { DateProvider } from '../../../service/Date';
 import {Events, IonSlides} from '@ionic/angular';
 import { NavController } from '@ionic/angular';
 import {AppConfig} from '../../../app.config';
+import {el} from '@angular/platform-browser/testing/src/browser_util';
+import {elementStart} from '@angular/core/src/render3';
 
 @Component({
     selector: 'index',
     templateUrl: './index.component.html',
     styleUrls: ['./index.component.scss'],
 })
-export class IndexComponent extends BasePage implements OnInit,OnDestroy {
+export class IndexComponent extends BasePage implements OnInit, OnDestroy {
     @ViewChild(IonSlides) slides: IonSlides;
     itemList = [];
     shenPiList = [];
     myShenPiList = [];
+    LiuChengJianKongList = [];
     public menuList = [
         { title: '我申请的' },
         { title: '待我审批的' },
-        { title: '我已审批的' }
+        { title: '我已审批的' },
+        { title: '流程监控' },
     ];
     public index = 0;
     constructor(
@@ -63,12 +67,14 @@ export class IndexComponent extends BasePage implements OnInit,OnDestroy {
         this.slides.slideTo(index);
     }
     getRequest() {
-        if (this.index == 0) {
+        if (this.index === 0) {
             this.getDocumentList();
-        } else if (this.index == 1) {
+        } else if (this.index === 1) {
             this.getShenPiList();
-        }else if(this.index==2){
+        } else if (this.index === 2) {
             this.getMyShenPiList();
+        } else if (this.index === 3) {
+            this.getLiuChengJianKongList();
         }
     }
 
@@ -88,6 +94,12 @@ export class IndexComponent extends BasePage implements OnInit,OnDestroy {
     getMyShenPiList() {
         this.request('/qingjia/mylist', {}).then((res) => {
             this.myShenPiList = res.data;
+        });
+    }
+
+    getLiuChengJianKongList() {
+        this.request('/qingjia/liuChengJianKong', {type: 1}).then((res) => {
+            this.LiuChengJianKongList = res.data;
         });
     }
     doRefresh(event) {

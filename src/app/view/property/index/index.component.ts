@@ -17,10 +17,12 @@ export class IndexComponent extends BasePage implements OnInit, OnDestroy {
     itemList = [];
     shenPiList = [];
     myShenPiList = [];
+    LiuChengJianKongList = [];
     public menuList = [
         { title: '我申请的' },
         { title: '待我审批的' },
         { title: '我已审批的' },
+        { title: '流程监控' },
     ];
     public index = 0;
     constructor(
@@ -67,6 +69,8 @@ export class IndexComponent extends BasePage implements OnInit, OnDestroy {
             this.getShenPiList();
         } else if(this.index == 2){
             this.getMyShenPiList();
+        } else if( this.index === 3 ){
+            this.getLiuChengJianKongList()
         }
     }
     getDocumentList() {
@@ -84,6 +88,11 @@ export class IndexComponent extends BasePage implements OnInit, OnDestroy {
     getMyShenPiList() {
         this.request('/zhigou/mylist', {}).then((res) => {
             this.myShenPiList = res.data;
+        });
+    }
+    getLiuChengJianKongList() {
+        this.request('/zhigou/liuChengJianKong', {type: 2}).then((res) => {
+            this.LiuChengJianKongList = res.data;
         });
     }
     doRefresh(event) {

@@ -17,12 +17,14 @@ export class IndexComponent extends BasePage implements OnInit, OnDestroy {
     @ViewChild(IonSlides) slides: IonSlides;
     itemList = [];
     shenPiList = [];
-
     myShenPiList = [];
+    LiuChengJianKongList = [];
+
     public menuList = [
         { title: '我申请的' },
         { title: '待我审批的' },
         { title: '我已审批的' },
+        { title: '流程监控' },
     ];
     public index = 0;
     constructor(
@@ -78,6 +80,11 @@ export class IndexComponent extends BasePage implements OnInit, OnDestroy {
             this.myShenPiList = res.data;
         });
     }
+    getLiuChengJianKongList() {
+        this.request('/qingjia/liuChengJianKong', {type: 3}).then((res) => {
+            this.LiuChengJianKongList = res.data;
+        });
+    }
     getRequest() {
         if (this.index == 0) {
             this.getDocumentList();
@@ -85,6 +92,8 @@ export class IndexComponent extends BasePage implements OnInit, OnDestroy {
             this.getShenPiList();
         } else if (this.index == 2){
             this.getMyShenPiList();
+        } else if (this.index === 3){
+            this.getLiuChengJianKongList();
         }
     }
     doRefresh(event) {
