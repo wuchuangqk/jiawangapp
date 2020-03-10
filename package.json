@@ -106,14 +106,14 @@
   "cordova": {
     "plugins": {
       "jpush-phonegap-plugin": {
-        "APP_KEY": "a714c39251cf550cd7d82a9b",
+        "APP_KEY": "2dfbed0a944f7c616e5cc78c",
         "CHANNEL": "developer-default"
       },
       "cordova-plugin-jcore": {},
       "cordova-huawei-hms": {
-        "APPID": "101682461",
-        "PACKAGENAME": "com.yuansong.oa",
-        "CPID": "101682461"
+        "APPID": "100875129",
+        "PACKAGENAME": "com.cn.yuansong",
+        "CPID": "100875129"
       },
       "cordova-plugin-whitelist": {},
       "cordova-plugin-statusbar": {},
