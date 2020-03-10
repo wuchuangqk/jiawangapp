@@ -1,5 +1,5 @@
 <?xml version='1.0' encoding='utf-8'?>
-<widget android-packageName="com.cn.yuansong" build="10" id="com.cn.yuansong" ios-CFBundleIdentifier="VTVX3T7R4F" ios-CFBundleVersion="2" version="1.00" xmlns="http://www.w3.org/ns/widgets" xmlns:cdv="http://cordova.apache.org/ns/1.0">
+<widget android-packageName="com.cn.yuansong" build="10" id="com.cn.yuansong" ios-CFBundleIdentifier="VTVX3T7R4F" ios-CFBundleVersion="2" version="1.83" xmlns="http://www.w3.org/ns/widgets" xmlns:cdv="http://cordova.apache.org/ns/1.0">
     <name>铜山兴铜OA</name>
     <description />
     <author email="hi@ionicframework.com" href="http://ionicframework.com/">Ionic Framework Team</author>
