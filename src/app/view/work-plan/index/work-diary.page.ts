@@ -72,7 +72,7 @@ export class WorkDiaryPage extends BasePage implements OnInit, OnDestroy {
     this.setRequest(this.payload.url, payload).then(() => {
 
       this.getList();
-      this.dialogService.toast('添加工作日志成功！');
+      this.dialogService.toast('添加工作计划成功！');
       // this.events.publish(AppConfig.WorkDiary.List);
       // this.navController.back();
     });
