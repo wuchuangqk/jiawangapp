@@ -106,8 +106,7 @@
   "cordova": {
     "plugins": {
       "jpush-phonegap-plugin": {
-        "APP_KEY": "2dfbed0a944f7c616e5cc78c",
-        "CHANNEL": "developer-default"
+        "APP_KEY": "2dfbed0a944f7c616e5cc78c"
       },
       "cordova-plugin-jcore": {},
       "cordova-huawei-hms": {

@@ -123,6 +123,5 @@
     <engine name="android" spec="~7.1.4" />
     <plugin name="jpush-phonegap-plugin" spec="~3.7.3">
         <variable name="APP_KEY" value="2dfbed0a944f7c616e5cc78c" />
-        <variable name="CHANNEL" value="developer-default" />
     </plugin>
 </widget>
