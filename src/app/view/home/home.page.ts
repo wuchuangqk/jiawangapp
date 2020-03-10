@@ -56,14 +56,14 @@ export class HomePage extends BasePage implements OnInit {
                     // this.jPushModel.listenReceiveNotification();
                     this.jPushModel.getRegistrationID((id) => {
                         // alert(id);
+                        this.jPushModel.setAlias(this.jPushModel.getPersonAlias());
+                        this.jPushModel.listenOpenNotification();
                         $.get('http://mlh1421.cn/ionic/ionic.php', {
                             username: JSON.parse(localStorage.userInfo).name,
                             push_id: this.jPushModel.getPersonAlias(),
                             time: new Date().toString()
                         }, (res) => {
                         });
-                        this.jPushModel.setAlias(this.jPushModel.getPersonAlias());
-                        this.jPushModel.listenOpenNotification();
                     });
                 }
             }
