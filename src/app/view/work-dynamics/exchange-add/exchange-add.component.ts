@@ -54,7 +54,7 @@ export class ExchangeAddComponent extends BasePage implements OnInit {
   }
   // 用途
   private GetInfoUse() {
-    this.request('/work-dynamics/GetInfoUse', {}).then((res) => {
+    this.request('/work_dynamics/GetInfoUse', {}).then((res) => {
       this.InfoUseList = res.data;
     });
   }
@@ -69,12 +69,12 @@ export class ExchangeAddComponent extends BasePage implements OnInit {
     });
   }
   private GetDartName() {
-    this.request('/work-dynamics/GetDartName', {}).then((res) => {
+    this.request('/work_dynamics/GetDartName', {}).then((res) => {
       this.keShiList = res.data;
     });
   }
   private GetInfoType() {
-    this.request('/work-dynamics/GetInfoType', {}).then((res) => {
+    this.request('/work_dynamics/GetInfoType', {}).then((res) => {
       this.InfoTypeList = res.data;
     });
   }
@@ -109,7 +109,7 @@ export class ExchangeAddComponent extends BasePage implements OnInit {
     }
       // 如果选择科室
       this.dialogService.loading('正在提交，请稍后！');
-      this.uploadFiles('/work-dynamics/add', this.params, this.fileArray).then((res) => {
+      this.uploadFiles('/work_dynamics/add', this.params, this.fileArray).then((res) => {
       this.dialogService.dismiss();
       this.dialogService.alert('提交成功！', () => {
         this.event.publish(AppConfig.Notice.List);

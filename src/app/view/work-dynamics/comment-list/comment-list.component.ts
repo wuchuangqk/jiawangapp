@@ -65,10 +65,10 @@ export class CommentListComponent extends BasePage implements OnInit {
     this.isHuiFu = true;
   }
   addComment(isHuiFu, item) {
-      this.nav('notice/comment-add/' + this.id, {id: this.id, isHuiFu, userId: item.usreid, workId: this.id});
+      this.nav('work-dynamics/comment-add/' + this.id, {id: this.id, isHuiFu, userId: item.usreid, workId: this.id});
   }
   GetCommitList() {
-    this.request('/work-dynamics/commitlist', {item_id: this.id}).then((res) => {
+    this.request('/work_dynamics/commitlist', {item_id: this.id}).then((res) => {
       this.commitList = res.data;
     });
   }
@@ -86,7 +86,7 @@ doRefresh(event) {
       infoTitle: this.infoTitle,
       workId: this.id
     };
-    this.setRequest('/work-dynamics/commitadd', params).then((res) => {
+    this.setRequest('/work_dynamics/commitadd', params).then((res) => {
       this.dialogService.toast('回复成功！');
       this.infoTitle = '';
       this.GetCommitList();
@@ -97,7 +97,7 @@ doRefresh(event) {
   huifu() {
     console.log(this.infoTitle);
     this.huiFuParams.infoTitle = this.infoTitle;
-    this.setRequest('/work-dynamics/recommitadd', this.huiFuParams).then((res) => {
+    this.setRequest('/work_dynamics/recommitadd', this.huiFuParams).then((res) => {
       this.dialogService.toast('回复成功！');
       this.isHuiFu = false;
       this.placeholder = '评论';

@@ -41,7 +41,9 @@ export class DetailComponent  extends DetailBasePage implements OnInit {
     });
   }
   public getDetail() {
-      return  this.request(this.url + '/' + this.id, {}).then((res) => {
+      return  this.request(this.url, {
+          item_id: this.id
+      }).then((res) => {
         this.content = this.transform(res.data);
       });
   }

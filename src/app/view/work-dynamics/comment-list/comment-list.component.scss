@@ -1,0 +1,7 @@
+textarea{
+  width: 100%;
+  border: none;
+}
+
+input,button,select,textarea{ outline:none;} /*取消表单项聚焦时产生的边框*/
+textarea{resize:none;}/*取消textarea改变大小的功能*/

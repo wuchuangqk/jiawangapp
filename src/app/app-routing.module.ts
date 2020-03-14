@@ -19,6 +19,7 @@ const routes: Routes = [
     { path: 'edit', component: EditComponent },
     { path: 'feedback', component: FeedbackComponent },
     { path: 'work-diary', loadChildren: './view/work-diary/work-diary.module#WorkDiaryModule' },
+    { path: 'work-dynamics', loadChildren: './view/work-dynamics/work-dynamics.module#WorkDynamicsModule' },
     { path: 'work-plan', loadChildren: './view/work-plan/work-plan.module#WorkPlanModule' },
     { path: 'receive-document', loadChildren: './view/receive-document/receive-document.module#ReceiveDocumentModule' },
     { path: 'send-document', loadChildren: './view/send-document/send-document.module#SendDocumentModule' },

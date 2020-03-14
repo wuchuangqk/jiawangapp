@@ -1,0 +1,26 @@
+<ion-header>
+  <ion-toolbar color="primary">
+    <ion-buttons slot="start">
+      <ion-back-button></ion-back-button>
+    </ion-buttons>
+    <ion-title>
+      {{title}}
+    </ion-title>
+  </ion-toolbar>
+</ion-header>
+<ion-content>
+<div>
+  <ion-item>
+    <ion-label>内容：</ion-label>
+    <ion-textarea [placeholder]="placeholder" rows="10" [(ngModel)]="params.noticecontent"></ion-textarea>
+    <!--        <quill-editor [(ngModel)]="params.noticecontent"></quill-editor>-->
+  </ion-item>
+  <app-file-viewer (getFileArray)="getFileArray($event)"></app-file-viewer>
+</div>
+</ion-content>
+
+<ion-footer>
+  <ion-toolbar>
+    <ion-button expand="full" (click)="submit()">提交</ion-button>
+  </ion-toolbar>
+</ion-footer>

@@ -22,7 +22,7 @@ export class ExchangeViewComponent extends DetailBasePage implements OnInit, OnD
     public commitList = [];
     public readNumber = 0; // 已读人数
     public noReadNumber = 0; // 未读人数
-    public getReadUrl = '/work-dynamics/GetRead/';
+    public getReadUrl = '/work_dynamics/GetRead/';
     constructor(
         public http: HttpService,
         public router: Router,
@@ -67,7 +67,7 @@ export class ExchangeViewComponent extends DetailBasePage implements OnInit, OnD
         });
     }
     GetCommitList() {
-        this.request('/work-dynamics/commitlist', {item_id: this.id}).then((res) => {
+        this.request('/work_dynamics/commitlist', {item_id: this.id}).then((res) => {
             this.commitList = res.data;
         });
     }
@@ -83,7 +83,7 @@ export class ExchangeViewComponent extends DetailBasePage implements OnInit, OnD
             infoTitle: this.infoTitle,
             workId: this.id
         };
-        this.setRequest('/work-dynamics/commitadd', params).then((res) => {
+        this.setRequest('/work_dynamics/commitadd', params).then((res) => {
             this.dialogService.toast('回复成功！');
             this.infoTitle = '';
             this.GetCommitList();
