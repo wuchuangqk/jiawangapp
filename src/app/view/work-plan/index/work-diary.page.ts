@@ -67,7 +67,8 @@ export class WorkDiaryPage extends BasePage implements OnInit, OnDestroy {
     console.log(data);
     const payload = {
       data,
-      addtime: this.addtime
+      addtime: this.addtime,
+      type: this.addtime > 0 ? 1 : 0
     };
     this.setRequest(this.payload.url, payload).then(() => {
 
@@ -126,7 +127,7 @@ export class WorkDiaryPage extends BasePage implements OnInit, OnDestroy {
     // if (this.special === 2) {
     //   this.nav('work-diary/view-staff-work-diary/' + this.departid, {title: '添加工作日志', departid: this.departid });
     // } else if (this.special === 3) {
-      this.nav('work-diary/view-staff-work-diary/' + 3, {title: '添加工作日志', departid: 3, isDepart: true });
+      this.nav('work-diary/view-staff-work-diary/' + 3, {title: '添加工作计划', departid: 3, isDepart: true });
     // }
   }
 }

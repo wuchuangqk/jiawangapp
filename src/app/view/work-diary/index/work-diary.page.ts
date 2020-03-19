@@ -61,7 +61,8 @@ export class WorkDiaryPage extends BasePage implements OnInit, OnDestroy {
     console.log(data);
     const payload = {
       data,
-      addtime: this.addtime
+      addtime: this.addtime,
+      type: this.addtime > 0 ? 1 : 0
     };
     this.setRequest(this.payload.url, payload).then(() => {
 

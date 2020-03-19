@@ -27,6 +27,7 @@ const routes: Routes = [
     { path: 'document-approve', component: DocumentApproveComponent },
     // { path: 'network-setting', component: NetworkSettingComponent },
     { path: 'network', loadChildren: './view/network/network.module#NetworkModule' },
+    { path: 'bao-xiao', loadChildren: './view/bao-xiao/bao-xiao.module#BaoXiaoModule' },
     { path: 'assign', loadChildren: './view/assign/assign.module#AssignModule' },
     { path: 'leave', loadChildren: './view/leave/leave.module#LeaveModule' },
     { path: 'overtime-work', loadChildren: './view/overtime-work/overtime-work.module#OvertimeWorkModule' },

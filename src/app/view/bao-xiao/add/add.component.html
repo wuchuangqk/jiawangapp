@@ -1,0 +1,74 @@
+<ion-header>
+  <ion-toolbar color="primary">
+    <app-back></app-back>
+    <ion-title>
+      {{title}}
+    </ion-title>
+  </ion-toolbar>
+</ion-header>
+
+
+<ion-content class="bg-style add-style">
+
+  <ion-item>
+    <ion-label>经办人：</ion-label>
+    {{params.qjtype}}
+  </ion-item>
+  <ion-item>
+    <ion-label>所属部门：</ion-label>
+    {{params.qjtype}}
+  </ion-item>
+  <ion-item>
+    <ion-label>日期：</ion-label>
+    <ion-datetime type="datetime-local" displayFormat="YYYY-MM-DD HH:mm" pickerFormat="YYYY-MM-DD HH:mm" doneText="确定" [(ngModel)]="params.qjstime" cancelText="取消"></ion-datetime>
+  </ion-item>
+  <ion-item>
+    <ion-label>用途：</ion-label>
+    <ion-input placeholder="请输入原因" [(ngModel)]="params.sl" type="number"></ion-input>
+  </ion-item>
+  <ion-item>
+    <ion-label>用印份数：</ion-label>
+    <ion-input placeholder="请输入原因" [(ngModel)]="params.sl" type="number"></ion-input>
+  </ion-item>
+  <ion-item>
+    <ion-label>发往单位：</ion-label>
+    <ion-input placeholder="请输入原因" [(ngModel)]="params.fwdw"></ion-input>
+  </ion-item>
+  <ion-item>
+    <ion-label>材料名称用印事由：</ion-label>
+    <ion-textarea placeholder="请输入原因" [(ngModel)]="params.qjyy"></ion-textarea>
+  </ion-item>
+  <ion-item>
+    <ion-label>经办人意见：</ion-label>
+    <ion-textarea placeholder="请填写经办人意见" [(ngModel)]="params.zbyj"></ion-textarea>
+  </ion-item>
+  <ion-item>
+    <ion-label>备注：</ion-label>
+    <ion-textarea placeholder="备注" [(ngModel)]="params.beizhu"></ion-textarea>
+  </ion-item>
+
+  <!-- <ion-item>
+    <ion-label>结束时间：</ion-label>
+    <ion-datetime type="datetime-local" displayFormat="YYYY-MM-DD HH:mm" pickerFormat="YYYY-MM-DD HH:mm" doneText="确定" [(ngModel)]="params.qjetime" cancelText="取消"></ion-datetime>
+  </ion-item> -->
+  <!-- <ion-item>
+    <ion-label>申请类型：</ion-label>
+    <ion-select [(ngModel)]="params.qjtype" cancelText="取消" okText="确定">
+      <ion-select-option *ngFor="let item of qjtypeList" [value]="item.name">{{item.name}}</ion-select-option>
+    </ion-select>
+  </ion-item> -->
+  <app-staff (click)="go('getSt', selectedStaff,false)" title="选择审批人" eventName="getSt" [(selectedStaff)]="selectedStaff"></app-staff>
+  <app-file-viewer (getFileArray)="getFileArray($event)"></app-file-viewer>
+</ion-content>
+
+
+
+
+
+<ion-footer>
+  <ion-toolbar>
+    <ion-button expand="full" (click)="save()" style="flex: 1">
+      保  存
+    </ion-button>
+  </ion-toolbar>
+</ion-footer>
