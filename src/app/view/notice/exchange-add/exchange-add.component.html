@@ -12,10 +12,8 @@
     <ion-input placeholder="请输入标题" [(ngModel)]="params.infoTitle"></ion-input>
   </ion-item>
   <ion-item>
-    <ion-label>用途</ion-label>
-    <ion-select  cancelText="取消" okText="确定" [(ngModel)]="params.infoUse">
-      <ion-select-option *ngFor="let item of InfoUseList" [value]="item.name">{{item.name}}</ion-select-option>
-    </ion-select>
+    <ion-label>用途:</ion-label>
+    <ion-input placeholder="请输入用途" [(ngModel)]="params.infoUse"></ion-input>
   </ion-item>
   <ion-item>
     <ion-label>权限</ion-label>

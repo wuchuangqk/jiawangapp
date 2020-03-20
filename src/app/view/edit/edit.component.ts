@@ -34,7 +34,7 @@ export class EditComponent extends BasePage implements OnInit {
     this.getDetail();
   }
   submit() {
-    this.setRequest('/work-dynamics/edit', {
+    this.setRequest('/work_dynamics/edit', {
       content: this.content,
       id: this.id
     }).then((res) => {

@@ -65,7 +65,7 @@ export class CommentListComponent extends BasePage implements OnInit {
     this.isHuiFu = true;
   }
   addComment(isHuiFu, item) {
-      this.nav('work-dynamics/comment-add/' + this.id, {id: this.id, isHuiFu, userId: item.usreid, workId: this.id});
+      this.nav('work_dynamics/comment-add/' + this.id, {id: this.id, isHuiFu, userId: item.usreid, workId: this.id});
   }
   GetCommitList() {
     this.request('/work_dynamics/commitlist', {item_id: this.id}).then((res) => {

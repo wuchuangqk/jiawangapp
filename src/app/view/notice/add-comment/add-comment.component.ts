@@ -59,13 +59,13 @@ public id: number;
       return true;
   }
   // public submit() {
-  //   // this.setRequest('/work-dynamics/commitadd', params).then((res) => {
+  //   // this.setRequest('/work_dynamics/commitadd', params).then((res) => {
   //   //   this.dialogService.toast('回复成功！');
   //   //   // this.infoTitle = '';
   //   //   // this.GetCommitList();
   //   // });
   //   // this.dialogService.loading('正在提交，请稍后！');
-  //   this.uploadFiles('/work-dynamics/commitadd', params, this.fileArray).then((res) => {
+  //   this.uploadFiles('/work_dynamics/commitadd', params, this.fileArray).then((res) => {
   //     this.dialogService.dismiss();
   //     this.dialogService.alert('提交成功！', () => {
   //       this.event.publish(AppConfig.Notice.List);
@@ -85,7 +85,7 @@ public id: number;
         infoTitle: this.params.noticecontent,
         workId: this.id
       };
-      this.uploadFiles('/work-dynamics/commitadd', params, this.fileArray).then((res) => {
+      this.uploadFiles('/work_dynamics/commitadd', params, this.fileArray).then((res) => {
         this.dialogService.dismiss();
         this.dialogService.alert('评论成功！', () => {
           this.event.publish(AppConfig.Exchange.commentList);
@@ -97,7 +97,7 @@ public id: number;
 
   huifu() {
     this.huiFuParams.infoTitle = this.params.noticecontent;
-    this.uploadFiles('/work-dynamics/recommitadd', this.huiFuParams, this.fileArray).then((res) => {
+    this.uploadFiles('/work_dynamics/recommitadd', this.huiFuParams, this.fileArray).then((res) => {
       this.dialogService.toast('回复成功！');
       this.infoTitle = '';
       this.event.publish(AppConfig.Exchange.commentList);
