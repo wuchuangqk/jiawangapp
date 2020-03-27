@@ -48,7 +48,7 @@ const routes: Routes = [
     {path: 'finance-detail', loadChildren: './view/finance-detail/finance-detail.module#FinanceDetailModule'},
   { path: 'read-list', loadChildren: './view/read-list/read-list.module#ReadListPageModule' },
     // 档案管理
-    { path: 'archive-management', loadChildren: './view/archive-management/archive-management.module#ArchiveManagementModule' },
+    { path: 'archive-management/:id', loadChildren: './view/archive-management/archive-management.module#ArchiveManagementModule' },
 
 
 

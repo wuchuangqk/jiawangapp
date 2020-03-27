@@ -90,7 +90,7 @@ export class IndexComponent extends BasePage implements OnInit, OnDestroy {
         });
     }
     getLiuChengJianKongList() {
-        this.request('/qingjia/liuChengJianKong', {type: 4}).then((res) => {
+        this.request('/qingjia/liuChengJianKong', {type: 5}).then((res) => {
             this.LiuChengJianKongList = res.data;
         });
     }

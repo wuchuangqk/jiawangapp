@@ -22,22 +22,29 @@ export class AddComponent extends BasePage implements OnInit {
     public id: string;
     qjtypeList: [];
     params = {
+        name : '',
+        depart: '',
+        yongTu: '',
         // 用印日期
-        qjstime: '',
+        riQi: '',
+        // 报销金额大写
+        baoXiaoJinEDaXie: '',
+        // 报销金额小写
+        baoXiaoJinEXiaoXie: '',
+        jingBanRenYiJian: '',
         // 用印份数
-        sl:1,
-        // 发往单位
-        fwdw: '',
-        // 结束时间
+        sl: 1,
+        zhiFuFangShi: '',
+        qingKuangShuoMing: '',
         qjetime: '',
         // 材料名称用印事由
         qjyy: '',
         // 申请类别
         qjtype: '印章使用审批',
         // 经办人意见
-        zbyj:'',
+        zbyj: '',
         // 备注
-        beizhu:'',
+        beizhu: '',
         // 处理人名单
         staff_ids: ''
     };
@@ -55,12 +62,13 @@ export class AddComponent extends BasePage implements OnInit {
         const date = new Date();
         const date2 = new Date().getTime() + 24 * 60 * 60 * 1000;
         const datePipe = new DatePipe('en-US');
-        this.params.qjstime = datePipe.transform(date, 'yyyy-MM-dd HH:mm');
+        this.params.riQi = datePipe.transform(date, 'yyyy-MM-dd HH:mm');
         this.params.qjetime = datePipe.transform(date2, 'yyyy-MM-dd HH:mm');
-
-
     }
     ngOnInit() {
+        const userInfo = JSON.parse(localStorage.userInfo);
+        this.params.name = userInfo.name;
+        this.params.depart = userInfo.depart;
         this.getQjtypeList();
     }
 
@@ -110,10 +118,10 @@ export class AddComponent extends BasePage implements OnInit {
     }
     save() {
         this.params.staff_ids = this.getIds(this.selectedStaff);
-        if (!this.checkParams(this.params)) {
-            return;
-        }
-        this.params.qjstime = this.dateProvider.DateTimeFormat(new Date(this.params.qjstime));
+        // if (!this.checkParams(this.params)) {
+        //     return;
+        // }
+        this.params.riQi = this.dateProvider.DateTimeFormat(new Date(this.params.riQi));
         this.params.qjetime = this.dateProvider.DateTimeFormat(new Date(this.params.qjetime));
         this.dialogService.loading('正在提交，请稍后.....');
         this.uploadFiles('/baoXiao/zhsp_yinzhang_add', this.params, this.fileArray).then((res) => {

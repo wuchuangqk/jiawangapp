@@ -25,19 +25,26 @@
             <ion-item *ngIf="itemList.length<1">
                 <p class="primary"> 无数据！ </p>
             </ion-item>
-            <ion-item *ngFor="let item of itemList" (click)="nav('archive-management/detail',{url:'/dangan/list/',id:item.id,title:title,contentTitle:item.title,title:'档案管理详情'})">
+            <ion-item *ngFor="let item of itemList" 
+                (click)="dodo(item)"
+                >
                 <section>
 
                     <div class="my-list-title">
-                        <h2>{{item.title}}</h2>
+                        <h2>
+                        <ion-icon  style="color:#ffd659;font-size:2.2rem;" *ngIf="!item.isDir" name="document"></ion-icon>
+                        <ion-icon  style="color:#ffd659;font-size:2.2rem;" *ngIf="item.isDir" name="folder"></ion-icon>
+                        <!-- <img *ngIf="item.isDir" src="assets/icon/Folder.png" alt="#"> -->
+                        <span style="margin-bottom:5px;color:#606266;"> {{item.name}} </span>
+                        </h2>
                     </div>
                     <div class="my-list-sub">
                         <div class="my-list-sub-top flex-between">
                             <span>
                                 <span>{{item.departname}}</span>
-                                <span>{{item.dangantime}}</span>
+                                <span>{{item.created}}</span>
                             </span>
-                            <span class="my-list-sub-top-last">{{item.creator}}</span>
+                            <span class="my-list-sub-top-last">{{item.creatorName}}</span>
                         </div>
                     </div>
                 </section>
