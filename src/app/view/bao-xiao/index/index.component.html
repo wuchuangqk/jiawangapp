@@ -34,7 +34,7 @@
                     <ion-item *ngIf="itemList.length<1">
                         <p class="primary"> 无数据！ </p>
                     </ion-item>
-                    <ion-item *ngFor="let item of itemList" (click)="nav('bao-xiao/detail',{url:'/baoxiao/zhsp_detail',id:item.id,title:title,contentTitle:item.title,title:'综合审批详情'})">
+                    <ion-item *ngFor="let item of itemList" (click)="nav('bao-xiao/detail',{url:'/baoxiao/zhsp_detail',id:item.id,title:title,contentTitle:item.title,title:'报销详情'})">
                         <section>
 
                             <div class="my-list-title">
@@ -62,7 +62,7 @@
                     </ion-item>
                     <ion-item *ngFor="let item of shenPiList" (click)="nav('bao-xiao/approve',{
                     url:'/baoxiao/zhsp_detail',handleUrl: '/baoxiao/shenpi_save',
-                    id:item.id,title:title,contentTitle:item.title,title:'报销审批'})">
+                    id:item.id,title:title,contentTitle:item.title,title:'报销管理'})">
                         <section>
                             <div class="my-list-title">
                                 <h2>{{item.title}}</h2>
@@ -83,7 +83,7 @@
                     <ion-item *ngIf="myShenPiList.length<1">
                         <p class="primary"> 无数据！ </p>
                     </ion-item>
-                    <ion-item *ngFor="let item of myShenPiList" (click)="nav('bao-xiao/detail',{url:'/baoxiao/zhsp_detail',id:item.id,title:title,contentTitle:item.title,title:'报销审批详情'})">
+                    <ion-item *ngFor="let item of myShenPiList" (click)="nav('bao-xiao/detail',{url:'/baoxiao/zhsp_detail',id:item.id,title:title,contentTitle:item.title,title:'报销管理详情'})">
                         <section>
 
                             <div class="my-list-title">

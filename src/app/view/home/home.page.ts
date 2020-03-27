@@ -113,6 +113,7 @@ export class HomePage extends BasePage implements OnInit {
             btnText = '确定';
         }
 
+        // this.dialogService.alert(type)
 
         this.dialogService.alert(contentTitle, () => {
             switch (type) {
@@ -290,6 +291,29 @@ export class HomePage extends BasePage implements OnInit {
                     });
                     break;
                 }
+                // 报销管理管理完成
+                case 'bxspdo': {
+                    this.nav('bao-xiao/approve', {
+                        title: itemTitle,
+                        url:'/baoxiao/zhsp_detail',
+                        handleUrl: '/baoxiao/shenpi_save',
+                        document_type: 1,
+                        id,
+                        handle_status: '1'
+                    });
+                    break;
+                }
+                case 'bxspdofinish': {
+                    this.nav('bao-xiao/detail', {
+                        id,
+                        title: itemTitle,
+                        contentTitle,
+                        url: '/baoxiao/zhsp_detail',
+                    });
+                    break;
+                }
+
+
                 case 'letterdo': {
                     this.nav('detail', {
                         title: itemTitle,
@@ -301,7 +325,6 @@ export class HomePage extends BasePage implements OnInit {
                     });
                     break;
                 }
-
                 case 'letterdofinish': {
                     this.nav('detail', {
                         title: itemTitle,
