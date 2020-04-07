@@ -12,7 +12,7 @@
     <ion-row>
         <ion-col col-12>
             <ion-item>
-                <ion-label>选择年份</ion-label>
+                <ion-label>年份</ion-label>
                 <ion-select [(ngModel)]="year" (ngModelChange)="change(month)" okText="确定" cancelText="取消">
                     <ion-select-option *ngFor="let item of yearList" [value]="item.year">{{item.year}}</ion-select-option>
                 </ion-select>
@@ -20,7 +20,7 @@
         </ion-col>
         <ion-col col-12>
             <ion-item>
-                <ion-label>选择月份</ion-label>
+                <ion-label>月份</ion-label>
                 <ion-select [(ngModel)]="month" (ngModelChange)="change(month)" okText="确定" cancelText="取消">
                     <ion-select-option [value]="1">一月</ion-select-option>
                     <ion-select-option [value]="2">二月</ion-select-option>
