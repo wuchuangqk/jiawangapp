@@ -7,11 +7,13 @@ import {WorkDiaryPage} from './index/work-diary.page';
 import {CommonComponentsModule} from '../../common-components/common-components.module';
 import {IonicModule} from '@ionic/angular';
 import {FormsModule} from '@angular/forms';
+import {MonthPlanComponent} from './month-plan/month-plan.component';
 
 @NgModule({
   declarations: [
-    AddComponent,
-      WorkDiaryPage
+      AddComponent,
+      WorkDiaryPage,
+      MonthPlanComponent,
   ],
   imports: [
     CommonComponentsModule,

@@ -1,0 +1,58 @@
+<ion-header>
+    <ion-toolbar color="primary">
+        <app-back></app-back>
+        <ion-title>
+            月度工作计划
+        </ion-title>
+    </ion-toolbar>
+</ion-header>
+
+
+<ion-content>
+    <ion-row>
+        <ion-col col-12>
+            <ion-item>
+                <ion-label>选择年份</ion-label>
+                <ion-select [(ngModel)]="year" (ngModelChange)="change(month)" okText="确定" cancelText="取消">
+                    <ion-select-option *ngFor="let item of yearList" [value]="item.year">{{item.year}}</ion-select-option>
+                </ion-select>
+            </ion-item>
+        </ion-col>
+        <ion-col col-12>
+            <ion-item>
+                <ion-label>选择月份</ion-label>
+                <ion-select [(ngModel)]="month" (ngModelChange)="change(month)" okText="确定" cancelText="取消">
+                    <ion-select-option [value]="1">一月</ion-select-option>
+                    <ion-select-option [value]="2">二月</ion-select-option>
+                    <ion-select-option [value]="3">三月</ion-select-option>
+                    <ion-select-option [value]="4">四月</ion-select-option>
+                    <ion-select-option [value]="5">五月</ion-select-option>
+                    <ion-select-option [value]="6">六月</ion-select-option>
+                    <ion-select-option [value]="7">七月</ion-select-option>
+                    <ion-select-option [value]="8">八月</ion-select-option>
+                    <ion-select-option [value]="9">九月</ion-select-option>
+                    <ion-select-option [value]="10">十月</ion-select-option>
+                    <ion-select-option [value]="11">十一月</ion-select-option>
+                    <ion-select-option [value]="12">十二月</ion-select-option>
+                </ion-select>
+            </ion-item>
+        </ion-col>
+    </ion-row>
+
+    <ion-list class="my-list">
+        <ion-item *ngFor="let item of itemList">
+            <div slot="start">
+                <div class="my-avatar">
+                    <p>{{
+                        getweekday(item.year,item.month,item.day)
+                        }}</p>
+                    <div></div>
+                    <p>({{item.year}}-{{item.month}}-{{item.day}})</p>
+                </div>
+            </div>
+            <div class="log-content">
+                <ion-textarea  [(ngModel)]="item.PlanContent" auto-grow></ion-textarea>
+            </div>
+        </ion-item>
+    </ion-list>
+</ion-content>

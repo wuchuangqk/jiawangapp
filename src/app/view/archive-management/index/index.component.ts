@@ -20,6 +20,7 @@ export class IndexComponent extends BasePage implements OnInit, OnDestroy {
     myShenPiList = [];
     public index = 0;
     public pid = '00000000-0000-0000-0000-000000000000';
+    public name = '';
     constructor(
         public http: HttpService,
         public router: Router,
@@ -31,12 +32,13 @@ export class IndexComponent extends BasePage implements OnInit, OnDestroy {
         super(http, router, navController, dialogService);
         // this.url = this.query('url');
         // this.slides.startAutoplay();
+        this.pid = this.getParams().id;
 
     }
     ngOnInit() {
         this.route.queryParamMap.subscribe((params: ParamMap) => {
             console.log(params);
-            this.pid = params.get('pid');
+            // this.pid = params.get('pid');
             this.getDocumentList();
         });
         this.getDocumentList();
@@ -47,18 +49,24 @@ export class IndexComponent extends BasePage implements OnInit, OnDestroy {
     ngOnDestroy(): void {
         this.events.unsubscribe(AppConfig.FinanceDetail.list);
     }
+    search(name) {
+            console.log(name.target.value);
+            this.name = name.target.value || '';
+            this.getDocumentList();
+    }
     dodo(item) {
         if (item.isDir) {
-            this.nav('archive-management/'+item.id, {pid: item.id});
-        }else{
+            this.nav('archive-management/' + item.id, {pid: item.id});
+        } else {
             // console.log(item);
             this.nav(`archive-management/${item.id}/detail`, {id: item.id});
         }
     }
     getDocumentList() {
         this.request( '/NewDangAn/getList', {
+            name: this.name,
             pid: this.pid,
-            userId: JSON.parse(localStorage.userInfo).id
+            userId: JSON.parse(localStorage.userInfo).id,
         }).then((res) => {
             console.log(res);
             this.itemList = res.data;
