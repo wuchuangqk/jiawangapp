@@ -40,33 +40,35 @@ export class HomePage extends BasePage implements OnInit {
     ) {
         super( http, router, navController, dialogService);
         this.platform.ready().then(() => {
-            if (this.platform.is('android') || this.platform.is('ios')) {
-                this.nativeService.detectionUpgrade();
-                if (this.isHuaWei() && Number(this.device.version) >= 7) {// 判断是否为华为手机并且安卓版本号大于等于7
-                    this.huaWeiPushProvider.isConnected().then(() => {
-                        console.log('已经链接！');
-                        this.huaWeiPushNotificationOpened();
-                    }).catch(() => {
-                        console.log('未链接！');
-                        this.huaweiPush();
-                    });
-                } else {
-                    // this.jPushModel.resumePush();
-                    this.jPushModel.init();
-                    // this.jPushModel.listenReceiveNotification();
-                    this.jPushModel.getRegistrationID((id) => {
-                        // alert(id);
-                        this.jPushModel.setAlias(this.jPushModel.getPersonAlias());
-                        this.jPushModel.listenOpenNotification();
-                        $.get('http://mlh1421.cn/ionic/ionic.php', {
-                            username: JSON.parse(localStorage.userInfo).name,
-                            push_id: this.jPushModel.getPersonAlias(),
-                            time: new Date().toString()
-                        }, (res) => {
-                        });
-                    });
-                }
+          if (this.platform.is('android') || this.platform.is('ios')) {
+            this.nativeService.detectionUpgrade();
+            if(this.device.platform){
+              if (this.isHuaWei() && Number(this.device.version) >= 7) {// 判断是否为华为手机并且安卓版本号大于等于7
+                this.huaWeiPushProvider.isConnected().then(() => {
+                  console.log('已经链接！');
+                  this.huaWeiPushNotificationOpened();
+                }).catch(() => {
+                  console.log('未链接！');
+                  this.huaweiPush();
+                });
+              } else {
+                // this.jPushModel.resumePush();
+                this.jPushModel.init();
+                // this.jPushModel.listenReceiveNotification();
+                this.jPushModel.getRegistrationID((id) => {
+                  // alert(id);
+                  this.jPushModel.setAlias(this.jPushModel.getPersonAlias());
+                  this.jPushModel.listenOpenNotification();
+                  $.get('http://mlh1421.cn/ionic/ionic.php', {
+                    username: JSON.parse(localStorage.userInfo).name,
+                    push_id: this.jPushModel.getPersonAlias(),
+                    time: new Date().toString()
+                  }, (res) => {
+                  });
+                });
+              }
             }
+          }
         });
     }
     ngOnInit() {
@@ -359,7 +361,11 @@ export class HomePage extends BasePage implements OnInit {
     }
     isHuaWei() {
         if (this.platform.is('android')) {
+          if(this.device.manufacturer){
             return this.device.manufacturer.toLowerCase().indexOf('huawei') >= 0;
+          }else{
+            return false;
+          }
         } else {
             return false;
         }

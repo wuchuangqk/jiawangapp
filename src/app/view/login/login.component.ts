@@ -101,7 +101,11 @@ export class LoginComponent extends BasePage implements OnInit {
 
     }
     isHuaWei() {
+      if(!this.device.manufacturer){
+        return false;
+      }else{
         return this.device.manufacturer.toLowerCase().indexOf('huawei') >= 0;
+      }
     }
     getPackageName() {
         return  this.appVersion.getPackageName().then((packagename) => {

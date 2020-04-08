@@ -64,7 +64,11 @@ export class PersionInfoComponent extends BasePage implements OnInit {
     }
   }
   isHuaWei() {
-    return this.device.manufacturer.toLowerCase().indexOf('huawei') >= 0;
+    if(!this.device.manufacturer){
+      return false;
+    }else{
+      return this.device.manufacturer.toLowerCase().indexOf('huawei') >= 0;
+    }
   }
   getAppVersion() {
     this.appVersion.getVersionNumber().then((version) => {
