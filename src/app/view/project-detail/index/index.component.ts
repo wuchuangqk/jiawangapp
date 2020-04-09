@@ -1,9 +1,9 @@
-import { Component, OnInit } from '@angular/core';
+import {Component, OnInit, ViewChild} from '@angular/core';
 import {BasePage} from '../../../base/base-page';
 import {HttpService} from '../../../service/http.service';
 import {ActivatedRoute, Router} from '@angular/router';
 import {DialogService} from '../../../service/dialog.service';
-import {Events, NavController} from '@ionic/angular';
+import {Events, IonSlides, NavController} from '@ionic/angular';
 
 @Component({
   selector: 'app-index',
@@ -11,10 +11,14 @@ import {Events, NavController} from '@ionic/angular';
   styleUrls: ['./index.component.scss'],
 })
 export class IndexComponent extends BasePage implements OnInit {
+  @ViewChild(IonSlides) slides: IonSlides;
   index = 0;
   public menu_id = 1;
+  // 项目id
+  public pid = 0;
+  public content = '';
   menuList: Array<object> = [
-    {id: 1, name: '预备项目'},
+    {id: 1, name: '基本信息'},
     {id: 2, name: '前期项目'},
     {id: 3, name: '在建项目'},
     {id: 3, name: '竣工项目'},
@@ -31,7 +35,8 @@ export class IndexComponent extends BasePage implements OnInit {
       public route?: ActivatedRoute,
   ) {
     super(http, router, navController, dialogService, route);
-    this.title = this.query('title');
+    this.pid = this.getParams().id;
+    this.title = this.query('name');
   }
 
 
@@ -39,20 +44,20 @@ export class IndexComponent extends BasePage implements OnInit {
     this.getDataList();
   }
   getDataList() {
-    this.request('/projects/list', {
-      menu_id: this.menu_id
+    this.request(`/projects/info/${this.pid}`, {
     }).then((res) => {
-      this.projectList = res.data;
+         this.content = res.data;
     });
   }
-  getItem(id) {
-      // tslint:disable-next-line:radix
-    this.menu_id = parseInt(id);
-    this.getDataList();
-    // this.service.get('/projects/list', {menu_id: id}, (response) => {
-    //   this.projectList = response.data;
-    // });
+
+  change() {
+    this.slides.getActiveIndex().then((index) => {
+      this.menu_id = index;
+    });
   }
 
-
+  segmentChange(index) {
+    this.menu_id = index;
+    this.slides.slideTo(index);
+  }
 }

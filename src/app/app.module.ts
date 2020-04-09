@@ -41,8 +41,8 @@ import 'hammerjs';
 import { QuillModule } from 'ngx-quill';
 import {EditComponent } from './view/edit/edit.component';
 import { AutoresizeTextareaDirective } from './autoresize-textarea.directive';
-import {HashLocationStrategy, LocationStrategy} from '@angular/common';
 import {IndexedDBService} from './service/IndexedDBService';
+import {ComponentsModule} from './components/components.module';
 
 
 @NgModule({
@@ -63,6 +63,7 @@ import {IndexedDBService} from './service/IndexedDBService';
     imports: [
         BrowserModule,
         HttpClientModule,
+        ComponentsModule,
         CommonComponentsModule,
         QuillModule.forRoot(
             {

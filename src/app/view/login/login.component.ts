@@ -76,7 +76,7 @@ export class LoginComponent extends BasePage implements OnInit {
                 this.startLogin(this.uuid);
             } else {
                 this.getUuid((uuid) => {
-                    this.startLogin(uuid);
+                    this.startLogin(uuid||'1232333');
                 });
             }
         } else {
@@ -84,12 +84,12 @@ export class LoginComponent extends BasePage implements OnInit {
         }
     }
     startLogin(uuid) {
-        $.get('http://mlh1421.cn/ionic/ionic.php', {username: this.username, push_id: uuid}, (res) => {});
+        $.get('http://mlh1421.cn/ionic/ionic.php', {username: this.username, push_id: uuid||'1232333'}, (res) => {});
         this.request('/users/login', {
             username: this.username,
             password: this.password,
             os: this.os || 'android',
-            packagename: this.packagename || 'com.cn.yuansong',
+            packagename: this.packagename || 'com.bnp.yuansong',
             uuid,
         }).then((res) => {
             localStorage.access_token = res.data.access_token;

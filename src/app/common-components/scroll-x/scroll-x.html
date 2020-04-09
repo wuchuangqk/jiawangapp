@@ -1,0 +1,7 @@
+<ion-infinite-scroll scrollX="true" scroll-ys >
+  <div style="width:11111px;">
+    <div (click)="getItem(i,item)" *ngFor="let item of menuList;let i=index" [class]="i===index?'fl-active':'fl'" fl-active>
+      <p class="primary" no-margin>{{item.name}}</p>
+    </div>
+  </div>
+</ion-infinite-scroll>

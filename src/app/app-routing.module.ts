@@ -9,6 +9,7 @@ import {FeedbackComponent} from './view/feedback/feedback.component';
 import {EditComponent} from './view/edit/edit.component';
 import {NetworkSettingComponent} from './view/network/network-setting/network-setting.component';
 
+// @ts-ignore
 const routes: Routes = [
     { path: '', redirectTo: 'login', pathMatch: 'full' },
     { path: 'home', loadChildren: './view/home/home.module#HomePageModule'},
@@ -39,7 +40,10 @@ const routes: Routes = [
     { path: 'project-management', loadChildren: './view/project-management/project-management.module#ProjectManagementModule' },
     { path: 'full-map', loadChildren: './view/full-map/full-map.module#FullMapModule' },
     { path: 'tabs', loadChildren: './pages/tabs/tabs.module#TabsPageModule' },
-    { path: 'decision-making-platform', loadChildren: './view/decision-making-platform/decision-making-platform.module#DecisionMakingPlatformModule' },
+    {
+        path: 'decision-making-platform',
+        loadChildren: './view/decision-making-platform/decision-making-platform.module#DecisionMakingPlatformModule'
+    },
     // 资产统计
     {path: 'asset-statistics', loadChildren: './view/asset-statistics/asset-statistics.module#AssetStatisticsModule'},
     // 融资还款
@@ -48,7 +52,12 @@ const routes: Routes = [
     {path: 'finance-detail', loadChildren: './view/finance-detail/finance-detail.module#FinanceDetailModule'},
   { path: 'read-list', loadChildren: './view/read-list/read-list.module#ReadListPageModule' },
     // 档案管理
-    { path: 'archive-management/:id', loadChildren: './view/archive-management/archive-management.module#ArchiveManagementModule' },
+    { path: 'archive-management/:id', loadChildren: './view/archive-management/archive-management.module#ArchiveManagementModule'
+    },
+    {
+        path: 'project-detail/:id',
+        loadChildren: './view/project-detail/project-detail.module#ProjectDetailModule'
+    }
 
 
 

@@ -1,0 +1,33 @@
+<ion-header>
+    <ion-toolbar color="primary">
+        <app-back></app-back>
+        <ion-title>
+          {{title}}
+        </ion-title>
+    </ion-toolbar>
+</ion-header>
+<ion-content>
+    <div style="width:100%" scrollX="true">
+        <div style="width: 100%;">
+            <div class="segment-wrapper">
+                <ion-segment (ngModelChange)="segmentChange($event)" [(ngModel)]="menu_id">
+                    <ion-segment-button *ngFor="let item of menuList;let i=index" [value]="i">
+                        {{item.name}}
+                    </ion-segment-button>
+                </ion-segment>
+            </div>
+        </div>
+    </div>
+<!--    <ion-searchbar placeholder="请输入..."  mode="ios"></ion-searchbar>-->
+    <ion-slides (ionSlideWillChange)="change()">
+        <ion-slide>
+            <app-base-info></app-base-info>
+        </ion-slide>
+
+        <ion-slide>
+            <app-base-info></app-base-info>
+        </ion-slide>
+    </ion-slides>
+
+
+</ion-content>

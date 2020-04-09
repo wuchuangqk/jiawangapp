@@ -13,7 +13,7 @@ import {IndexedDBService} from './IndexedDBService';
 export class HttpRequestService {
     public BaseUrl = localStorage.selectIp|| environment.host;
     private configUrl = 'assets/config.json';
-    private SECERET_KEY = 'com.yuangsong.102515';
+    private SECERET_KEY = 'com.8bpm.yuansong.keys.2020.05.89';
     private CryptoJS: any;
 
     constructor(
