@@ -1,3 +1,13 @@
-<p>
-  base-info works!
-</p>
+<app-divider></app-divider>
+<section>
+项目概况
+<ion-list>
+
+  <ion-item *ngFor="let item of list">
+    <ion-row style="width:100%;">
+      <ion-col class="primary text-md" size="4">{{item.label}}</ion-col>
+      <ion-col class="primary text-md" size="8">{{info[item.field]}}</ion-col>
+    </ion-row>
+  </ion-item>
+</ion-list>
+</section>

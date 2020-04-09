@@ -25,7 +25,7 @@
     <div [ngSwitch]="index">
         <div class="margin-top-5" *ngIf='index==0'>
             <ion-list class="my-list">
-                <ion-item *ngFor="let item of projectList" (click)="nav('project-detail/'+item.pid,item)">
+                <ion-item *ngFor="let item of projectList" (click)="nav('project-detail',item)">
                     <section>
                         <div class="my-list-title">
                             <h2>{{item.name}}</h2>

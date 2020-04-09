@@ -35,19 +35,12 @@ export class IndexComponent extends BasePage implements OnInit {
       public route?: ActivatedRoute,
   ) {
     super(http, router, navController, dialogService, route);
-    this.pid = this.getParams().id;
+    this.pid = this.query('pid');
     this.title = this.query('name');
   }
 
 
   ngOnInit() {
-    this.getDataList();
-  }
-  getDataList() {
-    this.request(`/projects/info/${this.pid}`, {
-    }).then((res) => {
-         this.content = res.data;
-    });
   }
 
   change() {

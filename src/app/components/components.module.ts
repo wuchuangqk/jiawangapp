@@ -4,6 +4,7 @@ import { ListsComponent } from './lists/lists.component';
 import { IonicModule } from '@ionic/angular';
 import { PipesModule } from '../pipes/pipes.module';
 import {BaseInfoComponent} from './base-info/base-info.component';
+import {CommonComponentsModule} from '../common-components/common-components.module';
 
 
 
@@ -19,7 +20,8 @@ import {BaseInfoComponent} from './base-info/base-info.component';
   imports: [
     CommonModule,
     IonicModule,
-    PipesModule
+    PipesModule,
+    CommonComponentsModule
   ]
 })
 export class ComponentsModule { }

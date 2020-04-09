@@ -29,7 +29,7 @@ export class AppComponent {
       public navController: NavController, // 导航控制器
       public toastCtrl: ToastController,
   ) {
-    this.initializeApp();
+    // this.initializeApp();
     // this.isLogin();
     this.platform.ready().then(() => {
       if (this.platform.is('android') || this.platform.is('ios')) {

@@ -44,7 +44,6 @@
     "@types/swiper": "^4.4.3",
     "cordova-android": "7.1.4",
     "cordova-android-support-gradle-release": "^3.0.1",
-    "cordova-huawei-hms": "https://gitee.com/hui1421/cordova-huawei-hms.git",
     "cordova-ios": "5.0.1",
     "cordova-plugin-android-permissions": "^1.0.2",
     "cordova-plugin-android-support-v4": "^21.0.1",
@@ -62,6 +61,7 @@
     "cordova-plugin-jcore": "1.2.3",
     "cordova-plugin-splashscreen": "^5.0.2",
     "cordova-plugin-statusbar": "^2.4.2",
+    "cordova-plugin-umengpush": "https://gitee.com/hui1421/cordova-plugin-umengpush.git",
     "cordova-plugin-whitelist": "1.3.4",
     "core-js": "^2.5.4",
     "crypto-js": "^3.1.9-1",
@@ -109,11 +109,6 @@
         "APP_KEY": "2dfbed0a944f7c616e5cc78c"
       },
       "cordova-plugin-jcore": {},
-      "cordova-huawei-hms": {
-        "APPID": "100875129",
-        "PACKAGENAME": "com.cn.yuansong",
-        "CPID": "100875129"
-      },
       "cordova-plugin-whitelist": {},
       "cordova-plugin-statusbar": {},
       "cordova-plugin-splashscreen": {},
@@ -135,6 +130,18 @@
       },
       "cordova-plugin-ionic-webview": {
         "ANDROID_SUPPORT_ANNOTATIONS_VERSION": "27.+"
+      },
+      "cordova-plugin-umengpush": {
+        "IOS_APPKEY": "YOUR_IOS_APPKEY",
+        "UM_APPKEY": "YOUR_UM_APPKEY",
+        "UM_MESSAGE_SECRET": "YOUR_UM_MESSAGE_SECRET",
+        "HUAWEI_APPID": "YOUR_HUAWEI_APPID",
+        "XIAOMI_ID": "YOUR_XIAOMI_ID",
+        "XIAOMI_KEY": "YOUR_XIAOMI_KEY",
+        "MEIZU_APPID": "YOUR_MEIZU_APPID",
+        "MEIZU_APPKEY": "YOUR_MEIZU_APPKEY",
+        "OPPO_APPKEY": "YOUR_OPPO_APPKEY",
+        "OPPO_SECRET": "YOUR_OPPO_SECRET"
       }
     },
     "platforms": [

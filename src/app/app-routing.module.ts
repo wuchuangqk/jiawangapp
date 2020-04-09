@@ -55,7 +55,7 @@ const routes: Routes = [
     { path: 'archive-management/:id', loadChildren: './view/archive-management/archive-management.module#ArchiveManagementModule'
     },
     {
-        path: 'project-detail/:id',
+        path: 'project-detail',
         loadChildren: './view/project-detail/project-detail.module#ProjectDetailModule'
     }
 

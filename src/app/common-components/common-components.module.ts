@@ -9,6 +9,7 @@ import {FileViewerComponent} from './file-viewer/file-viewer.component';
 import {RichTextEditorComponent} from './rich-text-editor/rich-text-editor.component';
 import {ScrollXComponent} from './scroll-x/scroll-x';
 import {ViewContentComponent} from './view-content/view-content.component';
+import {DividerComponent} from './divider/divider.component';
 
 @NgModule({
     declarations: [
@@ -20,6 +21,7 @@ import {ViewContentComponent} from './view-content/view-content.component';
         RichTextEditorComponent,
         ScrollXComponent,
         ViewContentComponent,
+        DividerComponent,
     ],
     imports: [
         IonicModule,
@@ -34,6 +36,7 @@ import {ViewContentComponent} from './view-content/view-content.component';
         RichTextEditorComponent,
         ScrollXComponent,
         ViewContentComponent,
+        DividerComponent,
     ]
 })
 export class CommonComponentsModule { }
