@@ -1,3 +1,11 @@
-<p>
-  gong-cheng-zhao-biao works!
-</p>
+<app-divider></app-divider>
+<section>
+  <div class="content-title">进度计划</div>
+  <ion-list>
+    <ion-item *ngFor="let item of DataList;let index=index" detail (click)="getItem(item)">
+        <div class="primary text-md" size="4">
+          {{index+1}}, {{item.title}}
+        </div>
+    </ion-item>
+  </ion-list>
+</section>
