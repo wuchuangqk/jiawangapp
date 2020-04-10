@@ -6,15 +6,15 @@
         </ion-title>
     </ion-toolbar>
 </ion-header>
-<ion-content>
+<ion-content style="">
     <div style="width:100%" scrollX="true">
         <div style="width: 100%;">
             <div class="segment-wrapper">
-                <ion-segment (ngModelChange)="segmentChange($event)" [(ngModel)]="menu_id">
+                <ion-segment  (ngModelChange)="segmentChange($event)" [(ngModel)]="menu_id">
                     <ion-segment-button *ngFor="let item of menuList;let i=index" [value]="i">
-                        {{item.name}}
+                            {{item.name}}
                     </ion-segment-button>
-                </ion-segment>
+            </ion-segment>
             </div>
         </div>
     </div>
@@ -26,7 +26,14 @@
         </ion-slide>
 
         <ion-slide>
+            <app-jin-du-ji-hua></app-jin-du-ji-hua>
+        </ion-slide>
 
+        <ion-slide>
+            <app-gong-cheng-zhao-biao></app-gong-cheng-zhao-biao>
+        </ion-slide>
+        <ion-slide>
+            <app-gong-cheng-zhao-biao></app-gong-cheng-zhao-biao>
         </ion-slide>
     </ion-slides>
 </ion-content>

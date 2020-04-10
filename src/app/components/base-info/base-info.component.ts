@@ -4,7 +4,10 @@ import {HttpService} from '../../service/http.service';
 import {ActivatedRoute, Router} from '@angular/router';
 import {DialogService} from '../../service/dialog.service';
 import {Events, NavController} from '@ionic/angular';
-
+interface IList {
+  label: string;
+  field: string;
+}
 @Component({
   selector: 'app-base-info',
   templateUrl: './base-info.component.html',
@@ -12,9 +15,10 @@ import {Events, NavController} from '@ionic/angular';
 })
 export class BaseInfoComponent extends BasePage implements OnInit {
   public pid = 0;
-  public baseInfo: any = {};
-  public info: any={};
-  public list = [
+  public info: any = {};
+  public other: any = {};
+  public unit: any = {};
+  public baseInfoList: Array<IList> = [
     { label: '项目分类', field:  'projectType' },
     { label: '项目码'  , field:  'projectCode' },
     { label: '项目名称', field:  'projectName' },
@@ -32,6 +36,16 @@ export class BaseInfoComponent extends BasePage implements OnInit {
     { label: '开工日期', field: 'kaiGongDate'},
     { label: '竣工日期', field: 'junGongDate'},
     { label: '建设规模', field: 'projectcontext'}
+  ];
+  public otherList: Array<IList> = [
+    {label: '安全及质量目标', field: 'anquanzl'},
+    {label: '立项批准文号', field: 'lxwh'},
+    {label: '土地审批文号', field: 'tdsp'},
+    {label: '环评审批文号', field:  'hpsp'},
+    {label: '建设用地规划审批文号', field: 'ydgh'},
+    {label: '建设工程规划审批文号', field: 'gcgh'},
+    {label: '施工许可号', field: 'sgxh'},
+    {label: '备注', field: 'remarks'},
   ];
   constructor(
     public http: HttpService,
@@ -53,9 +67,9 @@ export class BaseInfoComponent extends BasePage implements OnInit {
   getDataList() {
     this.request(`/projects/info/${this.pid}`, {
     }).then((res) => {
-      console.log(res.data);
-      this.baseInfo = res.data;
-      this.info = res.data.info
+      this.info = res.data.info;
+      this.other = res.data.other;
+      this.unit = res.data.unit;
     });
   }
 

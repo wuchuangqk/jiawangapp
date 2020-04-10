@@ -12,17 +12,20 @@ import {Events, IonSlides, NavController} from '@ionic/angular';
 })
 export class IndexComponent extends BasePage implements OnInit {
   @ViewChild(IonSlides) slides: IonSlides;
-  index = 0;
+  index = 1;
   public menu_id = 1;
   // 项目id
   public pid = 0;
   public content = '';
   menuList: Array<object> = [
-    {id: 1, name: '基本信息'},
-    {id: 2, name: '前期项目'},
-    {id: 3, name: '在建项目'},
-    {id: 3, name: '竣工项目'},
-    {id: 5, name: '决算项目'},
+    {id: 0, name: '基本信息'},
+    {id: 1, name: '进度计划'},
+    {id: 2, name: '工程招标'},
+    {id: 3, name: '工程合同'},
+    {id: 4, name: '工程变更'},
+    {id: 5, name: '进度月报'},
+    {id: 6, name: '质量安全'},
+    {id: 7, name: '竣工验收'},
   ];
   projectList: object[] = [];
 
@@ -41,6 +44,7 @@ export class IndexComponent extends BasePage implements OnInit {
 
 
   ngOnInit() {
+    this.segmentChange(this.index);
   }
 
   change() {

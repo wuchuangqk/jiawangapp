@@ -1,13 +1,58 @@
 <app-divider></app-divider>
 <section>
-项目概况
+  <div class="content-title">项目概况</div>
 <ion-list>
-
-  <ion-item *ngFor="let item of list">
+  <ion-item *ngFor="let item of baseInfoList">
     <ion-row style="width:100%;">
       <ion-col class="primary text-md" size="4">{{item.label}}</ion-col>
       <ion-col class="primary text-md" size="8">{{info[item.field]}}</ion-col>
     </ion-row>
   </ion-item>
 </ion-list>
+</section>
+
+<app-divider></app-divider>
+<section>
+  <div class="content-title">项目协调小组</div>
+<ion-list>
+  <ion-item *ngFor="let item of otherList">
+    <ion-row style="width:100%;">
+      <ion-col class="primary text-md" size="4">{{item.label}}</ion-col>
+      <ion-col class="primary text-md" size="8">{{other[item.field]}}</ion-col>
+    </ion-row>
+  </ion-item>
+</ion-list>
+</section>
+<app-divider></app-divider>
+<section>
+  <div class="content-title">单位信息</div>
+  <ion-list>
+    <ion-item>
+      <ion-row style="width:100%;">
+        <ion-col class="primary text-md" size="4">单位类别</ion-col>
+        <ion-col class="primary text-md" size="8">{{unit.type}}</ion-col>
+      </ion-row>
+    </ion-item>
+
+    <ion-item>
+      <ion-row style="width:100%;">
+        <ion-col class="primary text-md" size="4">单位名称</ion-col>
+        <ion-col class="primary text-md" size="8">{{unit.name}}</ion-col>
+      </ion-row>
+    </ion-item>
+  <ng-container  *ngFor="let item of unit.user">
+    <ion-item>
+      <ion-row style="width:100%;">
+        <ion-col class="primary text-md" size="4">姓名</ion-col>
+        <ion-col class="primary text-md" size="8">{{item.username}}</ion-col>
+      </ion-row>
+    </ion-item>
+    <ion-item>
+      <ion-row style="width:100%;">
+        <ion-col class="primary text-md" size="4">联系电话</ion-col>
+        <ion-col class="primary text-md" size="8">{{item.telephone}}</ion-col>
+      </ion-row>
+    </ion-item>
+  </ng-container>
+  </ion-list>
 </section>
