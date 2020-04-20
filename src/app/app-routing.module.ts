@@ -11,9 +11,9 @@ import {NetworkSettingComponent} from './view/network/network-setting/network-se
 
 // @ts-ignore
 const routes: Routes = [
-    // { path: '', redirectTo: 'login', pathMatch: 'full' },
+    { path: '', redirectTo: 'login', pathMatch: 'full' },
  //    {path: '', loadChildren: () => import('./tabs/tabs.module').then(m => m.TabsPageModule)},
-    { path: '', loadChildren: './tabs/tabs.module#TabsPageModule' },
+    { path: 'tabs', loadChildren: './tabs/tabs.module#TabsModule' },
     { path: 'home', loadChildren: './view/home/home.module#HomePageModule'},
     { path: 'login', loadChildren: './view/login/login.module#LoginPageModule'},
     { path: 'persion-info', component: PersionInfoComponent },
@@ -41,7 +41,7 @@ const routes: Routes = [
     { path: 'cultural-propaganda', loadChildren: './view/cultural-propaganda/cultural-propaganda.module#CulturalPropagandaModule' },
     { path: 'project-management', loadChildren: './view/project-management/project-management.module#ProjectManagementModule' },
     { path: 'full-map', loadChildren: './view/full-map/full-map.module#FullMapModule' },
-    { path: 'tabs', loadChildren: './pages/tabs/tabs.module#TabsPageModule' },
+    // { path: 'tabs', loadChildren: './pages/tabs/tabs.module#TabsPageModule' },
     {
         path: 'decision-making-platform',
         loadChildren: './view/decision-making-platform/decision-making-platform.module#DecisionMakingPlatformModule'

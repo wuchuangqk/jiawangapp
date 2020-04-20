@@ -1,58 +1,30 @@
 import { NgModule } from '@angular/core';
 import { RouterModule, Routes } from '@angular/router';
-import { TabsPage } from './tabs.page';
+import {HomeTabComponent} from '../home-tab/home-tab.component';
+import {OfficeTabPage} from '../office/office-tab-page.component';
+import {ProjectPage} from '../project/project-page.component';
+import {Tabs} from './tabs.component';
+import {RongZiComponent} from '../rong-zi/rong-zi.component';
+import {ZiChanComponent} from '../zi-chan/zi-chan.component';
 
 const routes: Routes = [
   {
-    path: 'tabs',
-    component: TabsPage,
+    path: '',
+    component: Tabs,
     children: [
-      {
-        path: 'tab1',
-        children: [
-          {
-            path: '',
-            loadChildren: () =>
-              import('../tab1/tab1.module').then(m => m.Tab1PageModule)
-          }
-        ]
-      },
-      {
-        path: 'tab2',
-        children: [
-          {
-            path: '',
-            loadChildren: () =>
-              import('../tab2/tab2.module').then(m => m.Tab2PageModule)
-          }
-        ]
-      },
-      {
-        path: 'tab3',
-        children: [
-          {
-            path: '',
-            loadChildren: () =>
-              import('../tab3/tab3.module').then(m => m.Tab3PageModule)
-          }
-        ]
-      },
-      {
-        path: '',
-        redirectTo: '/tabs/tab1',
-        pathMatch: 'full'
-      }
+      {path: 'home-tab', component: HomeTabComponent },
+      {path: 'office', component: OfficeTabPage },
+      {path: 'project', component: ProjectPage },
+      {path: 'rong-zi', component: RongZiComponent },
+      {path: 'zi-chan', component: ZiChanComponent },
+      {path: '', redirectTo: '/tabs/home-tab', pathMatch: 'full'}
     ]
   },
-  {
-    path: '',
-    redirectTo: '/tabs/tab1',
-    pathMatch: 'full'
-  }
+  {path: '', redirectTo: '/tabs/home-tab', pathMatch: 'full'}
 ];
 
 @NgModule({
   imports: [RouterModule.forChild(routes)],
   exports: [RouterModule]
 })
-export class TabsPageRoutingModule {}
+export class TabsRoutingModule {}

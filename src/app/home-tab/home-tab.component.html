@@ -1,0 +1,25 @@
+<ion-header>
+    <ion-toolbar color="primary">
+        <ion-title>
+            系统首页
+        </ion-title>
+<!--        <ion-icon *ngIf="flag" class="animated flipInX" (click)="save()" style="font-size: 38px" slot="end" name="checkmark"></ion-icon>-->
+    </ion-toolbar>
+</ion-header>
+
+<ion-content [fullscreen]="true">
+  <div class="weather flex-between">
+    <div>贾汪 多云转晴 35°</div>
+    <div class="">2020-04-20 星期二</div>
+  </div>
+  <app-divider></app-divider>
+<div class="item-wrapper">
+    <div class="item" *ngFor="let item of itemList">
+      <div class="cicle" [ngStyle] = "{background:item.color}">
+            <ion-icon [name]="item.icon"></ion-icon>
+        </div>
+        <div class="ion-text-center">{{item.title}}</div>
+    </div>
+</div>
+    <app-divider></app-divider>
+</ion-content>

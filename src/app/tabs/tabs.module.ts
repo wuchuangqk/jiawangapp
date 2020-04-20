@@ -3,17 +3,24 @@ import { NgModule } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { FormsModule } from '@angular/forms';
 
-import { TabsPageRoutingModule } from './tabs-routing.module';
 
-import { TabsPage } from './tabs.page';
+import {HomeTabComponent} from '../home-tab/home-tab.component';
+import {OfficeTabPage} from '../office/office-tab-page.component';
+import {ProjectPage} from '../project/project-page.component';
+import {TabsRoutingModule} from './tabs-routing.module';
+import {Tabs} from './tabs.component';
+import {RongZiComponent} from '../rong-zi/rong-zi.component';
+import {ZiChanComponent} from '../zi-chan/zi-chan.component';
+import {CommonComponentsModule} from '../common-components/common-components.module';
 
 @NgModule({
   imports: [
     IonicModule,
     CommonModule,
     FormsModule,
-    TabsPageRoutingModule
+    CommonComponentsModule,
+    TabsRoutingModule
   ],
-  declarations: [TabsPage]
+  declarations: [HomeTabComponent, Tabs, OfficeTabPage, ProjectPage, RongZiComponent, ZiChanComponent]
 })
-export class TabsPageModule {}
+export class TabsModule {}

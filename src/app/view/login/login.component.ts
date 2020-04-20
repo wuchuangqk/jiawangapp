@@ -96,8 +96,8 @@ export class LoginComponent extends BasePage implements OnInit {
             this.dialogService.dismiss();
             localStorage.userInfo = JSON.stringify(res.data);
             localStorage.isLogin = 1;
-            this.navController.navigateRoot('home');
         });
+        this.navController.navigateRoot('tabs');
 
     }
     isHuaWei() {
