@@ -2,7 +2,7 @@
     <ion-toolbar color="primary">
         <app-back></app-back>
         <ion-title>
-            资产统计
+          融资还款
         </ion-title>
     </ion-toolbar>
 </ion-header>
@@ -10,66 +10,31 @@
 
 <ion-content padding>
     <ion-list class="my-list">
-        <ion-item (click)="nav('RongZiHuanKuanDetailPage')">
-            <section>
-
+        <ion-item  *ngFor="let item of dataList;let index = index" (click)="nav('finance-reimbursement/detail',{id:item.id})">
+            <section class="text-md">
                 <div class="my-list-title">
-                    <h2>办公系统收文测试办公系统收文测试</h2>
+                    <h2>{{ index+1 }}、{{item.title}}</h2>
                 </div>
                 <div class="my-list-sub">
-                    <ion-grid>
                         <ion-row>
-                            <ion-col col-8> 贷款总金额(万元)：1000 </ion-col>
-                            <ion-col col-4> 利率(%)：0.1 </ion-col>
+                            <ion-col col-8> 贷款总金额(万元)：{{item.dkzy}} </ion-col>
+                            <ion-col col-4> 利率(%)：{{item.lilv}} </ion-col>
                         </ion-row>
-                    </ion-grid>
-                    <ion-grid>
+<!--                        <ion-row>-->
+<!--                            <ion-col col-12> 还款公司：{{item.hkcompany}} </ion-col>-->
+<!--                        </ion-row>-->
+                    <div class="danger">
                         <ion-row>
-                            <ion-col col-12> 还款公司：大梅庄有限公司 </ion-col>
+                            <ion-col col-12> 计划还款日期：{{item.jhhkrq}} </ion-col>
                         </ion-row>
-                    </ion-grid>
-                    <ion-grid class="danger">
+                    </div>
+                    <div class="danger">
                         <ion-row>
-                            <ion-col col-12> 计划还款日期：2018/08/10 </ion-col>
+                            <ion-col col-12> 是否提前结清：{{item.isok}} </ion-col>
                         </ion-row>
-                    </ion-grid>
-                    <ion-grid class="danger">
-                        <ion-row>
-                            <ion-col col-12> 是否提前结清：否 </ion-col>
-                        </ion-row>
-                    </ion-grid>
+                    </div>
                 </div>
             </section>
-        </ion-item>
-        <ion-item (click)="nav('RongZiHuanKuanDetailPage')">
-            <section>
-                <div class="my-list-title">
-                    <h2>办公系统收文测试办公系统收文测试</h2>
-                </div>
-                <div class="my-list-sub">
-                    <ion-grid>
-                        <ion-row>
-                            <ion-col col-8> 贷款总金额(万元)：1000 </ion-col>
-                            <ion-col col-4> 利率(%)：0.1 </ion-col>
-                        </ion-row>
-                    </ion-grid>
-                    <ion-grid>
-                        <ion-row>
-                            <ion-col col-12> 还款公司：大梅庄有限公司 </ion-col>
-                        </ion-row>
-                    </ion-grid>
-                    <ion-grid class="danger">
-                        <ion-row>
-                            <ion-col col-12> 计划还款日期：2018/08/10 </ion-col>
-                        </ion-row>
-                    </ion-grid>
-                    <ion-grid class="danger">
-                        <ion-row>
-                            <ion-col col-12> 是否提前结清：否 </ion-col>
-                        </ion-row>
-                    </ion-grid>
-                </div>
-                </section>
         </ion-item>
     </ion-list>
 </ion-content>

@@ -1,0 +1,30 @@
+
+<ion-header>
+    <ion-toolbar color="primary">
+        <app-back></app-back>
+        <ion-title>
+            招标详情
+        </ion-title>
+    </ion-toolbar>
+</ion-header>
+<ion-content style="">
+    <div style="width:100%" scrollX="true">
+        <div style="width: 100%;"></div>
+    </div>
+
+    <app-divider></app-divider>
+    <section>
+        <div class="content-title">招标准备</div>
+        <ion-list>
+            <ion-item *ngFor="let item of zhaoBiaoZhunBeiList">
+                <ion-row style="width:100%;">
+                    <ion-col class="primary text-md" size="4">{{item.label}}</ion-col>
+                    <ion-col class="primary text-md" size="8">
+                      <div [innerHTML]="heTong[item.field]"></div>
+                    </ion-col>
+                </ion-row>
+            </ion-item>
+        </ion-list>
+    </section>
+</ion-content>
+

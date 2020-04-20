@@ -11,7 +11,9 @@ import {NetworkSettingComponent} from './view/network/network-setting/network-se
 
 // @ts-ignore
 const routes: Routes = [
-    { path: '', redirectTo: 'login', pathMatch: 'full' },
+    // { path: '', redirectTo: 'login', pathMatch: 'full' },
+ //    {path: '', loadChildren: () => import('./tabs/tabs.module').then(m => m.TabsPageModule)},
+    { path: '', loadChildren: './tabs/tabs.module#TabsPageModule' },
     { path: 'home', loadChildren: './view/home/home.module#HomePageModule'},
     { path: 'login', loadChildren: './view/login/login.module#LoginPageModule'},
     { path: 'persion-info', component: PersionInfoComponent },

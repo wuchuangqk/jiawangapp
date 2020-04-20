@@ -14,42 +14,36 @@
         <div class="card-item bg-1">
             <ion-grid>
                 <ion-row class="text-center">
-                    <ion-col col-4> <span>30020</span> <p>资产总数（个）</p> </ion-col>
-                    <ion-col col-4> <span>30020</span> <p>面积（m2）</p> </ion-col>
-                    <ion-col col-4> <span>30020</span> <p>资产总值（个）</p> </ion-col>
+                  <ion-col col-4> <span>{{tableData.zzallcount }}</span> <p>资产总数</p> </ion-col>
+                    <ion-col col-4> <span>{{tableData.zzallmianji }}</span> <p>面积</p> </ion-col>
+                    <ion-col col-4> <span>{{tableData.Tzcgj  }}</span> <p>资产总值</p> </ion-col>
                 </ion-row>
             </ion-grid>
         </div>
         <div class="card-item default-color">
             <ion-grid>
                 <ion-row>
-                    <ion-col col-6>土地：0个</ion-col>
-                    <ion-col col-6>面积：0.00m2</ion-col>
-                </ion-row>
-            </ion-grid>
-            <ion-grid>
-                <ion-row>
-                    <ion-col col-6>土地：0个</ion-col>
-                    <ion-col col-6>面积：0.00m2</ion-col>
+                  <ion-col col-6>土地：{{tableData.tdcount }}</ion-col>
+                  <ion-col col-6>面积：{{tableData.tdmj }}</ion-col>
                 </ion-row>
             </ion-grid>
         </div>
         <div class="card-item default-color">
             <ion-grid>
                 <ion-row>
-                    <ion-col col-6>房产：0个</ion-col>
-                    <ion-col col-6>面积：0.00m2</ion-col>
+                  <ion-col col-6>房产：{{tableData.fzcount }}</ion-col>
+                  <ion-col col-6>面积：{{tableData.fzmianji }}</ion-col>
                 </ion-row>
             </ion-grid>
             <ion-grid>
                 <ion-row>
-                    <ion-col col-6>资产总值：0万</ion-col>
+                  <ion-col col-6>资产总值：{{tableData.zzalljiazi }}</ion-col>
                 </ion-row>
             </ion-grid>
         </div>
     </section>
+    <!--
     <section class="card margin-top-5">
-
         <div class="card-item bg-2">
             <ion-grid>
                 <ion-row class="text-center">
@@ -103,7 +97,8 @@
                 </ion-row>
             </ion-grid>
         </div>
-    </section>
+    </section> 
+    -->
 </ion-content>
 
 

@@ -12,26 +12,31 @@ import {DialogService} from '../../../service/dialog.service';
 })
 export class IndexComponent extends BasePage implements OnInit {
   index = 0;
+  tableData: any = {};
   menuList: Array<object> = [
     {id: 0, name: '预备项目'},
     {id: 1, name: '前期项目'},
     {id: 2, name: '前期项目'},
     {id: 3, name: '前期项目'},
   ];
-  projectList: object[] = [
-    {name: '姚笛懒理文章马伊琍离婚 青岛拍夜戏被偶遇'},
-    {name: '姚笛懒理文章马伊琍离婚 青岛拍夜戏被偶遇'},
-    {name: '姚笛懒理文章马伊琍离婚 青岛拍夜戏被偶遇'},
-  ];
 
   constructor(
-      public http: HttpService,
-      public router: Router,
-      public navController: NavController,
-      public dialogService: DialogService,
-      public route?: ActivatedRoute,
+    public http: HttpService,
+    public router: Router,
+    public navController: NavController,
+    public dialogService: DialogService,
+    public route?: ActivatedRoute,
   ) {
     super(http, router, navController, dialogService);
   }
-  ngOnInit() {}
+  ngOnInit() {
+    this.getData();
+  }
+  getData() {
+    this.request('/juece/index', {
+
+    }).then((res) => {
+      this.tableData = res.data;
+    });
+  }
 }

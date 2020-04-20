@@ -22,7 +22,7 @@ export class IndexComponent extends BasePage implements OnInit, OnDestroy {
         { title: '我申请的' },
         { title: '待我审批的' },
         { title: '我已审批的' },
-        { title: '流程监控' },
+        // { title: '流程监控' },
     ];
     public index = 0;
     constructor(

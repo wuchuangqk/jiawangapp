@@ -12,8 +12,7 @@ import {Events, IonSlides, NavController} from '@ionic/angular';
 })
 export class IndexComponent extends BasePage implements OnInit {
   @ViewChild(IonSlides) slides: IonSlides;
-  index = 1;
-  public menu_id = 1;
+  index = 0;
   // 项目id
   public pid = 0;
   public content = '';
@@ -26,6 +25,7 @@ export class IndexComponent extends BasePage implements OnInit {
     {id: 5, name: '进度月报'},
     {id: 6, name: '质量安全'},
     {id: 7, name: '竣工验收'},
+    {id: 9, name: '工程资料'},
   ];
   projectList: object[] = [];
 
@@ -49,12 +49,13 @@ export class IndexComponent extends BasePage implements OnInit {
 
   change() {
     this.slides.getActiveIndex().then((index) => {
-      this.menu_id = index;
+      this.index = Number(index);
+      console.log(index);
     });
   }
 
   segmentChange(index) {
-    this.menu_id = index;
+    this.index = Number(index);
     this.slides.slideTo(index);
   }
 }

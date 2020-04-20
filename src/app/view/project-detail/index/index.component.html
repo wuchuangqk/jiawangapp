@@ -10,7 +10,7 @@
     <div style="width:100%" scrollX="true">
         <div style="width: 100%;">
             <div class="segment-wrapper">
-                <ion-segment  (ngModelChange)="segmentChange($event)" [(ngModel)]="menu_id">
+                <ion-segment  (ngModelChange)="segmentChange($event)" [(ngModel)]="index">
                     <ion-segment-button *ngFor="let item of menuList;let i=index" [value]="i">
                             {{item.name}}
                     </ion-segment-button>
@@ -22,18 +22,34 @@
     <ion-slides (ionSlideWillChange)="change()">
         <ion-slide>
             <!--基本信息-->
-            <app-base-info></app-base-info>
+            <app-base-info *ngIf="index==0"></app-base-info>
         </ion-slide>
 
         <ion-slide>
-            <app-jin-du-ji-hua></app-jin-du-ji-hua>
+            <app-jin-du-ji-hua *ngIf="index==1"></app-jin-du-ji-hua>
         </ion-slide>
 
         <ion-slide>
-            <app-gong-cheng-zhao-biao></app-gong-cheng-zhao-biao>
+            <app-gong-cheng-zhao-biao *ngIf="index==2"></app-gong-cheng-zhao-biao>
         </ion-slide>
         <ion-slide>
-            <app-gong-cheng-zhao-biao></app-gong-cheng-zhao-biao>
+            <app-gong-cheng-he-tong *ngIf="index==3"></app-gong-cheng-he-tong>
+        </ion-slide>
+        <ion-slide>
+            <app-gong-cheng-bian-geng *ngIf="index==4"></app-gong-cheng-bian-geng>
+        </ion-slide>
+        <ion-slide>
+            <app-jin-du-yue-bao *ngIf="index==5"></app-jin-du-yue-bao>
+        </ion-slide>
+
+        <ion-slide>
+            <app-zhi-liang-an-quan *ngIf="index==6"></app-zhi-liang-an-quan>
+        </ion-slide>
+        <ion-slide>
+            <app-jun-gong-yan-shou *ngIf="index==7"></app-jun-gong-yan-shou>
+        </ion-slide>
+        <ion-slide>
+            <app-gong-cheng-zi-liao *ngIf="index==8"></app-gong-cheng-zi-liao>
         </ion-slide>
     </ion-slides>
 </ion-content>
