@@ -11,14 +11,15 @@
         <ion-title>
             办公
         </ion-title>
-        <!--        <ion-icon *ngIf="flag" class="animated flipInX" (click)="save()" style="font-size: 38px" slot="end" name="checkmark"></ion-icon>-->
     </ion-toolbar>
 </ion-header>
 <ion-content [fullscreen]="true">
-<!--  <ion-header collapse="condense">-->
-<!--    <ion-toolbar>-->
-<!--      <ion-title size="large">Tab 2</ion-title>-->
-<!--    </ion-toolbar>-->
-<!--  </ion-header>-->
-<!--  <app-explore-container name="Tab 2 page"></app-explore-container>-->
+    <div class="item-wrapper">
+        <div class="item" *ngFor="let item of itemList" (click)="nav(item.name,{url:item.url||'',title:item.title,addUrl:item.addUrl,isCanCommit:item.isCanCommit})">
+            <div class="cicle" [ngStyle] = "{background:item.color}">
+                <ion-icon [name]="item.icon"></ion-icon>
+            </div>
+            <div class="ion-text-center">{{item.title}}</div>
+        </div>
+    </div>
 </ion-content>

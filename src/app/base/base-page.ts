@@ -36,9 +36,11 @@ export class BasePage implements OnInit {
     getParams() {
         return this.route.snapshot.params;
     }
+    public getIds(arr): string {
+        return  arr.map(item => item.id).join(',');
+    }
 
-
-    public  request(url, data ): Promise < Iresponse > {
+    public  request(url, data ): Promise <Iresponse> {
         if (localStorage.access_token) {
             data.access_token = localStorage.access_token;
         }

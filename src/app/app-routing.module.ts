@@ -56,12 +56,13 @@ const routes: Routes = [
     // 档案管理
     { path: 'archive-management/:id', loadChildren: './view/archive-management/archive-management.module#ArchiveManagementModule'
     },
-    {
-        path: 'project-detail',
-        loadChildren: './view/project-detail/project-detail.module#ProjectDetailModule'
-    }
+    {path: 'project-detail', loadChildren: './view/project-detail/project-detail.module#ProjectDetailModule'},
+    {path: 'dai-ban', loadChildren: './view/dai-ban/dai-ban.module#DaiBanModule'},
+    // 资产模块
+    {path: 'zi-chan', loadChildren: './zi-chan/zi-chan.module#ZiChanModule'},
 
-
+    // 项目模块
+    {path: 'project', loadChildren: './project/project.module#ProjectModule'}
 
 ];
 

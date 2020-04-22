@@ -3,7 +3,7 @@
     <div class="content-title">工程变更</div>
     <ion-list>
         <ion-item *ngFor="let item of DataList;let index=index" detail (click)="getItem(item)">
-            <div class="primary text-md" size="4">
+            <div class="ion-item primary text-md" size="4">
                 {{index+1}}, {{item.detail}}
             </div>
         </ion-item>

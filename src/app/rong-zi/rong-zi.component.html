@@ -6,12 +6,13 @@
   </ion-toolbar>
 </ion-header>
 <ion-content [fullscreen]="true">
-  <!--  <ion-header collapse="condense">-->
-  <!--    <ion-toolbar>-->
-  <!--      <ion-title size="large">Tab 3</ion-title>-->
-  <!--    </ion-toolbar>-->
-  <!--  </ion-header>-->
 
-  <!--  <app-explore-container name="Tab 3 page"></app-explore-container>-->
-  项目
+  <div class="item-wrapper">
+    <div class="item" *ngFor="let item of itemList" (click)="nav(item.name,{url:item.url||'',title:item.title,addUrl:item.addUrl,isCanCommit:item.isCanCommit})">
+      <div class="cicle" [ngStyle] = "{background:item.color}">
+        <ion-icon [name]="item.icon"></ion-icon>
+      </div>
+      <div class="ion-text-center">{{item.title}}</div>
+    </div>
+  </div>
 </ion-content>
