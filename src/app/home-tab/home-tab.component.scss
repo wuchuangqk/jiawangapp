@@ -11,6 +11,7 @@ ion-content ion-toolbar {
   padding: 10px 0;
    .item{
      width: 25%;
+     font-size: 14px;
    }
   .cicle{
     width:60px;
@@ -23,4 +24,16 @@ ion-content ion-toolbar {
     color: #ffffff;
     margin: 5px auto;
   }
+}
+.tongJi-wrapper{
+  display: flex;
+  line-height: 35px;
+  font-size: 15px;
+  margin: 8px;
+}
+.rec{
+  height: 70px;
+  width: 5px;
+  background: red;
+  margin-right: 15px;
 }

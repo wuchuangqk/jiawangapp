@@ -1,13 +1,13 @@
 <ion-header>
-    <ion-toolbar color="primary">
-        <ion-title>
-            系统首页
-        </ion-title>
-<!--        <ion-icon *ngIf="flag" class="animated flipInX" (click)="save()" style="font-size: 38px" slot="end" name="checkmark"></ion-icon>-->
-        <div slot="end" (click)="nav('persion-info')">
-            <ion-icon name="contact" style="font-size: 30px"></ion-icon>
-        </div>
-    </ion-toolbar>
+  <ion-toolbar color="primary">
+    <ion-title>
+      系统首页
+    </ion-title>
+    <!--        <ion-icon *ngIf="flag" class="animated flipInX" (click)="save()" style="font-size: 38px" slot="end" name="checkmark"></ion-icon>-->
+    <div slot="end" (click)="nav('persion-info')">
+      <ion-icon name="contact" style="font-size: 30px"></ion-icon>
+    </div>
+  </ion-toolbar>
 </ion-header>
 
 <ion-content [fullscreen]="true">
@@ -16,13 +16,43 @@
     <div class="">2020-04-20 星期二</div>
   </div>
   <app-divider></app-divider>
-<div class="item-wrapper">
+  <div class="item-wrapper">
     <div class="item" *ngFor="let item of itemList" (click)="nav(item.name,{url:item.url||'',title:item.title,addUrl:item.addUrl,isCanCommit:item.isCanCommit})">
       <div class="cicle" [ngStyle] = "{background:item.color}">
-            <ion-icon [name]="item.icon"></ion-icon>
-        </div>
-        <div class="ion-text-center">{{item.title}}</div>
+        <ion-icon [name]="item.icon"></ion-icon>
+      </div>
+      <div class="ion-text-center">{{item.title}}</div>
     </div>
-</div>
-    <app-divider></app-divider>
+  </div>
+  <app-divider></app-divider>
+  <section class="tongJi-wrapper">
+    <section class="rec" style="background: #4088d0;"></section>
+    <section>
+      <div>
+        <span>总项目数:</span>
+        <span>33个</span>
+      </div>
+      <div>
+        <span>总投资数:</span>
+        <span>1554555555万</span>
+      </div>
+    </section>
+  </section>
+  <app-divider></app-divider>
+  <section class="tongJi-wrapper">
+    <section class="rec">
+
+    </section>
+    <section>
+      <div>
+        <span>总合同数:</span>
+        <span>224个</span>
+      </div>
+      <div>
+        <span>总合同额：</span>
+        <span>55555万</span>
+      </div>
+    </section>
+  </section>
+  <app-divider></app-divider>
 </ion-content>
