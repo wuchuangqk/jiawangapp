@@ -41,6 +41,7 @@ export class PersionInfoComponent extends BasePage implements OnInit {
   }
 
   ngOnInit() {
+      this.navController.navigateRoot('tabs/person-info');
       if (localStorage.userInfo) {
       this.userInfo = JSON.parse(localStorage.userInfo);
     } else {

@@ -1,26 +1,22 @@
 import { NgModule } from '@angular/core';
 import { CommonModule } from '@angular/common';
 
-import { ZiChanRoutingModule } from './zi-chan-routing.module';
-import {ZiChanWeiXiuComponent} from './zi-chan-wei-xiu/zi-chan-wei-xiu.component';
+import { RongZiRoutingModule } from './rong-zi-routing.module';
+import {RongZiComponent} from './rong-zi.component';
 import {IonicModule} from '@ionic/angular';
 import {FormsModule} from '@angular/forms';
 import {CommonComponentsModule} from '../common-components/common-components.module';
-import {ApproveComponent} from './approve/approve.component';
-import {ZiChanComponent} from './zi-chan.component';
 
 @NgModule({
   declarations: [
-      ZiChanComponent,
-      ZiChanWeiXiuComponent,
-      ApproveComponent
+      RongZiComponent
   ],
   imports: [
     CommonModule,
     IonicModule,
     FormsModule,
     CommonComponentsModule,
-    ZiChanRoutingModule
+    RongZiRoutingModule
   ]
 })
-export class ZiChanModule { }
+export class RongZiModule { }

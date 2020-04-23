@@ -21,43 +21,23 @@
 
     <div class="detail-content" [innerHTML]="content"></div>
     <section>
-        <!--      <div>-->
-        <!--          <ion-list>-->
-        <!--              <ion-item *ngFor="let item of DetailList">-->
-        <!--                  <ion-row style="width:100%;">-->
-        <!--                      <ion-col class="primary text-md" size="4">{{item.label}}</ion-col>-->
-        <!--                      <ion-col class="primary text-md" size="8">-->
-        <!--                          <div [innerHTML]="itemDetail[item.field]"></div>-->
-        <!--                      </ion-col>-->
-        <!--                  </ion-row>-->
-        <!--              </ion-item>-->
-        <!--          </ion-list>-->
-        <!--      </div>-->
         <ion-item>
-            <ion-textarea placeholder="请输入意见"  [(ngModel)]="payload.comments"></ion-textarea>
+            <ion-textarea placeholder="请输入意见"  [(ngModel)]="payload.opinion"></ion-textarea>
         </ion-item>
-        <ion-item>
-            <ion-row style="width:100%;">
-                <ion-col class="primary text-md" size="4">是否同意</ion-col>
-                <ion-col class="primary text-md" size="8">
-                    <ion-toggle [(ngModel)]="isTongYi"></ion-toggle>
-                </ion-col>
-            </ion-row>
-        </ion-item>
-        <app-staff (click)="go('getSt', selectedStaff,false)" title="选择下级处理人" eventName="getSt" [(selectedStaff)]="selectedStaff"></app-staff>
     </section>
 </ion-content>
 
 <ion-footer>
     <ion-toolbar>
         <div class="flex-between">
-            <ion-button (click)="save()"  style="flex: 1" color="tertiary">保存并提交下一审批人</ion-button>
-            <ion-button (click)="save()" style="flex: 1" color="secondary">临时保存</ion-button>
+            <ion-button (click)="saveAndNext()"  style="flex: 1" color="tertiary">保存并提交下一审批人</ion-button>
+            <ion-button (click)="linShiBaoChun()" style="flex: 1" color="secondary">临时保存</ion-button>
         </div>
         <div class="flex-between" margin-top-5>
             <ion-button  class="" (click)="save()" style="flex: 1" color="success">上一步</ion-button>
-            <ion-button  (click)="save()" style="flex: 1" color="warning">审批退回</ion-button>
-            <ion-button  (click)="save()" class="" style="flex: 1" color="danger">审批终止</ion-button>
+            <ion-button  (click)="shenPiTuiHui()" style="flex: 1" color="warning">审批退回</ion-button>
+            <ion-button  (click)="shenPiZongZhi()" class="" style="flex: 1" color="danger">审批终止</ion-button>
+            <ion-button  (click)="jieShuLiuCheng()" class="" style="flex: 1" color="danger">结束流程</ion-button>
         </div>
     </ion-toolbar>
 </ion-footer>

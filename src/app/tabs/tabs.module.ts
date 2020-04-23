@@ -9,9 +9,8 @@ import {OfficeTabPage} from '../office/office-tab-page.component';
 import {ProjectPage} from '../project/project-page.component';
 import {TabsRoutingModule} from './tabs-routing.module';
 import {Tabs} from './tabs.component';
-import {RongZiComponent} from '../rong-zi/rong-zi.component';
-import {ZiChanComponent} from '../zi-chan/zi-chan.component';
 import {CommonComponentsModule} from '../common-components/common-components.module';
+import {PersionInfoComponent} from '../view/persion-info/persion-info.component';
 
 @NgModule({
   imports: [
@@ -21,6 +20,6 @@ import {CommonComponentsModule} from '../common-components/common-components.mod
     CommonComponentsModule,
     TabsRoutingModule
   ],
-  declarations: [HomeTabComponent, Tabs, OfficeTabPage, ProjectPage, RongZiComponent, ZiChanComponent]
+  declarations: [HomeTabComponent, Tabs, OfficeTabPage, ProjectPage, PersionInfoComponent]
 })
 export class TabsModule {}

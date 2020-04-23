@@ -93,6 +93,8 @@ export class BasePage implements OnInit {
             });
         } else if (data.status_code === '30002') {
             this.dialogService.toast('参数错误！');
+        } else if (data.status_code === '100') {
+            this.dialogService.toast(data.msg);
         }
     }
 }

@@ -126,3 +126,9 @@ ion-content{
     font-size: 1.6rem;
     font-weight: bold;
   }
+  // 恢复百度地图默认图标大小
+#allmap{
+  img{
+    max-width: inherit;
+  }
+}

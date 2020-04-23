@@ -20,7 +20,7 @@ import {CommonComponentsModule} from './common-components/common-components.modu
 import {DocumentApproveComponent} from './view/receive-document/document-approve/document-approve.component';
 import {JPush} from '@jiguang-ionic/jpush/ngx';
 import {AppVersion} from '@ionic-native/app-version/ngx';
-import {PersionInfoComponent} from './view/persion-info/persion-info.component';
+// import {PersionInfoComponent} from './view/persion-info/persion-info.component';
 import { NativeStorage } from '@ionic-native/native-storage/ngx';
 import {FileTransfer } from '@ionic-native/file-transfer/ngx';
 import {FileOpener} from '@ionic-native/file-opener/ngx';
@@ -52,7 +52,6 @@ import {ComponentsModule} from './components/components.module';
         DetailComponent,
         DocumentHandleComponent,
         DocumentApproveComponent,
-        PersionInfoComponent,
         EditComponent,
         FeedbackComponent,
         // NetworkSettingComponent,

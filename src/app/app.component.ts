@@ -42,7 +42,7 @@ export class AppComponent {
     if (!localStorage.isLogin) {
       this.navController.navigateRoot('login');
     } else {
-      this.navController.navigateRoot('home');
+      this.navController.navigateRoot('tabs/home-tab');
     }
   }
   initializeApp() {
@@ -60,8 +60,7 @@ export class AppComponent {
 
   registerBackButtonAction() {
     this.customBackActionSubscription = this.platform.backButton.subscribe(() => {
-
-      if (this.url === '/home' || this.url === '/login' || this.url === '/camera') {
+      if (this.url === '/tabs/home-tab' || this.url === '/login' || this.url === '/tabs/office' || this.url === '/tabs/project' || this.url === '/tabs/person-info') {
         if (this.backButtonPressed) {
           this.appMinimize.minimize();
         } else {

@@ -1,7 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import {ActivatedRoute, Router} from '@angular/router';
 import {DomSanitizer, SafeHtml} from '@angular/platform-browser';
-import {Events} from '@ionic/angular';
+import {AlertController, Events} from '@ionic/angular';
 import { NavController } from '@ionic/angular';
 import {DetailBasePage} from '../../base/detail-base-page';
 import {HttpService} from '../../service/http.service';
@@ -19,14 +19,15 @@ export class ApproveComponent  extends DetailBasePage implements OnInit {
   public isShenPi: boolean;
   public handleUrl: string;
   public content: SafeHtml;
-  public selectedStaff = [];
-  public isTongYi = true;
   public payload: {
-    istongyi: string;
     url: string;
-    spid: string;
-    comments: string;
+    runid: string;
+    // 处理意见
+    opinion: string;
     staff_ids: string;
+    stepid: string;
+    // 当前步奏
+    current_step: string;
   };
   public itemDetail = {};
   public DetailList: Array<IListItem> = [
@@ -40,6 +41,8 @@ export class ApproveComponent  extends DetailBasePage implements OnInit {
     { label: '预计费用', field: 'yjfy'},
     { label: '相关文件', field: 'fj' }
   ];
+  public nextStepUserList = [];
+  public backUserList = [];
   constructor(
     public http: HttpService,
     public router: Router,
@@ -47,13 +50,14 @@ export class ApproveComponent  extends DetailBasePage implements OnInit {
     public dialogService: DialogService,
     public sanitizer: DomSanitizer,
     public events: Events,
+    public alertController: AlertController,
     public route?: ActivatedRoute,
   ) {
     super( http, router, dialogService, sanitizer, navController);
     this.url = '/flowrun/tododetail';
     this.handleUrl = this.query('handleUrl');
     this.id = this.query('id');
-    this.payload.spid = this.query('id');
+    this.payload.runid = this.query('id');
     this.payload.url = this.query('handleUrl');
     this.isShenPi = this.getQueryParams().isShenPi;
     this.title = this.query('title');
@@ -61,21 +65,10 @@ export class ApproveComponent  extends DetailBasePage implements OnInit {
 
   ngOnInit() {
     this.getDetail();
+    this.getNextUser();
+    this.getBackUserList();
     this.events.subscribe(AppConfig.Document.DocumentDetail, () => {
       this.getDetail();
-    });
-  }
-  segmentChanged(a) {
-    console.log(a);
-  }
-  go( eventName, selectedStaff, isSelectOne) {
-    localStorage.num = 0;
-    this.nav('/receive-document/staff-select/0000', {
-      title: '选择人员', url: 'bbb', depart_id: '0000',
-      isSelectOne,
-      eventName,
-      selected_staff : JSON.stringify(selectedStaff),
-      selectedStaff : JSON.stringify(selectedStaff)
     });
   }
   public getDetail() {
@@ -84,19 +77,158 @@ export class ApproveComponent  extends DetailBasePage implements OnInit {
     }).then((res) => {
       this.content = this.transform(res.data.content);
       this.itemDetail = res.data;
+      this.payload.current_step = res.data.current_step;
+      this.payload.opinion = res.data.opinion;
     });
   }
-
-    save() {
-    if (!this.payload.comments) {
+  // 获取下一步流转名单
+  getNextUser() {
+      this.request('/flowrun/getnextuser', this.payload).then((res) => {
+          this.nextStepUserList = [];
+          for (const item of res.data.step) {
+            this.nextStepUserList .push({
+              type: 'radio',
+              label: item.step_name,
+              value: item.step_id,
+            });
+          }
+      });
+  }
+  // 获取退回名单
+  getBackUserList() {
+    this.request('/flowrun/gettuiuser', this.payload).then((res) => {
+      this.backUserList = [];
+      for (const item of res.data) {
+        this.backUserList .push({
+          type: 'radio',
+          label: item.step_name,
+          value: item.step_id,
+        });
+      }
+    });
+  }
+  shenPiTuiHui() {
+    if (!this.payload.opinion) {
       this.dialogService.toast('请输入审批意见');
       return;
     }
-    this.payload.staff_ids = this.getIds(this.selectedStaff);
-    console.log(this.selectedStaff);
-    this.payload.istongyi = this.isTongYi ? '同意' : '不同意';
+    this.presentBackUserAlertRadio();
+
+  }
+  // 临时保存
+  linShiBaoChun() {
+    if (!this.payload.opinion) {
+      this.dialogService.toast('请输入审批意见');
+      return;
+    }
     this.dialogService.toast('正在提交数据...');
-    this.setRequest('/zichan/todoshepi', this.payload).then((res) => {
+    this.request('/flowrun/handlelinshisign', this.payload).then((res) => {
+      this.dialogService.toast('提交成功');
+      this.events.publish(AppConfig.Synthesize.List);
+      this.events.publish(AppConfig.Synthesize.ShenPiList);
+      this.navController.back();
+    });
+  }
+
+  async presentNextUserAlertRadio() {
+    const alert = await this.alertController.create({
+      header: '选择审批下一步',
+      inputs: this.nextStepUserList,
+      buttons: [
+        {
+          text: '取消',
+          role: 'cancel',
+          cssClass: 'secondary',
+          handler: () => {
+            console.log('Confirm Cancel');
+          }
+        }, {
+          text: '确定',
+          handler: (stepId) => {
+            this.payload.stepid = stepId;
+            this.dialogService.toast('正在提交数据...');
+            this.request('/flowrun/handlesignNext', this.payload).then((res) => {
+              this.dialogService.toast('提交成功');
+              this.events.publish(AppConfig.Synthesize.List);
+              this.events.publish(AppConfig.Synthesize.ShenPiList);
+              this.navController.back();
+            });
+          }
+        }
+      ]
+    });
+
+    await alert.present();
+  }
+
+  // 审批退回选择退回名单弹出框
+  async presentBackUserAlertRadio() {
+    const alert = await this.alertController.create({
+      header: '选择审批下一步',
+      inputs: this.backUserList,
+      buttons: [
+        {
+          text: '取消',
+          role: 'cancel',
+          cssClass: 'secondary',
+          handler: () => {
+            console.log('Confirm Cancel');
+          }
+        }, {
+          text: '确定',
+          handler: (res) => {
+            console.log(res);
+          }
+        }
+      ]
+    });
+
+    await alert.present();
+  }
+  // 审批终止
+  shenPiZongZhi() {
+    if (!this.payload.opinion) {
+      this.dialogService.toast('请输入审批意见');
+      return;
+    }
+    this.dialogService.toast('正在提交数据...');
+    this.request('/flowrun/finishsige', this.payload).then((res) => {
+      this.dialogService.toast('提交成功');
+      this.events.publish(AppConfig.Synthesize.List);
+      this.events.publish(AppConfig.Synthesize.ShenPiList);
+      this.navController.back();
+    });
+  }
+  // 结束流程
+  jieShuLiuCheng() {
+    if (!this.payload.opinion) {
+      this.dialogService.toast('请输入审批意见');
+      return;
+    }
+    this.dialogService.toast('正在提交数据...');
+    this.request('/flowrun/handlelinshisign', this.payload).then((res) => {
+      this.dialogService.toast('提交成功');
+      this.events.publish(AppConfig.Synthesize.List);
+      this.events.publish(AppConfig.Synthesize.ShenPiList);
+      this.navController.back();
+    });
+  }
+  saveAndNext() {
+    if (!this.payload.opinion) {
+      this.dialogService.toast('请输入审批意见');
+      return;
+    }
+    this.presentNextUserAlertRadio();
+
+
+  }
+  save() {
+    if (!this.payload.opinion) {
+      this.dialogService.toast('请输入审批意见');
+      return;
+    }
+    this.dialogService.toast('正在提交数据...');
+    this.request('/flowrun/handlelinshisign', this.payload).then((res) => {
       this.dialogService.toast('提交成功');
       this.events.publish(AppConfig.Synthesize.List);
       this.events.publish(AppConfig.Synthesize.ShenPiList);
