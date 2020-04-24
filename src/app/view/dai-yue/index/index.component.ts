@@ -69,7 +69,7 @@ export class IndexComponent extends BasePage implements OnInit, OnDestroy {
                 this.nav(`notice/exchange-view/${id}`, {
                     id,
                     title: itemTitle,
-                    url: '/notices/list/',
+                    url: '/work_dynamics/list/',
                     contentTitle
                 });
                 break;

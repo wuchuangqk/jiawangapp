@@ -23,7 +23,7 @@ export class CulturalDetailComponent extends DetailBasePage implements OnInit {
   ) {
     super(http, router, dialogService, sanitizer, navController);
     this.id = this.query('id');
-    this.title = '文化宣传';
+    this.title = '党建园地';
     this.url = this.query('url');
     console.log(this.url);
   }

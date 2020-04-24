@@ -96,29 +96,29 @@
             </ion-slide>
 
             <!--流程监控-->
-            <ion-slide>
-                <ion-list class="my-list">
-                    <ion-item *ngIf="LiuChengJianKongList.length<1">
-                        <p class="primary"> 无数据！ </p>
-                    </ion-item>
-                    <ion-item *ngFor="let item of LiuChengJianKongList" (click)="nav('overtime-work/detail',{url:'/jiaban/shenpi_detail',id:item.id,title:title,contentTitle:item.title,title:'加班审批详情'})">
-                        <section>
-                            <div class="my-list-title">
-                                <h2  [ngClass]="item.qjstate=='已审批'?'primary':''">
-                                    <span *ngIf="item.qjstate!=='已审批'" color="primary">[{{item.qjstate}}]</span>
-                                    <span *ngIf="item.qjstate=='已审批'">[已审批]</span>
-                                    {{item.title}}</h2>
-                            </div>
-                            <div class="my-list-sub">
-                                <div class="my-list-sub-top flex-between">
-                                    <span>{{item.qjr}}</span>
-                                    <span class="my-list-sub-top-last">{{item.qjstate}}</span>
-                                </div>
-                            </div>
-                        </section>
-                    </ion-item>
-                </ion-list>
-            </ion-slide>
+<!--            <ion-slide>-->
+<!--                <ion-list class="my-list">-->
+<!--                    <ion-item *ngIf="LiuChengJianKongList.length<1">-->
+<!--                        <p class="primary"> 无数据！ </p>-->
+<!--                    </ion-item>-->
+<!--                    <ion-item *ngFor="let item of LiuChengJianKongList" (click)="nav('overtime-work/detail',{url:'/jiaban/shenpi_detail',id:item.id,title:title,contentTitle:item.title,title:'加班审批详情'})">-->
+<!--                        <section>-->
+<!--                            <div class="my-list-title">-->
+<!--                                <h2  [ngClass]="item.qjstate=='已审批'?'primary':''">-->
+<!--                                    <span *ngIf="item.qjstate!=='已审批'" color="primary">[{{item.qjstate}}]</span>-->
+<!--                                    <span *ngIf="item.qjstate=='已审批'">[已审批]</span>-->
+<!--                                    {{item.title}}</h2>-->
+<!--                            </div>-->
+<!--                            <div class="my-list-sub">-->
+<!--                                <div class="my-list-sub-top flex-between">-->
+<!--                                    <span>{{item.qjr}}</span>-->
+<!--                                    <span class="my-list-sub-top-last">{{item.qjstate}}</span>-->
+<!--                                </div>-->
+<!--                            </div>-->
+<!--                        </section>-->
+<!--                    </ion-item>-->
+<!--                </ion-list>-->
+<!--            </ion-slide>-->
         </ion-slides>
     </section>
     <ion-fab vertical="bottom" horizontal="end" slot="fixed">

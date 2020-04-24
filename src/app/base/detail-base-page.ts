@@ -41,7 +41,8 @@ export class DetailBasePage extends BasePage {
     if (res.data.json) {
         this.detail.control = '1';
     }
-    this.content = this.transform(res.data.content || res.data.json);
+    this.content = this.transform(res.data.content || res.data.json) || '';
+    console.log(this.content);
   }
   doRefresh(event) {
       super.doRefresh(event);

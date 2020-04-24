@@ -22,7 +22,7 @@
         </ion-refresher-content>
     </ion-refresher>
     <h2>{{contentTitle}}</h2>
-    <div class="detail-content" [innerHTML]="content"></div>
+    <div class="detail-content" [innerHTML]="content||''"></div>
 </ion-content>
 <ion-footer>
     <ion-toolbar>

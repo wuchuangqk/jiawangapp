@@ -7,7 +7,7 @@ import {BasePage} from './base-page';
 
 export class ListBasePage extends BasePage {
     public url: string;
-    public listData: object[] = [];
+    public listData: any[] = [];
   constructor(
       public http: HttpService,
       public router: Router,
