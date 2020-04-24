@@ -22,8 +22,8 @@ export class RongZiComponent extends BasePage implements OnInit {
     // // { icon: 'ios-calendar', color: '#75bcd8', name: '', title: '节点监控' },
     // { icon: 'md-radio', color: '#fb8862', name: 'decision-making-platform', title: '决策平台' },
     // // { icon: 'ios-school', color: '#babda7', name: 'GongChengShenPiPage', title: '工程相关管理' },
-    { icon: 'md-trending-up', color: '#6dbbff', name: 'asset-statistics', title: '资产统计' },
-    { icon: 'logo-usd', color: '#f9a970', name: 'finance-reimbursement', title: '融资还款' },
+    { icon: 'md-trending-up', color: '#6dbbff', name: 'rong-zi/tai-zhang', title: '融资台账' },
+    { icon: 'logo-usd', color: '#f9a970', name: 'finance-reimbursement', title: '还款预警' },
     // { icon: 'ios-pin', color: '#94aac1', name: 'full-map', title: '全景地图' },
   ];
   constructor(

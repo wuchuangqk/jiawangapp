@@ -2,20 +2,20 @@
   <ion-card-header>
       <h2>
         <ion-icon class="icon" name="megaphone"></ion-icon>
-        文化宣传 </h2>
+        通知通告 </h2>
   </ion-card-header>
     <ion-card-content>
       <ion-list class="my-list">
         <ion-item *ngIf="listData.length<=0">
           <p class="primary">无数据！</p>
         </ion-item>
-        <ion-item *ngFor="let item of listData" (click)="nav('cultural-propaganda/detail',{url:'/notices/wenxuan_detail',id:item.id,title:title,contentTitle:item.title})">
+        <ion-item *ngFor="let item of listData" (click)="nav('common_view/'+item.id,{url:'/notices/list',id:item.id,title:title,contentTitle:item.title})">
           <section class="my-list">
             <div class="my-list-title">
               <h2 class="primary">
                 <span *ngIf="item.read=='0'" color="primary">[未读]</span>
                 <span *ngIf="item.read=='1'">[已读]</span>
-                {{item.infoTitle}}</h2>
+                {{item.title}}</h2>
             </div>
             <div class="my-list-sub">
               <div class="my-list-sub-top flex-between">

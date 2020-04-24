@@ -58,6 +58,7 @@ const routes: Routes = [
     },
     {path: 'project-detail', loadChildren: './view/project-detail/project-detail.module#ProjectDetailModule'},
     {path: 'dai-ban', loadChildren: './view/dai-ban/dai-ban.module#DaiBanModule'},
+    {path: 'dai-yue', loadChildren: './view/dai-yue/dai-yue.module#DaiYueModule'},
     // 资产模块
     {path: 'zi-chan', loadChildren: './zi-chan/zi-chan.module#ZiChanModule'},
     {path: 'rong-zi', loadChildren: './rong-zi/rong-zi.module#RongZiModule'},

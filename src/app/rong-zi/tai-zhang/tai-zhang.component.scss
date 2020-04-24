@@ -1,0 +1,21 @@
+.card{
+  display:flex;
+  height:81px;
+  border:1px solid #eee;
+  .text-bold{
+    font-weight: bold;
+  }
+  &-left{
+    display: none;
+  }
+  &-right{
+    height: 81px;
+    div{
+      box-sizing: border-box;
+      padding: 5px;
+      height: 40px;
+      line-height: 30px;
+      font-size: 1.4rem;
+    }
+  }
+}

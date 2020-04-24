@@ -9,7 +9,7 @@
 <ion-content [fullscreen]="true">
   <div class="weather flex-between">
     <div>贾汪 多云转晴 35°</div>
-    <div class="">2020-04-20 星期二</div>
+    <div class="">{{getThisDate()}} {{getThisWeek()}}</div>
   </div>
   <app-divider></app-divider>
   <div class="item-wrapper">
@@ -20,35 +20,37 @@
       <div class="ion-text-center">{{item.title}}</div>
     </div>
   </div>
-  <app-divider></app-divider>
-  <section class="tongJi-wrapper">
-    <section class="rec" style="background: #4088d0;"></section>
-    <section>
-      <div>
-        <span>总项目数:</span>
-        <span>33个</span>
-      </div>
-      <div>
-        <span>总投资数:</span>
-        <span>1554555555万</span>
-      </div>
-    </section>
-  </section>
-  <app-divider></app-divider>
-  <section class="tongJi-wrapper">
-    <section class="rec">
+<!--  <app-divider></app-divider>-->
+<!--  <section class="tongJi-wrapper">-->
+<!--    <section class="rec" style="background: #4088d0;"></section>-->
+<!--    <section>-->
+<!--      <div>-->
+<!--        <span>总项目数:</span>-->
+<!--        <span>33个</span>-->
+<!--      </div>-->
+<!--      <div>-->
+<!--        <span>总投资数:</span>-->
+<!--        <span>1554555555万</span>-->
+<!--      </div>-->
+<!--    </section>-->
+<!--  </section>-->
+<!--  <app-divider></app-divider>-->
+<!--  <section class="tongJi-wrapper">-->
+<!--    <section class="rec">-->
 
-    </section>
-    <section>
-      <div>
-        <span>总合同数:</span>
-        <span>224个</span>
-      </div>
-      <div>
-        <span>总合同额：</span>
-        <span>55555万</span>
-      </div>
-    </section>
-  </section>
+<!--    </section>-->
+<!--    <section>-->
+<!--      <div>-->
+<!--        <span>总合同数:</span>-->
+<!--        <span>224个</span>-->
+<!--      </div>-->
+<!--      <div>-->
+<!--        <span>总合同额：</span>-->
+<!--        <span>55555万</span>-->
+<!--      </div>-->
+<!--    </section>-->
+<!--  </section>-->
   <app-divider></app-divider>
+
+   <app-cultural></app-cultural>
 </ion-content>

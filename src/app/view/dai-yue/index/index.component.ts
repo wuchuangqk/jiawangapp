@@ -53,7 +53,7 @@ export class IndexComponent extends BasePage implements OnInit, OnDestroy {
     doDaiBan(item) {
         const id = item.id;
         const type = item.activityname;
-        const itemTitle = '';
+        const itemTitle = item.title;
         const contentTitle = '';
         switch (type) {
             case 'message': {
@@ -291,7 +291,7 @@ export class IndexComponent extends BasePage implements OnInit, OnDestroy {
 
     }
     getDocumentList() {
-        this.request('/home/Todolist', {}).then((res) => {
+        this.request('/home/ToReadlist', {}).then((res) => {
             this.itemList = res.data;
         });
     }

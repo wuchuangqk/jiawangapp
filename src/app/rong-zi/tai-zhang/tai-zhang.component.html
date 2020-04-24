@@ -1,0 +1,101 @@
+<ion-header>
+  <ion-toolbar color="primary">
+    <app-back></app-back>
+    <ion-title>
+      融资台账
+    </ion-title>
+  </ion-toolbar>
+</ion-header>
+<ion-content [fullscreen]="true">
+  <section class="primary">
+      <ion-row>
+        <ion-col>
+          <div class="card">
+            <div class="card-left">
+              <img src="http://192.168.1.50:8098/project/charting/images/1_2.jpg" alt="">
+            </div>
+            <div class="card-right">
+              <div>融资到账总额</div>
+              <div class="text-bold">{{taiZhangInfo.rjdzjy}}</div>
+            </div>
+          </div>
+        </ion-col>
+        <ion-col>
+          <div class="card">
+            <div class="card-left">
+              <img src="http://192.168.1.50:8098/project/charting/images/1_2.jpg" alt="">
+            </div>
+            <div class="card-right">
+              <div>融资到账可使用</div>
+              <div class="text-bold">{{taiZhangInfo.rzdz}}</div>
+            </div>
+          </div>
+        </ion-col>
+      </ion-row>
+
+      <ion-row>
+        <ion-col>
+          <div class="card">
+            <div class="card-left">
+              <img src="http://192.168.1.50:8098/project/charting/images/1_2.jpg" alt="">
+            </div>
+            <div class="card-right">
+              <div>年初贷款余额</div>
+              <div class="text-bold">{{taiZhangInfo.cdkye}}</div>
+            </div>
+          </div>
+        </ion-col>
+        <ion-col>
+          <div class="card">
+            <div class="card-left">
+              <img src="http://192.168.1.50:8098/project/charting/images/1_2.jpg" alt="">
+            </div>
+            <div class="card-right">
+              <div>今年已还本金:
+                <span  class="text-bold">                {{taiZhangInfo.bsum}}</span>
+              </div>
+              <div> 今年已还利息:
+                <span  class="text-bold">                {{taiZhangInfo.lsum}}</span>
+              </div>
+            </div>
+          </div>
+        </ion-col>
+      </ion-row>
+
+    <ion-row>
+      <ion-col>
+        <div class="card">
+          <div class="card-left">
+            <img src="http://192.168.1.50:8098/project/charting/images/1_2.jpg" alt="">
+          </div>
+          <div class="card-right">
+            <div>今年未还本金:
+              <span  class="text-bold">              {{taiZhangInfo.Wbjum}}</span>
+            </div>
+            <div>今年未还利息:
+              <span  class="text-bold">              {{taiZhangInfo.Wlsum}}</span>
+            </div>
+          </div>
+        </div>
+      </ion-col>
+      <ion-col>
+        <div class="card">
+          <div class="card-left">
+            <img src="http://192.168.1.50:8098/project/charting/images/1_2.jpg" alt="">
+          </div>
+          <div class="card-right">
+            <div>全部未还本金:
+              <span  class="text-bold">              {{taiZhangInfo.Wbjll}}</span>
+            </div>
+            <div>全部未还利息:
+              <span  class="text-bold">              {{taiZhangInfo.Wlxll}}</span>
+            </div>
+          </div>
+        </div>
+      </ion-col>
+    </ion-row>
+  </section>
+  <section margin-top-5>
+<!--    <div id="chart1" style="width:200px; height: 200px;"></div>-->
+  </section>
+</ion-content>

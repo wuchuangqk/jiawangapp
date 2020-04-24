@@ -24,7 +24,7 @@ export class CulturalComponent extends ListBasePage implements OnInit, OnDestroy
       public route?: ActivatedRoute,
   ) {
     super(http, router, dialogService, navController);
-    this.url = '/notices/wenxuan_list';
+    this.url = '/notices/list';
   }
   ngOnInit() {
     this.events.subscribe(AppConfig.CulturalPropaganda.List, () => {

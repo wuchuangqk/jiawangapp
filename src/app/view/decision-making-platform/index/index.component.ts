@@ -19,7 +19,7 @@ export class IndexComponent extends BasePage implements OnInit {
     {id: 2, name: '前期项目'},
     {id: 3, name: '前期项目'},
   ];
-
+  public loading = false;
   constructor(
     public http: HttpService,
     public router: Router,
@@ -33,10 +33,14 @@ export class IndexComponent extends BasePage implements OnInit {
     this.getData();
   }
   getData() {
+    this.dialogService.loading();
+    this.loading = true;
     this.request('/juece/index', {
 
     }).then((res) => {
       this.tableData = res.data;
+      this.dialogService.dismiss();
+      this.loading = false;
     });
   }
 }
