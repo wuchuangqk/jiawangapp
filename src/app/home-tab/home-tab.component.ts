@@ -52,19 +52,10 @@ export class HomeTabComponent  extends BasePage implements OnInit{
   }
 
   getHomeConfigData() {
-    this.request('/users/home_configure', {}).then((res) => {
-      this.itemList[0].bage = Number(res.data.tzgg);  //  通知公告
-      this.itemList[1].bage = Number(res.data.gzrz);  //  工作日志(该项没有推送)
-      this.itemList[2].bage = Number(res.data.sw);    //  收文系统
-      this.itemList[3].bage = Number(res.data.fw);    //  发文系统
-      this.itemList[4].bage = Number(res.data.gzdt);  //  工作交流
-      this.itemList[6].bage = Number(res.data.jbdb);  //  交办督办
-      this.itemList[7].bage = Number(res.data.qjsp);  //  请假管理
-      this.itemList[8].bage = Number(res.data.jbsp);  //  加班管理
-      this.itemList[9].bage = Number(res.data.wcsp);  //  外出管理
-      this.itemList[10].bage = Number(res.data.zhsp);  //  综合管理
-      // this.itemList[10].bage = Number(res.data.zcgz); //  资产购置
-      // this.itemList[11].bage = Number(res.data.whxc); //  文化宣传
+    this.request('/home/homecont', {}).then((res) => {
+      this.itemList[0].badge = Number(res.data.noticecount);  //  通知公告
+      this.itemList[2].badge = Number(res.data.todocount);    //  收文系统
+      this.itemList[3].badge = Number(res.data.toreadcount);    //  发文系统
     }).catch((err) => {
       console.log(err);
     });

@@ -19,7 +19,7 @@ export class IndexComponent extends BasePage implements OnInit, OnDestroy {
     shenPiList = [];
     public menuList = [
         { title: '收文系统' },
-        { title: '收文审核' }
+        // { title: '收文审核' }
     ];
     public index = 0;
     constructor(

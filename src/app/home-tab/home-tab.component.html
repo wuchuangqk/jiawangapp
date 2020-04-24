@@ -16,8 +16,8 @@
     <div class="item" *ngFor="let item of itemList" (click)="nav(item.name,{url:item.url||'',title:item.title,addUrl:item.addUrl,isCanCommit:item.isCanCommit})">
       <div class="cicle" [ngStyle] = "{background:item.color}">
 
-        <ion-badge *ngIf="item.badge" color="danger" style="position: absolute; margin-left: 2rem;margin-top:-0.25rem">
-          1
+        <ion-badge *ngIf="item.badge" color="danger" style="position: absolute; margin-left: 2.3rem;margin-top:-0.5rem">
+          {{item.badge}}
         </ion-badge>
         <ion-icon [name]="item.icon"></ion-icon>
       </div>

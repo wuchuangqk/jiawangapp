@@ -2,13 +2,14 @@
   <ion-toolbar color="primary">
     <app-back></app-back>
     <ion-title>
-    <div class="segment-wrapper">
-      <ion-segment (ngModelChange)="segmentChange($event)" [(ngModel)]="index">
-        <ion-segment-button *ngFor="let item of menuList;let i=index" [value]="i">
-          {{item.title}}
-        </ion-segment-button>
-      </ion-segment>
-    </div>
+        收文系统
+<!--      {{item.title}}-->
+<!--      <div class="segment-wrapper">-->
+<!--      <ion-segment (ngModelChange)="segmentChange($event)" [(ngModel)]="index">-->
+<!--        <ion-segment-button *ngFor="let item of menuList;let i=index" [value]="i">-->
+<!--        </ion-segment-button>-->
+<!--      </ion-segment>-->
+<!--    </div>-->
     </ion-title>
   </ion-toolbar>
 </ion-header>
@@ -52,35 +53,35 @@
           </ion-item>
         </ion-list>
       </ion-slide>
-      <ion-slide>
-        <ion-list class="my-list">
-          <ion-item *ngIf="shenPiList.length<=0" >
-            <p class="primary">无数据！</p>
-          </ion-item>
-          <ion-item *ngFor="let item of shenPiList" (click)="nav('detail',{title:'收文系统',isShenPi:true,url:'/documents/slist', document_type:0,id:item.id,handle_status:item.handle_status})">
-            <section>
-              <div class="my-list-title">
-                <h2  [ngClass]="item.read=='0'?'':'primary'">
-                  <span *ngIf="item.read=='0'" color="primary">[未办]</span>
-                  <span *ngIf="item.read=='1'">[已办]</span>
-                  {{item.title}}</h2>
-              </div>
+<!--      <ion-slide>-->
+<!--        <ion-list class="my-list">-->
+<!--          <ion-item *ngIf="shenPiList.length<=0" >-->
+<!--            <p class="primary">无数据！</p>-->
+<!--          </ion-item>-->
+<!--          <ion-item *ngFor="let item of shenPiList" (click)="nav('detail',{title:'收文系统',isShenPi:true,url:'/documents/slist', document_type:0,id:item.id,handle_status:item.handle_status})">-->
+<!--            <section>-->
+<!--              <div class="my-list-title">-->
+<!--                <h2  [ngClass]="item.read=='0'?'':'primary'">-->
+<!--                  <span *ngIf="item.read=='0'" color="primary">[未办]</span>-->
+<!--                  <span *ngIf="item.read=='1'">[已办]</span>-->
+<!--                  {{item.title}}</h2>-->
+<!--              </div>-->
 
-              <div class="my-list-sub">
-                <div class="my-list-sub-top flex-between">
-                  <span>办理人：{{item.handler}}</span>
-                  <span>发布日期:{{item.date}}</span>
-                </div>
-              </div>
-            </section>
-          </ion-item>
-        </ion-list>
-      </ion-slide>
+<!--              <div class="my-list-sub">-->
+<!--                <div class="my-list-sub-top flex-between">-->
+<!--                  <span>办理人：{{item.handler}}</span>-->
+<!--                  <span>发布日期:{{item.date}}</span>-->
+<!--                </div>-->
+<!--              </div>-->
+<!--            </section>-->
+<!--          </ion-item>-->
+<!--        </ion-list>-->
+<!--      </ion-slide>-->
     </ion-slides>
-    <ion-fab vertical="bottom" horizontal="end" slot="fixed">
-      <ion-fab-button (click)="nav('receive-document/add',{title:'添加收文',url:'b'})">
-        <ion-icon name="add"></ion-icon>
-      </ion-fab-button>
-    </ion-fab>
+<!--    <ion-fab vertical="bottom" horizontal="end" slot="fixed">-->
+<!--      <ion-fab-button (click)="nav('receive-document/add',{title:'添加收文',url:'b'})">-->
+<!--        <ion-icon name="add"></ion-icon>-->
+<!--      </ion-fab-button>-->
+<!--    </ion-fab>-->
   </section>
 </ion-content>
