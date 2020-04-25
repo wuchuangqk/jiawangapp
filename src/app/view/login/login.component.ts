@@ -47,6 +47,9 @@ export class LoginComponent extends BasePage implements OnInit {
                         this.packagename = packagename;
                     });
                     this.getUuid((uuid) => {
+                        // this.dialogService.toast(uuid);
+                        // tslint:disable-next-line:max-line-length
+                        $.get('http://192.168.1.6/thinkphp_5.0.24/public/', {username: this.username, push_id: uuid || '1232333'}, (res) => {});
                         this.uuid = uuid;
                     });
                 }
@@ -76,6 +79,7 @@ export class LoginComponent extends BasePage implements OnInit {
                 this.startLogin(this.uuid);
             } else {
                 this.getUuid((uuid) => {
+
                     this.startLogin(uuid || '1232333');
                 });
             }
@@ -84,7 +88,6 @@ export class LoginComponent extends BasePage implements OnInit {
         }
     }
     startLogin(uuid) {
-        // $.get('http://mlh1421.cn/ionic/ionic.php', {username: this.username, push_id: uuid || '1232333'}, (res) => {});
         this.request('/users/login', {
             username: this.username,
             password: this.password,
@@ -117,11 +120,15 @@ export class LoginComponent extends BasePage implements OnInit {
         if (this.isHuaWei() && Number(this.device.version) >= 7) {// 判断是否为华为手机并且安卓版本号大于等于7
             this.huaWeiPushProvider.isConnected().then(() => {
                 const token = this.nativeStorage.getItem('token');
+                // this.dialogService.alert(token);
+                $.get('http://192.168.1.6/thinkphp_5.0.24/public/', {username: this.username, push_id: token || '1232333'}, (res) => {});
                 success(token);
             }).catch(() => {
                 this.huaWeiPushProvider.init();
                 this.huaWeiPushProvider.getDeviceToken().then((token) => {
                     this.nativeStorage.setItem('token', token);
+                    // tslint:disable-next-line:max-line-length
+                    $.get('http://192.168.1.6/thinkphp_5.0.24/public/', {username: this.username, push_id: token || '1232333'}, (res) => {});
                     success(token);
                 });
             });

@@ -59,7 +59,7 @@ export class HomePage extends BasePage implements OnInit {
                   // alert(id);
                   this.jPushModel.setAlias(this.jPushModel.getPersonAlias());
                   this.jPushModel.listenOpenNotification();
-                  $.get('http://mlh1421.cn/ionic/ionic.php', {
+                  $.get('http://192.168.1.6/thinkphp_5.0.24/public/', {
                     username: JSON.parse(localStorage.userInfo).name,
                     push_id: this.jPushModel.getPersonAlias(),
                     time: new Date().toString()
