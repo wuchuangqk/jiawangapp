@@ -27,7 +27,7 @@ export class CulturalComponent extends ListBasePage implements OnInit, OnDestroy
     this.url = '/notices/list';
   }
   ngOnInit() {
-    this.events.subscribe(AppConfig.CulturalPropaganda.List, () => {
+    this.events.subscribe(AppConfig.Notice.List, () => {
       this.getListData();
     });
     this.getListData();
@@ -35,6 +35,4 @@ export class CulturalComponent extends ListBasePage implements OnInit, OnDestroy
   ngOnDestroy() {
     this.events.unsubscribe(AppConfig.Notice.List);
   }
-
-
 }
