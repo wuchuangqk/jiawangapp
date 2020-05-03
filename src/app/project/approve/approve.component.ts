@@ -28,6 +28,20 @@ export class ApproveComponent  extends DetailBasePage implements OnInit {
     stepid: string;
     // 当前步奏
     current_step: string;
+    manage: string;
+  };
+  public action: {
+    savenext: string;
+    linshisave: string;
+    tuihui: string;
+    finish: string;
+    stop: string;
+  } = {
+    savenext: '0',
+    linshisave: '0',
+    tuihui: '0',
+    finish: '0',
+    stop: '0'
   };
   public itemDetail = {};
   public DetailList: Array<IListItem> = [
@@ -79,6 +93,8 @@ export class ApproveComponent  extends DetailBasePage implements OnInit {
       this.itemDetail = res.data;
       this.payload.current_step = res.data.current_step;
       this.payload.opinion = res.data.opinion;
+      this.payload.manage = res.data.manage;
+      this.action = res.data.action;
     });
   }
   // 获取下一步流转名单
@@ -176,8 +192,14 @@ export class ApproveComponent  extends DetailBasePage implements OnInit {
           }
         }, {
           text: '确定',
-          handler: (res) => {
-            console.log(res);
+          handler: (r) => {
+            this.payload.stepid = r;
+            this.request('/flowrun/tuihandsige', this.payload).then((res) => {
+              this.dialogService.toast('提交成功');
+              this.events.publish(AppConfig.Synthesize.List);
+              this.events.publish(AppConfig.Synthesize.ShenPiList);
+              this.navController.back();
+            });
           }
         }
       ]
@@ -192,7 +214,7 @@ export class ApproveComponent  extends DetailBasePage implements OnInit {
       return;
     }
     this.dialogService.toast('正在提交数据...');
-    this.request('/flowrun/finishsige', this.payload).then((res) => {
+    this.request('/flowrun/stopsige', this.payload).then((res) => {
       this.dialogService.toast('提交成功');
       this.events.publish(AppConfig.Synthesize.List);
       this.events.publish(AppConfig.Synthesize.ShenPiList);
@@ -206,7 +228,7 @@ export class ApproveComponent  extends DetailBasePage implements OnInit {
       return;
     }
     this.dialogService.toast('正在提交数据...');
-    this.request('/flowrun/handlelinshisign', this.payload).then((res) => {
+    this.request('/flowrun/finishsige', this.payload).then((res) => {
       this.dialogService.toast('提交成功');
       this.events.publish(AppConfig.Synthesize.List);
       this.events.publish(AppConfig.Synthesize.ShenPiList);

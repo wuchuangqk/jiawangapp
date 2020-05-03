@@ -40,6 +40,12 @@
     <ion-label class="prefix-title">内容：</ion-label>
     <ion-textarea placeholder="请输入内容" [(ngModel)]="params.lettercontent"></ion-textarea>
   </ion-item>
+  <ion-item>
+    <ion-label class="prefix-title">审批人：</ion-label>
+    <ion-select multiple cancelText="取消" okText="确定" [(ngModel)]="params.staff_ids">
+      <ion-select-option *ngFor="let item of staff_idsList" [value]="item.userid">{{item.name}}</ion-select-option>
+    </ion-select>
+  </ion-item>
   <app-staff (click)="go('getSt', selectedStaff,true)" title="责任人" eventName="getSt" [(selectedStaff)]="selectedStaff"></app-staff>
   <app-staff (click)="go('getSta', _selectedStaff,false)" title="配合人" eventName="getSta" [(selectedStaff)]="_selectedStaff"></app-staff>
   <app-file-viewer (getFileArray)="getFileArray($event)"></app-file-viewer>

@@ -95,6 +95,10 @@ export class HomeTabComponent  extends BasePage implements OnInit {
     if (date.getDay() === 6) { week = '星期六'; }
     return week;
   }
+  doRefresh(event) {
+    super.doRefresh(event);
+    this.getHomeConfigData();
+  }
 
   getHomeConfigData() {
     this.request('/home/homecont', {}).then((res) => {

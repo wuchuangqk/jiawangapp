@@ -21,9 +21,10 @@ export class ApproveComponent  extends DetailBasePage implements OnInit {
   public content: SafeHtml;
   public selectedStaff = [];
   public payload: {
-      url: string;
-      id: string;
+    url: string;
+    id: string;
     option: string;
+    staff_ids: string;
   };
   constructor(
       public http: HttpService,
@@ -65,7 +66,11 @@ export class ApproveComponent  extends DetailBasePage implements OnInit {
         this.content = this.transform(res.data);
       });
   }
+    getIds(arr): string {
+        return  arr.map(item => item.id).join(',');
+    }
   save() {
+    this.payload.staff_ids = this.getIds(this.selectedStaff);
     if (!this.payload.option) {
       this.dialogService.toast('请输入审批意见');
       return;

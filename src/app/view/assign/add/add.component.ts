@@ -19,6 +19,7 @@ export class AddComponent extends BasePage implements OnInit {
     public _selectedStaff = [];
     public fileArray = [];
     public photo = '';
+    public staff_idsList = [];
     // 提交的参数
     public params: any = {
         url: '/letter/letteradd',
@@ -31,7 +32,7 @@ export class AddComponent extends BasePage implements OnInit {
         staff_ids: '',
         zrl: '', // 责任人
         phr: '', // 配合人
-        lettercontent: ''// 内容
+        lettercontent: '', // 内容
     };
     // 督办类别
     public duBanCatogray = [];
@@ -57,6 +58,9 @@ export class AddComponent extends BasePage implements OnInit {
     ngOnInit() {
         this.getBanLiShiXiang();
         this.getduBanCatogray();
+        this.request('/letter/GetShePiRen', {}).then((res) => {
+            this.staff_idsList = res.data;
+        });
     }
     getFileArray(fileArray) {
         this.fileArray = fileArray;

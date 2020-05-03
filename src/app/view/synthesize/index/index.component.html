@@ -129,31 +129,10 @@
 <!--            </ion-slide>-->
         </ion-slides>
     </section>
-        <ion-fab slot="fixed" horizontal="end" vertical="bottom">
-            <ion-fab-button>
-                <ion-icon name="add"></ion-icon>
-            </ion-fab-button>
-            <ion-fab-list side="top">
-                <div class="custom-fab">
-                    <ion-button color="secondary">
-                        印章使用审批
-                    </ion-button>
-                    <ion-fab-button
-                                (click)="nav('synthesize/add',{title:'印章使用审批',url:'b'})"
-                                color="secondary" size="small">
-                        <ion-icon name="add" style="color: #ffffff;"></ion-icon>
-                    </ion-fab-button>
-                </div>
-                <div class="custom-fab">
-                    <ion-button color="secondary">
-                        外出携带印章审批
-                    </ion-button>
-                    <ion-fab-button color="secondary"
-                                    (click)="nav('synthesize/zhsp-yinzhang-add',{title:'外出携带印章审批申请',url:'b'})"
-                                    size="small">
-                        <ion-icon name="add" style="color: #ffffff;"></ion-icon>
-                    </ion-fab-button>
-                </div>
-            </ion-fab-list>
-        </ion-fab>
+
+    <ion-fab vertical="bottom" horizontal="end" slot="fixed">
+        <ion-fab-button (click)="nav('synthesize/add',{title:'综合审批',url:'b'})">
+            <ion-icon name="add"></ion-icon>
+        </ion-fab-button>
+    </ion-fab>
 </ion-content>

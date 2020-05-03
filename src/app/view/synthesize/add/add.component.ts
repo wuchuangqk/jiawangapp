@@ -25,7 +25,7 @@ export class AddComponent extends BasePage implements OnInit {
         // 用印日期
         qjstime: '',
         // 用印份数
-        sl:1,
+        sl: 1,
         // 发往单位
         fwdw: '',
         // 结束时间
@@ -35,9 +35,9 @@ export class AddComponent extends BasePage implements OnInit {
         // 申请类别
         qjtype: '印章使用审批',
         // 经办人意见
-        zbyj:'',
+        zbyj: '',
         // 备注
-        beizhu:'',
+        beizhu: '',
         // 处理人名单
         staff_ids: ''
     };
@@ -91,13 +91,13 @@ export class AddComponent extends BasePage implements OnInit {
     // 检查参数
     private checkParams(params): boolean {
         if (!params.qjstime) {
-            this.dialogService.toast('请选择用印日期!');
+            this.dialogService.toast('请选择开始日期!');
+            return false;
+        } else if (!params.qjetime) {
+            this.dialogService.toast('请选择结束日期!');
             return false;
         } else if (!params.qjyy) {
             this.dialogService.toast('请输入材料名称用印事由!');
-            return false;
-        } else if (!params.zbyj) {
-            this.dialogService.toast('请输入经办人意见!');
             return false;
         } else if (!params.staff_ids) {
             this.dialogService.toast('请选择审批人!');

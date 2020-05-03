@@ -93,16 +93,13 @@ export class ZhspYinzhangAddComponent extends BasePage implements OnInit {
     // 检查参数
     private checkParams(params): boolean {
         if (!params.qjstime) {
-            this.dialogService.toast('请选择计划使用时间起!');
+            this.dialogService.toast('请选择开始时间!');
             return false;
         }else if (!params.qjetime) {
-            this.dialogService.toast('请选择计划使用时间止!');
+            this.dialogService.toast('请选择结束时间!');
             return false;
         } else if (!params.qjyy) {
-            this.dialogService.toast('请输入外出携带印章事由!');
-            return false;
-        } else if (!params.zbyj) {
-            this.dialogService.toast('请输入申请人意见!');
+            this.dialogService.toast('请输入原因!');
             return false;
         } else if (!params.staff_ids) {
             this.dialogService.toast('请选择审批人!');
