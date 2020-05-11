@@ -10,6 +10,24 @@
   <div>
     <div class="margin-top-5">
       <ion-searchbar placeholder="请输入..." (ionChange)="search($event)"></ion-searchbar>
+      <div class="flex-between">
+        <ion-select style="width: 50%" [(ngModel)]="fztype" (ngModelChange)="ngOnInit()" placeholder="房源类型">
+          <ion-select-option value="安置">安置</ion-select-option>
+          <ion-select-option value="销售">销售</ion-select-option>
+          <ion-select-option value="剩余">剩余</ion-select-option>
+          <ion-select-option value="经适房">经适房</ion-select-option>
+          <ion-select-option value="公租房">公租房</ion-select-option>
+          <ion-select-option value="抵工程款">抵工程款</ion-select-option>
+          <ion-select-option value="职工宿舍">职工宿舍</ion-select-option>
+          <ion-select-option value="过渡房">过渡房</ion-select-option>
+          <ion-select-option value="租赁">租赁</ion-select-option>
+          <ion-select-option value="物业用房">物业用房</ion-select-option>
+        </ion-select>
+        <ion-select style="width: 50%" [(ngModel)]="issf" placeholder="是否上房" (ngModelChange)="ngOnInit()">
+          <ion-select-option value="1">上房</ion-select-option>
+          <ion-select-option value="0">未上房</ion-select-option>
+        </ion-select>
+      </div>
       <ion-list class="my-list">
         <ion-item *ngFor="let item of itemList;let i=index;" (click)="nav('zi-chan/fang-chan-guan-li-detail',item)">
           <section>

@@ -13,6 +13,7 @@ import {BasePage} from '../../base/base-page';
 export class TuDiGuanLiComponent extends BasePage implements OnInit {
   public itemList = [];
   public keyword = '';
+  public state = '';
   constructor(
       public http: HttpService,
       public router: Router,
@@ -28,9 +29,18 @@ export class TuDiGuanLiComponent extends BasePage implements OnInit {
     this.keyword = e.detail.value;
     this.ngOnInit();
   }
+  changeStatus(e: CustomEvent) {
+    console.log(e.detail.value);
+    this.state = e.detail.value;
+    this.ngOnInit();
+  }
+  foo() {
+
+  }
   ngOnInit() {
     this.request('/zichan/landlist', {
-      keyword: this.keyword
+      keyword: this.keyword,
+      state: this.state,
     }).then((res) => {
       this.itemList = res.data;
     });

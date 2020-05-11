@@ -10,6 +10,26 @@
   <div>
     <div class="margin-top-5">
       <ion-searchbar placeholder="请输入..." (ionChange)="search($event)"></ion-searchbar>
+      <div class="flex-between">
+        <ion-select style="width: 50%" placeholder="商铺类型" [(ngModel)]="sptype" (ngModelChange)="ngOnInit()">
+          <ion-select-option value="安置">安置</ion-select-option>
+          <ion-select-option value="销售">销售</ion-select-option>
+          <ion-select-option value="剩余">剩余</ion-select-option>
+          <ion-select-option value="租赁">租赁</ion-select-option>
+          <ion-select-option value="配电室">配电室</ion-select-option>
+          <ion-select-option value="抵工程款">抵工程款</ion-select-option>
+          <ion-select-option value="物业用房">物业用房</ion-select-option>
+          <ion-select-option value="社区用房">社区用房</ion-select-option>
+          <ion-select-option value="会所">会所</ion-select-option>
+          <ion-select-option value="展览馆">展览馆</ion-select-option>
+          <ion-select-option value="治安联防">治安联防</ion-select-option>
+          <ion-select-option value="公厕">公厕</ion-select-option>
+        </ion-select>
+        <ion-select style="width: 50%" [(ngModel)]="issf" placeholder="是否上房" (ngModelChange)="ngOnInit()">
+          <ion-select-option value="1">上房</ion-select-option>
+          <ion-select-option value="0">未上房</ion-select-option>
+        </ion-select>
+      </div>
       <ion-list class="my-list">
         <ion-item *ngFor="let item of itemList;let i=index;" (click)="nav('zi-chan/shang-pu-guan-li-detail',item)">
           <section>

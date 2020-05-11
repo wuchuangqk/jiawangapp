@@ -13,6 +13,8 @@ import {BasePage} from '../../base/base-page';
 export class FangChanGuanLiComponent extends BasePage implements OnInit {
   public itemList = [];
   public keyword = '';
+  public fztype = '';
+  public issf = '';
   constructor(
       public http: HttpService,
       public router: Router,
@@ -30,7 +32,9 @@ export class FangChanGuanLiComponent extends BasePage implements OnInit {
   }
   ngOnInit() {
     this.request('/zichan/fangchanlist', {
-      keyword: this.keyword
+      keyword: this.keyword,
+      fztype: this.fztype,
+      issf: this.issf
     }).then((res) => {
       this.itemList = res.data;
     });

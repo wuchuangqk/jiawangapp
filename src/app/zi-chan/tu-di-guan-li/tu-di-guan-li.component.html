@@ -9,7 +9,18 @@
 <ion-content>
   <div>
     <div class="margin-top-5">
-      <ion-searchbar placeholder="请输入..." (ionChange)="search($event)"></ion-searchbar>
+      <div class="flex-between">
+        <ion-searchbar placeholder="请输入..." (ionChange)="search($event)"></ion-searchbar>
+        <ion-select style="width: 150px;" (ionChange)="changeStatus($event)" placeholder="状态">
+          <ion-select-option value="">状态</ion-select-option>
+          <ion-select-option value="1">净地</ion-select-option>
+          <ion-select-option value="2">抵押</ion-select-option>
+          <ion-select-option value="3">安置房项目建设用地</ion-select-option>
+          <ion-select-option value="4">开发项目用地</ion-select-option>
+          <ion-select-option value="5">公益性用地</ion-select-option>
+          <ion-select-option value="6">退地</ion-select-option>
+        </ion-select>
+      </div>
       <ion-list class="my-list">
         <ion-item *ngFor="let item of itemList;let i=index;" (click)="nav('zi-chan/tu-di-guan-li-detail',item)">
           <section>

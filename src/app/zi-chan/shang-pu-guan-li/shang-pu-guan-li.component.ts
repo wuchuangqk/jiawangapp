@@ -13,6 +13,9 @@ import {BasePage} from '../../base/base-page';
 export class ShangPuGuanLiComponent extends BasePage implements OnInit {
   public itemList = [];
   public keyword = '';
+  public sptype = '';
+  public issf = '';
+
   constructor(
       public http: HttpService,
       public router: Router,
@@ -26,11 +29,13 @@ export class ShangPuGuanLiComponent extends BasePage implements OnInit {
   search(e: CustomEvent) {
     console.log(e.detail.value);
     this.keyword = e.detail.value;
-    this.ngOnInit()
+    this.ngOnInit();
   }
   ngOnInit() {
     this.request('/zichan/shangpulist', {
-      keyword: this.keyword
+      keyword: this.keyword,
+      sptype : this.sptype,
+      issf: this.issf,
     }).then((res) => {
       this.itemList = res.data;
     });
