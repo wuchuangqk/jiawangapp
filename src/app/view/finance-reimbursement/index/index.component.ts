@@ -26,8 +26,8 @@ export class IndexComponent extends BasePage implements OnInit {
         public route?: ActivatedRoute,
     ) {
         super(http, router, navController, dialogService, route);
-        const date = new Date().getTime() - 30 * 24 * 60 * 60 * 1000;
-        const date2 = new Date();
+        const date = new Date();
+        const date2 = new Date().getTime() + 30 * 24 * 60 * 60 * 1000;
         const datePipe = new DatePipe('en-US');
         this.params.timebegin = datePipe.transform(date, 'yyyy-MM-dd');
         this.params.timeend = datePipe.transform(date2, 'yyyy-MM-dd');

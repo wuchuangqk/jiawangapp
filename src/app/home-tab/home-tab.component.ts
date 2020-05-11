@@ -19,6 +19,7 @@ import $ from 'jquery';
 })
 export class HomeTabComponent  extends BasePage implements OnInit {
   public ziChanAndHeTongCount = {};
+  public weather: any = {};
   public  itemList: Array<any> = [
     { icon: 'ios-notifications', color: '#7dc6ff', name: 'notice', title: '通知公告', url: '/notices/list', bage: '' , addUrl: 'add', isCanCommit: false },
     { icon: 'ios-bookmarks', color: '#7dc6ff', name: 'work-diary', title: '工作日志' , url: '/work_logs/list'},
@@ -78,11 +79,18 @@ export class HomeTabComponent  extends BasePage implements OnInit {
   }
   ngOnInit() {
     this.getHomeConfigData();
+    this.getWeather();
     this.events.subscribe(AppConfig.Home.Badge, () => {
       this.getHomeConfigData();
+      this.getWeather();
     });
   }
-
+  getWeather() {
+    $.get('https://restapi.amap.com/v3/weather/weatherInfo?key=771e4903465ad46e0d524d5190d148f1&city=%E8%B4%BE%E6%B1%AA', (res) => {
+      console.log(res);
+      this.weather = res.lives[0];
+    });
+  }
   getThisWeek() {
     const date = new Date();
     let week;
@@ -98,6 +106,7 @@ export class HomeTabComponent  extends BasePage implements OnInit {
   doRefresh(event) {
     super.doRefresh(event);
     this.getHomeConfigData();
+    this.getWeather();
   }
 
   getHomeConfigData() {

@@ -22,7 +22,7 @@ export class IndexComponent extends BasePage implements OnInit, OnDestroy {
     guiDangList = [];
     public keyword = '';
     public menuList = [
-        { title: '收文系统' },
+        { title: '待办收文' },
         { title: '已办收文' },
         { title: '收文归档' },
         // { title: '收文审核' }

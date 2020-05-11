@@ -13,6 +13,7 @@ import {BasePage} from '../../../base/base-page';
 export class CaiWuZhiFuComponent extends BasePage implements OnInit {
 
   public itemList = [];
+  public keyword = '';
   constructor(
       public http: HttpService,
       public router: Router,
@@ -24,10 +25,12 @@ export class CaiWuZhiFuComponent extends BasePage implements OnInit {
     super(http, router, navController, dialogService);
   }
   search(e: CustomEvent) {
-    console.log(e.detail.value);
+    this.keyword = e.detail.value;
+    this.ngOnInit();
   }
   ngOnInit() {
     this.request('/juece/zhifupay', {
+      keyword: this.keyword
     }).then((res) => {
       this.itemList = res.data;
     });
