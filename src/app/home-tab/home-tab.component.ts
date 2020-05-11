@@ -172,7 +172,7 @@ export class HomeTabComponent  extends BasePage implements OnInit {
       btnText = '确定';
     }
 
-    // this.dialogService.alert(type)
+    this.dialogService.alert(type);
 
     this.dialogService.alert(contentTitle, () => {
       switch (type) {
@@ -189,7 +189,7 @@ export class HomeTabComponent  extends BasePage implements OnInit {
           this.nav(`notice/exchange-view/${id}`, {
             id,
             title: itemTitle,
-            url: '/notices/list/',
+            url: '/work_dynamics/list/',
             contentTitle
           });
           break;
