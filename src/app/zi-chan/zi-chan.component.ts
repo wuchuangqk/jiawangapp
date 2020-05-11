@@ -23,6 +23,9 @@ export class ZiChanComponent extends BasePage implements OnInit {
     // { icon: 'md-radio', color: '#fb8862', name: 'decision-making-platform', title: '决策平台' },
     { icon: 'ios-school', color: '#babda7', name: 'zi-chan/wei-xiu', title: '资产维修审批' },
     { icon: 'md-trending-up', color: '#6dbbff', name: 'asset-statistics', title: '资产台账' },
+    { icon: 'apps', color: '#6cd7ff', name: 'zi-chan/tu-di-guan-li', title: '土地管理' },
+    { icon: 'home', color: '#afa9b3', name: 'zi-chan/fang-chan-guan-li', title: '房产管理' },
+    { icon: 'business', color: '#fb8862', name: 'zi-chan/shang-pu-guan-li', title: '商铺管理' },
     // { icon: 'ios-pin', color: '#94aac1', name: 'full-map', title: '全景地图' },
   ];
   constructor(

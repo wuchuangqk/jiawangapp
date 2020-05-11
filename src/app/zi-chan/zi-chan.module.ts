@@ -8,12 +8,24 @@ import {FormsModule} from '@angular/forms';
 import {CommonComponentsModule} from '../common-components/common-components.module';
 import {ApproveComponent} from './approve/approve.component';
 import {ZiChanComponent} from './zi-chan.component';
+import {TuDiGuanLiComponent} from './tu-di-guan-li/tu-di-guan-li.component';
+import {TuDiGuanLiDetailComponent} from './tu-di-guan-li-detail/tu-di-guan-li-detail.component';
+import {FangChanGuanLiComponent} from './fang-chan-guan-li/fang-chan-guan-li.component';
+import {FangChanGuanLiDetailComponent} from './fang-chan-guan-li-detail/fang-chan-guan-li-detail.component';
+import {ShangPuGuanLiComponent} from './shang-pu-guan-li/shang-pu-guan-li.component';
+import {ShangPuGuanLiDetailComponent} from './shang-pu-guan-li-detail/shang-pu-guan-li-detail.component';
 
 @NgModule({
   declarations: [
       ZiChanComponent,
       ZiChanWeiXiuComponent,
-      ApproveComponent
+      ApproveComponent,
+      TuDiGuanLiComponent,
+      TuDiGuanLiDetailComponent,
+      FangChanGuanLiComponent,
+      FangChanGuanLiDetailComponent,
+      ShangPuGuanLiComponent,
+      ShangPuGuanLiDetailComponent,
   ],
   imports: [
     CommonModule,

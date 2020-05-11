@@ -1,0 +1,45 @@
+<ion-header>
+  <ion-toolbar color="primary">
+    <app-back></app-back>
+    <ion-title>
+      动态资金分析
+    </ion-title>
+  </ion-toolbar>
+</ion-header>
+<ion-content>
+  <div>
+    <div class="margin-top-5">
+      <ion-searchbar placeholder="请输入..." (ionChange)="search($event)"></ion-searchbar>
+      <ion-list class="my-list">
+        <ion-item *ngFor="let item of itemList;let i=index;" (click)="nav('decision-making-platform/dong-tai-zi-jin-detail',item)">
+          <section>
+            <div class="my-list-title">
+              <h2>{{i+1}}、{{item.projectname }}</h2>
+            </div>
+            <div class="my-list-sub">
+              <div class="my-list-sub-top flex-between">
+                <span> 总投资:{{item.ztz  }} </span>
+                <span class="my-list-sub-top-last">月报完成投资:{{item.ywctz }}</span>
+              </div>
+              <div margin-top-5 class="my-list-sub-top flex-between">
+                <span>结余:{{item.jy }} </span>
+                <span class="my-list-sub-top-last"></span>
+              </div>
+            </div>
+          </section>
+        </ion-item>
+        <ion-item *ngIf="itemList.length==0">
+          <section>
+            <div class="my-list-title">
+              <h2 class="primary">无数据!</h2>
+            </div>
+            <div class="my-list-sub">
+              <div class="my-list-sub-top flex-between">
+              </div>
+            </div>
+          </section>
+        </ion-item>
+      </ion-list>
+    </div>
+  </div>
+</ion-content>

@@ -9,6 +9,16 @@
 
 
 <ion-content padding>
+    <div class="flex-between search-border">
+        <ion-item>
+            <ion-datetime type="datetime-local" displayFormat="YYYY-MM-DD" pickerFormat="YYYY-MM-DD" doneText="确定" [(ngModel)]="params.timebegin" (ngModelChange)="ngOnInit()" cancelText="取消"></ion-datetime>
+        </ion-item>
+        至
+        <ion-item>
+            <ion-datetime type="datetime-local" displayFormat="YYYY-MM-DD" pickerFormat="YYYY-MM-DD" doneText="确定" [(ngModel)]="params.timeend" cancelText="取消" (ngModelChange)="ngOnInit()"></ion-datetime>
+        </ion-item>
+    </div>
+    <app-divider></app-divider>
     <ion-list class="my-list">
         <ion-item  *ngFor="let item of dataList;let index = index" (click)="nav('finance-reimbursement/detail',{id:item.id})">
             <section class="text-md">
@@ -16,22 +26,16 @@
                     <h2>{{ index+1 }}、{{item.title}}</h2>
                 </div>
                 <div class="my-list-sub">
-                        <ion-row>
-                            <ion-col col-8> 贷款总金额(万元)：{{item.dkzy}} </ion-col>
-                            <ion-col col-4> 利率(%)：{{item.lilv}} </ion-col>
-                        </ion-row>
-<!--                        <ion-row>-->
-<!--                            <ion-col col-12> 还款公司：{{item.hkcompany}} </ion-col>-->
-<!--                        </ion-row>-->
-                    <div class="danger">
-                        <ion-row>
-                            <ion-col col-12> 计划还款日期：{{item.jhhkrq}} </ion-col>
-                        </ion-row>
+                        <div class="flex-between">
+                            <span> 贷款总金额(万元)：{{item.dkzy}} </span>
+                            <span> 利率(%)：{{item.lilv}} </span>
+                        </div>
+                    <div class="danger flex-between">
+                            <span> 预估利息：{{item.ykls}} </span>
+                            <span> 计划还款日期：{{item.jhhkrq}} </span>
                     </div>
                     <div class="danger">
-                        <ion-row>
-                            <ion-col col-12> 是否提前结清：{{item.isok}} </ion-col>
-                        </ion-row>
+                        <span>是否提前结清：{{item.isok}} </span>
                     </div>
                 </div>
             </section>

@@ -1,40 +1,27 @@
-.card{
-  background: #fff;
-  &-item{
-    padding: 0.4rem 1rem;
-    font-size: 1.5rem;
-    box-sizing: border-box;
-    p{
-      font-size: 1.5rem;
-      line-height: 2.7rem;
-      margin: 0;
-      text-indent:2em;
-    }
-    h2{
-      font-size: 2.1rem;
-    }
-    h3{
-      margin: 0;
-      font-size: 1.8rem;
-    }
-    &-text{
-      position: relative;
-      span{
-        color:#898989;
-        position: absolute;
-        left:12rem;
-      }
-    }
+ion-content ion-toolbar {
+  --background: translucent;
+}
+.weather{
+  height: 40px;
+  padding: 0 20px;
+}
+.item-wrapper{
+  display: flex;
+  flex-flow: wrap;
+  padding: 10px 0;
+  .item{
+    width: 25%;
+    font-size: 14px;
   }
-  &-item:not(:last-child){
-    border-bottom:1px solid #eee;
-  }
-  .bg-1{
-    color:#fff;
-    background:#a6b1cf;
-  }
-  .bg-2{
-    color:#fff;
-    background:#8ebfd0;
+  .cicle{
+    width:60px;
+    height:60px;
+    border:1px solid #eee;
+    border-radius:50%;
+    text-align:center;
+    line-height:60px;
+    font-size:30px;
+    color: #ffffff;
+    margin: 5px auto;
   }
 }

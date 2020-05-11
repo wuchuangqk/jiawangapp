@@ -12,7 +12,7 @@ import {Events, IonSlides, NavController} from '@ionic/angular';
 })
 export class IndexComponent extends BasePage implements OnInit {
   @ViewChild(IonSlides) slides: IonSlides;
-  index = 0;
+  index = 1;
   // 项目id
   public pid = 0;
   public content = '';

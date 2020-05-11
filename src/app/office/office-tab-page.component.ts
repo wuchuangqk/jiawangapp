@@ -1,4 +1,4 @@
-import { Component } from '@angular/core';
+import {Component, OnInit} from '@angular/core';
 import {BasePage} from '../base/base-page';
 import {HttpService} from '../service/http.service';
 import {ActivatedRoute, Router} from '@angular/router';
@@ -10,9 +10,9 @@ import {Events, NavController} from '@ionic/angular';
   templateUrl: 'office-tab-page.component.html',
   styleUrls: ['office-tab-page.component.scss']
 })
-export class OfficeTabPage extends BasePage {
+export class OfficeTabPage extends BasePage implements OnInit {
 
-  public itemList = [
+  public itemList: Array<any> = [
     { icon: 'ios-notifications', color: '#7dc6ff', name: 'notice',
       title: '通知公告', url: '/notices/list', bage: '' , addUrl: 'add', isCanCommit: false },
     { icon: 'ios-bookmarks', color: '#7dc6ff', name: 'work-diary', title: '工作日志' , url: '/work_logs/list'},
@@ -52,5 +52,31 @@ export class OfficeTabPage extends BasePage {
   ) {
     super(http, router, navController, dialogService);
   }
+  ngOnInit() {
+    // super.ngOnInit();
+      this.getHomeConfigData()
+  }
 
+  getHomeConfigData() {
+    this.request('/users/home_configure', {}).then((res) => {
+      this.itemList[0].badge = Number(res.data.tzgg);  //  通知公告
+      this.itemList[1].badge = Number(res.data.gzrz);  //  工作日志(该项没有推送)
+      this.itemList[2].badge = Number(res.data.sw);    //  收文系统
+      this.itemList[3].badge = Number(res.data.fw);    //  发文系统
+      this.itemList[4].badge = Number(res.data.gzdt);  //  工作交流
+      this.itemList[6].badge = Number(res.data.jbdb);  //  交办督办
+      this.itemList[7].badge = Number(res.data.qjsp);  //  请假管理
+      this.itemList[8].badge = Number(res.data.jbsp);  //  加班管理
+      this.itemList[9].badge = Number(res.data.wcsp);  //  外出管理
+      this.itemList[10].bdage = Number(res.data.zhsp);  //  综合管理
+      // this.itemList[10].bage = Number(res.data.zcgz); //  资产购置
+      // this.itemList[11].bage = Number(res.data.whxc); //  文化宣传
+    }).catch((err) => {
+      console.log(err);
+    });
+  }
+  doRefresh(event) {
+    super.doRefresh(event);
+    this.getHomeConfigData();
+  }
 }

@@ -14,6 +14,7 @@ import {AppConfig} from '../../../app.config';
 export class IndexComponent extends ListBasePage implements OnInit, OnDestroy {
   public addUrl: string;
   public isCanCommit: boolean;
+  public isAdd: boolean;
   constructor(
       public http: HttpService,
       public router: Router,
@@ -36,6 +37,8 @@ export class IndexComponent extends ListBasePage implements OnInit, OnDestroy {
       this.getListData();
     });
     this.getListData();
+    const userInfo = JSON.parse(localStorage.userInfo);
+    this.isAdd = userInfo.notice;
   }
   ngOnDestroy() {
     this.events.unsubscribe(AppConfig.Notice.List);

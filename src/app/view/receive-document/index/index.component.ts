@@ -17,8 +17,14 @@ export class IndexComponent extends BasePage implements OnInit, OnDestroy {
     @ViewChild(IonSlides) slides: IonSlides;
     itemList = [];
     shenPiList = [];
+    // 已办收文
+    yiBanList = [];
+    guiDangList = [];
+    public keyword = '';
     public menuList = [
         { title: '收文系统' },
+        { title: '已办收文' },
+        { title: '收文归档' },
         // { title: '收文审核' }
     ];
     public index = 0;
@@ -63,22 +69,46 @@ export class IndexComponent extends BasePage implements OnInit, OnDestroy {
 
     getDocumentList() {
         this.request('/documents/slist', {
-            document_type: 0
+            document_type: 0,
+            keyword: this.keyword
         }).then((res) => {
             this.itemList = res.data;
         });
     }
     getShenPiList() {
-        this.request('/documents/sshlist', {}).then((res) => {
+        this.request('/documents/sshlist', {
+            keyword: this.keyword
+        }).then((res) => {
             this.shenPiList = res.data;
         });
     }
-    getRequst(){
+    getYiBanList() {
+        this.request('/documents/listed', {
+            keyword: this.keyword
+        }).then((res) => {
+            this.yiBanList = res.data;
+        });
+    }
+    async getGuiDangList() {
+        const res = await this.request('/documents/archivelist', {
+            keyword: this.keyword
+        });
+        this.guiDangList = res.data;
+    }
+    getRequst() {
         if (this.index == 0) {
             this.getDocumentList();
         } else if (this.index == 1) {
-            this.getShenPiList();
+            // this.getShenPiList();
+            this.getYiBanList();
+        } else if (this.index == 2) {
+            this.getGuiDangList();
         }
+    }
+    search(e: CustomEvent) {
+        console.log(e.detail.value);
+        this.keyword = e.detail.value;
+        this.getRequst();
     }
     doRefresh(event) {
         super.doRefresh(event);

@@ -29,15 +29,15 @@
 
 <ion-footer>
     <ion-toolbar>
-        <div *ngIf="payload.manage!=0">
+        <div *ngIf="payload.manage!='0'">
             <div class="flex-between">
-                <ion-button *ngIf="action.savenext!=0" (click)="saveAndNext()"  style="flex: 1" color="tertiary">保存并提交下一审批人</ion-button>
-                <ion-button *ngIf="action.linshisave!=0" (click)="linShiBaoChun()" style="flex: 1" color="secondary">临时保存</ion-button>
+                <ion-button *ngIf="action.savenext!='0'" (click)="saveAndNext()"  style="flex: 1" color="tertiary">保存并提交下一审批人</ion-button>
+                <ion-button *ngIf="action.linshisave!='0'" (click)="linShiBaoChun()" style="flex: 1" color="secondary">临时保存</ion-button>
             </div>
             <div class="flex-between" margin-top-5>
-                <ion-button  *ngIf="action.tuihui!=0" (click)="shenPiTuiHui()" style="flex: 1" color="warning">审批退回</ion-button>
-                <ion-button  *ngIf="action.stop!=0" (click)="shenPiZongZhi()" class="" style="flex: 1" color="danger">审批终止</ion-button>
-                <ion-button  *ngIf="action.finish!=0" (click)="jieShuLiuCheng()" class="" style="flex: 1" color="danger">结束流程</ion-button>
+                <ion-button  *ngIf="action.tuihui!='0'" (click)="shenPiTuiHui()" style="flex: 1" color="warning">审批退回</ion-button>
+                <ion-button  *ngIf="action.stop!='0'" (click)="shenPiZongZhi()" class="" style="flex: 1" color="danger">审批终止</ion-button>
+                <ion-button  *ngIf="action.finish!='0'" (click)="jieShuLiuCheng()" class="" style="flex: 1" color="danger">结束流程</ion-button>
             </div>
         </div>
     </ion-toolbar>

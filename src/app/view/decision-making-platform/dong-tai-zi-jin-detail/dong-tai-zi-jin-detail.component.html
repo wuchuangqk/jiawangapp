@@ -1,0 +1,30 @@
+<ion-header>
+  <ion-toolbar color="primary">
+    <app-back slot="start"></app-back>
+    <ion-title>
+      动态资金分析详情
+    </ion-title>
+  </ion-toolbar>
+</ion-header>
+<ion-content>
+
+  <ion-refresher (ionRefresh)="doRefresh($event)">
+    <ion-refresher-content
+            pullingIcon="arrow-dropdown"
+            pullingText="下拉刷新"
+            refreshingSpinner="circles"
+            refreshingText="刷新...">
+    </ion-refresher-content>
+    <ion-refresher-content >
+    </ion-refresher-content>
+  </ion-refresher>
+
+  <section>
+    <app-view-content [content]="content"></app-view-content>
+  </section>
+</ion-content>
+
+<ion-footer>
+  <ion-toolbar>
+  </ion-toolbar>
+</ion-footer>

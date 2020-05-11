@@ -1,56 +1,27 @@
 <ion-header>
     <ion-toolbar color="primary">
-        <app-back></app-back>
+        <app-back slot="start"></app-back>
         <ion-title>
             决策平台
         </ion-title>
     </ion-toolbar>
 </ion-header>
-<ion-content>
-    <div *ngIf="!loading">
-        <section class="card">
-            <div class="card-item bg-1">
-                <ion-grid>
-                    <ion-row class="text-center">
-                        <ion-col col-12>
-                            <h2> 项目数 </h2>
-                            <h3>{{tableData.projectcount}}</h3>
-                        </ion-col>
-                    </ion-row>
-                </ion-grid>
-            </div>
-            <div class="card-item default-color">
-                <p class="card-item-text">总投资数：<span>{{tableData.ztz}}</span></p>
-                <p class="card-item-text">完成投资数：<span>{{tableData.wczjs}}</span><p>
-                <p class="card-item-text">本年度投资计划：<span>{{tableData.ndtzjh}}</span></p>
-                <p class="card-item-text">本年度财务计划：<span>{{tableData.ndcwjh}}</span></p>
-                <p class="card-item-text">总合同数：<span>{{tableData.htcount }}</span></p>
-                <p class="card-item-text">总合同额：<span>{{tableData.htsum}}</span></p>
-            </div>
-        </section>
-        <section class="card">
-            <div class="card-item bg-2">
-                <ion-grid>
-                    <ion-row class="text-center">
-                        <ion-col col-12>
-                            <h2>部门数</h2>
-                            <h3>{{tableData.bms}}</h3>
-                        </ion-col>
-                    </ion-row>
-                </ion-grid>
-            </div>
-            <div class="card-item default-color">
-                <p class="card-item-text">总人数：<span>{{tableData.zrs}}</span></p>
-                <p class="card-item-text">登录频率：<span>{{tableData.dlpl}}</span></p>
-                <p class="card-item-text">操作频率：<span>{{tableData.zzpl}}</span></p>
-                <p class="card-item-text">查看频率：<span>{{tableData.ckpl}}</span></p>
-                <p class="card-item-text">通知数：<span>{{tableData.tzs}}</span></p>
-                <p class="card-item-text">审批数：<span>{{tableData.hjs}}</span></p>
-                <p class="card-item-text">收文数：<span>{{tableData.sws}}</span></p>
-                <p class="card-item-text">发文数：<span>{{tableData.fws}}</span></p>
-            </div>
-        </section>
 
+
+<ion-content [fullscreen]="true">
+    <!--  <ion-header collapse="condense">-->
+    <!--    <ion-toolbar>-->
+    <!--      <ion-title size="large">Tab 3</ion-title>-->
+    <!--    </ion-toolbar>-->
+    <!--  </ion-header>-->
+
+    <!--  <app-explore-container name="Tab 3 page"></app-explore-container>-->
+    <div class="item-wrapper">
+        <div class="item" *ngFor="let item of itemList" (click)="nav(item.name,{url:item.url||'',title:item.title,addUrl:item.addUrl,isCanCommit:item.isCanCommit})">
+            <div class="cicle" [ngStyle] = "{background:item.color}">
+                <ion-icon [name]="item.icon"></ion-icon>
+            </div>
+            <div class="ion-text-center">{{item.title}}</div>
+        </div>
     </div>
 </ion-content>
-
