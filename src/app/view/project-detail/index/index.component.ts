@@ -4,6 +4,7 @@ import {HttpService} from '../../../service/http.service';
 import {ActivatedRoute, Router} from '@angular/router';
 import {DialogService} from '../../../service/dialog.service';
 import {Events, IonSlides, NavController} from '@ionic/angular';
+import {cordovaWarn} from '@ionic-native/core/decorators/common';
 
 @Component({
   selector: 'app-index',
@@ -39,6 +40,13 @@ export class IndexComponent extends BasePage implements OnInit {
   ) {
     super(http, router, navController, dialogService, route);
     this.pid = this.query('pid');
+    // 由项目进度进来的导航到项目计划里面
+    const index = this.query('index');
+    if (index) {
+      this.index = Number(index);
+    } else {
+      this.index = 0;
+    }
     this.title = this.query('name');
   }
 

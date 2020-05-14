@@ -14,7 +14,7 @@ import {JPushModel} from '../view/home/jPush.model';
 })
 export class HttpService {
     public BaseUrl = localStorage.selectIp;
-    //|| environment.host;
+    // || environment.host;
   private failCodeMap = new Map([
     [0, { msg: '网络错误,请检查网络设置' }],
     [400, { msg: '请求错误' }],
@@ -45,27 +45,27 @@ export class HttpService {
   public get(url: string, data): Promise<any> {
     return this.httpRequest.get(url, data)
         .toPromise().catch((error) => {
-      this.handleError(error);
+      this.handleError(error, url);
     });
   }
   public post(url: string, data): Promise<any> {
     return this.httpRequest.post(url, data).toPromise().catch((error) => {
-      this.handleError(error);
+      this.handleError(error, url);
     });
   }
   public uploadFile(url: string, data, filePath): Promise<any> {
     return this.httpRequest.uploadFile(url, data, filePath).catch((error) => {
-      this.handleError(error);
+      this.handleError(error, url);
     });
   }
   public uploadFiles(url: string, data, files): Promise<any> {
       return this.httpRequest.uploadFiles(url, data, files).toPromise().catch((error) => {
-          this.handleError(error);
+          this.handleError(error, url);
       });
   }
 
-  private handleError(error): void {
-    this.dialogService.toast(this.failCodeMap.get(error.status).msg);
+  private handleError(error, url): void {
+    this.dialogService.toast(this.failCodeMap.get(error.status).msg + url);
   }
 
       logout() {
@@ -76,7 +76,7 @@ export class HttpService {
           if (this.platform.is('android')) {
               if (this.isHuaWei() && Number(this.device.version) >= 7) {// 判断是否为华为手机并且安卓版本号大于等于7
                   this.huaWeiPushProvider.stop();
-                  navigator["app"].exitApp();
+                  navigator['app'].exitApp();
               } else {
                   this.jPushModel.stopPush();
                   this.navController.navigateRoot('login');

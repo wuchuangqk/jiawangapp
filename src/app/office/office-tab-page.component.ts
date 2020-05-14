@@ -58,12 +58,12 @@ export class OfficeTabPage extends BasePage implements OnInit {
   }
 
   getHomeConfigData() {
-    this.request('/users/home_configure', {}).then((res) => {
-      this.itemList[0].badge = Number(res.data.tzgg);  //  通知公告
+    this.request('/home/homecont', {}).then((res) => {
+      this.itemList[0].badge = Number(res.data.noticecontent);  //  通知公告
       this.itemList[1].badge = Number(res.data.gzrz);  //  工作日志(该项没有推送)
-      this.itemList[2].badge = Number(res.data.sw);    //  收文系统
-      this.itemList[3].badge = Number(res.data.fw);    //  发文系统
-      this.itemList[4].badge = Number(res.data.gzdt);  //  工作交流
+      this.itemList[2].badge = Number(res.data.receiptcount);    //  收文系统
+      this.itemList[3].badge = Number(res.data.dispatchcount);    //  发文系统
+      this.itemList[4].badge = Number(res.data.workcount);  //  工作交流
       this.itemList[6].badge = Number(res.data.jbdb);  //  交办督办
       this.itemList[7].badge = Number(res.data.qjsp);  //  请假管理
       this.itemList[8].badge = Number(res.data.jbsp);  //  加班管理
