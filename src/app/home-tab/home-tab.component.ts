@@ -21,15 +21,14 @@ export class HomeTabComponent  extends BasePage implements OnInit {
   public ziChanAndHeTongCount = {};
   public weather: any = {};
   public  itemList: Array<any> = [
-    { icon: 'ios-notifications', color: '#7dc6ff', name: 'notice', title: '通知公告', url: '/notices/list', bage: '' , addUrl: 'add', isCanCommit: false },
-    { icon: 'ios-bookmarks', color: '#7dc6ff', name: 'work-diary', title: '工作日志' , url: '/work_logs/list'},
-    { icon: 'ios-paper', color: '#73d1d1', name: 'dai-ban', title: '待办事项' },
-    { icon: 'ios-paper', color: '#73d1d1', name: 'dai-yue', title: '待阅事项' },
-    { icon: 'send', color: '#fa7c92', name: 'rong-zi', title: '融资管理' },
-    { icon: 'ios-chatbubbles', color: '#7dc6ff', name: 'zi-chan', title: '资产管理', url: '/work_dynamics/list', addUrl: 'exchange-add', isCanCommit: true },
-    // { icon: 'ios-people', color: '#fbbd6d', name: 'assign', title: '决策平台' },
-    { icon: 'md-radio', color: '#fb8862', name: 'decision-making-platform', title: '决策平台' },
-    { icon: 'calendar', color: '#b2d76a', name: 'full-map', title: '项目分布' },
+    { icon: 'ios-notifications', color: '#7dc6ff', name: 'notice', title: '通知公告', url: '/notices/list', bage: '' , addUrl: 'add', isCanCommit: false , access: true},
+    { icon: 'ios-bookmarks', color: '#7dc6ff', name: 'work-diary', title: '工作日志' , url: '/work_logs/list', access: true},
+    { icon: 'ios-paper', color: '#73d1d1', name: 'dai-ban', title: '待办事项' , access: true},
+    { icon: 'ios-paper', color: '#73d1d1', name: 'dai-yue', title: '待阅事项' , access: true},
+    { icon: 'send', color: '#fa7c92', name: 'rong-zi', title: '融资管理', access: false },
+    { icon: 'ios-chatbubbles', color: '#7dc6ff', name: 'zi-chan', title: '资产管理', url: '/work_dynamics/list', addUrl: 'exchange-add', isCanCommit: true, access: false },
+    { icon: 'md-radio', color: '#fb8862', name: 'decision-making-platform', title: '决策平台', access: false },
+    { icon: 'calendar', color: '#b2d76a', name: 'full-map', title: '项目分布', access: true },
   ];
   constructor(
       public http: HttpService,
@@ -110,7 +109,19 @@ export class HomeTabComponent  extends BasePage implements OnInit {
   }
 
   getHomeConfigData() {
-    this.request('/home/homecont', {}).then((res) => {
+      this.request('/home/homeaccess', {}).then((res) => {
+        console.log(res);
+        if (res.data.rz) {
+          this.itemList[4].access = true;
+        }
+        if (res.data.zc) {
+          this.itemList[5].access = true;
+        }
+        if (res.data.jc) {
+          this.itemList[6].access = true;
+        }
+      });
+      this.request('/home/homecont', {}).then((res) => {
       this.itemList[0].badge = Number(res.data.noticecount);  //  通知公告
       this.itemList[2].badge = Number(res.data.todocount);    //  收文系统
       this.itemList[3].badge = Number(res.data.toreadcount);    //  发文系统
