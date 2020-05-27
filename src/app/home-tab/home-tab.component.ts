@@ -109,18 +109,13 @@ export class HomeTabComponent  extends BasePage implements OnInit {
   }
 
   getHomeConfigData() {
-      this.request('/home/homeaccess', {}).then((res) => {
-        console.log(res);
-        if (res.data.rz) {
-          this.itemList[4].access = true;
-        }
-        if (res.data.zc) {
-          this.itemList[5].access = true;
-        }
-        if (res.data.jc) {
-          this.itemList[6].access = true;
-        }
-      });
+    this.request('/home/homeaccess', {}).then((res) => {
+      console.log(res);
+      let data = res.data;
+      this.itemList[4].access = data.rz;
+      this.itemList[5].access = data.zc;
+      this.itemList[6].access = data.jc;
+    });
       this.request('/home/homecont', {}).then((res) => {
       this.itemList[0].badge = Number(res.data.noticecount);  //  通知公告
       this.itemList[2].badge = Number(res.data.todocount);    //  收文系统
