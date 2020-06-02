@@ -1,0 +1,1 @@
+cordova plugin add cordova-plugin-mipush --variable MI_PUSH_APP_KEY=5141840975126 --variable MI_PUSH_APP_ID=2882303761518409126 --variable MI_PUSH_APP_IOS_ID=2882303761518409126 --variable MI_PUSH_APP_IOS_KEY=5141840975126

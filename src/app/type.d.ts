@@ -3,3 +3,4 @@ interface Iresponse {
     msg: string;
     data: any;
 }
+declare  const plugins;

@@ -40,7 +40,6 @@ export class JPushModel {
     }
     getRegistrationID(callback?: Function) {
         this.jPush.getRegistrationID().then((id) => {
-            // this.dialogService.toast(id);
             if (id.length > 0) {
                if (callback) {
                    callback(id);

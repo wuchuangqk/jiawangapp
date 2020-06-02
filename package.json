@@ -58,8 +58,10 @@
     "cordova-plugin-file-transfer": "^1.7.1",
     "cordova-plugin-filechooser": "^1.2.0",
     "cordova-plugin-ionic-keyboard": "^2.2.0",
-    "cordova-plugin-ionic-webview": "^4.2.0",
-    "cordova-plugin-jcore": "^1.2.3",
+    "cordova-plugin-ionic-webview": "^4.2.1",
+    "cordova-plugin-jcore": "^1.3.2",
+    "cordova-plugin-mipush": "^2.0.3",
+    "cordova-plugin-mixpush": "^1.0.8",
     "cordova-plugin-splashscreen": "^5.0.3",
     "cordova-plugin-statusbar": "^2.4.3",
     "cordova-plugin-umengpush": "https://gitee.com/hui1421/cordova-plugin-umengpush.git",
@@ -68,7 +70,7 @@
     "crypto-js": "^3.1.9-1",
     "echarts": "^4.7.0",
     "hammerjs": "^2.0.8",
-    "jpush-phonegap-plugin": "^3.4.3",
+    "jpush-phonegap-plugin": "^3.7.5",
     "jquery": "^3.4.1",
     "ngx-quill": "7.3.2",
     "node-sass": "^4.13.1",
@@ -108,7 +110,8 @@
   "cordova": {
     "plugins": {
       "jpush-phonegap-plugin": {
-        "APP_KEY": "2dfbed0a944f7c616e5cc78c"
+        "APP_KEY": "2dfbed0a944f7c616e5cc78c",
+        "CHANNEL": "developer-default"
       },
       "cordova-plugin-jcore": {},
       "cordova-plugin-whitelist": {},
@@ -139,6 +142,17 @@
         "APPID": "102108765",
         "PACKAGENAME": "com.bnp.yuansong",
         "CPID": "102108765"
+      },
+      "cordova-plugin-mixPush": {
+        "ANDROID_PACKAGE_NAME": "com.bnp.yuansong",
+        "MI_PUSH_APP_IOS_ID": "2882303761518409126",
+        "MI_PUSH_APP_IOS_KEY": "5141840975126"
+      },
+      "cordova-plugin-mipush": {
+        "MI_PUSH_APP_KEY": "5141840975126",
+        "MI_PUSH_APP_ID": "2882303761518409126",
+        "MI_PUSH_APP_IOS_ID": "2882303761518409126",
+        "MI_PUSH_APP_IOS_KEY": "5141840975126"
       }
     },
     "platforms": [

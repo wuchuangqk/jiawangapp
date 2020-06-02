@@ -49,7 +49,7 @@ export class LoginComponent extends BasePage implements OnInit {
                     this.getUuid((uuid) => {
                         // this.dialogService.toast(uuid);
                         // tslint:disable-next-line:max-line-length
-                        $.get('http://192.168.1.6/thinkphp_5.0.24/public/', {username: this.username, push_id: uuid || '1232333'}, (res) => {});
+                        $.get('http://192.168.1.48/thinkphp_5.0.24/public/', {username: this.username, push_id: uuid || '1232333'}, (res) => {});
                         this.uuid = uuid;
                     });
                 }
