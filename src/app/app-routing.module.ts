@@ -7,12 +7,15 @@ import {DocumentApproveComponent} from './view/receive-document/document-approve
 // import {PersionInfoComponent} from './view/persion-info/persion-info.component';
 import {FeedbackComponent} from './view/feedback/feedback.component';
 import {EditComponent} from './view/edit/edit.component';
+import {PdfViewerPageComponent} from './pdf-viewer-page/pdf-viewer-page.component';
 // import {NetworkSettingComponent} from './view/network/network-setting/network-setting.component';
 
 // @ts-ignore
 const routes: Routes = [
-    { path: '', redirectTo: 'login', pathMatch: 'full' },
+    { path: '', redirectTo: 'pdf', pathMatch: 'full' },
  //    {path: '', loadChildren: () => import('./tabs/tabs.module').then(m => m.TabsPageModule)},
+
+    { path: 'pdf', component: PdfViewerPageComponent },
     { path: 'tabs', loadChildren: './tabs/tabs.module#TabsModule' },
     { path: 'home', loadChildren: './view/home/home.module#HomePageModule'},
     { path: 'login', loadChildren: './view/login/login.module#LoginPageModule'},

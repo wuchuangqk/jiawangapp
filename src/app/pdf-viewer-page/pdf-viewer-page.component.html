@@ -1,0 +1,31 @@
+
+
+<ion-content>
+
+
+<simple-pdf-viewer #pdfViewer [src]="url"></simple-pdf-viewer>
+<!--<pdf-viewer src="pdfSource"-->
+<!--            [show-all]="true"-->
+<!--            [original-size]="false"-->
+<!--            [zoom]=1-->
+<!--            [render-text]="false"-->
+<!--            [autoresize]="true"-->
+<!--            style="display: block" >-->
+<!--</pdf-viewer>-->
+
+<!--<pdf-viewer src="assets/1.pdf"-->
+<!--            [render-text]="true"-->
+<!--            style="display: block;"-->
+<!--&gt;</pdf-viewer>-->
+
+</ion-content>
+<ion-footer>
+    <ion-toolbar>
+        <ion-button size="small" (click)="pdfViewer.prevPage()">下一页</ion-button>
+        <ion-button size="small" (click)="nextPage()">下一页</ion-button>
+        <ion-button size="small" (click)="pdfViewer.zoomIn()">放大</ion-button>
+        <ion-button size="small" (click)="pdfViewer.zoomOut()">缩小</ion-button>
+        <ion-button size="small" (click)="pdfViewer.turnLeft()">旋转</ion-button>
+    </ion-toolbar>
+</ion-footer>
+

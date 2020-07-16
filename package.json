@@ -24,7 +24,7 @@
     "@ionic-native/app-minimize": "^5.9.0",
     "@ionic-native/app-version": "^5.10.0",
     "@ionic-native/badge": "^5.10.0",
-    "@ionic-native/base64": "^5.10.0",
+    "@ionic-native/base64": "^5.27.0",
     "@ionic-native/camera": "^5.10.0",
     "@ionic-native/core": "^5.0.0",
     "@ionic-native/device": "^5.16.0",
@@ -42,6 +42,7 @@
     "@ionic/pro": "2.0.4",
     "@jiguang-ionic/jpush": "2.0.0",
     "@types/swiper": "^4.4.3",
+    "com-badrit-base64": "^0.2.0",
     "cordova-android": "7.1.4",
     "cordova-android-support-gradle-release": "^3.0.1",
     "cordova-huawei-hms": "https://gitee.com/hui1421/cordova-huawei-hms.git",
@@ -72,10 +73,12 @@
     "hammerjs": "^2.0.8",
     "jpush-phonegap-plugin": "^3.7.5",
     "jquery": "^3.4.1",
+    "ng2-pdf-viewer": "^6.3.2",
     "ngx-quill": "7.3.2",
     "node-sass": "^4.13.1",
     "quill": "1.3.7",
     "rxjs": "~6.5.1",
+    "simple-pdf-viewer": "^2.0.3",
     "tslib": "^1.9.0",
     "zone.js": "~0.8.29",
     "zx-editor": "^3.0.2"
@@ -153,7 +156,8 @@
         "MI_PUSH_APP_ID": "2882303761518409126",
         "MI_PUSH_APP_IOS_ID": "2882303761518409126",
         "MI_PUSH_APP_IOS_KEY": "5141840975126"
-      }
+      },
+      "com-badrit-base64": {}
     },
     "platforms": [
       "android",

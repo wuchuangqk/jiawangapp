@@ -21,6 +21,8 @@ import {DocumentApproveComponent} from './view/receive-document/document-approve
 import {JPush} from '@jiguang-ionic/jpush/ngx';
 import {AppVersion} from '@ionic-native/app-version/ngx';
 // import {PersionInfoComponent} from './view/persion-info/persion-info.component';
+
+
 import { NativeStorage } from '@ionic-native/native-storage/ngx';
 import {FileTransfer } from '@ionic-native/file-transfer/ngx';
 import {FileOpener} from '@ionic-native/file-opener/ngx';
@@ -43,7 +45,10 @@ import {EditComponent } from './view/edit/edit.component';
 import { AutoresizeTextareaDirective } from './autoresize-textarea.directive';
 import {IndexedDBService} from './service/IndexedDBService';
 import {ComponentsModule} from './components/components.module';
-
+import {PdfViewerPageComponent} from './pdf-viewer-page/pdf-viewer-page.component';
+import {PdfComponent} from './pdf/pdf.component';
+// import { PdfViewerModule } from 'ng2-pdf-viewer';
+import { SimplePdfViewerModule } from 'simple-pdf-viewer';
 
 @NgModule({
     declarations: [
@@ -55,6 +60,8 @@ import {ComponentsModule} from './components/components.module';
         EditComponent,
         FeedbackComponent,
         // NetworkSettingComponent,
+        PdfViewerPageComponent,
+        PdfComponent,
         AutoresizeTextareaDirective,
     ],
     entryComponents: [],
@@ -63,6 +70,8 @@ import {ComponentsModule} from './components/components.module';
         HttpClientModule,
         ComponentsModule,
         CommonComponentsModule,
+        // PdfViewerModule,
+        SimplePdfViewerModule,
         QuillModule.forRoot(
             {
                 modules: {
