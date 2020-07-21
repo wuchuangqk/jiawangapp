@@ -51,10 +51,10 @@ export class HomeTabComponent  extends BasePage implements OnInit {
     });
   }
   Your_Receive_Register_Function(data) {
-    alert(JSON.stringify(data));
+    //alert(JSON.stringify(data));
   }
   Your_Notification_Message_Arrived_Function(data) {
-    alert(JSON.stringify(data));
+    //alert(JSON.stringify(data));
   }
 
   init() {

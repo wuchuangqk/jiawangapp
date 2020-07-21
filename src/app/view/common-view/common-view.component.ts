@@ -60,4 +60,8 @@ export class CommonViewComponent extends DetailBasePage implements OnInit, OnDes
             id: this.id
         });
     }
+
+    viewFile(item: IDownFile) {
+        this.nav('pdf', item);
+    }
 }

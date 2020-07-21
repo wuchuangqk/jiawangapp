@@ -34,6 +34,9 @@ export class AddComponent extends BasePage implements OnInit {
         zfdw: '',
 
     };
+
+    public shengQingRenName = '';
+
     constructor(
         public http: HttpService,
         public router: Router,
@@ -54,6 +57,8 @@ export class AddComponent extends BasePage implements OnInit {
 
     }
     ngOnInit() {
+        const userInfo =  JSON.parse(localStorage.getItem('userInfo'));
+        this.shengQingRenName = userInfo.name;
     }
 
 

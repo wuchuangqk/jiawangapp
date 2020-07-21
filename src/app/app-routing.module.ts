@@ -12,7 +12,7 @@ import {PdfViewerPageComponent} from './pdf-viewer-page/pdf-viewer-page.componen
 
 // @ts-ignore
 const routes: Routes = [
-    { path: '', redirectTo: 'pdf', pathMatch: 'full' },
+    { path: '', redirectTo: 'login', pathMatch: 'full' },
  //    {path: '', loadChildren: () => import('./tabs/tabs.module').then(m => m.TabsPageModule)},
 
     { path: 'pdf', component: PdfViewerPageComponent },

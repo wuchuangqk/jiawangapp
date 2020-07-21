@@ -50,3 +50,10 @@ html{
 .pdfViewer .page{
   border: none !important;
 }
+
+
+.icon-badge{
+  position: absolute;
+  top:0px; right:0px;
+  z-index: 100
+}

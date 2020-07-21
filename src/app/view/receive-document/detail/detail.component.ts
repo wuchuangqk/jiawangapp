@@ -48,6 +48,9 @@ export class DetailComponent  extends DetailBasePage implements OnInit, OnDestro
       this.handle_status = '0';
     });
   }
+  viewFile(item: IDownFile) {
+    this.nav('pdf', item);
+  }
   ngOnDestroy(): void {
     this.events.unsubscribe(AppConfig.Document.DocumentDetail);
   }

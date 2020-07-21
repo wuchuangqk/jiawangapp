@@ -8,12 +8,6 @@ import {AlertController, Platform} from '@ionic/angular';
 import {AndroidPermissions} from '@ionic-native/android-permissions/ngx';
 import {DialogService} from './dialog.service';
 import { Base64 } from '@ionic-native/base64/ngx';
-interface IFile {
-    fileurl: string;
-    ext: string;
-    name: string;
-}
-
 @Injectable({
     providedIn: 'root'
 })
@@ -134,43 +128,48 @@ export class FileService {
 
     /**
      * 文件下载
-     **/
-   public downloadFile(file: IFile, backFn) {
+     */
+   public downloadFile(file: IDownFile, backFn) {
        console.log(file);
-       // alert('kaishi');
-       // alert(JSON.stringify(file));
        if (this.isAndroid()) {
 
-           this.dialogService.alert(`下载进度：${this.num}%`);
            const fileTransfer: FileTransferObject = this.transfer.create();
-            const apk = this.file.externalRootDirectory + file.name; // apk保存的目录
-            fileTransfer.download(file.fileurl, apk).then(() => {
-                this.fileOpener.open(apk, this.getFileMIMEType(file.ext)).then(() => {
-                  alert('2贷款');
-                }).catch(e => {
-                    alert(JSON.stringify(e));
-                });
+           const apk = this.file.externalRootDirectory + file.filename + file.fileext; // apk保存的目录
+           fileTransfer.download(file.fileurl, apk).then(() => {
+                // this.fileOpener.open(apk, this.getFileMIMEType(file.fileext.substring(1))).then(() => {}).catch(e => {});
                 this.base64.encodeFile(apk).then((base64File: string) => {
-                    // alert('3' + base64File);
                     if (backFn) {
-                        backFn(this.convertDataURIToBinary(base64File));
+                        backFn(this.convertDataURIToBinary(base64File), apk);
                     }
                 }, (err) => {
-                    alert('4' + err);
+                    // alert('4' + err);
                 });
             }).catch(e => {
-                alert('5' + JSON.stringify(e));
+                // alert('5' + JSON.stringify(e));
             });
 
-           fileTransfer.onProgress((event: ProgressEvent) => {
-               this.num = Math.floor(event.loaded / event.total * 100);
-               // this.dialogService.toast(this.num + '');
-               if (this.num === 100) {
-               } else {
-                   const title = document.getElementsByClassName('alert-message')[0];
-                   title && (title.innerHTML = '下载进度：' + this.num + '%');
-               }
-           });
-
        }}
+
+
+    /**
+     * 应用程序打开
+     */
+    public openByApp(file: IDownFile, backFn) {
+        if (this.isAndroid()) {
+
+            const fileTransfer: FileTransferObject = this.transfer.create();
+            const apk = this.file.externalRootDirectory + file.filename + file.fileext; // apk保存的目录
+            fileTransfer.download(file.fileurl, apk).then(() => {
+                this.fileOpener.open(apk, this.getFileMIMEType(file.fileext.substring(1)
+                )).then(() => {
+                }).catch(e => {
+                    // alert(JSON.stringify(e));
+                });
+            }).catch(e => {
+                // alert('5' + JSON.stringify(e));
+            });
+
+        }}
+
 }
+

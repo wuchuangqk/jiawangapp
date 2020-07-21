@@ -21,7 +21,7 @@ export class ZhaoBiaoDetailComponent extends BasePage implements OnInit {
 
   // 招标准备
   public zhaoBiaoZhunBeiList: Array<IList> = [
-    { label: '项目分类', field:  'projectType' },
+    // { label: '项目分类', field:  'projectType' },
     { label: '招标码', field: 'code'},
     { label: '发包方式', field: 'fbfs'},
     { label: '办理类型', field: 'bllx'},

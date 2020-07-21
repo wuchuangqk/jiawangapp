@@ -3,7 +3,7 @@
     <app-back></app-back>
     <ion-title>
       <div class="segment-wrapper">
-        <ion-segment mode="ios" color="white" small (ngModelChange)="ngModelChange($event)" [(ngModel)]="index">
+        <ion-segment mode="ios" small (ngModelChange)="ngModelChange($event)" [(ngModel)]="index">
           <ion-segment-button *ngFor="let item of menuList" [value]="item.index">
             {{item.name}}
           </ion-segment-button>

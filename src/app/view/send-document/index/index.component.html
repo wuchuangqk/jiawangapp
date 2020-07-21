@@ -54,7 +54,7 @@
         <ion-item *ngIf="yiBanList.length<=0" >
           <p class="primary">无数据！</p>
         </ion-item>
-        <ion-item *ngFor="let item of yiBanList" (click)="nav('detail',{title:'收文系统',url:'/documents/slist',handleUrl:'/documents/handle_document', document_type:0,id:item.id,handle_status:item.handle_status})">
+        <ion-item *ngFor="let item of yiBanList" (click)="nav('detail',{title:'发文系统',url:'/documents/flist',handleUrl:'/documents/handle_document', document_type:1,id:item.id,handle_status:item.handle_status})">
           <section>
             <div class="my-list-title">
               <h2  [ngClass]="item.read=='0'?'':'primary'">
@@ -78,7 +78,7 @@
         <ion-item *ngIf="guiDangList.length<=0" >
           <p class="primary">无数据！</p>
         </ion-item>
-        <ion-item *ngFor="let item of guiDangList" (click)="nav('detail',{title:'收文系统',url:'/documents/slist',handleUrl:'/documents/handle_document', document_type:0,id:item.id,handle_status:item.handle_status})">
+        <ion-item *ngFor="let item of guiDangList" (click)="nav('detail',{title:'发文系统',url:'/documents/flist',handleUrl:'/documents/handle_document', document_type:1,id:item.id,handle_status:item.handle_status})">
           <section>
             <div class="my-list-title">
               <h2  [ngClass]="item.read=='0'?'':'primary'">

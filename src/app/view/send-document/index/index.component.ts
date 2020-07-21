@@ -69,7 +69,7 @@ export class IndexComponent extends BasePage implements OnInit, OnDestroy {
         });
     }
     getYiBanList() {
-        this.request('/documents/listed', {
+        this.request('/documents/flisted', {
             keyword: this.keyword
         }).then((res) => {
             this.yiBanList = res.data;

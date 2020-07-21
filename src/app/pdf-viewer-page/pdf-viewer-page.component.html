@@ -1,31 +1,35 @@
 
 
+<ion-header>
+    <ion-toolbar color="primary">
+        <app-back></app-back>
+        <ion-title>
+            文件预览
+        </ion-title>
+        <div slot="end" (click)="openByApp()">
+            <ion-icon name="redo" style="font-size: 30px"></ion-icon>
+        </div>
+    </ion-toolbar>
+</ion-header>
+
 <ion-content>
-
-
-<simple-pdf-viewer #pdfViewer [src]="url"></simple-pdf-viewer>
-<!--<pdf-viewer src="pdfSource"-->
-<!--            [show-all]="true"-->
-<!--            [original-size]="false"-->
-<!--            [zoom]=1-->
-<!--            [render-text]="false"-->
-<!--            [autoresize]="true"-->
-<!--            style="display: block" >-->
-<!--</pdf-viewer>-->
-
-<!--<pdf-viewer src="assets/1.pdf"-->
-<!--            [render-text]="true"-->
-<!--            style="display: block;"-->
-<!--&gt;</pdf-viewer>-->
-
+    <simple-pdf-viewer #pdfViewer [src]="url"></simple-pdf-viewer>
 </ion-content>
 <ion-footer>
     <ion-toolbar>
-        <ion-button size="small" (click)="pdfViewer.prevPage()">下一页</ion-button>
-        <ion-button size="small" (click)="nextPage()">下一页</ion-button>
-        <ion-button size="small" (click)="pdfViewer.zoomIn()">放大</ion-button>
-        <ion-button size="small" (click)="pdfViewer.zoomOut()">缩小</ion-button>
-        <ion-button size="small" (click)="pdfViewer.turnLeft()">旋转</ion-button>
+        <div>
+        <ion-button size="small" fill="outline" (click)="pdfViewer.zoomIn()">放大</ion-button>
+            <ion-button size="small" fill="outline" (click)="pdfViewer.zoomFullPage()">全屏</ion-button>
+            <ion-button size="small" fill="outline" (click)="pdfViewer.zoomPageWidth()">整宽</ion-button>
+            <ion-button size="small" fill="outline" (click)="pdfViewer.zoomPageHeight()">整高</ion-button>
+            <ion-button size="small" fill="outline" (click)="pdfViewer.zoomReset()">重置</ion-button>
+        </div>
+        <div>
+            <ion-button size="small" fill="outline" (click)="pdfViewer.zoomOut()">缩小</ion-button>
+            <ion-button size="small" fill="outline" (click)="pdfViewer.turnLeft()">旋转</ion-button>
+            <ion-button size="small" fill="outline" (click)="pdfViewer.prevPage()">下一页</ion-button>
+            <ion-button size="small" fill="outline" (click)="nextPage()">下一页</ion-button>
+        </div>
     </ion-toolbar>
 </ion-footer>
 

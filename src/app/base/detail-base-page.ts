@@ -21,7 +21,8 @@ export class DetailBasePage extends BasePage {
 };
     public content: SafeHtml = '';
     public comment_num: any;
-  constructor(
+    public fileList: Array<IDownFile> = [];
+    constructor(
       public http: HttpService,
       public router: Router,
       public dialogService: DialogService,
@@ -37,6 +38,7 @@ export class DetailBasePage extends BasePage {
     console.log(res.data);
     if (res.data) {
           this.comment_num = res.data.comment_num;
+          this.fileList = res.data.file;
       }
     if (res.data.json) {
         this.detail.control = '1';

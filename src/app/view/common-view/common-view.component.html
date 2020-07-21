@@ -20,6 +20,13 @@
   </ion-refresher>
     <h2>{{contentTitle}}</h2>
     <div class="detail-content" [innerHTML]="content"></div>
+
+  <section *ngIf="fileList&&fileList.length>0" class="detail-style">
+        <p>附件：</p>
+    <div *ngFor="let item of fileList;let i = index;" (click)="viewFile(item)">
+      <a>{{i+1}},{{item.filename}}{{item.fileext}}</a>
+    </div>
+  </section>
 </ion-content>
 <ion-footer>
   <ion-toolbar>

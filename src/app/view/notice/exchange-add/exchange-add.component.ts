@@ -16,9 +16,9 @@ export class ExchangeAddComponent extends BasePage implements OnInit {
     // 标题
     infoTitle: '',
     // 用途
-    infoUse: '',
+    infoUse: '内部交流',
     // 分类
-    infoType: '',
+    infoType: '下传',
     // 内容
     infoContent: '',
     roleType: 1,
@@ -27,7 +27,9 @@ export class ExchangeAddComponent extends BasePage implements OnInit {
     public fileArray = [];
  public keshiIds = [];
   public selectedStaff = [];
-  public InfoUseList = [];
+  public infoUseList = [
+  ];
+  // infoUse
   public InfoTypeList = [];
   public keShiList = [];
   public rolesList = [
@@ -55,7 +57,7 @@ export class ExchangeAddComponent extends BasePage implements OnInit {
   // 用途
   private GetInfoUse() {
     this.request('/work_dynamics/GetInfoUse', {}).then((res) => {
-      this.InfoUseList = res.data;
+      this.infoUseList = res.data;
     });
   }
   go(eventName) {

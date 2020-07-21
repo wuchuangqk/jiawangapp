@@ -81,7 +81,7 @@ export class IndexComponent extends BasePage implements OnInit, OnDestroy {
                     url: '/documents/slist',
                     contentTitle,
                     document_type: 0,
-                    handle_status: 0,
+                    handle_status: 1,
                     handleUrl: '/documents/handle_document',
                 });
                 break;

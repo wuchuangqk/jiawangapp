@@ -21,7 +21,7 @@ export class OfficeTabPage extends BasePage implements OnInit {
     { icon: 'send', color: '#fa7c92', name: 'send-document', title: '发文系统' },
     { icon: 'ios-chatbubbles', color: '#7dc6ff', name: 'work-dynamics',
       title: '工作交流', url: '/work_dynamics/list', addUrl: 'exchange-add', isCanCommit: true },
-    { icon: 'ios-people', color: '#fbbd6d', name: 'assign', title: '交办督办督查' },
+    { icon: 'ios-people', color: '#fbbd6d', name: 'assign', title: '交办督办' },
     { icon: 'calendar', color: '#b2d76a', name: 'leave', title: '请假管理' },
     { icon: 'ios-alarm', color: '#c1a6f0', name: 'overtime-work', title: '加班管理' },
     { icon: 'md-pin', color: '#a3bdb9', name: 'go-out', title: '外出管理' },

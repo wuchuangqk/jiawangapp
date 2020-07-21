@@ -46,7 +46,6 @@ import { AutoresizeTextareaDirective } from './autoresize-textarea.directive';
 import {IndexedDBService} from './service/IndexedDBService';
 import {ComponentsModule} from './components/components.module';
 import {PdfViewerPageComponent} from './pdf-viewer-page/pdf-viewer-page.component';
-import {PdfComponent} from './pdf/pdf.component';
 // import { PdfViewerModule } from 'ng2-pdf-viewer';
 import { SimplePdfViewerModule } from 'simple-pdf-viewer';
 
@@ -61,7 +60,6 @@ import { SimplePdfViewerModule } from 'simple-pdf-viewer';
         FeedbackComponent,
         // NetworkSettingComponent,
         PdfViewerPageComponent,
-        PdfComponent,
         AutoresizeTextareaDirective,
     ],
     entryComponents: [],

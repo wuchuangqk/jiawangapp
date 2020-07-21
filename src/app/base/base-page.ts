@@ -30,7 +30,7 @@ export class BasePage implements OnInit {
     query(name ) {
         return this.route.snapshot.queryParams[name];
     }
-    getQueryParams() {
+    getQueryParams(): any {
         return this.route.snapshot.queryParams;
     }
     getParams() {
