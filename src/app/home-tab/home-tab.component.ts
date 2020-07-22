@@ -48,22 +48,21 @@ export class HomeTabComponent  extends BasePage implements OnInit {
       document.addEventListener('mipush.notificationMessageArrived', this.Your_Notification_Message_Arrived_Function, false);
       plugins.MiPushPlugin.init();
       document.addEventListener('mipush.receiveRegisterResult', this.Your_Receive_Register_Function, false);
+      this.nativeService.detectionUpgrade();
     });
   }
   Your_Receive_Register_Function(data) {
-    //alert(JSON.stringify(data));
+    // alert(JSON.stringify(data));
   }
   Your_Notification_Message_Arrived_Function(data) {
-    //alert(JSON.stringify(data));
+    // alert(JSON.stringify(data));
   }
 
   init() {
     if (this.isHuaWei() && Number(this.device.version) >= 7) {// 判断是否为华为手机并且安卓版本号大于等于7
       this.huaWeiPushProvider.isConnected().then(() => {
-        console.log('已经链接！');
         this.huaWeiPushNotificationOpened();
       }).catch(() => {
-        console.log('未链接！');
         this.huaweiPush();
       });
     } else {
@@ -74,12 +73,6 @@ export class HomeTabComponent  extends BasePage implements OnInit {
         this.dialogService.alert(id);
         this.jPushModel.setAlias(this.jPushModel.getPersonAlias());
         this.jPushModel.listenOpenNotification();
-        $.get('http://192.168.1.48/thinkphp_5.0.24/public/', {
-          username: JSON.parse(localStorage.userInfo).name,
-          push_id: id,
-          time: new Date().toString()
-        }, (res) => {
-        });
       });
     }
   }

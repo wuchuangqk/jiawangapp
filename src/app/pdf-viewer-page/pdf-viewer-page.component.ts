@@ -59,8 +59,8 @@ export class PdfViewerPageComponent extends BasePage implements OnInit {
     setTimeout(() => {
       this.fileService.downloadFile(this.file, (res: any, filePath: string) => {
         this.localFilePath = filePath;
-        this.pdfViewer.zoomFullPage();
         this.pdfViewer.openDocument(res);
+        this.pdfViewer.zoomFullPage();
       });
     }, 2000);
   }
