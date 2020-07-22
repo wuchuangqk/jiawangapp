@@ -30,6 +30,10 @@ export class JPushModel {
             }
         });
     }
+    setDebugMode(enable: boolean): void {
+        return this.jPush.setDebugMode(enable);
+    }
+
     stopPush() {
         return this.jPush.stopPush();
     }
