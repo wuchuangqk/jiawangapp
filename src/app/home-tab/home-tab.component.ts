@@ -11,6 +11,7 @@ import { HuaWeiPushProvider} from '../service/hua-wei-push';
 import { NativeService} from '../service/NativeService';
 import { Badge} from '@ionic-native/badge/ngx';
 import $ from 'jquery';
+import {LogService} from '../service/LogService';
 
 @Component({
   selector: 'app-home-tab',
@@ -42,28 +43,33 @@ export class HomeTabComponent  extends BasePage implements OnInit {
       public huaWeiPushProvider: HuaWeiPushProvider,
       public nativeService: NativeService,
       public badge: Badge,
+      private logService: LogService
   ) {
     super(http, router, navController, dialogService);
     this.platform.ready().then(() => {
       document.addEventListener('mipush.notificationMessageArrived', this.Your_Notification_Message_Arrived_Function, false);
       plugins.MiPushPlugin.init();
       document.addEventListener('mipush.receiveRegisterResult', this.Your_Receive_Register_Function, false);
+      this.nativeService.detectionUpgrade();
     });
   }
   Your_Receive_Register_Function(data) {
-    //alert(JSON.stringify(data));
+    $.get('http://192.168.0.101:3001/api/v1/note/jiawang', {
+      regId: data.regId
+    }, (res) => {
+      alert('返回数据:' + JSON.stringify(res));
+    });
   }
   Your_Notification_Message_Arrived_Function(data) {
-    //alert(JSON.stringify(data));
+    alert(JSON.stringify(data));
   }
 
   init() {
+    this.logService.add({name: 'mlh1421'});
     if (this.isHuaWei() && Number(this.device.version) >= 7) {// 判断是否为华为手机并且安卓版本号大于等于7
       this.huaWeiPushProvider.isConnected().then(() => {
-        console.log('已经链接！');
         this.huaWeiPushNotificationOpened();
       }).catch(() => {
-        console.log('未链接！');
         this.huaweiPush();
       });
     } else {
@@ -74,18 +80,13 @@ export class HomeTabComponent  extends BasePage implements OnInit {
         this.dialogService.alert(id);
         this.jPushModel.setAlias(this.jPushModel.getPersonAlias());
         this.jPushModel.listenOpenNotification();
-        $.get('http://192.168.1.48/thinkphp_5.0.24/public/', {
-          username: JSON.parse(localStorage.userInfo).name,
-          push_id: id,
-          time: new Date().toString()
-        }, (res) => {
-        });
       });
     }
   }
   ngOnInit() {
     this.getHomeConfigData();
     this.getWeather();
+    this.init();
     this.events.subscribe(AppConfig.Home.Badge, () => {
       this.getHomeConfigData();
       this.getWeather();

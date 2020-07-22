@@ -48,6 +48,7 @@ import {ComponentsModule} from './components/components.module';
 import {PdfViewerPageComponent} from './pdf-viewer-page/pdf-viewer-page.component';
 // import { PdfViewerModule } from 'ng2-pdf-viewer';
 import { SimplePdfViewerModule } from 'simple-pdf-viewer';
+import {LogService} from './service/LogService';
 
 @NgModule({
     declarations: [
@@ -105,6 +106,7 @@ import { SimplePdfViewerModule } from 'simple-pdf-viewer';
         FileTransfer,
         FileOpener,
         ImgUploadProvider,
+        LogService,
         FileChooser,
         Base64,
         FilePath,
