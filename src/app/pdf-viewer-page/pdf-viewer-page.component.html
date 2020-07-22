@@ -17,15 +17,10 @@
 </ion-content>
 <ion-footer>
     <ion-toolbar>
-        <div>
+        <div style="text-align: end">
         <ion-button size="small" fill="outline" (click)="pdfViewer.zoomIn()">放大</ion-button>
-            <ion-button size="small" fill="outline" (click)="pdfViewer.zoomFullPage()">全屏</ion-button>
-            <ion-button size="small" fill="outline" (click)="pdfViewer.zoomPageWidth()">整宽</ion-button>
-            <ion-button size="small" fill="outline" (click)="pdfViewer.zoomPageHeight()">整高</ion-button>
-            <ion-button size="small" fill="outline" (click)="pdfViewer.zoomReset()">重置</ion-button>
-        </div>
-        <div>
             <ion-button size="small" fill="outline" (click)="pdfViewer.zoomOut()">缩小</ion-button>
+            <ion-button size="small" fill="outline" (click)="pdfViewer.zoomFullPage()">全屏</ion-button>
             <ion-button size="small" fill="outline" (click)="pdfViewer.turnLeft()">旋转</ion-button>
             <ion-button size="small" fill="outline" (click)="pdfViewer.prevPage()">下一页</ion-button>
             <ion-button size="small" fill="outline" (click)="nextPage()">下一页</ion-button>
