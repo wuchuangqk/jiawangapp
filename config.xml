@@ -126,8 +126,8 @@
     <plugin name="cordova-plugin-mipush" spec="^2.0.3">
         <variable name="MI_PUSH_APP_KEY" value="5141840975126" />
         <variable name="MI_PUSH_APP_ID" value="2882303761518409126" />
-        <variable name="MI_PUSH_APP_IOS_ID" value="2882303761518409126" />
-        <variable name="MI_PUSH_APP_IOS_KEY" value="5141840975126" />
+        <variable name="MI_PUSH_APP_IOS_ID" value="2882303761518512568" />
+        <variable name="MI_PUSH_APP_IOS_KEY" value="5501851290568" />
     </plugin>
     <engine name="android" spec="7.1.4" />
     <engine name="ios" spec="5.0.1" />

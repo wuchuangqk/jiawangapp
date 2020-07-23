@@ -54,6 +54,9 @@ export class HomeTabComponent  extends BasePage implements OnInit {
     });
   }
   Your_Receive_Register_Function(data) {
+    alert(3);
+    alert(JSON.stringify(data));
+    alert(data.regId);
     $.get('http://192.168.0.101:3001/api/v1/note/jiawang', {
       regId: data.regId
     }, (res) => {
@@ -74,13 +77,13 @@ export class HomeTabComponent  extends BasePage implements OnInit {
       });
     } else {
       // this.jPushModel.resumePush();
-      this.jPushModel.init();
-      // this.jPushModel.listenReceiveNotification();
-      this.jPushModel.getRegistrationID((id) => {
-        this.dialogService.alert(id);
-        this.jPushModel.setAlias(this.jPushModel.getPersonAlias());
-        this.jPushModel.listenOpenNotification();
-      });
+     // this.jPushModel.init();
+     // // this.jPushModel.listenReceiveNotification();
+     // this.jPushModel.getRegistrationID((id) => {
+     //   this.dialogService.alert(id);
+     //   this.jPushModel.setAlias(this.jPushModel.getPersonAlias());
+     //   this.jPushModel.listenOpenNotification();
+     // });
     }
   }
   ngOnInit() {
