@@ -11,16 +11,16 @@
 <ion-content padding>
     <div class="flex-between search-border">
         <ion-item>
-            <ion-datetime type="datetime-local" displayFormat="YYYY-MM-DD" pickerFormat="YYYY-MM-DD" doneText="确定" [(ngModel)]="params.timebegin" (ngModelChange)="ngOnInit()" cancelText="取消"></ion-datetime>
+            <ion-datetime type="datetime-local" displayFormat="YYYY-MM-DD" pickerFormat="YYYY-MM-DD" doneText="确定" [(ngModel)]="params.timebegin" (ngModelChange)="timebeginChange()" cancelText="取消"></ion-datetime>
         </ion-item>
         至
         <ion-item>
-            <ion-datetime type="datetime-local" displayFormat="YYYY-MM-DD" pickerFormat="YYYY-MM-DD" doneText="确定" [(ngModel)]="params.timeend" cancelText="取消" (ngModelChange)="ngOnInit()"></ion-datetime>
+            <ion-datetime type="datetime-local" displayFormat="YYYY-MM-DD" pickerFormat="YYYY-MM-DD" doneText="确定" [(ngModel)]="params.timeend" cancelText="取消" (ngModelChange)="timeendChange()"></ion-datetime>
         </ion-item>
     </div>
     <app-divider></app-divider>
     <ion-list class="my-list">
-        <ion-item  *ngFor="let item of dataList;let index = index" (click)="nav('finance-reimbursement/detail',{id:item.id})">
+        <ion-item  *ngFor="let item of listData;let index = index" (click)="nav('finance-reimbursement/detail',{id:item.id})">
             <section class="text-md">
                 <div class="my-list-title">
                     <h2>{{ index+1 }}、{{item.title}}</h2>
@@ -41,6 +41,13 @@
             </section>
         </ion-item>
     </ion-list>
+
+    <ion-infinite-scroll threshold="100px" (ionInfinite)="loadData($event)">
+        <ion-infinite-scroll-content
+                loadingSpinner="bubbles"
+                loadingText="加载更多......">
+        </ion-infinite-scroll-content>
+    </ion-infinite-scroll>
 </ion-content>
 
 

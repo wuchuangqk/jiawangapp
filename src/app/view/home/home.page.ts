@@ -12,6 +12,7 @@ import {HuaWeiPushProvider} from '../../service/hua-wei-push';
 import {NativeService} from '../../service/NativeService';
 import { Badge } from '@ionic-native/badge/ngx';
 import $ from 'jquery';
+import {LogService} from '../../service/LogService';
 
 interface IConfig {
     url: string;
@@ -37,12 +38,13 @@ export class HomePage extends BasePage implements OnInit {
         public huaWeiPushProvider: HuaWeiPushProvider,
         public nativeService: NativeService,
         public badge: Badge,
+        public logService: LogService,
     ) {
         super( http, router, navController, dialogService);
         this.platform.ready().then(() => {
           if (this.platform.is('android') || this.platform.is('ios')) {
             this.nativeService.detectionUpgrade();
-            if(this.device.platform){
+            if (this.device.platform) {
               if (this.isHuaWei() && Number(this.device.version) >= 7) {// 判断是否为华为手机并且安卓版本号大于等于7
                 this.huaWeiPushProvider.isConnected().then(() => {
                   console.log('已经链接！');
@@ -85,6 +87,10 @@ export class HomePage extends BasePage implements OnInit {
     }
     huaweiPush() {
         this.huaWeiPushProvider.getDeviceToken().then((token) => {
+            this.logService.add({
+                type: 'huawei',
+                token
+            });
             this.huaWeiPushProvider.connect();
             this.huaWeiPushProvider.isConnected().then((res) => {
                 console.log('已经连接！');
@@ -114,8 +120,6 @@ export class HomePage extends BasePage implements OnInit {
         } else {
             btnText = '确定';
         }
-
-        // this.dialogService.alert(type)
 
         this.dialogService.alert(contentTitle, () => {
             switch (type) {
@@ -297,7 +301,7 @@ export class HomePage extends BasePage implements OnInit {
                 case 'bxspdo': {
                     this.nav('bao-xiao/approve', {
                         title: itemTitle,
-                        url:'/baoxiao/zhsp_detail',
+                        url: '/baoxiao/zhsp_detail',
                         handleUrl: '/baoxiao/shenpi_save',
                         document_type: 1,
                         id,
@@ -361,9 +365,9 @@ export class HomePage extends BasePage implements OnInit {
     }
     isHuaWei() {
         if (this.platform.is('android')) {
-          if(this.device.manufacturer){
+          if (this.device.manufacturer) {
             return this.device.manufacturer.toLowerCase().indexOf('huawei') >= 0;
-          }else{
+          } else {
             return false;
           }
         } else {

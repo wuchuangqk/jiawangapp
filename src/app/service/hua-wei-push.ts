@@ -25,7 +25,7 @@ export class HuaWeiPushProvider {
   }
   public getDeviceToken(): Promise<any> {
     return new Promise(((resolve, reject) => {
-      document.addEventListener('huaweipush.receiveRegisterResult',  function(event: any) {
+      document.addEventListener('huaweipush.receiveRegisterResult',  (event: any) => {
         resolve(event.token);
       }, false);
     }));

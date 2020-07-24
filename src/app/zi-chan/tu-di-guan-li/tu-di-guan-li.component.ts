@@ -4,46 +4,45 @@ import {ActivatedRoute, Router} from '@angular/router';
 import {DialogService} from '../../service/dialog.service';
 import {Events, NavController} from '@ionic/angular';
 import {BasePage} from '../../base/base-page';
+import {ListBasePage} from '../../base/list-base-page';
 
 @Component({
   selector: 'app-tu-di-guan-li',
   templateUrl: './tu-di-guan-li.component.html',
   styleUrls: ['./tu-di-guan-li.component.scss'],
 })
-export class TuDiGuanLiComponent extends BasePage implements OnInit {
-  public itemList = [];
+export class TuDiGuanLiComponent extends ListBasePage implements OnInit {
+  // public itemList = [];
   public keyword = '';
   public state = '';
   constructor(
       public http: HttpService,
       public router: Router,
-      public dialogService: DialogService,
-      public events: Events,
       public navController: NavController,
+      public dialogService: DialogService,
       public route?: ActivatedRoute,
   ) {
-    super(http, router, navController, dialogService);
+    super(http, router,  dialogService, navController);
+    this.url = '/zichan/landlist';
   }
-  search(e: CustomEvent) {
+   search(e: CustomEvent) {
     console.log(e.detail.value);
     this.keyword = e.detail.value;
+    this.listData = [];
     this.ngOnInit();
   }
   changeStatus(e: CustomEvent) {
     console.log(e.detail.value);
     this.state = e.detail.value;
+    this.listData = [];
     this.ngOnInit();
   }
-  foo() {
-
-  }
   ngOnInit() {
-    this.request('/zichan/landlist', {
+    this.payload = {
       keyword: this.keyword,
       state: this.state,
-    }).then((res) => {
-      this.itemList = res.data;
-    });
+    };
+    this.getListData();
   }
 
 }

@@ -72,19 +72,7 @@ export class JPushModel {
     public nav(path, queryParams?) {
         return this.router.navigate([path], { queryParams});
     }
-    handleAndroid(json) {
-        this.badge.decrease(1);
-        const dialogMsg = json.alert;
-        const itemTitle = json.extras.title;
-        const contentTitle = json.extras['cn.jpush.android.ALERT'];
-        const type = json.extras.type;
-        const id = json.extras.id;
-        let btnText = '';
-        if (type === 'message') {
-            btnText = '前往查看';
-        } else {
-            btnText = '确定';
-        }
+    public pushNav(id, type, contentTitle, itemTitle) {
         // this.dialogService.alert(type);
         this.dialogService.alert(contentTitle, () => {
             switch (type) {
@@ -287,5 +275,13 @@ export class JPushModel {
                 }
             }
         }, itemTitle , '查看');
+    }
+    handleAndroid(json) {
+        this.badge.decrease(1);
+        const itemTitle = json.extras.title;
+        const contentTitle = json.extras['cn.jpush.android.ALERT'];
+        const type = json.extras.type;
+        const id = json.extras.id;
+        this.pushNav(id, type, contentTitle, itemTitle);
     }
 }

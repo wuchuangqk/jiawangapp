@@ -11,7 +11,7 @@
     <div class="margin-top-5">
       <ion-searchbar placeholder="请输入..." (ionChange)="search($event)"></ion-searchbar>
       <div class="flex-between">
-        <ion-select style="width: 50%" [(ngModel)]="fztype" (ngModelChange)="ngOnInit()" placeholder="房源类型">
+        <ion-select style="width: 50%" [(ngModel)]="fztype" ok-text="确定" cancel-text="取消" (ngModelChange)="changeFzType($event)" placeholder="房源类型">
           <ion-select-option value="安置">安置</ion-select-option>
           <ion-select-option value="销售">销售</ion-select-option>
           <ion-select-option value="剩余">剩余</ion-select-option>
@@ -23,13 +23,13 @@
           <ion-select-option value="租赁">租赁</ion-select-option>
           <ion-select-option value="物业用房">物业用房</ion-select-option>
         </ion-select>
-        <ion-select style="width: 50%" [(ngModel)]="issf" placeholder="是否上房" (ngModelChange)="ngOnInit()">
+        <ion-select style="width: 50%" [(ngModel)]="issf" ok-text="确定" cancel-text="取消" placeholder="是否上房" (ngModelChange)="issfChange($event)">
           <ion-select-option value="1">上房</ion-select-option>
           <ion-select-option value="0">未上房</ion-select-option>
         </ion-select>
       </div>
       <ion-list class="my-list">
-        <ion-item *ngFor="let item of itemList;let i=index;" (click)="nav('zi-chan/fang-chan-guan-li-detail',item)">
+        <ion-item *ngFor="let item of listData;let i=index;" (click)="nav('zi-chan/fang-chan-guan-li-detail',item)">
           <section>
             <div class="my-list-title">
               <h2>{{i+1}}、{{item.fangchanname }}</h2>
@@ -46,7 +46,7 @@
             </div>
           </section>
         </ion-item>
-        <ion-item *ngIf="itemList.length==0">
+        <ion-item *ngIf="listData.length==0">
           <section>
             <div class="my-list-title">
               <h2 class="primary">无数据!</h2>
@@ -60,4 +60,11 @@
       </ion-list>
     </div>
   </div>
+
+  <ion-infinite-scroll threshold="100px" (ionInfinite)="loadData($event)">
+    <ion-infinite-scroll-content
+            loadingSpinner="bubbles"
+            loadingText="加载更多......">
+    </ion-infinite-scroll-content>
+  </ion-infinite-scroll>
 </ion-content>

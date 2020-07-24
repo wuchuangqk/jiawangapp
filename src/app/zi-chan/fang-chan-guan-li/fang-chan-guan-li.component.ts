@@ -4,14 +4,14 @@ import {ActivatedRoute, Router} from '@angular/router';
 import {DialogService} from '../../service/dialog.service';
 import {Events, NavController} from '@ionic/angular';
 import {BasePage} from '../../base/base-page';
+import {ListBasePage} from '../../base/list-base-page';
 
 @Component({
   selector: 'app-fang-chan-guan-li',
   templateUrl: './fang-chan-guan-li.component.html',
   styleUrls: ['./fang-chan-guan-li.component.scss'],
 })
-export class FangChanGuanLiComponent extends BasePage implements OnInit {
-  public itemList = [];
+export class FangChanGuanLiComponent extends ListBasePage implements OnInit {
   public keyword = '';
   public fztype = '';
   public issf = '';
@@ -23,20 +23,31 @@ export class FangChanGuanLiComponent extends BasePage implements OnInit {
       public navController: NavController,
       public route?: ActivatedRoute,
   ) {
-    super(http, router, navController, dialogService);
+    super(http, router, dialogService, navController);
+    this.url = '/zichan/fangchanlist';
   }
   search(e: CustomEvent) {
-    console.log(e.detail.value);
     this.keyword = e.detail.value;
+    this.listData = [];
     this.ngOnInit();
   }
   ngOnInit() {
-    this.request('/zichan/fangchanlist', {
+    this.payload = {
       keyword: this.keyword,
       fztype: this.fztype,
       issf: this.issf
-    }).then((res) => {
-      this.itemList = res.data;
-    });
+    };
+    this.getListData();
+  }
+  changeFzType(event) {
+    console.log(event);
+    this.fztype = event;
+    this.listData = [];
+    this.ngOnInit();
+  }
+  issfChange(issf) {
+    this.issf = issf;
+    this.listData = [];
+    this.ngOnInit();
   }
 }

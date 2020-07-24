@@ -11,7 +11,7 @@
     <div class="margin-top-5">
       <div class="flex-between">
         <ion-searchbar placeholder="请输入..." (ionChange)="search($event)"></ion-searchbar>
-        <ion-select style="width: 150px;" (ionChange)="changeStatus($event)" placeholder="状态">
+        <ion-select style="width: 150px;" ok-text="确定" cancel-text="取消" (ionChange)="changeStatus($event)" placeholder="状态">
           <ion-select-option value="">状态</ion-select-option>
           <ion-select-option value="1">净地</ion-select-option>
           <ion-select-option value="2">抵押</ion-select-option>
@@ -22,7 +22,7 @@
         </ion-select>
       </div>
       <ion-list class="my-list">
-        <ion-item *ngFor="let item of itemList;let i=index;" (click)="nav('zi-chan/tu-di-guan-li-detail',item)">
+        <ion-item *ngFor="let item of listData;let i=index;" (click)="nav('zi-chan/tu-di-guan-li-detail',item)">
           <section>
             <div class="my-list-title">
               <h2>{{i+1}}、{{item.dikuainame}}</h2>
@@ -39,7 +39,7 @@
             </div>
           </section>
         </ion-item>
-        <ion-item *ngIf="itemList.length==0">
+        <ion-item *ngIf="listData.length==0">
           <section>
             <div class="my-list-title">
               <h2 class="primary">无数据!</h2>
@@ -53,4 +53,11 @@
       </ion-list>
     </div>
   </div>
+
+  <ion-infinite-scroll threshold="100px" (ionInfinite)="loadData($event)">
+    <ion-infinite-scroll-content
+            loadingSpinner="bubbles"
+            loadingText="加载更多......">
+    </ion-infinite-scroll-content>
+  </ion-infinite-scroll>
 </ion-content>

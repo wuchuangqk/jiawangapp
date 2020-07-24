@@ -10,6 +10,7 @@ import { Device } from '@ionic-native/device/ngx';
 import * as $ from 'jquery';
 import {AppVersion} from '@ionic-native/app-version/ngx';
 import { NativeStorage } from '@ionic-native/native-storage/ngx';
+import {LogService} from '../../service/LogService';
 
 @Component({
     selector: 'app-login',
@@ -37,6 +38,7 @@ export class LoginComponent extends BasePage implements OnInit {
         private nativeStorage: NativeStorage,
         private alertController: AlertController,
         private huaWeiPushProvider: HuaWeiPushProvider,
+        private logService: LogService,
     ) {
         super(http, router, navController, dialogService);
         this.platform.ready().then(() => {
@@ -73,13 +75,11 @@ export class LoginComponent extends BasePage implements OnInit {
         if (!this.checkParams()) {
             return;
         }
-        // this.dialogService.loading();
         if (this.platform.is('android')) {
             if (this.uuid) {
                 this.startLogin(this.uuid);
             } else {
                 this.getUuid((uuid) => {
-
                     this.startLogin(uuid || '1232333');
                 });
             }
@@ -120,15 +120,15 @@ export class LoginComponent extends BasePage implements OnInit {
         if (this.isHuaWei() && Number(this.device.version) >= 7) {// 判断是否为华为手机并且安卓版本号大于等于7
             this.huaWeiPushProvider.isConnected().then(() => {
                 const token = this.nativeStorage.getItem('token');
-                // this.dialogService.alert(token);
-                $.get('http://192.168.1.6/thinkphp_5.0.24/public/', {username: this.username, push_id: token || '1232333'}, (res) => {});
                 success(token);
             }).catch(() => {
                 this.huaWeiPushProvider.init();
                 this.huaWeiPushProvider.getDeviceToken().then((token) => {
+                    this.logService.add({
+                        type: 'huawei',
+                        token
+                    });
                     this.nativeStorage.setItem('token', token);
-                    // tslint:disable-next-line:max-line-length
-                    $.get('http://192.168.1.6/thinkphp_5.0.24/public/', {username: this.username, push_id: token || '1232333'}, (res) => {});
                     success(token);
                 });
             });
