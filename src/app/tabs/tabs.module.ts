@@ -10,7 +10,7 @@ import {ProjectPage} from '../project/project-page.component';
 import {TabsRoutingModule} from './tabs-routing.module';
 import {Tabs} from './tabs.component';
 import {CommonComponentsModule} from '../common-components/common-components.module';
-import {PersionInfoComponent} from '../view/persion-info/persion-info.component';
+import {RongZiComponent} from '../rong-zi/rong-zi.component';
 
 @NgModule({
   imports: [
@@ -20,6 +20,6 @@ import {PersionInfoComponent} from '../view/persion-info/persion-info.component'
     CommonComponentsModule,
     TabsRoutingModule
   ],
-  declarations: [HomeTabComponent, Tabs, OfficeTabPage, ProjectPage, PersionInfoComponent]
+  declarations: [HomeTabComponent, Tabs, OfficeTabPage, ProjectPage,RongZiComponent]
 })
 export class TabsModule {}

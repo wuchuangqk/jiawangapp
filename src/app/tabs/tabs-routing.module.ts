@@ -5,6 +5,7 @@ import {OfficeTabPage} from '../office/office-tab-page.component';
 import {ProjectPage} from '../project/project-page.component';
 import {Tabs} from './tabs.component';
 import {PersionInfoComponent} from '../view/persion-info/persion-info.component';
+import {RongZiComponent} from '../rong-zi/rong-zi.component';
 // import {RongZiComponent} from '../rong-zi/rong-zi.component';
 // import {ZiChanComponent} from '../zi-chan/zi-chan.component';
 
@@ -16,8 +17,7 @@ const routes: Routes = [
       {path: 'home-tab', component: HomeTabComponent },
       {path: 'office', component: OfficeTabPage },
       {path: 'project', component: ProjectPage },
-      {path: 'person-info', component: PersionInfoComponent },
-      // {path: 'zi-chan', component: ZiChanComponent },
+      {path: 'rong-zi', component: RongZiComponent },
       {path: '', redirectTo: '/tabs/home-tab', pathMatch: 'full'}
     ]
   },

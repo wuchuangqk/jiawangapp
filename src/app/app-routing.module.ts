@@ -4,7 +4,7 @@ import {CommonViewComponent} from './view/common-view/common-view.component';
 import {DetailComponent} from './view/receive-document/detail/detail.component';
 import {DocumentHandleComponent} from './view/receive-document/document-handle/document-handle.component';
 import {DocumentApproveComponent} from './view/receive-document/document-approve/document-approve.component';
-// import {PersionInfoComponent} from './view/persion-info/persion-info.component';
+import {PersionInfoComponent} from './view/persion-info/persion-info.component';
 import {FeedbackComponent} from './view/feedback/feedback.component';
 import {EditComponent} from './view/edit/edit.component';
 import {PdfViewerPageComponent} from './pdf-viewer-page/pdf-viewer-page.component';
@@ -19,7 +19,7 @@ const routes: Routes = [
     { path: 'tabs', loadChildren: './tabs/tabs.module#TabsModule' },
     { path: 'home', loadChildren: './view/home/home.module#HomePageModule'},
     { path: 'login', loadChildren: './view/login/login.module#LoginPageModule'},
-    // { path: 'persion-info', component: PersionInfoComponent },
+    { path: 'persion-info', component: PersionInfoComponent },
     { path: 'common_view/:id', component: CommonViewComponent },
     { path: 'detail', component: DetailComponent },
     { path: 'edit', component: EditComponent },

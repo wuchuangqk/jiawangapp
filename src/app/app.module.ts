@@ -20,7 +20,6 @@ import {CommonComponentsModule} from './common-components/common-components.modu
 import {DocumentApproveComponent} from './view/receive-document/document-approve/document-approve.component';
 import {JPush} from '@jiguang-ionic/jpush/ngx';
 import {AppVersion} from '@ionic-native/app-version/ngx';
-// import {PersionInfoComponent} from './view/persion-info/persion-info.component';
 
 
 import { NativeStorage } from '@ionic-native/native-storage/ngx';
@@ -49,6 +48,7 @@ import {PdfViewerPageComponent} from './pdf-viewer-page/pdf-viewer-page.componen
 // import { PdfViewerModule } from 'ng2-pdf-viewer';
 import { SimplePdfViewerModule } from 'simple-pdf-viewer';
 import {LogService} from './service/LogService';
+import {PersionInfoComponent} from './view/persion-info/persion-info.component';
 
 @NgModule({
     declarations: [
@@ -60,6 +60,7 @@ import {LogService} from './service/LogService';
         EditComponent,
         FeedbackComponent,
         // NetworkSettingComponent,
+        PersionInfoComponent,
         PdfViewerPageComponent,
         AutoresizeTextareaDirective,
     ],

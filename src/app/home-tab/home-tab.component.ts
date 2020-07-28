@@ -26,10 +26,10 @@ export class HomeTabComponent  extends BasePage implements OnInit {
         { icon: 'ios-bookmarks', color: '#7dc6ff', name: 'work-diary', title: '工作日志' , url: '/work_logs/list', access: true},
         { icon: 'ios-paper', color: '#73d1d1', name: 'dai-ban', title: '待办事项' , access: true},
         { icon: 'ios-paper', color: '#73d1d1', name: 'dai-yue', title: '待阅事项' , access: true},
-        { icon: 'send', color: '#fa7c92', name: 'rong-zi', title: '融资管理', access: false },
-        { icon: 'ios-chatbubbles', color: '#7dc6ff', name: 'zi-chan', title: '资产管理', url: '/work_dynamics/list', addUrl: 'exchange-add', isCanCommit: true, access: false },
-        { icon: 'md-radio', color: '#fb8862', name: 'decision-making-platform', title: '决策平台', access: false },
-        { icon: 'calendar', color: '#b2d76a', name: 'full-map', title: '项目分布', access: true },
+        // { icon: 'send', color: '#fa7c92', name: 'tabs/rong-zi', title: '融资管理', access: false },
+        // { icon: 'ios-chatbubbles', color: '#7dc6ff', name: 'zi-chan', title: '资产管理', url: '/work_dynamics/list', addUrl: 'exchange-add', isCanCommit: true, access: false },
+        // { icon: 'md-radio', color: '#fb8862', name: 'decision-making-platform', title: '决策平台', access: false },
+        // { icon: 'calendar', color: '#b2d76a', name: 'full-map', title: '项目分布', access: true },
     ];
     constructor(
         public http: HttpService,

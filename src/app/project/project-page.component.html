@@ -16,11 +16,23 @@
 
 <!--  <app-explore-container name="Tab 3 page"></app-explore-container>-->
   <div class="item-wrapper">
-    <div class="item" *ngFor="let item of itemList" (click)="nav(item.name,{url:item.url||'',title:item.title,addUrl:item.addUrl,isCanCommit:item.isCanCommit})">
-      <div class="cicle" [ngStyle] = "{background:item.color}">
-        <ion-icon [name]="item.icon"></ion-icon>
+<!--    <div  class="item" *ngFor="let item of itemList" (click)="nav(item.name,{url:item.url||'',title:item.title,addUrl:item.addUrl,isCanCommit:item.isCanCommit})">-->
+<!--      <div class="cicle" [ngStyle] = "{background:item.color}">-->
+<!--        <ion-icon [name]="item.icon"></ion-icon>-->
+<!--      </div>-->
+<!--      <div class="ion-text-center">{{item.title}}</div>-->
+<!--    </div>-->
+    <ng-container *ngFor="let item of itemList">
+      <div *ngIf="item.access" class="item" (click)="nav(item.name,{url:item.url||'',title:item.title,addUrl:item.addUrl,isCanCommit:item.isCanCommit})">
+        <div class="cicle" [ngStyle] = "{background:item.color}">
+          <ion-badge *ngIf="item.badge" color="danger" style="position: absolute; margin-left: 2.3rem;margin-top:-0.5rem">
+            {{item.badge}}
+          </ion-badge>
+          <ion-icon [name]="item.icon"></ion-icon>
+        </div>
+        <div class="ion-text-center">{{item.title}}</div>
       </div>
-      <div class="ion-text-center">{{item.title}}</div>
-    </div>
+    </ng-container>
+
   </div>
 </ion-content>
