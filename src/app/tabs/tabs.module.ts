@@ -20,6 +20,6 @@ import {RongZiComponent} from '../rong-zi/rong-zi.component';
     CommonComponentsModule,
     TabsRoutingModule
   ],
-  declarations: [HomeTabComponent, Tabs, OfficeTabPage, ProjectPage,RongZiComponent]
+  declarations: [HomeTabComponent, Tabs, OfficeTabPage, ProjectPage, RongZiComponent]
 })
 export class TabsModule {}
