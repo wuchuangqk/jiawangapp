@@ -22,11 +22,13 @@ export class HomeTabComponent  extends BasePage implements OnInit {
     public ziChanAndHeTongCount = {};
     public weather: any = {};
     public  itemList: Array<any> = [
+        // tslint:disable-next-line:max-line-length
         { icon: 'ios-notifications', color: '#7dc6ff', name: 'notice', title: '通知公告', url: '/notices/list', bage: '' , addUrl: 'add', isCanCommit: false , access: true},
         { icon: 'ios-bookmarks', color: '#7dc6ff', name: 'work-diary', title: '工作日志' , url: '/work_logs/list', access: true},
         { icon: 'ios-paper', color: '#73d1d1', name: 'dai-ban', title: '待办事项' , access: true},
         { icon: 'ios-paper', color: '#73d1d1', name: 'dai-yue', title: '待阅事项' , access: true},
         // { icon: 'send', color: '#fa7c92', name: 'tabs/rong-zi', title: '融资管理', access: false },
+        // tslint:disable-next-line:max-line-length
         // { icon: 'ios-chatbubbles', color: '#7dc6ff', name: 'zi-chan', title: '资产管理', url: '/work_dynamics/list', addUrl: 'exchange-add', isCanCommit: true, access: false },
         // { icon: 'md-radio', color: '#fb8862', name: 'decision-making-platform', title: '决策平台', access: false },
         // { icon: 'calendar', color: '#b2d76a', name: 'full-map', title: '项目分布', access: true },
@@ -47,33 +49,47 @@ export class HomeTabComponent  extends BasePage implements OnInit {
     ) {
         super(http, router, navController, dialogService);
     }
-    Your_Receive_Register_Function(data) {
+    /**
+     * @description 小米推送注册后获取token
+     */
+    Your_Receive_Register_Function(data): void {
+        // this.dialogService.alert(JSON.stringify(data));
         this.logService.add({
             regId: data.regId
         });
+        this.regid(data.regId, this.getMobileType());
     }
-    Your_Notification_Message_Arrived_Function(data) {
+    /**
+     * @description 小米推送接收推送消息
+     */
+    Your_Notification_Message_Arrived_Function(data): void {
+        this.handleXiaoMi(data);
         const jsonData = JSON.stringify(data);
-        this.dialogService.alert(jsonData);
-        this.logService.add({
-            data: jsonData
-        });
+        this.logService.add({data: jsonData});
     }
+    /**
+     * @description 注册小米推送
+     */
     registerMipush() {
         this.platform.ready().then(() => {
             if (this.platform.is('android')) {
                 document.addEventListener('mipush.notificationMessageArrived', (data) => {
                     this.Your_Notification_Message_Arrived_Function(data);
                 }, false);
+                document.addEventListener('mipush.notificationMessageClicked', (data) => {
+                    this.Your_Notification_Message_Arrived_Function(data);
+                }, false);
                 plugins.MiPushPlugin.init();
                 document.addEventListener('mipush.receiveRegisterResult', (data) => {
                     this.Your_Receive_Register_Function(data);
                 }, false);
-                this.nativeService.detectionUpgrade();
             }
         });
     }
-    init() {
+    /**
+     * @description 初始化推送
+     */
+    private init(): void {
         if (this.isHuaWei() && Number(this.device.version) >= 7) {// 判断是否为华为手机并且安卓版本号大于等于7
             this.huaWeiPushProvider.isConnected().then(() => {
                 this.huaWeiPushNotificationOpened();
@@ -81,35 +97,45 @@ export class HomeTabComponent  extends BasePage implements OnInit {
                 this.huaweiPush();
             });
         } else if (this.isXiaoMi()) {
-            this.registerMipush();
-        } else {
-            this.registerMipush();
+           this.registerMipush();
+       } else {
+            // this.registerMipush();
             // this.jPushModel.resumePush();
-            // this.jPushModel.init();
-            // // this.jPushModel.listenReceiveNotification();
-            // this.jPushModel.getRegistrationID((id) => {
-            //   this.dialogService.alert(id);
-            //   this.jPushModel.setAlias(this.jPushModel.getPersonAlias());
-            //   this.jPushModel.listenOpenNotification();
-            // });
+            // this.jPushModel.setDebugMode(true);
+            this.jPushModel.init();
+            this.jPushModel.listenReceiveNotification();
+            this.jPushModel.getRegistrationID((token) => {
+              // this.dialogService.alert(id);
+                this.regid(token, this.getMobileType());
+                this.jPushModel.setAlias(this.jPushModel.getPersonAlias());
+              // this.jPushModel.listenOpenNotification();
+            });
         }
     }
     ngOnInit() {
         this.getHomeConfigData();
         this.getWeather();
         this.init();
+        // 检查是否需要更新
+        this.nativeService.detectionUpgrade();
         this.events.subscribe(AppConfig.Home.Badge, () => {
             this.getHomeConfigData();
             this.getWeather();
         });
     }
-    getWeather() {
+    /**
+     * @description 获取天气情况
+     */
+    private getWeather(): void {
         $.get('https://restapi.amap.com/v3/weather/weatherInfo?key=771e4903465ad46e0d524d5190d148f1&city=%E8%B4%BE%E6%B1%AA', (res) => {
             console.log(res);
             this.weather = res.lives[0];
         });
     }
-    getThisWeek() {
+    /**
+     * 获取当前时间是星期几
+     */
+     public getThisWeek(): string {
         const date = new Date();
         let week;
         if (date.getDay() === 0) { week = '星期日'; }
@@ -126,7 +152,9 @@ export class HomeTabComponent  extends BasePage implements OnInit {
         this.getHomeConfigData();
         this.getWeather();
     }
-
+    /**
+     * @description 获取角标
+     */
     getHomeConfigData() {
         this.request('/home/homeaccess', {}).then((res) => {
             console.log(res);
@@ -143,6 +171,9 @@ export class HomeTabComponent  extends BasePage implements OnInit {
             console.log(err);
         });
     }
+    /**
+     * 格式化当前时间
+     */
     getThisDate() {
         const  d = new Date();
         const date = d.getDate();
@@ -150,6 +181,9 @@ export class HomeTabComponent  extends BasePage implements OnInit {
         const year = d.getFullYear();
         return `${year}年${this.addZero(month)}月${this.addZero(date)}`;
     }
+    /**
+     * @description 判断是否为华为手机
+     */
     isHuaWei() {
         if (this.platform.is('android')) {
             if (this.device.manufacturer) {
@@ -161,7 +195,9 @@ export class HomeTabComponent  extends BasePage implements OnInit {
             return false;
         }
     }
-
+    /**
+     * @description 判断是否为小米手机
+     */
     isXiaoMi() {
         if (this.platform.is('android')) {
             if (this.device.manufacturer) {
@@ -173,6 +209,29 @@ export class HomeTabComponent  extends BasePage implements OnInit {
             return false;
         }
     }
+    /**
+     * 获取手机型号
+     */
+    private getMobileType(): string {
+        if (this.platform.is('android')) {
+            if (this.device.manufacturer) {
+                return this.device.manufacturer.toLowerCase();
+            } else {
+                return '';
+            }
+        } else {
+            return '';
+        }
+    }
+    private regid(regid: string, PushType: string): Promise<any> {
+        return  this.request('/users/regid', {
+            regid,
+            PushType
+        }).then((res) => {
+            this.logService.add(res);
+        });
+    }
+    // 加 0
     addZero(num) {
         let str = num + '';
         if (str.length <= 1) {
@@ -180,18 +239,25 @@ export class HomeTabComponent  extends BasePage implements OnInit {
         }
         return str;
     }
-
+    /**
+     * 华为手机打开通知栏
+     */
     huaWeiPushNotificationOpened() {
         document.addEventListener('huaweipush.notificationOpened', function(event) {
             this.handleHuaWei(event);
         }.bind(this), false);
     }
+    /**
+     * 注册华为推送
+     */
     huaweiPush() {
         this.huaWeiPushProvider.getDeviceToken().then((token) => {
             this.logService.add({
                 type: 'huawei',
                 token
             });
+
+            this.regid(token, this.getMobileType());
             this.huaWeiPushProvider.connect();
             this.huaWeiPushProvider.isConnected().then((res) => {
             });
@@ -200,6 +266,20 @@ export class HomeTabComponent  extends BasePage implements OnInit {
         document.addEventListener('huaweipush.notificationOpened', function(event) {
             this.handleHuaWei(event);
         }.bind(this), false);
+    }
+    handleXiaoMi(json) {
+        this.logService.add({
+            data: 'xiaoMiPush_:' + JSON.stringify(json)
+        });
+        const extras = json.extra;
+        const itemTitle = json.title; // temp.itemTitle;
+        const contentTitle = json.description;
+        const type = extras.type;
+        const id = extras.id;
+        this.logService.add({
+            temp: JSON.stringify(extras)
+        });
+        this.jPushModel.pushNav(id, type, contentTitle, itemTitle);
     }
     handleHuaWei(json) {
         const extras = json.extras;
@@ -214,7 +294,5 @@ export class HomeTabComponent  extends BasePage implements OnInit {
         const type = temp.type;
         const id = temp.relId;
         this.jPushModel.pushNav(id, type, contentTitle, itemTitle);
-
     }
-
 }

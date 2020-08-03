@@ -1,4 +1,4 @@
-import {Component, OnInit, ViewChild} from '@angular/core';
+import {Component, ElementRef, OnInit, ViewChild} from '@angular/core';
 import $ from 'jquery';
 import {FileService} from '../service/FileService';
 import { SimplePdfViewerComponent, SimplePDFBookmark } from 'simple-pdf-viewer';
@@ -17,6 +17,8 @@ export class PdfViewerPageComponent extends BasePage implements OnInit {
   public file: IDownFile;
   public localFilePath = '';
   @ViewChild(SimplePdfViewerComponent) public pdfViewer: SimplePdfViewerComponent;
+
+  @ViewChild('fullPageBtn') public fullPageBtn: ElementRef; // 定义此dom变量
   constructor(
       public http: HttpService,
       public router: Router,
@@ -56,13 +58,12 @@ export class PdfViewerPageComponent extends BasePage implements OnInit {
     this.pdfViewer.nextPage();
   }
   ngOnInit() {
-    setTimeout(() => {
-      this.fileService.downloadFile(this.file, (res: any, filePath: string) => {
-        this.localFilePath = filePath;
-        this.pdfViewer.openDocument(res);
-        this.pdfViewer.zoomFullPage();
-      });
-    }, 2000);
+    this.fileService.downloadFile(this.file, (res: any, filePath: string) => {
+      this.localFilePath = filePath;
+      this.pdfViewer.openDocument(res);
+      // 全屏点击时间
+      this.fullPageBtn.nativeElement.click();
+    });
   }
   openByApp() {
     this.fileService.openByApp(this.file, (res: any, filePath: string) => {

@@ -38,7 +38,9 @@ export class DetailBasePage extends BasePage {
     console.log(res.data);
     if (res.data) {
           this.comment_num = res.data.comment_num;
-          this.fileList = res.data.file;
+          if (res.data.file) {
+              this.fileList = res.data.file;
+          }
       }
     if (res.data.json) {
         this.detail.control = '1';

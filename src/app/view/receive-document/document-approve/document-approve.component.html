@@ -15,5 +15,7 @@
     <app-staff (click)="go('getStaffs', selectedStaff)" title="选择流程名单" eventName="getStaffs" [(selectedStaff)]="selectedStaff"></app-staff>
     <app-staff (click)="go('get', _selectedStaff)" title="选择查看名单" eventName="get" [(selectedStaff)]="_selectedStaff"></app-staff>
 
+
+<!--    <app-file-viewer (getFileArray)="getFileArray($event)"></app-file-viewer>-->
     <ion-button expand="full" (click)="save()">提交</ion-button>
 </ion-content>

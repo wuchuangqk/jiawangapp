@@ -13,6 +13,8 @@ import {AppConfig} from '../../../app.config';
 })
 export class DocumentApproveComponent extends BasePage implements OnInit {
   public selectedStaff = [];
+
+  public fileArray = [];
   public _selectedStaff = [];
   public id: string;
   public payload = {
@@ -47,6 +49,9 @@ export class DocumentApproveComponent extends BasePage implements OnInit {
     });
   }
 
+  getFileArray(fileArray) {
+    this.fileArray = fileArray;
+  }
   getIds(arr): string {
     return  arr.map(item => item.id).join(',');
   }
@@ -74,7 +79,9 @@ export class DocumentApproveComponent extends BasePage implements OnInit {
     if (!this.checkParams()) {
       return;
     }
-    this.setRequest(this.payload.url, this.payload).then((res) => {
+
+    // this.uploadFiles('/baoXiao/zhsp_yinzhang_add', this.params, this.fileArray).then((res) => {
+      this.setRequest(this.payload.url, this.payload).then((res) => {
       this.dialogService.alert('审批完毕!');
       this.events.publish(AppConfig.Document.DocumentShenPiList);
       this.events.publish(AppConfig.Document.DocumentDetail);

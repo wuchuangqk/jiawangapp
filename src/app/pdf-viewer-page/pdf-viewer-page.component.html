@@ -20,9 +20,9 @@
         <div style="text-align: end">
         <ion-button size="small" fill="outline" (click)="pdfViewer.zoomIn()">放大</ion-button>
             <ion-button size="small" fill="outline" (click)="pdfViewer.zoomOut()">缩小</ion-button>
-            <ion-button size="small" fill="outline" (click)="pdfViewer.zoomFullPage()">全屏</ion-button>
+            <ion-button #fullPageBtn size="small" fill="outline" (click)="pdfViewer.zoomFullPage()">全屏</ion-button>
             <ion-button size="small" fill="outline" (click)="pdfViewer.turnLeft()">旋转</ion-button>
-            <ion-button size="small" fill="outline" (click)="pdfViewer.prevPage()">下一页</ion-button>
+            <ion-button size="small" fill="outline" (click)="pdfViewer.prevPage()">上一页</ion-button>
             <ion-button size="small" fill="outline" (click)="nextPage()">下一页</ion-button>
         </div>
     </ion-toolbar>

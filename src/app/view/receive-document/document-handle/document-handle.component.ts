@@ -14,6 +14,8 @@ import {json} from '@angular-devkit/core';
 })
 export class DocumentHandleComponent extends BasePage implements OnInit {
   public url = '';
+
+  public fileArray = [];
   payload = {
     opinion: '',
     url: '',
@@ -42,6 +44,9 @@ export class DocumentHandleComponent extends BasePage implements OnInit {
   ngOnInit() {
   }
 
+  getFileArray(fileArray) {
+    this.fileArray = fileArray;
+  }
   getIds(arr): string {
     return  arr.map(item => item.id).join(',');
   }
@@ -53,7 +58,7 @@ export class DocumentHandleComponent extends BasePage implements OnInit {
     this.payload.staff_ids = this.getIds(this.selectedStaff);
     this.dialogService.toast('正在提交数据...');
     this.payload.document_type = this.documentType || '0';
-    this.setRequest(this.payload.url, this.payload).then((res) => {
+    this.uploadFiles(this.payload.url, this.payload, this.fileArray).then((res) => {
       this.dialogService.toast('提交成功');
       this.events.publish(AppConfig.Document.DocumentDetail);
       this.events.publish(AppConfig.Document.DocumentList);

@@ -33,6 +33,7 @@ export class DetailComponent  extends DetailBasePage implements OnInit, OnDestro
   ) {
     super( http, router, dialogService, sanitizer, navController);
     this.url = this.query('url');
+    this.title = this.query('title');
     this.handleUrl = this.query('handleUrl');
     this.handle_status = this.query('handle_status');
     this.id = this.query('id');

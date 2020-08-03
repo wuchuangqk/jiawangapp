@@ -33,7 +33,7 @@ export class NativeService {
     /**
      * 检查app是否需要升级
      */
-    public detectionUpgrade() {
+    public detectionUpgrade(): void {
         // 这里连接后台获取app最新版本号,然后与当前app版本号(this.getVersionNumber())对比
         // 版本号不一样就需要申请,不需要升级就return
         if (this.isAndroid()) {
@@ -61,7 +61,7 @@ export class NativeService {
     /**
      * 下载安装app
      */
-    downloadApp(path) {
+    private downloadApp(path) {
         if (this.isAndroid()) {
             this.dialogService.alert(`下载进度：${this.num}%`);
             const fileTransfer: FileTransferObject = this.transfer.create();

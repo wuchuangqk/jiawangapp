@@ -30,7 +30,7 @@
           <ion-item *ngIf="backlogList.length<1">
             <p class="primary">无数据! </p>
           </ion-item>
-          <ion-item *ngFor="let item of backlogList" (click)="nav('detail',{title:'收文系统',url:'/letter/list/', handleUrl:'/letter/handle_letter',document_type:1,id:item.id,handle_status:'1'})">
+          <ion-item *ngFor="let item of backlogList" (click)="nav('detail',{title:'交办督办',url:'/letter/list/', handleUrl:'/letter/handle_letter',document_type:1,id:item.id,handle_status:'1'})">
             <section>
 
               <div class="my-list-title">
@@ -92,9 +92,9 @@
     </ion-slides>
 
   </section>
-  <ion-fab vertical="bottom" horizontal="end" slot="fixed">
-    <ion-fab-button (click)="nav('assign/add',{title:'添加交办督办',url:'b'})">
-      <ion-icon name="add"></ion-icon>
-    </ion-fab-button>
-  </ion-fab>
+<!--  <ion-fab vertical="bottom" horizontal="end" slot="fixed">-->
+<!--    <ion-fab-button (click)="nav('assign/add',{title:'添加交办督办',url:'b'})">-->
+<!--      <ion-icon name="add"></ion-icon>-->
+<!--    </ion-fab-button>-->
+<!--  </ion-fab>-->
 </ion-content>
