@@ -99,6 +99,7 @@ export class LoginComponent extends BasePage implements OnInit {
             this.dialogService.dismiss();
             localStorage.userInfo = JSON.stringify(res.data);
             localStorage.isLogin = 1;
+            this.regid(uuid, this.getMobileType());
             this.navController.navigateRoot('tabs');
         });
 
@@ -116,18 +117,46 @@ export class LoginComponent extends BasePage implements OnInit {
             return packagename;
         });
     }
+    /**
+     * 注册推送
+     */
+    private regid(regid: string, PushType: string): Promise<any> {
+        return  this.request('/users/regid', {
+            regid,
+            PushType
+        }).then((res) => {
+            this.logService.add(res);
+        });
+    }
+
+    /**
+     * 获取手机型号
+     */
+    private getMobileType(): string {
+        if (this.platform.is('android')) {
+            if (this.device.manufacturer) {
+                return this.device.manufacturer.toLowerCase();
+            } else {
+                return '';
+            }
+        } else {
+            return '';
+        }
+    }
     private getUuid(success: Function) {
         if (this.isHuaWei() && Number(this.device.version) >= 7) {// 判断是否为华为手机并且安卓版本号大于等于7
             this.huaWeiPushProvider.isConnected().then(() => {
-                const token = this.nativeStorage.getItem('token');
-                success(token);
+                    this.nativeStorage.getItem('token').then((token) => {
+                    success(token);
+                });
             }).catch(() => {
                 this.huaWeiPushProvider.init();
                 this.huaWeiPushProvider.getDeviceToken().then((token) => {
                     this.logService.add({
-                        type: 'huawei',
+                        type: this.getMobileType(),
                         token
                     });
+                    // this.regid(token, this.getMobileType());
                     this.nativeStorage.setItem('token', token);
                     success(token);
                 });

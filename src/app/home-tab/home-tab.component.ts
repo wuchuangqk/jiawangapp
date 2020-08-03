@@ -90,27 +90,33 @@ export class HomeTabComponent  extends BasePage implements OnInit {
      * @description 初始化推送
      */
     private init(): void {
-        if (this.isHuaWei() && Number(this.device.version) >= 7) {// 判断是否为华为手机并且安卓版本号大于等于7
-            this.huaWeiPushProvider.isConnected().then(() => {
-                this.huaWeiPushNotificationOpened();
-            }).catch(() => {
-                this.huaweiPush();
-            });
-        } else if (this.isXiaoMi()) {
-           this.registerMipush();
-       } else {
-            // this.registerMipush();
-            // this.jPushModel.resumePush();
-            // this.jPushModel.setDebugMode(true);
-            this.jPushModel.init();
-            this.jPushModel.listenReceiveNotification();
-            this.jPushModel.getRegistrationID((token) => {
-              // this.dialogService.alert(id);
-                this.regid(token, this.getMobileType());
-                this.jPushModel.setAlias(this.jPushModel.getPersonAlias());
-              // this.jPushModel.listenOpenNotification();
-            });
-        }
+        this.platform.ready().then(() => {
+            if (this.platform.is('android') || this.platform.is('ios')) {
+                if (this.device.platform) {
+                    if (this.isHuaWei() && Number(this.device.version) >= 7) {// 判断是否为华为手机并且安卓版本号大于等于7
+                        this.huaWeiPushProvider.isConnected().then(() => {
+                            this.huaWeiPushNotificationOpened();
+                        }).catch(() => {
+                            this.huaweiPush();
+                        });
+                    } else if (this.isXiaoMi()) {
+                        this.registerMipush();
+                    } else {
+                        // this.registerMipush();
+                        // this.jPushModel.resumePush();
+                        // this.jPushModel.setDebugMode(true);
+                        this.jPushModel.init();
+                        this.jPushModel.listenReceiveNotification();
+                        this.jPushModel.getRegistrationID((token) => {
+                            // this.dialogService.alert(token);
+                            this.regid(token, this.getMobileType());
+                            this.jPushModel.setAlias(this.jPushModel.getPersonAlias());
+                            // this.jPushModel.listenOpenNotification();
+                        });
+                    }
+                }
+            }
+        });
     }
     ngOnInit() {
         this.getHomeConfigData();
@@ -243,9 +249,9 @@ export class HomeTabComponent  extends BasePage implements OnInit {
      * 华为手机打开通知栏
      */
     huaWeiPushNotificationOpened() {
-        document.addEventListener('huaweipush.notificationOpened', function(event) {
+        document.addEventListener('huaweipush.notificationOpened', (event) => {
             this.handleHuaWei(event);
-        }.bind(this), false);
+        }, false);
     }
     /**
      * 注册华为推送
@@ -256,16 +262,16 @@ export class HomeTabComponent  extends BasePage implements OnInit {
                 type: 'huawei',
                 token
             });
-
             this.regid(token, this.getMobileType());
             this.huaWeiPushProvider.connect();
             this.huaWeiPushProvider.isConnected().then((res) => {
+                this.logService.add({type: 'huawei'});
             });
         });
         this.huaWeiPushProvider.init();
-        document.addEventListener('huaweipush.notificationOpened', function(event) {
+        document.addEventListener('huaweipush.notificationOpened', (event) => {
             this.handleHuaWei(event);
-        }.bind(this), false);
+        }, false);
     }
     handleXiaoMi(json) {
         this.logService.add({
@@ -282,6 +288,9 @@ export class HomeTabComponent  extends BasePage implements OnInit {
         this.jPushModel.pushNav(id, type, contentTitle, itemTitle);
     }
     handleHuaWei(json) {
+        this.logService.add({
+            huawei: JSON.stringify(json)
+        });
         const extras = json.extras;
         const temp: any = {};
         for (const _item of extras) {
@@ -293,6 +302,10 @@ export class HomeTabComponent  extends BasePage implements OnInit {
         const contentTitle = temp.contentTitle;
         const type = temp.type;
         const id = temp.relId;
+
+        this.logService.add({
+            huawei_temp: JSON.stringify(temp)
+        });
         this.jPushModel.pushNav(id, type, contentTitle, itemTitle);
     }
 }
