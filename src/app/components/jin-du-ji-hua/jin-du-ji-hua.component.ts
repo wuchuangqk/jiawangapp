@@ -21,7 +21,6 @@ export class JinDuJiHuaComponent extends BasePage implements OnInit {
 
   ];
   public pid = 0;
-  public avatarClass = 'avatar-success';
   constructor(
       public http: HttpService,
       public router: Router,

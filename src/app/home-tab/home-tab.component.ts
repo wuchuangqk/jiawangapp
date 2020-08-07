@@ -146,6 +146,7 @@ export class HomeTabComponent  extends BasePage implements OnInit {
      public getThisWeek(): string {
         const date = new Date();
         let week;
+        // let arr = ['星期日', '星期一', '星期二', '星期三', '星期四', '星期五', '星期六'];
         if (date.getDay() === 0) { week = '星期日'; }
         if (date.getDay() === 1) { week = '星期一'; }
         if (date.getDay() === 2) { week = '星期二'; }
