@@ -90,6 +90,7 @@ doRefresh(event) {
       this.dialogService.toast('回复成功！');
       this.infoTitle = '';
       this.GetCommitList();
+      this.event.publish(AppConfig.Exchange.view);
     });
   }
   }

@@ -57,9 +57,6 @@ export class ExchangeViewComponent extends DetailBasePage implements OnInit, OnD
     ngOnDestroy() {
     }
     edit(e) {
-        console.log(this.title);
-        console.log(this.url);
-        console.log(this.id);
         this.nav('edit', {
             title: this.title,
             url: this.url,

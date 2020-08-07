@@ -37,7 +37,7 @@
                 </ion-button>
 
             </div>
-            <ion-button color="light" (click)="nav('work-dynamics/comment-list/'+id,{id:id})" size="small">评论 ({{comment_num||0}})</ion-button>
+            <ion-button *ngIf="comment" color="light" (click)="nav('work-dynamics/comment-list/'+id,{id:id})" size="small">评论 ({{comment_num||0}})</ion-button>
 <!--            <ion-textarea style="font-size: 1.5rem;" [(ngModel)]="infoTitle" clearOnEdit="true"></ion-textarea>-->
 <!--            <ion-icon name="md-send" color="primary" (click)="submit()" style="padding: 10px;font-size: 30px"></ion-icon>-->
         </div>

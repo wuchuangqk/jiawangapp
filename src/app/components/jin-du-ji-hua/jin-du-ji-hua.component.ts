@@ -21,6 +21,7 @@ export class JinDuJiHuaComponent extends BasePage implements OnInit {
 
   ];
   public pid = 0;
+  public avatarClass = 'avatar-success';
   constructor(
       public http: HttpService,
       public router: Router,
@@ -40,16 +41,23 @@ export class JinDuJiHuaComponent extends BasePage implements OnInit {
       this.DataList = res.data;
     });
   }
+  getAvatarClass(handle_status) {
+    if (handle_status === 3) {
+          return 'avatar-success';
+    } else {
+      return 'avatar-info';
+    }
+  }
   getItem(item: JinDuJiHua) {
     this.request('/project_details/notedetail', {
       noteid: item.id
     }).then((res) => {
       this.dialogService.alert(`
     <section>
-            <div margin-top-3 class="ion-text-left">节点名称:${res.data.dataname}</div>
-            <div margin-top-3  class="ion-text-left">责任人:${res.data.zrr}</div>
-            <div margin-top-3  class="ion-text-left">计划时间:${res.data.jhtime}</div>
-            <div margin-top-3  class="ion-text-left">实际时间:${res.data.sjtime}</div>
+            <div style="margin-top: 3px;" class="ion-text-left">节点名称:${res.data.dataname}</div>
+            <div style="margin-top: 3px;"  class="ion-text-left">责任人:${res.data.zrr}</div>
+            <div style="margin-top: 3px;"  class="ion-text-left">计划时间:${res.data.jhtime}</div>
+            <div style="margin-top: 3px;"  class="ion-text-left">实际时间:${res.data.sjtime}</div>
     </section>`);
     });
   }

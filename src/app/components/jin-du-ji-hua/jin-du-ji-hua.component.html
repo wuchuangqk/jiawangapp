@@ -5,7 +5,7 @@
     <ion-item *ngFor="let item of DataList" (click)="getItem(item)">
       <ion-row style="width:100%;">
         <ion-col class="primary text-md" size="3">
-          <span class="avatar">{{item.handle_status_desc}}</span>
+          <span class="avatar" [ngClass]="getAvatarClass(item.handle_status)">{{item.handle_status_desc}}</span>
         </ion-col>
         <ion-col class="primary text-md" size="4">{{item.title}}</ion-col>
         <ion-col class="primary text-md ion-text-end" size="5">{{item.thestage}}</ion-col>

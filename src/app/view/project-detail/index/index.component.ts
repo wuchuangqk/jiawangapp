@@ -14,6 +14,7 @@ import {cordovaWarn} from '@ionic-native/core/decorators/common';
 export class IndexComponent extends BasePage implements OnInit {
   @ViewChild(IonSlides) slides: IonSlides;
   index = 1;
+  public avatarClass = '';
   // 项目id
   public pid = 0;
   public content = '';

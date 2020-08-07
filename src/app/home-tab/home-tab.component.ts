@@ -165,9 +165,9 @@ export class HomeTabComponent  extends BasePage implements OnInit {
         this.request('/home/homeaccess', {}).then((res) => {
             console.log(res);
             const data = res.data;
-            this.itemList[4].access = data.rz;
-            this.itemList[5].access = data.zc;
-            this.itemList[6].access = data.jc;
+            // this.itemList[4].access = data.rz;
+            // this.itemList[5].access = data.zc;
+            // this.itemList[6].access = data.jc;
         });
         this.request('/home/homecont', {}).then((res) => {
             this.itemList[0].badge = Number(res.data.noticecount);  //  通知公告
