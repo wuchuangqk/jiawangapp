@@ -11,7 +11,7 @@ ion-content ion-toolbar {
   padding: 10px 0;
   .item{
     width: 25%;
-    font-size: 14px;    
+    font-size: 14px;
   }
   .cicle{
     width:60px;
@@ -23,5 +23,8 @@ ion-content ion-toolbar {
     font-size:30px;
     color: #ffffff;
     margin: 5px auto;
+
+    padding-top: 2px;
+    box-sizing: border-box;
   }
 }
