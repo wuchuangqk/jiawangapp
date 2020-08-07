@@ -57,7 +57,8 @@ export class HomeTabComponent  extends BasePage implements OnInit {
         this.logService.add({
             regId: data.regId
         });
-        this.regid(data.regId, this.getMobileType());
+        // this.regid(data.regId, this.getMobileType());
+        this.regid(data.regId, 'xiaomi');
     }
     /**
      * @description 小米推送接收推送消息
@@ -102,17 +103,18 @@ export class HomeTabComponent  extends BasePage implements OnInit {
                     } else if (this.isXiaoMi()) {
                         this.registerMipush();
                     } else {
+                        this.registerMipush();
                         // this.registerMipush();
                         // this.jPushModel.resumePush();
                         // this.jPushModel.setDebugMode(true);
-                        this.jPushModel.init();
-                        this.jPushModel.listenReceiveNotification();
-                        this.jPushModel.getRegistrationID((token) => {
-                            // this.dialogService.alert(token);
-                            this.regid(token, this.getMobileType());
-                            this.jPushModel.setAlias(this.jPushModel.getPersonAlias());
-                            // this.jPushModel.listenOpenNotification();
-                        });
+                       //  this.jPushModel.init();
+                       //  this.jPushModel.listenReceiveNotification();
+                       //  this.jPushModel.getRegistrationID((token) => {
+                       //      // this.dialogService.alert(token);
+                       //      this.regid(token, this.getMobileType());
+                       //      this.jPushModel.setAlias(this.jPushModel.getPersonAlias());
+                       //      // this.jPushModel.listenOpenNotification();
+                       //  });
                     }
                 }
             }
