@@ -11,10 +11,10 @@ import {ShangPuGuanLiComponent} from './shang-pu-guan-li/shang-pu-guan-li.compon
 import {ShangPuGuanLiDetailComponent} from './shang-pu-guan-li-detail/shang-pu-guan-li-detail.component';
 
 const routes: Routes = [
-  {
-    path: '',
-    component: ZiChanComponent
-  },
+  // {
+  //   path: '',
+  //   component: ZiChanComponent
+  // },
   {
     path: 'wei-xiu',
     component: ZiChanWeiXiuComponent

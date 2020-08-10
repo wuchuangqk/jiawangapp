@@ -7,7 +7,7 @@ import {IonicModule} from '@ionic/angular';
 import {FormsModule} from '@angular/forms';
 import {CommonComponentsModule} from '../common-components/common-components.module';
 import {ApproveComponent} from './approve/approve.component';
-import {ZiChanComponent} from './zi-chan.component';
+// import {ZiChanComponent} from './zi-chan.component';
 import {TuDiGuanLiComponent} from './tu-di-guan-li/tu-di-guan-li.component';
 import {TuDiGuanLiDetailComponent} from './tu-di-guan-li-detail/tu-di-guan-li-detail.component';
 import {FangChanGuanLiComponent} from './fang-chan-guan-li/fang-chan-guan-li.component';
@@ -17,7 +17,7 @@ import {ShangPuGuanLiDetailComponent} from './shang-pu-guan-li-detail/shang-pu-g
 
 @NgModule({
   declarations: [
-      ZiChanComponent,
+      // ZiChanComponent,
       ZiChanWeiXiuComponent,
       ApproveComponent,
       TuDiGuanLiComponent,

@@ -60,6 +60,10 @@
       </ion-slide>
       <ion-slide>
         <ion-list class="my-list">
+
+          <ion-item *ngIf="doneList.length<1">
+            <p class="primary">无数据! </p>
+          </ion-item>
           <ion-item *ngFor="let item of doneList" (click)="nav('detail',{title:'已办事项', id:item.id, url:'/letter/list/' })">
             <section>
 

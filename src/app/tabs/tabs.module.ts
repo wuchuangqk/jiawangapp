@@ -11,6 +11,7 @@ import {TabsRoutingModule} from './tabs-routing.module';
 import {Tabs} from './tabs.component';
 import {CommonComponentsModule} from '../common-components/common-components.module';
 import {RongZiComponent} from '../rong-zi/rong-zi.component';
+import {ZiChanComponent} from "../zi-chan/zi-chan.component";
 
 @NgModule({
   imports: [
@@ -20,6 +21,6 @@ import {RongZiComponent} from '../rong-zi/rong-zi.component';
     CommonComponentsModule,
     TabsRoutingModule
   ],
-  declarations: [HomeTabComponent, Tabs, OfficeTabPage, ProjectPage, RongZiComponent]
+  declarations: [HomeTabComponent, Tabs, OfficeTabPage, ProjectPage, ZiChanComponent,RongZiComponent]
 })
 export class TabsModule {}
