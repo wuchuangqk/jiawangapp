@@ -61,10 +61,10 @@ export class AddComponent extends BasePage implements OnInit {
 
     }
 
-    getQjtypeList() {
-        this.request('/zhigou/bumen_list', {}).then((res) => {
-            this.qjtypeList = res.data;
-        });
+    // @ts-ignore
+    private async getQjtypeList(): Promise<any> {
+        const res = await this.request('/zhigou/bumen_list', {});
+        this.qjtypeList = res.data;
     }
 
 
@@ -96,10 +96,6 @@ export class AddComponent extends BasePage implements OnInit {
         return  arr.map(item => item.id).join(',');
     }
     save() {
-        // this.params.staff_ids = this.getIds(this.selectedStaff);
-       // if (!this.checkParams(this.params)) {
-       //     return;
-       // }
         this.params.shijian = this.dateProvider.DateTimeFormat(new Date(this.params.shijian));
         this.dialogService.loading('正在提交，请稍候....');
         this.setRequest('/zhigou/zhichan_add', this.params).then((res) => {

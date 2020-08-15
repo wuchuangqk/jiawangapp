@@ -27,44 +27,33 @@ export class IndexComponent extends BasePage implements OnInit {
       public router: Router,
       public navController: NavController,
       public dialogService: DialogService,
-      private events: Events,
       public route?: ActivatedRoute,
   ) {
     super(http, router, navController, dialogService);
-    // this.url = this.query('url');
-    // this.slides.startAutoplay();
-    //
-
   }
-  ngOnInit() {
-      this.dialogService.loading();
+  async ngOnInit() {
+    this.dialogService.loading();
     setTimeout(() => {
-      this.request('/home/maplist', {}).then((res) => {
-        document.getElementById('allmap').innerHTML = '';
-        MP.init().then((BMap) => {
-          this.dialogService.dismiss();
-          this.init(BMap, res.data);
-        });
-      });
-    }, 1000);
+       this.getData();
+    }, 500);
   }
   getItem(id) {
     this.index = Number(id);
   }
-
+  async getData() {
+    const res = await this.request('/home/maplist', {});
+    document.getElementById('allmap').innerHTML = '';
+    const BMap = await MP.init();
+    this.dialogService.dismiss();
+    this.init(BMap, res.data);
+  }
   addMarker(point, map, BMap, content) {
     const marker = new BMap.Marker(point);
     map.addOverlay(marker);
 
-
-    const sContent = content;
-    const infoWindow = new BMap.InfoWindow(sContent);  // 创建信息窗口对象
+    const infoWindow = new BMap.InfoWindow(content);  // 创建信息窗口对象
     marker.addEventListener('click', function() {
       this.openInfoWindow(infoWindow);
-      // 图片加载完毕重绘infowindow
-      // document.getElementById('imgDemo').onload = () => {
-      //   infoWindow.redraw();   // 防止在网速较慢，图片未加载时，生成的信息框高度比图片的总高度小，导致图片部分被隐藏
-      // };
     });
   }
   init(BMap, dataList) {
@@ -73,12 +62,7 @@ export class IndexComponent extends BasePage implements OnInit {
     const pointer = new BMap.Point(117.471410, 34.443026);
     map.centerAndZoom(pointer, 13);   //
 
-
-
-
     // 没有设置 center 和 zoom 属性的地图组件是不进行地图渲染的。当center 属性为合法地名字符串时例外，因为百度地图会根据地名自动调整 zoom 的值。
-
-
 
     // 百度地图API功能
     // const map = new BMap.Map('allmap');
@@ -89,16 +73,11 @@ export class IndexComponent extends BasePage implements OnInit {
     const bounds = map.getBounds();
     const sw = bounds.getSouthWest();
     const ne = bounds.getNorthEast();
+
     // 添加标注点
     for (const item of dataList) {
       const P_OINT = new BMap.Point(item.maplng, item.maplat);
       this.addMarker(P_OINT, map, BMap, item.marker);
     }
-    // for (let i = 0; i < 25; i ++) {}
-
-
-
-
-
   }
 }

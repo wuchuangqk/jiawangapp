@@ -8,6 +8,7 @@ import {AlertController, Platform} from '@ionic/angular';
 import {AndroidPermissions} from '@ionic-native/android-permissions/ngx';
 import {DialogService} from './dialog.service';
 import { Base64 } from '@ionic-native/base64/ngx';
+import {NativeService} from './NativeService';
 @Injectable({
     providedIn: 'root'
 })
@@ -87,6 +88,7 @@ export class FileService {
                 private fileOpener: FileOpener,
                 private service: HttpService,
                 private dialogService: DialogService,
+                private nativeService: NativeService,
                 private base64: Base64,
                 // private inAppBrowser: InAppBrowser
     ) {
@@ -101,7 +103,7 @@ export class FileService {
 
     /**
      * 是否android真机环境
-     * @return {boolean}
+     * @return { boolean }
      */
     isAndroid(): boolean {
         return this.isMobile() && this.platform.is('android');
@@ -129,10 +131,9 @@ export class FileService {
     /**
      * 文件下载
      */
-   public downloadFile(file: IDownFile, backFn) {
-       console.log(file);
+   public  async downloadFile(file: IDownFile, backFn) {
        if (this.isAndroid()) {
-
+           await this.nativeService.getPrmissions();
            const fileTransfer: FileTransferObject = this.transfer.create();
            const apk = this.file.externalRootDirectory + file.filename + file.fileext; // apk保存的目录
            fileTransfer.download(file.fileurl, apk).then(() => {

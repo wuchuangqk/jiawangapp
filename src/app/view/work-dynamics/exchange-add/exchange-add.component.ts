@@ -53,10 +53,9 @@ export class ExchangeAddComponent extends BasePage implements OnInit {
     this.GetDartName();
   }
   // 用途
-  private GetInfoUse() {
-    this.request('/work_dynamics/GetInfoUse', {}).then((res) => {
-      this.InfoUseList = res.data;
-    });
+  private async GetInfoUse() {
+    const res =  await this.request('/work_dynamics/GetInfoUse', {});
+    this.InfoUseList = res.data;
   }
   go(eventName) {
     localStorage.num = 0;
@@ -68,15 +67,13 @@ export class ExchangeAddComponent extends BasePage implements OnInit {
       selectedStaff : JSON.stringify(this.selectedStaff)
     });
   }
-  private GetDartName() {
-    this.request('/work_dynamics/GetDartName', {}).then((res) => {
-      this.keShiList = res.data;
-    });
+  private async GetDartName() {
+    const res = await this.request('/work_dynamics/GetDartName', {});
+    this.keShiList = res.data;
   }
-  private GetInfoType() {
-    this.request('/work_dynamics/GetInfoType', {}).then((res) => {
-      this.InfoTypeList = res.data;
-    });
+  private async GetInfoType() {
+    const res = await this.request('/work_dynamics/GetInfoType', {});
+    this.InfoTypeList = res.data;
   }
   private checkParams(): boolean {
     if (!this.params.infoTitle) {
@@ -91,7 +88,7 @@ export class ExchangeAddComponent extends BasePage implements OnInit {
     getFileArray(fileArray) {
         this.fileArray = fileArray;
     }
-    public submit() {
+    public async submit() {
       this.params.ids = '';
       if (this.params.roleType === 2) {
       this.params.ids = this.keshiIds.join(',');
@@ -109,12 +106,11 @@ export class ExchangeAddComponent extends BasePage implements OnInit {
     }
       // 如果选择科室
       this.dialogService.loading('正在提交，请稍后！');
-      this.uploadFiles('/work_dynamics/add', this.params, this.fileArray).then((res) => {
+      await this.uploadFiles('/work_dynamics/add', this.params, this.fileArray);
       this.dialogService.dismiss();
       this.dialogService.alert('提交成功！', () => {
-        this.event.publish(AppConfig.Notice.List);
-        this.navController.back();
-      });
-    });
+            this.event.publish(AppConfig.Notice.List);
+            this.navController.back();
+        });
   }
 }

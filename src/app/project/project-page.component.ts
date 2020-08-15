@@ -58,7 +58,6 @@ export class ProjectPage extends  BasePage {
     super(http, router, navController, dialogService);
 
     this.request('/home/homeaccess', {}).then((res) => {
-      console.log(res);
       const data = res.data;
       // this.itemList[4].access = data.rz;
       this.itemList[4].access = data.zc;

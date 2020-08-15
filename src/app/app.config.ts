@@ -38,6 +38,7 @@ export class AppConfig {
         List: 'NoticeList'
     };
     public static Exchange = {
+        List: 'ExchangeList',
         view: 'ExchangeView',
         commentList: 'commentList'
     };

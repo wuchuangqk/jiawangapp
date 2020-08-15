@@ -65,7 +65,7 @@ export class CommentListComponent extends BasePage implements OnInit {
     this.isHuiFu = true;
   }
   addComment(isHuiFu, item) {
-      this.nav('work_dynamics/comment-add/' + this.id, {id: this.id, isHuiFu, userId: item.usreid, workId: this.id});
+      this.nav('work-dynamics/comment-add/' + this.id, {id: this.id, isHuiFu, userId: item.usreid, workId: this.id});
   }
   GetCommitList() {
     this.request('/work_dynamics/commitlist', {item_id: this.id}).then((res) => {
@@ -77,34 +77,31 @@ doRefresh(event) {
   this.GetCommitList();
 }
 
-  submit() {
-  if (this.isHuiFu) {
-  this.huifu();
-  } else {
-    console.log(this.infoTitle);
-    const params = {
-      infoTitle: this.infoTitle,
-      workId: this.id
-    };
-    this.setRequest('/work_dynamics/commitadd', params).then((res) => {
+  async submit() {
+    if (this.isHuiFu) {
+      this.huiFu();
+    } else {
+      console.log(this.infoTitle);
+      const params = {
+        infoTitle: this.infoTitle,
+        workId: this.id
+      };
+      await this.setRequest('/work_dynamics/commitadd', params);
       this.dialogService.toast('回复成功！');
       this.infoTitle = '';
       this.GetCommitList();
       this.event.publish(AppConfig.Exchange.view);
-    });
-  }
+    }
   }
 
-  huifu() {
-    console.log(this.infoTitle);
+  async huiFu() {
     this.huiFuParams.infoTitle = this.infoTitle;
-    this.setRequest('/work_dynamics/recommitadd', this.huiFuParams).then((res) => {
-      this.dialogService.toast('回复成功！');
-      this.isHuiFu = false;
-      this.placeholder = '评论';
-      this.infoTitle = '';
-      this.event.publish(AppConfig.Exchange.view);
-      this.GetCommitList();
-    });
+    const res = await this.setRequest('/work_dynamics/recommitadd', this.huiFuParams);
+    this.dialogService.toast('回复成功！');
+    this.isHuiFu = false;
+    this.placeholder = '评论';
+    this.infoTitle = '';
+    this.event.publish(AppConfig.Exchange.view);
+    this.GetCommitList();
   }
 }

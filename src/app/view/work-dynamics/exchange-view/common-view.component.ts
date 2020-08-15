@@ -43,14 +43,14 @@ export class ExchangeViewComponent extends DetailBasePage implements OnInit, OnD
         this.events.subscribe(AppConfig.Exchange.view, () => {
             this.GetCommitList();
             this.getDetail({}).then(() => {
-                this.events.publish(AppConfig.Notice.List);
+                this.events.publish(AppConfig.Exchange.List);
                 this.events.publish(AppConfig.Home.Badge);
             });
         });
         this.GetCommitList();
         this.getReadNumber();
+        this.events.publish(AppConfig.Exchange.List);
         this.getDetail({}).then((res) => {
-            this.events.publish(AppConfig.Notice.List);
             this.events.publish(AppConfig.Home.Badge);
         });
     }
@@ -63,27 +63,23 @@ export class ExchangeViewComponent extends DetailBasePage implements OnInit, OnD
             id: this.id
         });
     }
-    GetCommitList() {
-        this.request('/work_dynamics/commitlist', {item_id: this.id}).then((res) => {
-            this.commitList = res.data;
-        });
+    async GetCommitList() {
+        const res = await this.request('/work_dynamics/commitlist', {item_id: this.id});
+        this.commitList = res.data;
     }
-    getReadNumber() {
-        this.request(this.getReadUrl + this.id, {}).then((res) => {
-            this.readNumber = res.data.hasreader.length;
-            this.noReadNumber = res.data.noreader.length;
-        });
+    async getReadNumber() {
+        const res = await this.request(this.getReadUrl + this.id, {});
+        this.readNumber = res.data.hasreader.length;
+        this.noReadNumber = res.data.noreader.length;
     }
-    submit() {
-        console.log(this.infoTitle);
+    async submit() {
         const params = {
             infoTitle: this.infoTitle,
             workId: this.id
         };
-        this.setRequest('/work_dynamics/commitadd', params).then((res) => {
-            this.dialogService.toast('回复成功！');
-            this.infoTitle = '';
-            this.GetCommitList();
-        });
+        await this.setRequest('/work_dynamics/commitadd', params);
+        this.dialogService.toast('回复成功！');
+        this.infoTitle = '';
+        this.GetCommitList();
     }
 }

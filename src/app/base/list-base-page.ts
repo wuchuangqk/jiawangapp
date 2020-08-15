@@ -23,7 +23,7 @@ export class ListBasePage extends BasePage {
     public async getListData() {
         this.payload.pageindex = this.pageindex;
         const res = (await this.request(this.url, this.payload));
-        this.listData = this.listData.concat(res.data)
+        this.listData = this.listData.concat(res.data);
         this.hasnext = res.hasnext;
     }
     doRefresh(event) {

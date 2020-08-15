@@ -16,7 +16,7 @@ export class IndexComponent extends BasePage implements OnInit, OnDestroy {
     @ViewChild(IonSlides) slides: IonSlides;
     itemList = [];
     shenPiList = [];
-    myShenPiList= [];
+    myShenPiList = [];
     LiuChengJianKongList = [];
     public menuList = [
         { title: '我申请的' },
@@ -53,11 +53,10 @@ export class IndexComponent extends BasePage implements OnInit, OnDestroy {
         this.events.unsubscribe(AppConfig.Synthesize.List);
         this.events.unsubscribe(AppConfig.Synthesize.ShenPiList);
     }
-    change() {
-        this.slides.getActiveIndex().then((index) => {
-            this.index = index;
-            this.getRequest();
-        });
+    async change() {
+        const index = await this.slides.getActiveIndex();
+        this.index = index;
+        this.getRequest();
     }
     segmentChange(index) {
         this.index = index;
@@ -68,31 +67,31 @@ export class IndexComponent extends BasePage implements OnInit, OnDestroy {
             this.getDocumentList();
         } else if (this.index == 1) {
             this.getShenPiList();
-        } else if( this.index == 2){
+        } else if ( this.index == 2) {
             this.getMyShenPiList();
-        }else if( this.index === 3 ){
+        } else if ( this.index === 3 ) {
             this.getLiuChengJianKongList();
         }
     }
-    getDocumentList() {
-        this.request('/baoXiao/zhsp_list', {}).then((res) => {
-            this.itemList = res.data;
-        });
+    // @ts-ignore
+    async getDocumentList() {
+        const res = await  this.request('/baoXiao/zhsp_list', {});
+        this.itemList = res.data;
     }
-    getShenPiList() {
-        this.request('/baoXiao/shenpi_list', {}).then((res) => {
-            this.shenPiList = res.data;
-        });
+    // @ts-ignore
+    async getShenPiList() {
+        const res = await this.request('/baoXiao/shenpi_list', {});
+        this.shenPiList = res.data;
     }
-     getMyShenPiList() {
-        this.request('/baoXiao/mylist', {}).then((res) => {
-            this.myShenPiList = res.data;
-        });
-    }
-    getLiuChengJianKongList() {
-        this.request('/qingjia/liuChengJianKong', {type: 5}).then((res) => {
-            this.LiuChengJianKongList = res.data;
-        });
+     // @ts-ignore
+    async getMyShenPiList() {
+        const res = await this.request('/baoXiao/mylist', {});
+        this.myShenPiList = res.data;
+     }
+    // @ts-ignore
+    async getLiuChengJianKongList() {
+        const res = await this.request('/qingjia/liuChengJianKong', {type: 5});
+        this.LiuChengJianKongList = res.data;
     }
     doRefresh(event) {
         super.doRefresh(event);

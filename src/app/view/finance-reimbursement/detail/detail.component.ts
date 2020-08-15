@@ -63,11 +63,10 @@ export class DetailComponent  extends BasePage implements OnInit {
   ngOnInit() {
     this.getDetail();
   }
-  public getDetail() {
-    this.request('/rongzi/warmdetail', {
+  public async getDetail() {
+    const res = await this.request('/rongzi/warmdetail', {
       id: this.id
-    }).then((res) => {
-      this.detail = res.data;
     });
+    this.detail = res.data;
   }
 }

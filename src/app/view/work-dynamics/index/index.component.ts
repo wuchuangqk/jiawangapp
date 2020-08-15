@@ -34,36 +34,29 @@ export class IndexComponent extends ListBasePage implements OnInit, OnDestroy {
     this.title = this.query('title');
     this.url = this.query('url');
     this.isCanCommit = this.query('isCanCommit') === 'true' ? true : false;
-    console.log(this.isCanCommit);
-
     this.addUrl = this.query('addUrl');
-    console.log(this.addUrl);
   }
   ngOnInit() {
-    this.events.subscribe(AppConfig.Notice.List, () => {
+    this.events.subscribe(AppConfig.Exchange.List, () => {
       this.getListData();
       this.getMyListData();
     });
     this.getListData();
     this.getMyListData();
   }
-    segmentChange(index) {
-        this.index = index;
-        this.slides.slideTo(index);
-    }
-    getMyListData() {
-      this.request('/work_dynamics/my_list', {}).then((res) => {
-        console.log(res);
-        this.myList = res.data;
-      });
-    }
-  change() {
-    this.slides.getActiveIndex().then((index) => {
-      this.index = index;
-      // this.getRequest();
-      this.getListData();
-      this.getMyListData();
-    });
+  segmentChange(index) {
+    this.index = index;
+    this.slides.slideTo(index);
+  }
+  async getMyListData() {
+    const res = await this.request('/work_dynamics/my_list', {});
+    this.myList = res.data;
+  }
+  async change() {
+    const  index = await this.slides.getActiveIndex();
+    this.index = index;
+    this.getListData();
+    this.getMyListData();
   }
 
   ngOnDestroy() {
