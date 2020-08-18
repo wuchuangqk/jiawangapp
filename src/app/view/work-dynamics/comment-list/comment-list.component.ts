@@ -72,12 +72,12 @@ export class CommentListComponent extends BasePage implements OnInit {
       this.commitList = res.data;
     });
   }
-doRefresh(event) {
-  super.doRefresh(event);
-  this.GetCommitList();
-}
+  doRefresh(event) {
+    super.doRefresh(event);
+    this.GetCommitList();
+  }
 
-  async submit() {
+  public async submit() {
     if (this.isHuiFu) {
       this.huiFu();
     } else {
@@ -94,9 +94,9 @@ doRefresh(event) {
     }
   }
 
-  async huiFu() {
+  public async huiFu() {
     this.huiFuParams.infoTitle = this.infoTitle;
-    const res = await this.setRequest('/work_dynamics/recommitadd', this.huiFuParams);
+    await this.setRequest('/work_dynamics/recommitadd', this.huiFuParams);
     this.dialogService.toast('回复成功！');
     this.isHuiFu = false;
     this.placeholder = '评论';

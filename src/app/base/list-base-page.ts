@@ -23,17 +23,22 @@ export class ListBasePage extends BasePage {
     public async getListData() {
         this.payload.pageindex = this.pageindex;
         const res = (await this.request(this.url, this.payload));
-        this.listData = this.listData.concat(res.data);
+        this.listData = res.data;
         this.hasnext = res.hasnext;
     }
-    doRefresh(event) {
+    public async doRefresh(event) {
         super.doRefresh(event);
-        this.getListData();
+        const res = (await this.request(this.url, this.payload));
+        this.listData = res.data;
+        this.hasnext = res.hasnext;
     }
     async loadData(event) {
         this.pageindex++;
         if (this.hasnext) {
-          await this.getListData();
+            this.payload.pageindex = this.pageindex;
+            const res = (await this.request(this.url, this.payload));
+            this.listData = this.listData.concat(res.data);
+            this.hasnext = res.hasnext;
         } else {
             await this.dialogService.toast('已加载所有数据！');
         }

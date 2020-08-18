@@ -36,3 +36,21 @@
     </fieldset>
   </section>
 </ion-content>
+
+<ion-footer>
+  <ion-toolbar>
+    <!--        [rows]="flag?4:1" (ionFocus)="flag=true" (ionBlur)="flag=false"-->
+    <div style="margin-bottom: 5px;">
+      <div>
+          <div class="card-header">办理</div>
+      <textarea *ngIf="isEdit" placeholder="请输入处理意见" style="font-size: 1.4rem;" [(ngModel)]="infoTitle"></textarea>
+      <div>
+      <ion-icon (click)="isEdit=!isEdit" name="create" size="20" style="font-size: 20px;"></ion-icon>
+      <ion-button expand="full"  fill="outline">暂存</ion-button>
+      <ion-button expand="full"  fill="outline">提交</ion-button>
+      </div>
+      </div>
+    </div>
+  </ion-toolbar>
+</ion-footer>
+

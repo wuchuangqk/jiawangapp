@@ -19,6 +19,8 @@ export class DetailComponent  extends DetailBasePage implements OnInit, OnDestro
   public isShenPi: boolean;
   public handle_status: string;
   public handleUrl: string;
+  public infoTitle: string;
+  public isEdit = false;
   public payload: {
     document_type: string
   };

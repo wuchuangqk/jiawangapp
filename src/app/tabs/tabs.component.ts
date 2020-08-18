@@ -11,7 +11,9 @@ import {DialogService} from '../service/dialog.service';
   styleUrls: ['tabs.component.scss']
 })
 export class Tabs extends BasePage {
-  public isShow = false;
+  public rz = false;
+  public zc = false;
+  public jc = false;
   constructor(
       public http: HttpService,
       public router: Router,
@@ -22,7 +24,8 @@ export class Tabs extends BasePage {
     super(http, router, navController, dialogService, route);
     this.request('/home/homeaccess', {}).then((res) => {
         const data = res.data;
-        this.isShow = data.rz;
+        this.rz = data.rz;
+        this.zc = data.zc;
     });
   }
 

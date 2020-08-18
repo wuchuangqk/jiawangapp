@@ -16,3 +16,17 @@
   padding: 0 2rem;
   border: 1px solid #ff0000;
 }
+textarea{
+  width: 100%;
+  height: 20rem;
+  border: none;
+}
+
+
+.card-header{
+  font-size: 15px;
+  padding: 3px;
+}
+
+input,button,select,textarea{ outline:none;} /*取消表单项聚焦时产生的边框*/
+textarea{resize:none;}/*取消textarea改变大小的功能*/
