@@ -15,22 +15,25 @@ import {ZhiLiangAnQuanDetailComponent} from './zhi-liang-an-quan-detail/zhi-lian
 import {JunGongYanShouDetailComponent} from './jun-gong-yan-shou-detail/jun-gong-yan-shou-detail.component';
 
 @NgModule({
-  declarations: [
-      IndexComponent,
-      ZhaoBiaoDetailComponent,
-      HeTongDetailComponent,
-      BianGengDetailComponent,
-      YueBaoDetailComponent,
-      ZhiLiangAnQuanDetailComponent,
-      JunGongYanShouDetailComponent,
-  ],
-  imports: [
-    CommonModule,
-    IonicModule,
-    FormsModule,
-    CommonComponentsModule,
-    ComponentsModule,
-    ProjectDetailRoutingModule
-  ]
+    declarations: [
+        IndexComponent,
+        ZhaoBiaoDetailComponent,
+        HeTongDetailComponent,
+        BianGengDetailComponent,
+        YueBaoDetailComponent,
+        ZhiLiangAnQuanDetailComponent,
+        JunGongYanShouDetailComponent,
+    ],
+    exports: [
+        HeTongDetailComponent
+    ],
+    imports: [
+        CommonModule,
+        IonicModule,
+        FormsModule,
+        CommonComponentsModule,
+        ComponentsModule,
+        ProjectDetailRoutingModule
+    ]
 })
 export class ProjectDetailModule { }

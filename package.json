@@ -43,6 +43,7 @@
     "@jiguang-ionic/jpush": "2.0.0",
     "@types/es6-promise": "^3.3.0",
     "@types/swiper": "^4.4.3",
+    "alloyfinger": "^0.1.16",
     "com-badrit-base64": "^0.2.0",
     "cordova": "^9.0.0",
     "cordova-android": "7.1.4",

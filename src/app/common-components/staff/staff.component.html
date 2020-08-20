@@ -1,6 +1,6 @@
-<ion-item>
+<ion-item *ngIf="type">
     <div class="staff">
-        <p class="staff-title">{{title}}</p>
+        <p class="staff-title" style="font-size: 16px;">{{title}}</p>
         <section class="staff-item">
             <section class="staff-item-wrapper">
                 <app-circle-text *ngFor="let item of selectedStaff" [name]="item.name"></app-circle-text>
@@ -11,3 +11,17 @@
         </section>
     </div>
 </ion-item>
+
+
+<div *ngIf="!type" class="staff flex-between">
+    <p class="staff-title">{{title}}</p>
+    <div>
+        {{selectName}}
+        <ion-icon name="arrow-forward"></ion-icon>
+    </div>
+    <!--        <section class="staff-item">-->
+    <!--            <section class="staff-item-wrapper">-->
+    <!--                <app-circle-text *ngFor="let item of selectedStaff" [name]="item.name"></app-circle-text>-->
+    <!--            </section>-->
+    <!--        </section>-->
+</div>

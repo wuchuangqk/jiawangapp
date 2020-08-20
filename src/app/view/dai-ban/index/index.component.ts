@@ -74,11 +74,11 @@ export class IndexComponent extends BasePage implements OnInit, OnDestroy {
                 });
                 break;
             }
-            case 'article': {
-                this.nav('detail', {
+            case 'article': { // 收文办理
+                this.nav('receive-document/receive-handle/'+id, {
                     id,
                     title: '收发文系统',
-                    url: '/documents/slist',
+                    url: '/receipt/anditdetail',
                     contentTitle,
                     document_type: 0,
                     handle_status: 1,
@@ -98,11 +98,11 @@ export class IndexComponent extends BasePage implements OnInit, OnDestroy {
                 });
                 break;
             }
-            case 'swsh': {
-                this.nav('detail', {
+            case 'swsh': { // 收文审核，收文拟办
+                this.nav('receive-document/receive-detail/'+id, {
                     id,
                     title: '收文系统',
-                    url: '/documents/slist',
+                    url: '/receipt/anditdetail',
                     contentTitle,
                     isShenPi: true,
                     handle_status: 0,

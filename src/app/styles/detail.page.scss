@@ -25,7 +25,37 @@
   padding: 10px 10px;
   /*padding:3px 5%;*/
   max-width: 100%;
+  overflow: auto;
 }
+.detail-style{
+  .tb-pyd {
+    border-top: 1px solid red;
+    border-left: 1px solid red;
+    //width: 650px;
+    //height: 780px;
+  }
+  .tb-pyd td {
+    border-bottom: 1px solid red;
+    border-right: 1px solid red;
+    height: 40px;
+    text-align: center;
+    color: red;
+    padding: 2px;
+  }
+
+  .childtb {
+    border: 0px;
+    background-color: #efefef;
+  }
+
+  .childtb td {
+    border: 0px;
+    text-align: left;
+    padding: 2px;
+    color: #333;
+  }
+}
+
 
 //.detail-style
 fieldset{

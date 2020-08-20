@@ -14,9 +14,11 @@ import { NavController } from '@ionic/angular';
   templateUrl: './detail.component.html',
   styleUrls: ['./detail.component.scss'],
 })
+// @ts-ignore
 export class DetailComponent  extends DetailBasePage implements OnInit, OnDestroy {
   public title = '详情';
   public isShenPi: boolean;
+  // tslint:disable-next-line:variable-name
   public handle_status: string;
   public handleUrl: string;
   public infoTitle: string;

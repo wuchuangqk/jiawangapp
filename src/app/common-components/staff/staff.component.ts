@@ -7,10 +7,12 @@ import {Events} from '@ionic/angular';
   styleUrls: ['./staff.component.scss'],
 })
 export class StaffComponent implements OnInit {
-  @Input() selectedStaff: object[];
+  @Input() selectedStaff: any[];
   @Input() eventName: string;
   @Input() title: string;
+  @Input() type = true;
   @Output() selectedStaffChange = new EventEmitter();
+  public selectName = '';
   constructor(
       public events: Events,
   ) { }
@@ -18,6 +20,7 @@ export class StaffComponent implements OnInit {
   ngOnInit() {
     this.events.subscribe(this.eventName, (selectedStaff) => {
       this.selectedStaff = selectedStaff;
+      this.selectName = this.selectedStaff.map(item => item.name).join(' ');
       this.selectedStaffChange.emit(this.selectedStaff);
     });
   }

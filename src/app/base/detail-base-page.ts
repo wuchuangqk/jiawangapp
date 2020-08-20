@@ -15,6 +15,14 @@ export class DetailBasePage extends BasePage {
     public url: string;
     public id: string;
     public comment: boolean;
+    public SignIndex: number;
+    // 是否已办理
+    public isgned = false;
+    public zhengWen: IDownFile = {
+        filename: '',
+        fileext: '',
+        fileurl: ''
+    };
     public detail: IDetail = {
         content: '',
         control: '',
@@ -37,10 +45,10 @@ export class DetailBasePage extends BasePage {
     const res = (await this.request(this.url + '/' + this.id, data));
     if (res.data) {
           this.detail = res.data;
-          console.log(res.data)
+          this.SignIndex = res.data.SignIndex;
+          this.isgned = res.data.isgned;
           this.comment = res.data.comment === '1';
-          console.log('是否能评论:' + this.comment);
-          console.log(this.comment);
+          this.zhengWen = res.data.pdfurl;
           this.comment_num = res.data.comment_num;
           if (res.data.file) {
               this.fileList = res.data.file;

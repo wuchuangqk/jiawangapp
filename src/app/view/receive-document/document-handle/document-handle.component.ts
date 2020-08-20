@@ -14,7 +14,6 @@ import {json} from '@angular-devkit/core';
 })
 export class DocumentHandleComponent extends BasePage implements OnInit {
   public url = '';
-
   public fileArray = [];
   payload = {
     opinion: '',

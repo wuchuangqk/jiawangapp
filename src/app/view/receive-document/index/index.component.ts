@@ -22,9 +22,10 @@ export class IndexComponent extends BasePage implements OnInit, OnDestroy {
     guiDangList = [];
     public keyword = '';
     public menuList = [
+        { title: '拟办收文' },
         { title: '待办收文' },
         { title: '已办收文' },
-        { title: '收文归档' },
+        // { title: '收文归档' },
         // { title: '收文审核' }
     ];
     public index = 0;
@@ -45,6 +46,7 @@ export class IndexComponent extends BasePage implements OnInit, OnDestroy {
     ngOnInit() {
         this.events.subscribe((AppConfig.Document.DocumentList), () => {
             this.getDocumentList();
+            this.getRequst();
         });
         this.events.subscribe((AppConfig.Document.DocumentShenPiList), () => {
             this.getShenPiList();
@@ -67,8 +69,11 @@ export class IndexComponent extends BasePage implements OnInit, OnDestroy {
         this.slides.slideTo(index);
     }
 
+    /**
+     * 拟办收文列表
+     * */
     getDocumentList() {
-        this.request('/documents/slist', {
+        this.request('/receipt/auditlist', {
             document_type: 0,
             keyword: this.keyword
         }).then((res) => {
@@ -83,14 +88,14 @@ export class IndexComponent extends BasePage implements OnInit, OnDestroy {
         });
     }
     getYiBanList() {
-        this.request('/documents/listed', {
+        this.request('/receipt/todo', {
             keyword: this.keyword
         }).then((res) => {
             this.yiBanList = res.data;
         });
     }
     async getGuiDangList() {
-        const res = await this.request('/documents/archivelist', {
+        const res = await this.request('/receipt/hasdone', {
             keyword: this.keyword
         });
         this.guiDangList = res.data;
