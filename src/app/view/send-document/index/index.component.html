@@ -51,7 +51,7 @@
     </ion-slide>
     <ion-slide>
       <ion-list class="my-list">
-        <ion-item *ngIf="yiBanList.length<=0" >
+        <ion-item *ngIf="yiBanList.length<=0">
           <p class="primary">无数据！</p>
         </ion-item>
         <ion-item *ngFor="let item of yiBanList" (click)="nav('detail',{title:'发文系统',url:'/documents/flist',handleUrl:'/documents/handle_document', document_type:1,id:item.id,handle_status:item.handle_status})">
@@ -70,6 +70,14 @@
             </div>
           </section>
         </ion-item>
+
+        <!---已办--->
+        <ion-infinite-scroll threshold="100px" (ionInfinite)="loadYiBanData($event)">
+          <ion-infinite-scroll-content
+                  loadingSpinner="bubbles"
+                  loadingText="加载更多......">
+          </ion-infinite-scroll-content>
+        </ion-infinite-scroll>
       </ion-list>
     </ion-slide>
 
@@ -95,6 +103,12 @@
           </section>
         </ion-item>
       </ion-list>
+      <ion-infinite-scroll threshold="100px" (ionInfinite)="loadGuiDangData($event)">
+        <ion-infinite-scroll-content
+                loadingSpinner="bubbles"
+                loadingText="加载更多......">
+        </ion-infinite-scroll-content>
+      </ion-infinite-scroll>
     </ion-slide>
     <!--      <ion-slide>-->
     <!--        <ion-list class="my-list">-->

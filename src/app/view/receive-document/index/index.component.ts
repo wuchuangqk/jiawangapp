@@ -20,7 +20,10 @@ export class IndexComponent extends BasePage implements OnInit, OnDestroy {
     // 已办收文
     yiBanList = [];
     guiDangList = [];
+    public pageindex = 1;
     public keyword = '';
+    public hasnext = 1;
+    public payload: any = {};
     public menuList = [
         { title: '拟办收文' },
         { title: '待办收文' },
@@ -96,7 +99,7 @@ export class IndexComponent extends BasePage implements OnInit, OnDestroy {
     }
     async getGuiDangList() {
         const res = await this.request('/receipt/hasdone', {
-            keyword: this.keyword
+            keyword: this.keyword,
         });
         this.guiDangList = res.data;
     }
@@ -118,5 +121,21 @@ export class IndexComponent extends BasePage implements OnInit, OnDestroy {
     doRefresh(event) {
         super.doRefresh(event);
         this.getRequst();
+    }
+    async loadData(event) {
+        this.pageindex++;
+        const isHasNext = Number(this.hasnext) === 1;
+        console.log(isHasNext);
+        if (isHasNext) {
+            this.payload.pageindex = this.pageindex;
+
+            this.payload.keyword = this.keyword;
+            const res = (await this.request('/receipt/hasdone', this.payload));
+            this.guiDangList = this.guiDangList.concat(res.data);
+            this.hasnext = res.hasnext;
+        } else {
+            // await this.dialogService.toast('已加载所有数据！');
+        }
+        event.target.complete();
     }
 }

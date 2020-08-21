@@ -1,4 +1,3 @@
-import { OnInit } from '@angular/core';
 import { NavController } from '@ionic/angular';
 import { HttpService } from '../service/http.service';
 import { DialogService } from '../service/dialog.service';
@@ -34,13 +33,14 @@ export class ListBasePage extends BasePage {
     }
     async loadData(event) {
         this.pageindex++;
-        if (this.hasnext) {
+        const isHasNext = Number(this.hasnext) === 1;
+        if (isHasNext) {
             this.payload.pageindex = this.pageindex;
             const res = (await this.request(this.url, this.payload));
             this.listData = this.listData.concat(res.data);
             this.hasnext = res.hasnext;
         } else {
-            await this.dialogService.toast('已加载所有数据！');
+            // await this.dialogService.toast('已加载所有数据！');
         }
         event.target.complete();
     }

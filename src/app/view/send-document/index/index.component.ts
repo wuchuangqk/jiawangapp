@@ -18,7 +18,14 @@ export class IndexComponent extends BasePage implements OnInit, OnDestroy {
     itemList = [];
     yiBanList = [];
     guiDangList = [];
-    public keyword="";
+    public guiDangPageIndex = 1;
+    public yiBanPageIndex = 1;
+    public keyword = '';
+    public guiDangHasNext = 1;
+    public guiDangPayload: any = {};
+    public yiBanHasNext = 1;
+    public yiBanPayload: any = {};
+
     public menuList = [
         { title: '待办发文' },
         { title: '已办发文' },
@@ -39,11 +46,11 @@ export class IndexComponent extends BasePage implements OnInit, OnDestroy {
         // this.slides.startAutoplay();
 
     }
-    ngOnInit() {
+    async ngOnInit() {
         this.events.subscribe(AppConfig.Document.DocumentList, () => {
-            this.getDocumentList();
+              this.getDocumentList();
         });
-        this.getDocumentList();
+        await this.getDocumentList();
     }
     ngOnDestroy(): void {
         this.events.unsubscribe(AppConfig.Document.DocumentList);
@@ -60,43 +67,83 @@ export class IndexComponent extends BasePage implements OnInit, OnDestroy {
         this.keyword = e.detail.value;
         this.getRequst();
     }
-    getDocumentList() {
-        this.request('/documents/flist', {
+    async getDocumentList() {
+        const res = await this.request('/documents/flist', {
             document_type: 1,
             keyword: this.keyword
-        }).then((res) => {
-            this.itemList = res.data;
         });
+        this.itemList = res.data;
     }
-    getYiBanList() {
-        this.request('/documents/flisted', {
+    async getYiBanList() {
+        const res = await this.request('/documents/flisted', {
             keyword: this.keyword
-        }).then((res) => {
-            this.yiBanList = res.data;
         });
+        this.yiBanList = res.data;
+        this.yiBanHasNext = res.hasnext;
     }
-   async getGuiDangList() {
+    async getGuiDangList() {
         const res = await this.request('/documents/DisPatchArchive', {
             keyword: this.keyword
         });
         this.guiDangList = res.data;
-   }
-    getRequst() {
+        this.guiDangHasNext = res.hasnext;
+    }
+    async getRequst() {
         if (this.index == 0) {
             this.getDocumentList();
         } else if (this.index == 1) {
             // this.getShenPiList();
-            this.getYiBanList();
-        }else if(this.index==2){
-            this.getGuiDangList();
+            await this.getYiBanList();
+        } else if (this.index == 2) {
+          await  this.getGuiDangList();
         }
     }
     segmentChange(index) {
         this.index = index;
         this.slides.slideTo(index);
     }
-    doRefresh(event) {
+    async doRefresh(event) {
         super.doRefresh(event);
-        this.getDocumentList();
+        await this.getDocumentList();
+    }
+
+
+    /*
+    *  已办上拉加载更多
+    */
+    async loadYiBanData(event) {
+        this.yiBanPageIndex++;
+        const isHasNext = Number(this.yiBanHasNext) === 1;
+        console.log(isHasNext);
+        if (isHasNext) {
+            this.yiBanPayload.pageindex = this.guiDangPageIndex;
+            this.yiBanPayload.keyword = this.keyword;
+            const res = (await this.request('/documents/flisted', this.yiBanPayload));
+            this.yiBanList = this.yiBanList.concat(res.data);
+            this.yiBanPayload = res.hasnext;
+        } else {
+            // await this.dialogService.toast('已加载所有数据！');
+        }
+        event.target.complete();
+    }
+
+
+    /*
+    * 归档上拉加载更多
+    */
+    async loadGuiDangData(event) {
+        this.guiDangPageIndex++;
+        const isHasNext = Number(this.guiDangHasNext) === 1;
+        console.log(isHasNext);
+        if (isHasNext) {
+            this.guiDangPayload.pageindex = this.guiDangPageIndex;
+            this.guiDangPayload.keyword = this.keyword;
+            const res = (await this.request('/documents/DisPatchArchive', this.guiDangPayload));
+            this.guiDangList = this.guiDangList.concat(res.data);
+            this.guiDangHasNext = res.hasnext;
+        } else {
+            // await this.dialogService.toast('已加载所有数据！');
+        }
+        event.target.complete();
     }
 }

@@ -10,21 +10,23 @@ import {StaffSelectComponent} from './staff-select/staff-select.component';
 import {AddComponent} from './add/add.component';
 import {ReceiveDetailComponent} from './receive-detail/receive-detail.component';
 import {ReceiveHandleComponent} from './receive-handle/receive-handle.component';
+import {ComponentsModule} from '../../components/components.module';
 
 @NgModule({
-  declarations: [
-    IndexComponent,
-    StaffSelectComponent,
-    AddComponent,
-      ReceiveDetailComponent,
-      ReceiveHandleComponent,
-  ],
-  imports: [
-    CommonComponentsModule,
-    CommonModule,
-    IonicModule,
-    FormsModule,
-    ReceiveDocumentRoutingModule
-  ]
+    declarations: [
+        IndexComponent,
+        StaffSelectComponent,
+        AddComponent,
+        ReceiveDetailComponent,
+        ReceiveHandleComponent,
+    ],
+    imports: [
+        CommonComponentsModule,
+        CommonModule,
+        IonicModule,
+        FormsModule,
+        ReceiveDocumentRoutingModule,
+        ComponentsModule
+    ]
 })
 export class ReceiveDocumentModule { }

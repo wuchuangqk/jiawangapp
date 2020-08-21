@@ -13,6 +13,7 @@ import {JinDuYueBaoComponent} from './jin-du-yue-bao/jin-du-yue-bao.component';
 import {ZhiLiangAnQuanComponent} from './zhi-liang-an-quan/zhi-liang-an-quan.component';
 import {JunGongYanShouComponent} from './jun-gong-yan-shou/jun-gong-yan-shou.component';
 import {GongChengZiLiaoComponent} from './gong-cheng-zi-liao/gong-cheng-zi-liao.component';
+import {YiBanShouWenComponent} from './yi-ban-shou-wen/yi-ban-shou-wen.component';
 
 
 @NgModule({
@@ -27,6 +28,7 @@ import {GongChengZiLiaoComponent} from './gong-cheng-zi-liao/gong-cheng-zi-liao.
     ZhiLiangAnQuanComponent,
     JunGongYanShouComponent,
     GongChengZiLiaoComponent,
+      YiBanShouWenComponent,
   ],
   exports: [
     ListsComponent,
@@ -39,6 +41,7 @@ import {GongChengZiLiaoComponent} from './gong-cheng-zi-liao/gong-cheng-zi-liao.
     ZhiLiangAnQuanComponent,
     JunGongYanShouComponent,
     GongChengZiLiaoComponent,
+    YiBanShouWenComponent,
   ],
   imports: [
     CommonModule,
