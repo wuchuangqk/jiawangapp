@@ -21,7 +21,7 @@ export class ReceiveHandleComponent  extends DetailBasePage implements OnInit, O
   public handleUrl: string;
   public infoTitle: string;
   public isEdit = false;
-  public tabIndex = 0;
+  public tabIndex = -1;
   public commentList = [];
   public commentShort = '';
   public primarySignerList = [];
@@ -35,6 +35,10 @@ export class ReceiveHandleComponent  extends DetailBasePage implements OnInit, O
   public selectedStaff = [];
   // 关联项目
   public linkProjectList = [];
+  // 关联收文
+  public linkReceiptList = [];
+  // 关联发文
+  public linkDispathList = [];
   public payload: {
     document_type: string
   };
@@ -58,13 +62,13 @@ export class ReceiveHandleComponent  extends DetailBasePage implements OnInit, O
     this.payload.document_type = this.query('document_type');
   }
 
-  ngOnInit() {
-    this.getDetail(this.payload);
-    this.getCommentList();
-    this.getPrimarySignerList();
-    this.getFenGuanLingDaoList();
-    this.getSignList();
-    this.getLinkProjectList();
+  async ngOnInit() {
+    await this.getDetail(this.payload);
+    await this.getCommentList();
+    await this.getPrimarySignerList();
+    await this.getFenGuanLingDaoList();
+    await this.getSignList();
+    await this.getLinkProjectList();
     this.events.subscribe(AppConfig.Document.DocumentDetail, () => {
       this.getDetail(this.payload);
       this.isShenPi = false;
@@ -105,7 +109,9 @@ export class ReceiveHandleComponent  extends DetailBasePage implements OnInit, O
 
   private async getLinkProjectList() {
     const res = await this.request('/receipt/oarel/' + this.id, {});
-    this.linkProjectList = res.data;
+    this.linkProjectList = res.data.result;
+    this.linkReceiptList = res.data.receipt;
+    this.linkDispathList = res.data.dispath;
   }
 
 
@@ -253,6 +259,29 @@ export class ReceiveHandleComponent  extends DetailBasePage implements OnInit, O
 
   }
 
+
+
+
+  /**
+   * 关联收文查看
+   */
+  public viewReceipt(item) {
+    item.pid = item.id;
+    item.url = '/receipt/anditdetail';
+    item.title = '收文系统';
+    this.nav('/receive-document/receive-detail/' + item.id, item);
+  }
+
+  /**
+   * 关联发文查看
+   */
+  public viewFaWen(item) {
+    item.title = '发文系统';
+    item.url = '/documents/flist/';
+    item.handleUrl = '/documents/handle_document';
+    item.document_type = 1;
+    this.nav('detail', item);
+  }
 
   public getIds(arr): string {
     return  arr.map(item => item.id).join(',');

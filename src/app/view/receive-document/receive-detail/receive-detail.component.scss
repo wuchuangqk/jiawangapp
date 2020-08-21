@@ -21,19 +21,38 @@ textarea{
   height: 20rem;
   border: none;
 }
-.switch-title{
-  color: #216ef8;
-  font-size: 16px;
-  padding: 5px;
-  margin-top: 10px;
-  div{
-    text-align: center;
-    width: 25%;
-    //border: 1px solid red;
+@media screen and (min-width: 360px) {
+  .switch-title{
+    color: #216ef8;
+    font-size: 16px;
+    padding: 5px;
+    margin-top: 10px;
+    div{
+      text-align: center;
+      width: 25%;
+      //border: 1px solid red;
+    }
+    div:not(:last-child){
+      border-right:1px solid #d3d3d3;
+    }
   }
-  div:not(:last-child){
-  border-right:1px solid #d3d3d3;
 }
+
+@media screen and (max-width: 360px) {
+  .switch-title{
+    color: #216ef8;
+    font-size: 12px;
+    padding: 5px;
+    margin-top: 10px;
+    div{
+      text-align: center;
+      width: 25%;
+      //border: 1px solid red;
+    }
+    div:not(:last-child){
+      border-right:1px solid #d3d3d3;
+    }
+  }
 }
 
 .card-header{

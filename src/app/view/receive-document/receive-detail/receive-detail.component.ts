@@ -34,6 +34,10 @@ export class ReceiveDetailComponent extends DetailBasePage implements OnInit, On
   public signList = [];
   // 关联项目
   public linkProjectList = [];
+  // 关联收文
+  public linkReceiptList = [];
+  // 关联发文
+  public linkDispathList = [];
   public payload: {
     document_type: string
   };
@@ -143,14 +147,18 @@ export class ReceiveDetailComponent extends DetailBasePage implements OnInit, On
     this.events.unsubscribe(AppConfig.Document.DocumentDetail);
   }
 
-
+  /*
+   * 关联项目，关联收发文
+   */
   private async getLinkProjectList() {
     const res = await this.request('/receipt/oarel/' + this.id, {});
-    this.linkProjectList = res.data;
+    this.linkProjectList = res.data.result;
+    this.linkReceiptList = res.data.receipt;
+    this.linkDispathList = res.data.dispath;
   }
 
 
-  /**
+  /*
    * 选择分管领导
    */
   async selectFenGuanLingDao() {
@@ -234,7 +242,7 @@ export class ReceiveDetailComponent extends DetailBasePage implements OnInit, On
     await alert.present();
   }
 
-  /**
+  /*
    * 选择快捷语
    */
   async presentAlertPrompt() {
@@ -284,11 +292,11 @@ export class ReceiveDetailComponent extends DetailBasePage implements OnInit, On
       }
     }
     await this.setRequest('/receipt/anditsave', {
-     id: this.id,
-     comments: this.infoTitle,
-     ldid: this.ldid,
-     staff_ids
-   });
+      id: this.id,
+      comments: this.infoTitle,
+      ldid: this.ldid,
+      staff_ids
+    });
     this.events.publish(AppConfig.Document.DocumentList);
     this.events.publish(AppConfig.Home.Badge);
     this.events.publish(AppConfig.Synthesize.List);
@@ -301,6 +309,29 @@ export class ReceiveDetailComponent extends DetailBasePage implements OnInit, On
   public viewProject(item) {
     item.pid = item.id;
     this.nav('project-detail', item);
+  }
+
+
+
+  /**
+   * 关联收文查看
+   */
+  public viewReceipt(item) {
+    item.pid = item.id;
+    item.url = '/receipt/anditdetail';
+    item.title = '收文系统';
+    this.nav('/receive-document/receive-detail/' + item.id, item);
+  }
+
+  /**
+   * 关联发文查看
+   */
+  public viewFaWen(item) {
+    item.title = '发文系统';
+    item.url = '/documents/flist/';
+    item.handleUrl = '/documents/handle_document';
+    item.document_type = 1;
+    this.nav('detail', item);
   }
   public getCommentShort(e) {
     this.infoTitle = e;

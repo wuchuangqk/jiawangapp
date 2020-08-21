@@ -45,7 +45,7 @@
         <app-divider></app-divider>
     </section>
 
-    <div *ngIf="tabIndex==0" class="detail-style" [innerHTML]="content"></div>
+    <div *ngIf="tabIndex==-1" class="detail-style" [innerHTML]="content"></div>
     <section *ngIf="tabIndex==1" class="detail-style">
         <fieldset>
             <legend><b>附件：</b></legend>
@@ -77,7 +77,6 @@
     </section>
 
 
-
     <section *ngIf="tabIndex===3">
         <fieldset>
             <legend><b>关联项目</b></legend>
@@ -87,6 +86,28 @@
 
             <div *ngIf="linkProjectList.length==0">
                 <a >无关联项目</a>
+            </div>
+        </fieldset>
+
+        <fieldset>
+            <legend><b>关联收文</b></legend>
+            <div *ngFor="let item of linkReceiptList;let i = index;" (click)="viewReceipt(item)">
+                <a>{{i+1}}、{{item.name}}</a>
+            </div>
+
+            <div *ngIf="linkReceiptList.length==0">
+                <a >无关联收文</a>
+            </div>
+        </fieldset>
+
+        <fieldset>
+            <legend><b>关联发文</b></legend>
+            <div *ngFor="let item of linkDispathList;let i = index;" (click)="viewFaWen(item)">
+                <a>{{i+1}}、{{item.name}}</a>
+            </div>
+
+            <div *ngIf="linkDispathList.length==0">
+                <a >无关联发文</a>
             </div>
         </fieldset>
     </section>
