@@ -7,10 +7,12 @@ import {CommonComponentsModule} from '../../common-components/common-components.
 import {IonicModule} from '@ionic/angular';
 import {FormsModule} from '@angular/forms';
 import {AddComponent} from './add/add.component';
+import {DetailComponent} from "./detail/detail.component";
 
 @NgModule({
   declarations: [
       IndexComponent,
+      DetailComponent,
       AddComponent,
   ],
   imports: [

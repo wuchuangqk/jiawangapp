@@ -18,10 +18,12 @@ export class ApproveComponent  extends DetailBasePage implements OnInit {
   public title = '详情';
   public isShenPi: boolean;
   public handleUrl: string;
+  public tabIndex = 0;
   public content: SafeHtml;
   public selectedStaff = [];
   public commentList = [];
   public isEdit = false;
+  public signList = [];
   public payload: {
     url: string;
     id: string;
@@ -51,6 +53,7 @@ export class ApproveComponent  extends DetailBasePage implements OnInit {
   async ngOnInit() {
     await this.getDetail();
     await this.getCommentList();
+    await this.getSignList();
     this.events.subscribe(AppConfig.Document.DocumentDetail, () => {
       this.getDetail();
     });
@@ -81,6 +84,10 @@ export class ApproveComponent  extends DetailBasePage implements OnInit {
     return  arr.map(item => item.id).join(',');
   }
 
+  private async getSignList() {
+    const res = await this.request('/zhsp/signlist', {item_id: this.id});
+    this.signList = res.data;
+  }
   /**
    * 选择快捷语
    */

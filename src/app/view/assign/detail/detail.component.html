@@ -4,6 +4,12 @@
     <ion-title>
       {{title}}
     </ion-title>
+    <div class="title-end"
+         *ngIf="handle_status==='1'&&!isShenPi"
+         (click)="nav('document-handle',{title:title,id:id,handleUrl:handleUrl,document_type:payload.document_type})" slot="end">办理</div>
+    <div class="title-end"  *ngIf="isShenPi" slot="end" (click)="nav('document-approve',{ title:'收文审批',id:id })">
+      审批
+    </div>
   </ion-toolbar>
 </ion-header>
 <ion-content>
@@ -19,8 +25,6 @@
     </ion-refresher-content>
   </ion-refresher>
 
-
-
   <section>
     <div class="switch-title flex-between">
       <div (click)="tabIndex=0">
@@ -35,14 +39,11 @@
     </div>
     <app-divider></app-divider>
   </section>
-
-
-
-
   <section *ngIf="tabIndex==0">
     <div class="detail-style" [innerHTML]="content"></div>
   </section>
-  <section *ngIf="tabIndex==1">
+
+  <div *ngIf="tabIndex==1">
     <section *ngIf="fileList.length>0" class="detail-style">
       <fieldset>
         <legend><b>附件：</b></legend>
@@ -60,7 +61,9 @@
         </div>
       </fieldset>
     </section>
-  </section>
+  </div>
+
+
 
   <section *ngIf="tabIndex===2">
     <table class="table">
@@ -82,30 +85,30 @@
 
 </ion-content>
 
-
-<ion-footer>
+<ion-footer *ngIf="handle_status==='1'&&!isShenPi">
   <ion-toolbar>
     <div style="margin-bottom: 5px;">
       <div>
         <div class="card-header">办理</div>
         <div *ngIf="isEdit">
-          <textarea placeholder="请输入处理意见" style="font-size: 1.4rem;" [(ngModel)]="payload.comments"></textarea>
+          <textarea placeholder="请输入处理意见" style="font-size: 1.4rem;" [(ngModel)]="payload.opinion"></textarea>
 
-          <div class="flex-between" style="padding-bottom: 10px;">
-            <div></div>
-            <div style="color: #96999e;padding-right: 5px;" (click)="presentAlertPrompt()">常用语</div>
-          </div>
+<!--          <div class="flex-between" style="padding-bottom: 10px;">-->
+<!--            <div></div>-->
+<!--            <div style="color: #96999e;padding-right: 5px;" (click)="presentAlertPrompt()">常用语</div>-->
+<!--          </div>-->
         </div>
         <div class="flex-between">
           <ion-icon (click)="isEdit=!isEdit" name="create" size="20" style="font-size: 20px;"></ion-icon>
           <div>
-          <ion-button size="small" type="default" fill="outline" (click)="back()">退回</ion-button>
-          <ion-button size="small" fill="outline" (click)="save()">提交</ion-button>
+<!--            <ion-button size="small" type="default" fill="outline" (click)="back()">退回</ion-button>-->
+            <ion-button size="small" fill="outline" (click)="save()">提交</ion-button>
           </div>
         </div>
       </div>
     </div>
   </ion-toolbar>
 </ion-footer>
+
 
 

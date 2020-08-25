@@ -23,6 +23,15 @@
     </ion-refresher>
     <h2>{{contentTitle}}</h2>
     <div class="detail-content" [innerHTML]="content"></div>
+
+    <section *ngIf="fileList.length>0" class="detail-style" style="margin-top: 30px;">
+        <fieldset>
+            <legend><b>附件：</b></legend>
+            <div *ngFor="let item of fileList;let i = index;" (click)="viewFile(item)">
+                <a>{{i+1}}、{{item.filename}}</a>
+            </div>
+        </fieldset>
+    </section>
 </ion-content>
 <ion-footer>
     <ion-toolbar>

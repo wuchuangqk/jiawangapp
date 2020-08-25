@@ -19,7 +19,7 @@ export class IndexComponent extends BasePage implements OnInit, OnDestroy {
   yiBanList= [];
   LiuChengJianKongList = [];
   public menuList = [
-    // { title: '我申请的' },
+    { title: '我的申请' },
     { title: '待办' },
     { title: '已办' },
     // { title: '流程监控' },
@@ -41,10 +41,10 @@ export class IndexComponent extends BasePage implements OnInit, OnDestroy {
   }
   ngOnInit() {
 
-    // this.getDocumentList();
+    this.getDocumentList();
     this.getDaiBanList();
     this.events.subscribe(AppConfig.Synthesize.List, () => {
-      // this.getDocumentList();
+       this.getDocumentList();
     });
     this.events.subscribe(AppConfig.Synthesize.ShenPiList, () => {
       this.getDaiBanList();
@@ -66,18 +66,19 @@ export class IndexComponent extends BasePage implements OnInit, OnDestroy {
   }
   getRequest() {
     if (this.index == 0) {
-      this.getDaiBanList();
+      this.getDocumentList();
     } else if( this.index == 1){
-      this.getMyShenPiList();
+      this.getDaiBanList();
     }else if( this.index === 2 ){
-      this.getLiuChengJianKongList();
+      // this.getLiuChengJianKongList();
+      this.getMyShenPiList();
     }
   }
   /*
    *我申请的
    */
   getDocumentList() {
-    this.request('/zhsp/zhsp_list', {}).then((res) => {
+    this.request('/zhsp/mylist', {}).then((res) => {
         this.itemList = res.data;
         });
   }

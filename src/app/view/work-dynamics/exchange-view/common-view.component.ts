@@ -52,9 +52,39 @@ export class ExchangeViewComponent extends DetailBasePage implements OnInit, OnD
         this.events.publish(AppConfig.Exchange.List);
         this.getDetail({}).then((res) => {
             this.events.publish(AppConfig.Home.Badge);
+            setTimeout(()=>{
+                this.getFileListByHtml()
+            },200)
         });
     }
     ngOnDestroy() {
+    }
+    getFileListByHtml(){
+        var fileList = new Array<IDownFile>();
+        var s= document.getElementsByClassName("detail-content")
+        if(s.length>0){
+            var html = s[0];
+            var ATageList = html.getElementsByTagName("a");
+            // @ts-ignore
+            for (let item of ATageList){
+                if(this.getFileType(item.href)){
+                    fileList.push({
+                        fileext: "."+this.getFileType(item.href),
+                        fileurl: item.href,
+                        filename:item.innerText
+                    })
+                }
+            }
+            console.log(fileList)
+            this.fileList=fileList
+        }
+    }
+
+    getFileType(filePath){
+        var startIndex = filePath.lastIndexOf(".");
+        if(startIndex != -1)
+            return filePath.substring(startIndex+1, filePath.length).toLowerCase();
+        else return "";
     }
     edit(e) {
         this.nav('edit', {

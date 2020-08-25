@@ -157,7 +157,6 @@ export class FileService {
      */
     public openByApp(file: IDownFile, backFn) {
         if (this.isAndroid()) {
-
             const fileTransfer: FileTransferObject = this.transfer.create();
             const apk = this.file.externalRootDirectory + file.filename + file.fileext; // apk保存的目录
             fileTransfer.download(file.fileurl, apk).then(() => {

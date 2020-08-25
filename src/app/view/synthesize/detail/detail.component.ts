@@ -17,6 +17,8 @@ import { NavController } from '@ionic/angular';
 export class DetailComponent  extends DetailBasePage implements OnInit {
   public title = '详情';
   public content: SafeHtml;
+  public tabIndex = 0;
+  public signList = [];
   public payload: {
     document_type: string
   };
@@ -34,8 +36,9 @@ export class DetailComponent  extends DetailBasePage implements OnInit {
     this.id = this.query('id');
   }
 
-  ngOnInit() {
-    this.getDetail();
+  async ngOnInit() {
+    await this.getDetail();
+    await this.getSignList()
     this.events.subscribe(AppConfig.Document.DocumentDetail, () => {
       this.getDetail();
     });
@@ -50,5 +53,10 @@ export class DetailComponent  extends DetailBasePage implements OnInit {
         }
         console.log(this.fileList)
       });
+  }
+
+  private async getSignList() {
+    const res = await this.request('/zhsp/signlist', {item_id: this.id});
+    this.signList = res.data;
   }
 }
