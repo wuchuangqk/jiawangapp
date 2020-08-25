@@ -64,6 +64,9 @@ export class DetailBasePage extends BasePage {
       super.doRefresh(event);
       this.getDetail(this.payload);
   }
+    viewFile(item: IDownFile) {
+        this.nav('pdf', item);
+    }
     public transform(content): SafeHtml {
         return this.sanitizer.bypassSecurityTrustHtml(content);
     }

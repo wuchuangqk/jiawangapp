@@ -20,7 +20,7 @@
     </ion-refresher>
 
     <div class="detail-content" [innerHTML]="content"></div>
-    <section>
+    <section *ngIf="handle_status==0">
         <ion-item>
             <ion-textarea placeholder="请输入意见"  [(ngModel)]="payload.opinion"></ion-textarea>
         </ion-item>

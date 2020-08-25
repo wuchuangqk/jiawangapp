@@ -4,7 +4,7 @@ import {HttpService} from '../../../service/http.service';
 import {ActivatedRoute, Router} from '@angular/router';
 import {DialogService} from '../../../service/dialog.service';
 import {DomSanitizer, SafeHtml} from '@angular/platform-browser';
-import {Events} from '@ionic/angular';
+import {AlertController, Events} from '@ionic/angular';
 import {AppConfig} from '../../../app.config';
 import { NavController } from '@ionic/angular';
 
@@ -20,10 +20,12 @@ export class ApproveComponent  extends DetailBasePage implements OnInit {
   public handleUrl: string;
   public content: SafeHtml;
   public selectedStaff = [];
+  public commentList = [];
+  public isEdit = false;
   public payload: {
     url: string;
     id: string;
-    option: string;
+    comments: string;
     staff_ids: string;
   };
   constructor(
@@ -32,6 +34,7 @@ export class ApproveComponent  extends DetailBasePage implements OnInit {
       public navController: NavController,
       public dialogService: DialogService,
       public sanitizer: DomSanitizer,
+      public alertController: AlertController,
       public events: Events,
       public route?: ActivatedRoute,
   ) {
@@ -45,11 +48,16 @@ export class ApproveComponent  extends DetailBasePage implements OnInit {
     this.title = this.query('title');
   }
 
-  ngOnInit() {
-    this.getDetail();
+  async ngOnInit() {
+    await this.getDetail();
+    await this.getCommentList();
     this.events.subscribe(AppConfig.Document.DocumentDetail, () => {
       this.getDetail();
     });
+  }
+  private async  getCommentList() {
+    const res = await this.request('/receipt/commentStore', {});
+    this.commentList = res.data;
   }
   go( eventName, selectedStaff, isSelectOne) {
     localStorage.num = 0;
@@ -63,15 +71,71 @@ export class ApproveComponent  extends DetailBasePage implements OnInit {
   }
   public getDetail() {
       return  this.request(this.url + '/' + this.id, {}).then((res) => {
-        this.content = this.transform(res.data);
+        this.content = this.transform(res.data.json);
+        if (res.data.file) {
+          this.fileList = res.data.file;
+        }
       });
   }
   getIds(arr): string {
     return  arr.map(item => item.id).join(',');
   }
+
+  /**
+   * 选择快捷语
+   */
+  async presentAlertPrompt() {
+    const inputs: any = this.commentList.map(item => {
+      return {
+        name: item.name,
+        type: 'radio',
+        label: item.name,
+        value: item.name
+      };
+    });
+    const alert = await this.alertController.create({
+      cssClass: 'my-custom-class',
+      header: '请选择快捷语!',
+      inputs,
+      buttons: [
+        {
+          text: '取消',
+          role: 'cancel',
+          cssClass: 'secondary',
+          handler: () => {
+            console.log('Confirm Cancel');
+          }
+        }, {
+          text: '确定',
+          handler: (e) => {
+            this.payload.comments = e;
+          }
+        }
+      ]
+    });
+
+    await alert.present();
+  }
+
+
+
+  back() {
+    if (!this.payload.comments) {
+      this.dialogService.toast('请输入审批意见');
+      return;
+    }
+    this.dialogService.toast('正在提交数据...');
+    this.setRequest("/zhsp/backsave", this.payload).then((res) => {
+      this.dialogService.toast('提交成功');
+      this.events.publish(AppConfig.Synthesize.List);
+      this.events.publish(AppConfig.Synthesize.ShenPiList);
+      this.navController.back();
+    });
+  }
+
+
   save() {
-    this.payload.staff_ids = this.getIds(this.selectedStaff);
-    if (!this.payload.option) {
+    if (!this.payload.comments) {
       this.dialogService.toast('请输入审批意见');
       return;
     }

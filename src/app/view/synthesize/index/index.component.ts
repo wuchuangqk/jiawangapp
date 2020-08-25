@@ -13,89 +13,97 @@ import {AppConfig} from '../../../app.config';
     styleUrls: ['./index.component.scss'],
 })
 export class IndexComponent extends BasePage implements OnInit, OnDestroy {
-    @ViewChild(IonSlides) slides: IonSlides;
-    itemList = [];
-    shenPiList = [];
-    myShenPiList= [];
-    LiuChengJianKongList = [];
-    public menuList = [
-        { title: '我申请的' },
-        { title: '待我审批的' },
-        { title: '我已审批的' },
-        // { title: '流程监控' },
-    ];
-    public index = 0;
-    constructor(
-        public http: HttpService,
-        public router: Router,
-        public navController: NavController,
-        public dialogService: DialogService,
-        private events: Events,
-        public route?: ActivatedRoute,
-    ) {
-        super(http, router, navController, dialogService);
-        // this.url = this.query('url');
-        // this.slides.startAutoplay();
-        //
+  @ViewChild(IonSlides) slides: IonSlides;
+  itemList = [];
+  daiBanList = [];
+  yiBanList= [];
+  LiuChengJianKongList = [];
+  public menuList = [
+    // { title: '我申请的' },
+    { title: '待办' },
+    { title: '已办' },
+    // { title: '流程监控' },
+  ];
+  public index = 0;
+  constructor(
+    public http: HttpService,
+    public router: Router,
+    public navController: NavController,
+    public dialogService: DialogService,
+    private events: Events,
+    public route?: ActivatedRoute,
+  ) {
+    super(http, router, navController, dialogService);
+    // this.url = this.query('url');
+    // this.slides.startAutoplay();
+    //
 
+  }
+  ngOnInit() {
+
+    // this.getDocumentList();
+    this.getDaiBanList();
+    this.events.subscribe(AppConfig.Synthesize.List, () => {
+      // this.getDocumentList();
+    });
+    this.events.subscribe(AppConfig.Synthesize.ShenPiList, () => {
+      this.getDaiBanList();
+    });
+  }
+  ngOnDestroy(): void {
+    this.events.unsubscribe(AppConfig.Synthesize.List);
+    this.events.unsubscribe(AppConfig.Synthesize.ShenPiList);
+  }
+  change() {
+    this.slides.getActiveIndex().then((index) => {
+      this.index = index;
+      this.getRequest();
+    });
+  }
+  segmentChange(index) {
+    this.index = index;
+    this.slides.slideTo(index);
+  }
+  getRequest() {
+    if (this.index == 0) {
+      this.getDaiBanList();
+    } else if( this.index == 1){
+      this.getMyShenPiList();
+    }else if( this.index === 2 ){
+      this.getLiuChengJianKongList();
     }
-    ngOnInit() {
-        this.getDocumentList();
-        this.getShenPiList();
-        this.events.subscribe(AppConfig.Synthesize.List, () => {
-            this.getDocumentList();
+  }
+  /*
+   *我申请的
+   */
+  getDocumentList() {
+    this.request('/zhsp/zhsp_list', {}).then((res) => {
+        this.itemList = res.data;
         });
-        this.events.subscribe(AppConfig.Synthesize.ShenPiList, () => {
-            this.getShenPiList();
+  }
+  /*
+  * 待办
+  */
+  getDaiBanList() {
+    this.request('/zhsp/todolist', {}).then((res) => {
+        this.daiBanList = res.data;
         });
-    }
-    ngOnDestroy(): void {
-        this.events.unsubscribe(AppConfig.Synthesize.List);
-        this.events.unsubscribe(AppConfig.Synthesize.ShenPiList);
-    }
-    change() {
-        this.slides.getActiveIndex().then((index) => {
-            this.index = index;
-            this.getRequest();
+  }
+  /**
+  * 已办
+  */
+  getMyShenPiList() {
+    this.request('/zhsp/hasdolist', {}).then((res) => {
+      this.yiBanList = res.data;
+    });
+  }
+  getLiuChengJianKongList() {
+    this.request('/qingjia/liuChengJianKong', {type: 4}).then((res) => {
+        this.LiuChengJianKongList = res.data;
         });
-    }
-    segmentChange(index) {
-        this.index = index;
-        this.slides.slideTo(index);
-    }
-    getRequest() {
-        if (this.index == 0) {
-            this.getDocumentList();
-        } else if (this.index == 1) {
-            this.getShenPiList();
-        } else if( this.index == 2){
-            this.getMyShenPiList();
-        }else if( this.index === 3 ){
-            this.getLiuChengJianKongList();
-        }
-    }
-    getDocumentList() {
-        this.request('/zhsp/zhsp_list', {}).then((res) => {
-            this.itemList = res.data;
-        });
-    }
-    getShenPiList() {
-        this.request('/zhsp/shenpi_list', {}).then((res) => {
-            this.shenPiList = res.data;
-        });
-    }
-     getMyShenPiList() {
-        this.request('/zhsp/mylist', {}).then((res) => {
-            this.myShenPiList = res.data;
-        });
-    }
-    getLiuChengJianKongList() {
-        this.request('/qingjia/liuChengJianKong', {type: 4}).then((res) => {
-            this.LiuChengJianKongList = res.data;
-        });
-    }
-    doRefresh(event) {
-        super.doRefresh(event);
-        this.getRequest();
-    }
+  }
+  doRefresh(event) {
+    super.doRefresh(event);
+    this.getRequest();
+  }
 }

@@ -21,17 +21,45 @@
 
   <section>
     <div class="detail-style" [innerHTML]="content"></div>
-    <ion-item>
-      <ion-textarea placeholder="请输入意见"  [(ngModel)]="payload.option"></ion-textarea>
-    </ion-item>
-      <app-staff (click)="go('getSt', selectedStaff,false)" title="选择下级处理人" eventName="getSt" [(selectedStaff)]="selectedStaff"></app-staff>
+<!--    <ion-item>-->
+<!--      <ion-textarea placeholder="请输入意见"  [(ngModel)]="payload.option"></ion-textarea>-->
+<!--    </ion-item>-->
+  </section>
+
+  <section *ngIf="fileList.length>0" class="detail-style">
+    <fieldset>
+      <legend><b>附件：</b></legend>
+      <div *ngFor="let item of fileList;let i = index;" (click)="viewFile(item)">
+        <a>{{i+1}}、{{item.filename}}{{item.fileext}}</a>
+      </div>
+    </fieldset>
   </section>
 </ion-content>
 
+
 <ion-footer>
   <ion-toolbar>
-    <ion-button expand="full" (click)="save()" style="flex: 1">
-      保  存
-    </ion-button>
+    <div style="margin-bottom: 5px;">
+      <div>
+        <div class="card-header">办理</div>
+        <div *ngIf="isEdit">
+          <textarea placeholder="请输入处理意见" style="font-size: 1.4rem;" [(ngModel)]="payload.comments"></textarea>
+
+          <div class="flex-between" style="padding-bottom: 10px;">
+            <div></div>
+            <div style="color: #96999e;padding-right: 5px;" (click)="presentAlertPrompt()">常用语</div>
+          </div>
+        </div>
+        <div class="flex-between">
+          <ion-icon (click)="isEdit=!isEdit" name="create" size="20" style="font-size: 20px;"></ion-icon>
+          <div>
+          <ion-button size="small" type="default" fill="outline" (click)="back()">退回</ion-button>
+          <ion-button size="small" fill="outline" (click)="save()">提交</ion-button>
+          </div>
+        </div>
+      </div>
+    </div>
   </ion-toolbar>
 </ion-footer>
+
+

@@ -57,6 +57,8 @@ export class ApproveComponent  extends DetailBasePage implements OnInit {
   ];
   public nextStepUserList = [];
   public backUserList = [];
+  //审批状态 0 流转 2完成 4 终止
+  public handle_status = 0;
   constructor(
     public http: HttpService,
     public router: Router,
@@ -73,14 +75,18 @@ export class ApproveComponent  extends DetailBasePage implements OnInit {
     this.id = this.query('id');
     this.payload.runid = this.query('id');
     this.payload.url = this.query('handleUrl');
+
+    this.handle_status =Number(this.query('handle_status'));
     this.isShenPi = this.getQueryParams().isShenPi;
     this.title = this.query('title');
   }
 
   ngOnInit() {
     this.getDetail();
-    this.getNextUser();
-    this.getBackUserList();
+    if(this.handle_status!=2){
+      this.getBackUserList();
+      this.getNextUser();
+    }
     this.events.subscribe(AppConfig.Document.DocumentDetail, () => {
       this.getDetail();
     });
