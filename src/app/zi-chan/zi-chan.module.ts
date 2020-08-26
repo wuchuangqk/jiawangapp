@@ -14,6 +14,7 @@ import {FangChanGuanLiComponent} from './fang-chan-guan-li/fang-chan-guan-li.com
 import {FangChanGuanLiDetailComponent} from './fang-chan-guan-li-detail/fang-chan-guan-li-detail.component';
 import {ShangPuGuanLiComponent} from './shang-pu-guan-li/shang-pu-guan-li.component';
 import {ShangPuGuanLiDetailComponent} from './shang-pu-guan-li-detail/shang-pu-guan-li-detail.component';
+import {ZiChanFenBuComponent} from "./zi-chan-fen-bu/zi-chan-fen-bu.component";
 
 @NgModule({
   declarations: [
@@ -26,6 +27,7 @@ import {ShangPuGuanLiDetailComponent} from './shang-pu-guan-li-detail/shang-pu-g
       FangChanGuanLiDetailComponent,
       ShangPuGuanLiComponent,
       ShangPuGuanLiDetailComponent,
+      ZiChanFenBuComponent,
   ],
   imports: [
     CommonModule,

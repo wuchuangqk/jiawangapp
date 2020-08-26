@@ -1,0 +1,17 @@
+<ion-header>
+  <ion-toolbar color="primary">
+    <app-back></app-back>
+    <ion-title>
+      土地分布图
+    </ion-title>
+  </ion-toolbar>
+</ion-header>
+<ion-content>
+  <div>
+    <ion-searchbar placeholder="请输入..." (ionChange)="search($event)"></ion-searchbar>
+  </div>
+  <section id="mapWrapper" style="width:100%;height:100%">
+    <div id="allmap" style="width:100%;height:100%"></div>
+  </section>
+</ion-content>
+

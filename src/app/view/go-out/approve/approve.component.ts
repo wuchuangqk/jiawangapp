@@ -80,6 +80,7 @@ export class ApproveComponent  extends DetailBasePage implements OnInit {
       this.dialogService.toast('提交成功');
       this.events.publish(AppConfig.GoOut.List);
       this.events.publish(AppConfig.GoOut.ShenPiList);
+      this.events.publish(AppConfig.Home.Badge);
       this.navController.back();
     });
   }

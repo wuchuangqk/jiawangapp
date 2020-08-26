@@ -23,5 +23,8 @@ ion-content ion-toolbar {
     font-size:30px;
     color: #ffffff;
     margin: 5px auto;
+    display: flex;
+    align-items: center;
+    justify-content: center;
   }
 }

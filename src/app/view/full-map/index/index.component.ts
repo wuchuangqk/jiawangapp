@@ -1,9 +1,9 @@
 import { Component, OnInit } from '@angular/core';
-import { MP } from './map';
+import { MP } from '../../../plugins/map';
 import {BasePage} from '../../../base/base-page';
 import {HttpService} from '../../../service/http.service';
 import {ActivatedRoute, Router} from '@angular/router';
-import {Events, NavController} from '@ionic/angular';
+import {NavController} from '@ionic/angular';
 import {DialogService} from '../../../service/dialog.service';
 // declare const BMap;
 
@@ -20,8 +20,6 @@ export class IndexComponent extends BasePage implements OnInit {
     {id: 2, name: '前期项目'},
     {id: 3, name: '前期项目'},
   ];
-
-
   constructor(
       public http: HttpService,
       public router: Router,

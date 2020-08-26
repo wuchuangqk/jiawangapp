@@ -18,6 +18,7 @@ export class ZiChanComponent extends BasePage implements OnInit {
     { icon: 'business', color: '#fb8862', name: 'zi-chan/shang-pu-guan-li', title: '商铺管理' },
     { icon: 'md-trending-up', color: '#6dbbff', name: 'asset-statistics', title: '资产台账' },
     { icon: 'build', color: '#babda7', name: 'zi-chan/wei-xiu', title: '资产维修审批' },
+    { icon: 'locate', color: '#77f466', name: 'zi-chan/zi-chan-fen-bu-tu', title: '土地分布图' },
   ];
   constructor(
       public http: HttpService,
