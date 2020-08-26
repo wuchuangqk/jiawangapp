@@ -13,7 +13,7 @@ import {JPushModel} from "../../home/jPush.model";
     templateUrl: './index.component.html',
     styleUrls: ['./index.component.scss'],
 })
-export class IndexComponent extends BasePage implements OnInit, OnDestroy {
+export class IndexComponent extends BasePage implements OnInit {
     @ViewChild(IonSlides) slides: IonSlides;
     itemList = [];
     shenPiList = [];
@@ -40,15 +40,9 @@ export class IndexComponent extends BasePage implements OnInit, OnDestroy {
     }
     ngOnInit() {
         this.getDocumentList();
-        this.events.subscribe(AppConfig.Synthesize.List, () => {
+        this.events.subscribe(AppConfig.Home.Badge, () => {
             this.getDocumentList();
         });
-        this.events.subscribe(AppConfig.Synthesize.ShenPiList, () => {
-        });
-    }
-    ngOnDestroy(): void {
-        this.events.unsubscribe(AppConfig.Synthesize.List);
-        this.events.unsubscribe(AppConfig.Synthesize.ShenPiList);
     }
     change() {
     }

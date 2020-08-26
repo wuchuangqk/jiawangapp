@@ -43,6 +43,7 @@ export class ApproveComponent  extends DetailBasePage implements OnInit {
     this.payload.url = this.query('handleUrl');
     this.isShenPi = this.getQueryParams().isShenPi;
     this.title = this.query('title');
+    this.getIsBackToHome();
   }
 
   ngOnInit() {
@@ -77,10 +78,12 @@ export class ApproveComponent  extends DetailBasePage implements OnInit {
     }
     this.dialogService.toast('正在提交数据...');
     this.setRequest(this.payload.url, this.payload).then((res) => {
-        this.dialogService.toast('提交成功');
-        this.events.publish(AppConfig.OvertimeWork.List);
-        this.events.publish(AppConfig.OvertimeWork.ShenPiList);
-        this.navController.back();
+      this.events.publish(AppConfig.OvertimeWork.List);
+      this.events.publish(AppConfig.OvertimeWork.ShenPiList);
+      this.events.publish(AppConfig.Home.Badge);
+      this.dialogService.alert('提交成功',()=>{
+        this.goBack();
       });
+    });
   }
 }

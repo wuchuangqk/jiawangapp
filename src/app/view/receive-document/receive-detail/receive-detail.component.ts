@@ -59,6 +59,7 @@ export class ReceiveDetailComponent extends DetailBasePage implements OnInit, On
     this.id = this.query('id');
     this.isShenPi = this.getQueryParams().isShenPi;
     this.payload.document_type = this.query('document_type');
+    this.getIsBackToHome();
   }
 
   async ngOnInit() {
@@ -300,9 +301,8 @@ export class ReceiveDetailComponent extends DetailBasePage implements OnInit, On
     this.events.publish(AppConfig.Document.DocumentList);
     this.events.publish(AppConfig.Home.Badge);
     this.events.publish(AppConfig.Synthesize.List);
-    // this.dialogService.alert('提交成功!');
     this.dialogService.alert('提交成功!', () => {
-      this.navController.back();
+        this.goBack();
     });
 
   }

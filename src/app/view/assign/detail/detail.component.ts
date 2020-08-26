@@ -48,6 +48,7 @@ export class DetailComponent  extends DetailBasePage implements OnInit, OnDestro
         this.isShenPi = this.getQueryParams().isShenPi;
         this.payload.document_type = this.query('document_type');
         this.payload.id  = this.id;
+        this.getIsBackToHome();
     }
 
     ngOnInit() {
@@ -69,20 +70,20 @@ export class DetailComponent  extends DetailBasePage implements OnInit, OnDestro
         const res = await this.request('/letter/signlist', {item_id: this.id});
         this.signList = res.data;
     }
-    save() {
+    async save() {
         if (!this.payload.opinion) {
             this.dialogService.toast('请输入意见！');
             return ;
         }
-        this.dialogService.toast('正在提交数据...');
-        this.setRequest("/letter/handle_letter", this.payload).then((res) => {
-            this.dialogService.toast('提交成功');
-            this.events.publish(AppConfig.Document.DocumentDetail);
-            this.events.publish(AppConfig.Document.DocumentList);
-            this.events.publish(AppConfig.Home.Badge);
-            this.events.publish(AppConfig.Assign.List);
-            this.events.publish(AppConfig.Assign.DoneList);
-            this.navController.back();
+        await this.dialogService.toast('正在提交数据...');
+        await this.setRequest("/letter/handle_letter", this.payload);
+        this.events.publish(AppConfig.Home.Badge);
+        this.events.publish(AppConfig.Assign.List);
+        this.events.publish(AppConfig.Assign.DoneList);
+        this.events.publish(AppConfig.Document.DocumentDetail);
+        this.events.publish(AppConfig.Document.DocumentList);
+        this.dialogService.alert('提交成功',()=>{
+            this.goBack();
         });
     }
 }

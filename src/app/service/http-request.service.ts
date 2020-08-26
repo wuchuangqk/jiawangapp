@@ -2,11 +2,8 @@ import { Injectable } from '@angular/core';
 import { HttpClient } from '@angular/common/http';
 import {Observable} from 'rxjs';
 import { UtilService } from './util.service';
-import { environment } from '../../environments/environment.prod';
+import { environment } from '../../environments/environment';
 import { File as IFile } from '@ionic-native/file/ngx';
-import {Events} from '@ionic/angular';
-import {AppConfig} from '../app.config';
-import {IndexedDBService} from './IndexedDBService';
 @Injectable({
     providedIn: 'root'
 })
@@ -14,7 +11,6 @@ export class HttpRequestService {
     public BaseUrl = localStorage.selectIp|| environment.host;
     private configUrl = 'assets/config.json';
     private SECERET_KEY = 'com.8bpm.yuansong.keys.2020.05.89';
-    private CryptoJS: any;
 
     constructor(
         public http: HttpClient,

@@ -46,7 +46,6 @@
     "alloyfinger": "^0.1.16",
     "com-badrit-base64": "^0.2.0",
     "cordova": "^9.0.0",
-    "cordova-android": "7.1.4",
     "cordova-android-support-gradle-release": "^3.0.1",
     "cordova-huawei-hms": "https://gitee.com/hui1421/cordova-huawei-hms.git",
     "cordova-ios": "5.0.1",
@@ -100,6 +99,7 @@
     "@types/jasminewd2": "~2.0.3",
     "@types/node": "~12.0.0",
     "codelyzer": "~4.5.0",
+    "cordova-android": "^7.1.4",
     "jasmine-core": "~2.99.1",
     "jasmine-spec-reporter": "~4.2.1",
     "karma": "~4.1.0",
@@ -120,7 +120,6 @@
         "CHANNEL": "developer-default"
       },
       "cordova-plugin-jcore": {},
-      "cordova-plugin-whitelist": {},
       "cordova-plugin-statusbar": {},
       "cordova-plugin-splashscreen": {},
       "cordova-plugin-ionic-keyboard": {},
@@ -160,11 +159,12 @@
         "MI_PUSH_APP_IOS_ID": "2882303761518512568",
         "MI_PUSH_APP_IOS_KEY": "5501851290568"
       },
-      "com-badrit-base64": {}
+      "com-badrit-base64": {},
+      "cordova-plugin-whitelist": {}
     },
     "platforms": [
-      "android",
-      "ios"
+      "ios",
+      "android"
     ]
   }
 }

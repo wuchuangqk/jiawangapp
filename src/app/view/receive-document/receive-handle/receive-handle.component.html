@@ -125,10 +125,10 @@
                     <textarea placeholder="请输入处理意见" style="font-size: 1.4rem;" [(ngModel)]="infoTitle"></textarea>
                     <div class="flex-between" style="padding-bottom: 10px;">
                         <div></div>
-                        <div style="color: #96999e;padding-right: 5px;" (click)="presentAlertPrompt()">常用语</div>
+                        <div style="color: #96999e;padding-right: 5px;" class="font-14" (click)="presentAlertPrompt()">常用语</div>
                     </div>
 
-                    <div class="flex-between" *ngIf="SignIndex<2"  style="padding: 10px 0;border-bottom: 1px solid #eee;" (click)="selectFenGuanLingDao()">
+                    <div class="flex-between font-14" *ngIf="SignIndex<2"  style="padding: 10px 0;border-bottom: 1px solid #eee;" (click)="selectFenGuanLingDao()">
                         <div>
                             选择分管领导
                         </div>

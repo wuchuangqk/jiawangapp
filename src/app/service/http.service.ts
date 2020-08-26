@@ -2,7 +2,6 @@ import { Injectable } from '@angular/core';
 import { HttpRequestService } from './http-request.service';
 import { Router } from '@angular/router';
 import { DialogService } from './dialog.service';
-import { environment } from '../../environments/environment.prod';
 import {NavController, Platform} from '@ionic/angular';
 import {Device} from '@ionic-native/device/ngx';
 import {HuaWeiPushProvider} from './hua-wei-push';

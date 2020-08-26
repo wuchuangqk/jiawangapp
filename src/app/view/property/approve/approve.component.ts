@@ -43,6 +43,7 @@ export class ApproveComponent  extends DetailBasePage implements OnInit {
     this.payload.url = this.query('handleUrl');
     this.isShenPi = this.getQueryParams().isShenPi;
     this.title = this.query('title');
+    this.getIsBackToHome();
   }
 
   ngOnInit() {
@@ -69,18 +70,19 @@ export class ApproveComponent  extends DetailBasePage implements OnInit {
   getIds(arr): string {
     return  arr.map(item => item.id).join(',');
   }
-  save() {
+  async save() {
     this.payload.staff_ids = this.getIds(this.selectedStaff);
     if (!this.payload.option) {
-      this.dialogService.toast('请输入审批意见');
+      await this.dialogService.toast('请输入审批意见');
       return;
     }
-    this.dialogService.toast('正在提交数据...');
-    this.setRequest(this.payload.url, this.payload).then((res) => {
-      this.dialogService.toast('提交成功');
-      this.events.publish(AppConfig.Property.List);
-      this.events.publish(AppConfig.Property.ShenPiList);
-      this.navController.back();
+    await this.dialogService.toast('正在提交数据...');
+    await this.setRequest(this.payload.url, this.payload);
+    this.events.publish(AppConfig.Property.List);
+    this.events.publish(AppConfig.Property.ShenPiList);
+    this.events.publish(AppConfig.Home.Badge);
+    await this.dialogService.alert('提交成功',()=>{
+      this.goBack();
     });
   }
 }

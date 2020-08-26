@@ -73,13 +73,16 @@ export class JPushModel {
         return this.router.navigate([path], { queryParams});
     }
     public goToPage( id, type, contentTitle, itemTitle ){
+        // 是否返回到首页
+        var isBackToHome = true;
         switch (type) {
             case 'message': {
                 this.nav(`common_view/${id}`, {
                     id,
                     title: itemTitle,
                     url: '/notices/list/',
-                    contentTitle
+                    contentTitle,
+                    isBackToHome
                 });
                 break;
             }
@@ -87,20 +90,23 @@ export class JPushModel {
                 this.nav(`notice/exchange-view/${id}`, {
                     id,
                     title: itemTitle,
-                    url: '/notices/list/',
-                    contentTitle
+                    url: '/work_dynamics/list/',
+                    contentTitle,
+                    isBackToHome
                 });
                 break;
             }
-            case 'article': {
-                this.nav('detail', {
+            // 回到首页^
+            case 'article': { // 收文办理
+                this.nav('receive-document/receive-handle/'+id, {
                     id,
                     title: '收发文系统',
-                    url: '/documents/slist',
+                    url: '/receipt/anditdetail',
                     contentTitle,
                     document_type: 0,
-                    handle_status: 0,
+                    handle_status: 1,
                     handleUrl: '/documents/handle_document',
+                    isBackToHome
                 });
                 break;
             }
@@ -113,110 +119,124 @@ export class JPushModel {
                     document_type: 1,
                     handle_status: 1,
                     handleUrl: '/documents/handle_document',
+                    isBackToHome
                 });
                 break;
             }
-            case 'swsh': {
-                this.nav('detail', {
+
+            // 回到首页^
+            case 'swsh': { // 收文审核，收文拟办
+                this.nav('receive-document/receive-detail/'+id, {
                     id,
                     title: '收文系统',
-                    url: '/documents/slist',
+                    url: '/receipt/anditdetail',
                     contentTitle,
                     isShenPi: true,
                     handle_status: 0,
                     document_type: 0,
                     handleUrl: '/documents/handle_document',
+                    isBackToHome
                 });
                 break;
             }
             case 'sign': {
                 this.nav('SignDetailPage', {
                     id,
-                    title: itemTitle
+                    title: itemTitle,
+                    isBackToHome
                 });
                 break;
             }
 
-            case 'qingjiado': {// 请假审批
+            case 'qingjiado': {// 请假管理
                 this.nav('/leave/approve', {
                     id,
                     title: itemTitle,
                     url: '/qingjia/shenpi_detail',
                     contentTitle,
                     handleUrl: '/qingjia/shenpi_save',
+                    isBackToHome
                 });
                 break;
             }
-            case 'qingjiadofinish': {// 请假审批完成
+            case 'qingjiadofinish': {// 请假管理完成
                 this.nav('/leave/detail', {
                     id,
                     title: itemTitle,
                     url: '/qingjia/shenpi_detail',
                     contentTitle,
+                    isBackToHome
                 });
                 break;
             }
-            case 'jiabando': {// 加班审批
+            case 'jiabando': {// 加班管理
                 this.nav('/overtime-work/approve', {
                     id,
                     title: itemTitle,
                     contentTitle,
                     url: '/jiaban/shenpi_detail',
-                    handleUrl: '/jiaban/shenpi_save'
+                    handleUrl: '/jiaban/shenpi_save',
+                    isBackToHome
                 });
                 break;
             }
-
-            case 'jiabandofinish': {// 请假审批完成
+            case 'jiabandofinish': {// 请假管理完成
                 this.nav('/overtime-work/detail', {
                     id,
                     title: itemTitle,
                     url: '/jiaban/shenpi_detail',
                     contentTitle,
+                    isBackToHome
                 });
                 break;
             }
-            case 'waichudo': {// 外出审批
+            case 'waichudo': {// 外出管理
                 this.nav('go-out/approve', {
                     id,
                     title: itemTitle,
                     contentTitle,
                     url: '/waichu/shenpi_detail',
                     handleUrl: '/waichu/shenpi_save',
+                    isBackToHome
                 });
                 break;
             }
 
-            case 'waichudofinish': {// 外出审批完成
+            case 'waichudofinish': {// 外出管理完成
                 this.nav('/go-out/detail', {
                     id,
                     title: itemTitle,
                     url: '/waichu/shenpi_detail',
                     contentTitle,
+                    isBackToHome
                 });
                 break;
             }
-            case 'zhspdo': {// 综合审批审批
+            // 回到首页^
+            case 'zhspdo': {// 综合管理管理
                 this.nav('synthesize/approve', {
                     id,
                     title: itemTitle,
                     contentTitle,
                     url: '/zhsp/mydetail',
                     handleUrl: '/zhsp/todosave',
+                    isBackToHome
                 });
                 break;
             }
 
-            case 'zhspdofinish': {// 综合审批审批完成
+            case 'zhspdofinish': {// 综合管理管理完成
                 this.nav('synthesize/detail', {
                     id,
                     title: itemTitle,
                     contentTitle,
-                    url: '/zhsp/mydetail',
+                    url: '/zhsp/zhsp_detail',
+                    isBackToHome
                 });
                 break;
             }
-            // 置产购置审批
+            // 置产购置管理
+            // 回到首页^
             case 'zhigou': {
                 this.nav('property/approve', {
                     id,
@@ -224,17 +244,19 @@ export class JPushModel {
                     contentTitle,
                     url: '/zhigou/zhigou_detail',
                     handleUrl: '/zhigou/shenpi_save',
+                    isBackToHome
                 });
                 break;
             }
 
-            // 置产购置审批完成
+            // 置产购置管理完成
             case 'zhigoufinish': {
                 this.nav('property/detail', {
                     id,
                     title: itemTitle,
                     contentTitle,
                     url: '/zhigou/zhigou_detail',
+                    isBackToHome
                 });
                 break;
             }
@@ -245,21 +267,47 @@ export class JPushModel {
                     title: '文化宣传详情',
                     contentTitle,
                     url: '/notices/wenxuan_detail',
+                    isBackToHome
                 });
                 break;
             }
-            case 'letterdo': { // 交办督办
+            // 报销管理管理完成
+            case 'bxspdo': {
+                this.nav('bao-xiao/approve', {
+                    title: itemTitle,
+                    url: '/baoxiao/zhsp_detail',
+                    handleUrl: '/baoxiao/shenpi_save',
+                    document_type: 1,
+                    id,
+                    handle_status: '1',
+                    isBackToHome
+                });
+                break;
+            }
+            case 'bxspdofinish': {
+                this.nav('bao-xiao/detail', {
+                    id,
+                    title: itemTitle,
+                    contentTitle,
+                    url: '/baoxiao/zhsp_detail',
+                    isBackToHome
+                });
+                break;
+            }
+
+            // 交办督办
+            case 'letterdo': {
                 this.nav('assign/detail', {
                     title: itemTitle,
                     url: '/letter/list/',
                     handleUrl: '/letter/handle_letter',
                     document_type: 1,
                     id,
-                    handle_status: '1'
+                    handle_status: '1',
+                    isBackToHome
                 });
                 break;
             }
-
             case 'letterdofinish': {
                 this.nav('detail', {
                     title: itemTitle,
@@ -267,14 +315,27 @@ export class JPushModel {
                     handleUrl: '/letter/handle_letter',
                     document_type: 1,
                     id,
-                    handle_status: '0'
+                    handle_status: '0',
+                    isBackToHome
+                });
+                break;
+            }
+            //  回到首页^
+            case 'zcsp': {
+                this.nav('zi-chan/approve', {
+                    title: itemTitle,
+                    url: '/letter/list/',
+                    handleUrl: '/letter/handle_letter',
+                    document_type: 1,
+                    id,
+                    handle_status: '0',
+                    isBackToHome
                 });
                 break;
             }
         }
     }
     public pushNav(id, type, contentTitle, itemTitle) {
-        // this.dialogService.alert(type);
         this.dialogService.alert(contentTitle, () => {
             this.goToPage(id, type, contentTitle, itemTitle);
         }, itemTitle , '查看');

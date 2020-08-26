@@ -2,6 +2,7 @@ export class AppConfig {
     public static  Permissions = {
      WRITE_EXTERNAL_STORAGE: 'WRITE_EXTERNAL_STORAGE'
     };
+    // 角标的问题
     public  static Home = {
       Badge: 'HomeBagde'
     };
