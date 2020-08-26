@@ -86,8 +86,9 @@ export class JPushModel {
                 });
                 break;
             }
+            // 工作交流
             case 'trendofwork': {
-                this.nav(`notice/exchange-view/${id}`, {
+                this.nav(`work-dynamics/exchange-view/${id}`, {
                     id,
                     title: itemTitle,
                     url: '/work_dynamics/list/',

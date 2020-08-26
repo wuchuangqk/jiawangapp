@@ -58,11 +58,14 @@ export class PdfViewerPageComponent extends BasePage implements OnInit {
     this.pdfViewer.nextPage();
   }
   ngOnInit() {
+    console.log(this.fullPageBtn.nativeElement);
     this.fileService.downloadFile(this.file, (res: any, filePath: string) => {
       this.localFilePath = filePath;
       this.pdfViewer.openDocument(res);
       // 全屏点击时间
-      this.fullPageBtn.nativeElement.click();
+      setTimeout(()=>{
+        this.pdfViewer.zoomFullPage()
+      },500)
     });
   }
   openByApp() {
