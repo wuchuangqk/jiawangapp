@@ -334,6 +334,24 @@ export class JPushModel {
                 });
                 break;
             }
+
+
+
+            //  回到首页^
+            case 'rzspdo': { // 融资审批
+                this.nav('rong-zi/sheng-pi-detail', {
+                    title: itemTitle,
+                    url: '/rongzi/tododetail',
+                    handleUrl: '/rongzi/todosave',
+                    document_type: 1,
+                    id,
+                    handle_status: '0',
+                    isBackToHome
+                });
+                break;
+            }
+
+
         }
     }
     public pushNav(id, type, contentTitle, itemTitle) {

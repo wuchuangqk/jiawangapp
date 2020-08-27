@@ -10,6 +10,7 @@ import echarts from 'echarts';
   templateUrl: './tai-zhang.component.html',
   styleUrls: ['./tai-zhang.component.scss'],
 })
+// 融资台帐
 export class TaiZhangComponent extends BasePage implements OnInit {
   public taiZhangInfo: any = {};
   constructor(

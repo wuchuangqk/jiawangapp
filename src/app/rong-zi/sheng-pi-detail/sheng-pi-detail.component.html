@@ -1,0 +1,111 @@
+<ion-header>
+  <ion-toolbar color="primary">
+    <app-back slot="start"></app-back>
+    <ion-title>
+      {{title}}
+    </ion-title>
+  </ion-toolbar>
+</ion-header>
+<ion-content>
+
+  <ion-refresher (ionRefresh)="doRefresh($event)">
+    <ion-refresher-content
+            pullingIcon="arrow-dropdown"
+            pullingText="下拉刷新"
+            refreshingSpinner="circles"
+            refreshingText="刷新...">
+    </ion-refresher-content>
+    <ion-refresher-content >
+    </ion-refresher-content>
+  </ion-refresher>
+
+
+
+  <section>
+    <div class="switch-title flex-between">
+      <div (click)="tabIndex=0">
+        <ion-icon name="menu"></ion-icon>
+        表单
+      </div>
+      <div (click)="tabIndex=1">
+        <ion-icon name="link"></ion-icon>附件</div>
+      <div (click)="tabIndex=2">
+        <ion-icon name="git-network"></ion-icon>
+        流程</div>
+    </div>
+    <app-divider></app-divider>
+  </section>
+
+
+
+
+  <section *ngIf="tabIndex==0">
+    <div class="detail-style" [innerHTML]="content"></div>
+  </section>
+  <section *ngIf="tabIndex==1">
+    <section *ngIf="fileList.length>0" class="detail-style">
+      <fieldset>
+        <legend><b>附件：</b></legend>
+        <div *ngFor="let item of fileList;let i = index;" (click)="viewFile(item)">
+          <a>{{i+1}}、{{item.filename}}{{item.fileext}}</a>
+        </div>
+      </fieldset>
+    </section>
+
+    <section *ngIf="fileList.length==0" class="detail-style">
+      <fieldset>
+        <legend><b>附件：</b></legend>
+        <div>
+          <a>无附件！</a>
+        </div>
+      </fieldset>
+    </section>
+  </section>
+
+  <section *ngIf="tabIndex===2">
+    <table class="table">
+      <tr>
+        <th>处理人</th>
+        <th>处理状态</th>
+        <th>处理时间</th>
+      </tr>
+      <tr *ngFor="let item of signList">
+        <td>{{item.name}}</td>
+        <td>{{item.signed}}</td>
+        <td>{{item.time}}</td>
+      </tr>
+    </table>
+    <div *ngIf="signList.length==0">
+      <a >无流程</a>
+    </div>
+  </section>
+
+</ion-content>
+
+
+<ion-footer *ngIf="!isgned">
+  <ion-toolbar>
+    <div style="margin-bottom: 5px;">
+      <div>
+        <div class="card-header">办理</div>
+        <div *ngIf="isEdit">
+          <textarea placeholder="请输入处理意见" style="font-size: 1.4rem;" [(ngModel)]="payload.comments"></textarea>
+
+<!--          <div class="flex-between" style="padding-bottom: 10px;">-->
+<!--            <div></div>-->
+<!--            <div style="color: #96999e;padding-right: 5px;" (click)="presentAlertPrompt()">常用语</div>-->
+<!--          </div>-->
+        </div>
+        <div class="flex-between">
+          <ion-icon (click)="isEdit=!isEdit" name="create" size="20" style="font-size: 20px;"></ion-icon>
+          <div>
+<!--            <ion-button size="small" type="default" fill="outline" (click)="back()">退回</ion-button>-->
+            <ion-button size="small" fill="outline" (click)="save()">提交</ion-button>
+          </div>
+        </div>
+      </div>
+    </div>
+  </ion-toolbar>
+</ion-footer>
+
+
