@@ -57,16 +57,6 @@ export class IndexComponent extends BasePage implements OnInit {
     getDocumentList() {
         this.request('/home/Todolist', {}).then((res) => {
             this.itemList = res.data;
-            console.log(this.itemList);
-            let r =  this.itemList.sort((a:any,b:any)=>{
-                // @ts-ignore
-                let s= new Date(a.time)-new Date(b.time);
-                console.log(s);
-                return s;
-            })
-            this.itemList.reverse()
-            console.log(this.itemList);
-            console.log(r);
         });
     }
     doRefresh(event) {

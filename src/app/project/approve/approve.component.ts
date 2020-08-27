@@ -79,6 +79,7 @@ export class ApproveComponent  extends DetailBasePage implements OnInit {
     this.handle_status =Number(this.query('handle_status'));
     this.isShenPi = this.getQueryParams().isShenPi;
     this.title = this.query('title');
+    this.getIsBackToHome();
   }
 
   ngOnInit() {
@@ -145,10 +146,12 @@ export class ApproveComponent  extends DetailBasePage implements OnInit {
     }
     this.dialogService.toast('正在提交数据...');
     this.request('/flowrun/handlelinshisign', this.payload).then((res) => {
-      this.dialogService.toast('提交成功');
+      this.events.publish(AppConfig.Home.Badge);
       this.events.publish(AppConfig.Synthesize.List);
       this.events.publish(AppConfig.Synthesize.ShenPiList);
-      this.navController.back();
+      this.dialogService.alert('提交成功',()=>{
+        this.goBack();
+      });
     });
   }
 
@@ -170,10 +173,12 @@ export class ApproveComponent  extends DetailBasePage implements OnInit {
             this.payload.stepid = stepId;
             this.dialogService.toast('正在提交数据...');
             this.request('/flowrun/handlesignNext', this.payload).then((res) => {
-              this.dialogService.toast('提交成功');
+              this.events.publish(AppConfig.Home.Badge);
               this.events.publish(AppConfig.Synthesize.List);
               this.events.publish(AppConfig.Synthesize.ShenPiList);
-              this.navController.back();
+              this.dialogService.alert('提交成功',()=>{
+                this.goBack();
+              });
             });
           }
         }
@@ -201,10 +206,12 @@ export class ApproveComponent  extends DetailBasePage implements OnInit {
           handler: (r) => {
             this.payload.stepid = r;
             this.request('/flowrun/tuihandsige', this.payload).then((res) => {
-              this.dialogService.toast('提交成功');
+              this.events.publish(AppConfig.Home.Badge);
               this.events.publish(AppConfig.Synthesize.List);
               this.events.publish(AppConfig.Synthesize.ShenPiList);
-              this.navController.back();
+              this.dialogService.alert('提交成功',()=>{
+                this.goBack();
+              });
             });
           }
         }
@@ -221,10 +228,12 @@ export class ApproveComponent  extends DetailBasePage implements OnInit {
     }
     this.dialogService.toast('正在提交数据...');
     this.request('/flowrun/stopsige', this.payload).then((res) => {
-      this.dialogService.toast('提交成功');
+      this.events.publish(AppConfig.Home.Badge);
       this.events.publish(AppConfig.Synthesize.List);
       this.events.publish(AppConfig.Synthesize.ShenPiList);
-      this.navController.back();
+      this.dialogService.alert('提交成功',()=>{
+        this.goBack();
+      });
     });
   }
   // 结束流程
@@ -235,10 +244,12 @@ export class ApproveComponent  extends DetailBasePage implements OnInit {
     }
     this.dialogService.toast('正在提交数据...');
     this.request('/flowrun/finishsige', this.payload).then((res) => {
-      this.dialogService.toast('提交成功');
+      this.events.publish(AppConfig.Home.Badge);
       this.events.publish(AppConfig.Synthesize.List);
       this.events.publish(AppConfig.Synthesize.ShenPiList);
-      this.navController.back();
+      this.dialogService.alert('提交成功',()=>{
+        this.goBack();
+      });
     });
   }
   saveAndNext() {
@@ -257,10 +268,11 @@ export class ApproveComponent  extends DetailBasePage implements OnInit {
     }
     this.dialogService.toast('正在提交数据...');
     this.request('/flowrun/handlelinshisign', this.payload).then((res) => {
-      this.dialogService.toast('提交成功');
       this.events.publish(AppConfig.Synthesize.List);
       this.events.publish(AppConfig.Synthesize.ShenPiList);
-      this.navController.back();
+      this.dialogService.alert('提交成功',()=>{
+        this.goBack();
+      });
     });
   }
 }

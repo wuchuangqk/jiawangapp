@@ -140,10 +140,12 @@ export class JPushModel {
                 });
                 break;
             }
+            // 工程审批
             case 'sign': {
-                this.nav('SignDetailPage', {
+                this.nav('project/approve', {
                     id,
                     title: itemTitle,
+                    handle_status:0,
                     isBackToHome
                 });
                 break;
