@@ -15,6 +15,7 @@ export class TuDiGuanLiComponent extends ListBasePage implements OnInit {
   // public itemList = [];
   public keyword = '';
   public state = '';
+  public stateList = [];
   constructor(
       public http: HttpService,
       public router: Router,
@@ -37,12 +38,19 @@ export class TuDiGuanLiComponent extends ListBasePage implements OnInit {
     this.listData = [];
     this.ngOnInit();
   }
-  ngOnInit() {
+  async ngOnInit() {
     this.payload = {
       keyword: this.keyword,
       state: this.state,
     };
-    this.getListData();
+    await this.getListData();
+    await this.getStateList();
+  }
+  private async getStateList(){
+    let res = await this.request("/zichan/landstate",{})
+    console.log(res);
+    this.stateList = res.data;
+
   }
 
 }

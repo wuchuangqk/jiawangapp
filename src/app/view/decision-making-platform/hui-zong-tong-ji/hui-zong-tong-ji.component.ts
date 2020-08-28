@@ -33,6 +33,9 @@ export class HuiZongTongJiComponent extends BasePage implements OnInit {
   }
   ngOnInit() {
     this.getData();
+
+  }
+  setChart4(){
     // 月度
     this.request('/juece/projectInfo', {}).then((res) => {
       const  { data1, data2} = res.data;
@@ -73,7 +76,6 @@ export class HuiZongTongJiComponent extends BasePage implements OnInit {
       };
       // 使用刚指定的配置项和数据显示图表。
       myChart.setOption(option);
-      this.setChart5();
     });
   }
   setChart5() {
@@ -137,6 +139,8 @@ export class HuiZongTongJiComponent extends BasePage implements OnInit {
       this.tableData = res.data;
       this.dialogService.dismiss();
       this.loading = false;
+      this.setChart5();
+      this.setChart4();
     });
   }
 
