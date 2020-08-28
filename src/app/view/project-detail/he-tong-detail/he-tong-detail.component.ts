@@ -38,11 +38,21 @@ export class HeTongDetailComponent extends  BasePage implements OnInit {
     { label: '添加人', field: 'addren'},
     { label: '添加时间', field: 'addtime'},
     { label: '备注', field: 'remark'},
-    { label: '合同审批附件列表', field: 'spfj'},
-    { label: '合同正式稿', field: 'zsgao'},
-    { label: '合同过程稿附件', field: 'guofj'},
+    // { label: '合同审批附件列表', field: 'spfj'},
+    // { label: '合同正式稿', field: 'zsgao'},
+    // { label: '合同过程稿附件', field: 'guofj'},
   ];
-  constructor(
+
+// { label: '合同审批附件列表', field: 'spfj'},
+// { label: '合同正式稿', field: 'zsgao'},
+// { label: '合同过程稿附件', field: 'guofj'},
+    // 合同审批附件列表
+  public spfjfile :Array<IDownFile>= [];
+  // 合同正式稿
+  public zsgaofile :Array<IDownFile>= [];
+  // 合同过程稿附件
+  public guofjfile :Array<IDownFile>= [];
+constructor(
       public http: HttpService,
       public router: Router,
       public dialogService: DialogService,
@@ -60,6 +70,9 @@ export class HeTongDetailComponent extends  BasePage implements OnInit {
       htid: this.htid
     }).then((res) => {
       this.heTong = res.data;
+      this.spfjfile = res.data.spfjfile;
+      this.zsgaofile = res.data.zsgaofile;
+      this.guofjfile=res.data.guofjfile;
     });
   }
 

@@ -37,7 +37,7 @@
               无数据！
             </p>
           </ion-item>
-          <ion-item *ngFor="let item of itemList" (click)="nav('rong-zi/sheng-pi-detail',{url:'/rongzi/tododetail',id:item.id,title:title,contentTitle:item.title,title:'融资审批详情'})">
+          <ion-item *ngFor="let item of itemList" (click)="nav('rong-zi/sheng-pi-detail',{url:'/rongzi/tododetail',id:item.id,title:title,contentTitle:item.title,title:'融资审批详情', handleUrl:'/rongzi/todosave' })">
             <section>
               <div class="my-list-title">
                 <h2>{{item.title}}</h2>

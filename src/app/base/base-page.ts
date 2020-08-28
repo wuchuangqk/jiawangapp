@@ -82,6 +82,10 @@ export class BasePage implements OnInit {
     public doRefresh(event) {
         event.target.complete();
     }
+
+    public viewFile(item: IDownFile) {
+        this.nav('pdf', item);
+    }
     public handleErr(data: Iresponse) {
         if (data.status_code === '10000') {
             this.dialogService.toast(data.msg);

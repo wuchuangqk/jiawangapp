@@ -14,6 +14,7 @@ export class Tabs extends BasePage {
   public rz = false;
   public zc = false;
   public jc = false;
+  public xm = false;
   constructor(
       public http: HttpService,
       public router: Router,
@@ -26,6 +27,7 @@ export class Tabs extends BasePage {
         const data = res.data;
         this.rz = data.rz;
         this.zc = data.zc;
+        this.xm = data.xm;
     });
   }
 

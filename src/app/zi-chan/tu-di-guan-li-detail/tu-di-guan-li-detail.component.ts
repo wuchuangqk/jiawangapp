@@ -67,7 +67,8 @@ export class TuDiGuanLiDetailComponent extends DetailBasePage implements OnInit 
       item_id: this.id
     }).then((res) => {
       this.itemDetail = res.data;
-      this.content = res.data;
+      this.content = res.data.json;
+      this.fileList = res.data.file
     });
   }
 }

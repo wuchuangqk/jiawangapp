@@ -23,8 +23,11 @@ export class YueBaoDetailComponent extends BasePage implements OnInit {
     { label: '进度内容', field:  'gContent' },
     { label: '存在问题', field:  'ReportProblem' },
     { label: '本月完成投资', field:  '_gInvest' },
-    { label: '相关附件', field:  'fj' },
+    // { label: '相关附件', field:  'fj' },
   ];
+
+  // 相关附件
+  public fjfile :Array<IDownFile>= [];
   constructor(
       public http: HttpService,
       public router: Router,
@@ -44,7 +47,7 @@ export class YueBaoDetailComponent extends BasePage implements OnInit {
     }).then((res) => {
       console.log(res);
       this.zhaoBiaoZhunBei = res.data;
-      // this.kaiBiaoHou = res.data.hh;
+      this.fjfile = res.data.fjfile;
     });
   }
 

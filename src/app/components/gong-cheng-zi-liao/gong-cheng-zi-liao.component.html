@@ -2,11 +2,24 @@
 <section>
   <div class="content-title">竣工验收</div>
   <ion-list>
-    <ion-item *ngFor="let item of DataList" (click)="getItem(item)">
+    <ion-item *ngFor="let item of canViewFileList" (click)="viewFile(item)">
       <ion-row style="width:100%;">
         <ion-col class="primary text-md" size="8">
           <div style="margin-top:5px;">
-            <strong>{{item.title}}</strong>
+            <strong>{{item.filename}}</strong>
+          </div>
+        </ion-col>
+        <ion-col class="primary text-md ion-text-end" size="4">
+          <div style="margin-top:5px;">{{item.creator}}</div>
+        </ion-col>
+      </ion-row>
+    </ion-item>
+
+    <ion-item *ngFor="let item of cannotViewFileList" (click)="openByBrowser(item)">
+      <ion-row style="width:100%;">
+        <ion-col class="primary text-md" size="8">
+          <div style="margin-top:5px;">
+            <strong>{{item.filename}}</strong>
           </div>
         </ion-col>
         <ion-col class="primary text-md ion-text-end" size="4">

@@ -30,18 +30,23 @@ export class ZhaoBiaoDetailComponent extends BasePage implements OnInit {
     { label: '发布日期', field: 'fbtime'},
     { label: '开标日期', field: 'kbtime'},
     { label: '招标代理单位', field: 'danwei'},
-    { label: '招标审批稿', field: 'fj'},
+    // { label: '招标审批稿', field: 'fj'},
   ];
    public KaiBiaoHouList: Array<IList> = [
      { label: '中标价', field:  'zbjia' },
      { label: '中标人', field:  'zbren' },
-     { label: '过程材料', field:  'sf' },
+     // { label: '过程材料', field:  'sf' },
    ];
+   // 招标审批稿
+  public fjfile:Array<IDownFile>=[];
+
+  // 过程材料
+  public sffile:Array<IDownFile>=[];
   constructor(
     public http: HttpService,
     public router: Router,
-    public dialogService: DialogService,
     public navController: NavController,
+    public dialogService: DialogService,
     public events: Events,
     public route?: ActivatedRoute,
   ) {
@@ -54,9 +59,10 @@ export class ZhaoBiaoDetailComponent extends BasePage implements OnInit {
     this.request('/project_details/zbdetail', {
       zbid: this.zbid
     }).then((res) => {
-      console.log(res);
       this.zhaoBiaoZhunBei = res.data.qq;
       this.kaiBiaoHou = res.data.hh;
+      this.fjfile = res.data.qq.fjfile;
+      this.sffile = res.data.hh.sffile;
     });
   }
 

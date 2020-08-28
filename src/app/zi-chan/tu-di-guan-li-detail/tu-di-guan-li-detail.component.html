@@ -22,6 +22,27 @@
   <section>
       <app-view-content [content]="content"></app-view-content>
   </section>
+
+  <div>
+    <section *ngIf="fileList.length>0" class="detail-style">
+      <fieldset>
+        <legend><b>附件：</b></legend>
+        <div *ngFor="let item of fileList;let i = index;" (click)="viewFile(item)">
+          <a>{{i+1}}、{{item.filename}}{{item.fileext}}</a>
+        </div>
+      </fieldset>
+    </section>
+
+    <section *ngIf="fileList.length==0" class="detail-style">
+      <fieldset>
+        <legend><b>附件：</b></legend>
+        <div>
+          <a>无附件！</a>
+        </div>
+      </fieldset>
+    </section>
+  </div>
+
 </ion-content>
 
 <ion-footer>

@@ -32,14 +32,11 @@ export class JunGongYanShouDetailComponent extends BasePage implements OnInit {
     { label: '竣工验收结论', field: 'ysjl'},
     { label: '存在问题', field: 'czwt'},
     { label: '验收日期', field: 'ystime'},
-    { label: '验收相关附件', field: 'fj'}
-  ];
-  public KaiBiaoHouList: Array<IList> = [
-    { label: '中标价', field:  'zbjia' },
-    { label: '中标人', field:  'zbren' },
-    { label: '过程材料', field:  'sf' },
+    // { label: '验收相关附件', field: 'fj'}
   ];
 
+  // 验收相关附件
+  public fjfile :Array<IDownFile>= [];
 
 
   constructor(
@@ -60,6 +57,7 @@ export class JunGongYanShouDetailComponent extends BasePage implements OnInit {
       ysid: this.ysid
     }).then((res) => {
       this.zhaoBiaoZhunBei = res.data;
+      this.fjfile = res.data.fjfile;
     });
   }
 

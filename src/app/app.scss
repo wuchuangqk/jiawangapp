@@ -60,3 +60,6 @@ html{
 .font-14{
   font-size: 1.4rem;
 }
+.tableNoWrap table td {
+  white-space:normal !important;
+}

@@ -11,8 +11,11 @@ import {Events, NavController} from '@ionic/angular';
   styleUrls: ['./gong-cheng-zi-liao.component.scss'],
 })
 export class GongChengZiLiaoComponent extends BasePage implements OnInit {
+  // 可预览的附件
+  public canViewFileList = [];
 
-  DataList = [];
+  // 不可预览的附件
+  public cannotViewFileList = [];
   public pid = 0;
   constructor(
       public http: HttpService,
@@ -30,14 +33,14 @@ export class GongChengZiLiaoComponent extends BasePage implements OnInit {
     this.request('/project_details/breiflist', {
       pid: this.pid
     }).then((res) => {
-      this.DataList = res.data;
+        this.canViewFileList = [];
+      this.canViewFileList = res.data.files;
+      this.cannotViewFileList = res.data.result
     });
   }
-  getItem(item) {
-    // this.nav('project-detail/jun-gong-yan-shou-detail', {ysid: item.id});
-      console.log(item);
-      location.href = item.fileurl;
+  // 通过浏览器打开
+  openByBrowser(item: IDownFile){
+    location.href = item.fileurl;
   }
-
 
 }

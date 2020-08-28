@@ -32,14 +32,12 @@ export class ZhiLiangAnQuanDetailComponent extends BasePage implements OnInit {
     { label: '处理结果', field: 'jg'},
     { label: '附件', field: 'fj'}
   ];
-  public KaiBiaoHouList: Array<IList> = [
-    { label: '中标价', field:  'zbjia' },
-    { label: '中标人', field:  'zbren' },
-    { label: '过程材料', field:  'sf' },
-  ];
 
+  // 附件
+  public fjfile :Array<IDownFile>= [];
 
-
+  // // 过程材料
+  // public sffile :Array<IDownFile>= [];
   constructor(
       public http: HttpService,
       public router: Router,
@@ -58,6 +56,7 @@ export class ZhiLiangAnQuanDetailComponent extends BasePage implements OnInit {
       zlid: this.zlid
     }).then((res) => {
       this.zhaoBiaoZhunBei = res.data;
+      this.fjfile = res.data.fjfile;
     });
   }
 

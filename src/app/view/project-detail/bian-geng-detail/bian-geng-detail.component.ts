@@ -35,9 +35,11 @@ export class BianGengDetailComponent extends BasePage implements OnInit {
     { label: '变更内容及事由', field:  'bgcontext' },
     { label: '审核价', field:  'shj' },
     { label: '备注', field:  'remarks' },
-    { label: '变更相关附件', field:  'fj' },
+    // { label: '变更相关附件', field:  'fj' },
   ];
 
+  // 变更相关附件
+  public fjfile :Array<IDownFile>= [];
   constructor(
       public http: HttpService,
       public router: Router,
@@ -56,6 +58,7 @@ export class BianGengDetailComponent extends BasePage implements OnInit {
       bgid: this.bgid
     }).then((res) => {
       this.heTong = res.data;
+      this.fjfile = res.data.fjfile;
     });
   }
 

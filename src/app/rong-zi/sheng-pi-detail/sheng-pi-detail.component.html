@@ -40,7 +40,7 @@
 
 
   <section *ngIf="tabIndex==0">
-    <div class="detail-style" [innerHTML]="content"></div>
+    <div class="detail-style tableNoWrap" [innerHTML]="content"></div>
   </section>
   <section *ngIf="tabIndex==1">
     <section *ngIf="fileList.length>0" class="detail-style">
@@ -91,10 +91,10 @@
         <div *ngIf="isEdit">
           <textarea placeholder="请输入处理意见" style="font-size: 1.4rem;" [(ngModel)]="payload.comments"></textarea>
 
-<!--          <div class="flex-between" style="padding-bottom: 10px;">-->
-<!--            <div></div>-->
-<!--            <div style="color: #96999e;padding-right: 5px;" (click)="presentAlertPrompt()">常用语</div>-->
-<!--          </div>-->
+          <div class="flex-between" style="padding-bottom: 10px;">
+            <div></div>
+            <div style="color: #96999e;padding-right: 5px;" (click)="presentAlertPrompt()">常用语</div>
+          </div>
         </div>
         <div class="flex-between">
           <ion-icon (click)="isEdit=!isEdit" name="create" size="20" style="font-size: 20px;"></ion-icon>
