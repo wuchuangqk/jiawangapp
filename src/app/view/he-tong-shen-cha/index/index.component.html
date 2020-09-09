@@ -1,0 +1,134 @@
+<ion-header>
+    <ion-toolbar color="primary">
+        <app-back></app-back>
+        <ion-title style="padding:0 40px">
+            <div class="segment-wrapper">
+                <ion-segment (ngModelChange)="segmentChange($event)" [(ngModel)]="index">
+                    <ion-segment-button *ngFor="let item of menuList;let i=index" [value]="i">
+                        {{item.title}}
+                    </ion-segment-button>
+                </ion-segment>
+            </div>
+        </ion-title>
+    </ion-toolbar>
+</ion-header>
+
+<ion-content>
+    <ion-refresher (ionRefresh)="doRefresh($event)">
+        <ion-refresher-content
+                 pullingIcon="arrow-dropdown"
+                 pullingText="下拉刷新"
+                 refreshingSpinner="circles"
+                 refreshingText="刷新...">
+        </ion-refresher-content>
+    </ion-refresher>
+    <section>
+
+        <ion-slides (ionSlideWillChange)="change()">
+            <ion-slide>
+                <ion-list class="my-list">
+                    <ion-item *ngIf="woDeShenChaList.length<1">
+                        <p class="primary"> 无数据！ </p>
+                    </ion-item>
+                    <ion-item *ngFor="let item of woDeShenChaList" (click)="nav('he-tong-shen-cha/detail',{url:'/examine/tododetail',id:item.id,title:title,contentTitle:item.title,title:'合同审查', handleUrl:'/examine/todosave' })">
+                        <section>
+                            <div class="my-list-title">
+                                <h2  [ngClass]="item.qjstate=='已审批'?'primary':''">
+                                    {{item.docTitle}}</h2>
+                            </div>
+                            <div class="my-list-sub">
+                                <div class="my-list-sub-top flex-between">
+                                    <span>合同价:{{item.htjk}}</span>
+                                    <span  class="my-list-sub-top-last">
+                                    <span >{{item.times}}</span>
+                                    <span>{{item.yzlx}}</span>
+                                    </span>
+                                </div>
+                            </div>
+                        </section>
+                    </ion-item>
+                </ion-list>
+            </ion-slide>
+            <ion-slide>
+                <ion-list class="my-list">
+                    <ion-item *ngIf="daiBanShenChaList.length<1">
+                        <p class="primary">
+                        无数据！
+                        </p>
+                    </ion-item>
+                    <ion-item *ngFor="let item of daiBanShenChaList" (click)="nav('he-tong-shen-cha/detail',{url:'/examine/tododetail',id:item.id,title:title,contentTitle:item.title,title:'合同审查', handleUrl:'/examine/todosave' })">
+                        <section>
+                            <div class="my-list-title">
+                                <h2  [ngClass]="item.qjstate=='已审批'?'primary':''">
+                                    {{item.docTitle}}</h2>
+                            </div>
+                            <div class="my-list-sub">
+                                <div class="my-list-sub-top flex-between">
+                                    <span>合同价:{{item.htjk}}</span>
+                                    <span  class="my-list-sub-top-last">
+                                    <span >{{item.times}}</span>
+                                    <span>{{item.yzlx}}</span>
+                                    </span>
+                                </div>
+                            </div>
+                        </section>
+                    </ion-item>
+                </ion-list>
+            </ion-slide>
+            <ion-slide>
+                <ion-list class="my-list">
+                    <ion-item *ngIf="yiBanShenChaList.length<1">
+                        <p class="primary"> 无数据！ </p>
+                    </ion-item>
+                    <ion-item *ngFor="let item of yiBanShenChaList" (click)="nav('he-tong-shen-cha/detail',{url:'/examine/tododetail',id:item.id,title:title,contentTitle:item.title,title:'合同审查', handleUrl:'/examine/todosave' })">
+                        <section>
+                            <div class="my-list-title">
+                                <h2  [ngClass]="item.qjstate=='已审批'?'primary':''">
+                                    {{item.docTitle}}</h2>
+                            </div>
+                            <div class="my-list-sub">
+                                <div class="my-list-sub-top flex-between">
+                                    <span>合同价:{{item.htjk}}</span>
+                                    <span  class="my-list-sub-top-last">
+                                    <span >{{item.times}}</span>
+                                    <span>{{item.yzlx}}</span>
+                                    </span>
+                                </div>
+                            </div>
+                        </section>
+                    </ion-item>
+                </ion-list>
+            </ion-slide>
+
+<!--            <ion-slide>-->
+<!--                <ion-list class="my-list">-->
+<!--                    <ion-item *ngIf="LiuChengJianKongList.length<1">-->
+<!--                        <p class="primary"> 无数据！ </p>-->
+<!--                    </ion-item>-->
+<!--                    <ion-item *ngFor="let item of LiuChengJianKongList" (click)="nav('go-out/detail',{url:'/waichu/shenpi_detail',id:item.id,title:title,contentTitle:item.title,title:'外出审批详情'})">-->
+<!--                        <section>-->
+
+<!--                            <div class="my-list-title">-->
+<!--                                <h2  [ngClass]="item.qjstate=='已审批'?'primary':''">-->
+<!--                                    <span *ngIf="item.qjstate!=='已审批'" color="primary">[{{item.qjstate}}]</span>-->
+<!--                                    <span *ngIf="item.qjstate=='已审批'">[已审批]</span>-->
+<!--                                    {{item.title}}</h2>-->
+<!--                            </div>-->
+<!--                            <div class="my-list-sub">-->
+<!--                                <div class="my-list-sub-top flex-between">-->
+<!--                                    <span>{{item.qjr}}</span>-->
+<!--                                    <span class="my-list-sub-top-last">{{item.qjstate}}</span>-->
+<!--                                </div>-->
+<!--                            </div>-->
+<!--                        </section>-->
+<!--                    </ion-item>-->
+<!--                </ion-list>-->
+<!--            </ion-slide>-->
+        </ion-slides>
+    </section>
+    <ion-fab vertical="bottom" horizontal="end" slot="fixed">
+        <ion-fab-button (click)="nav('go-out/add',{title:'外出申请',url:'b'})">
+            <ion-icon name="add"></ion-icon>
+        </ion-fab-button>
+    </ion-fab>
+</ion-content>

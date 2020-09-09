@@ -67,7 +67,8 @@ const routes: Routes = [
     {path: 'rong-zi', loadChildren: './rong-zi/rong-zi.module#RongZiModule'},
 
     // 项目模块
-    {path: 'project', loadChildren: './project/project.module#ProjectModule'}
+    {path: 'project', loadChildren: './project/project.module#ProjectModule'},
+    { path: 'he-tong-shen-cha', loadChildren: './view/he-tong-shen-cha/he-tong-shen-cha.module#HeTongShenChaModule'}
 
 ];
 

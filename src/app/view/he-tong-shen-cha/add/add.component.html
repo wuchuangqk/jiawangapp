@@ -1,0 +1,63 @@
+<ion-header>
+    <ion-toolbar color="primary">
+        <app-back></app-back>
+        <ion-title>
+            {{title}}
+        </ion-title>
+    </ion-toolbar>
+</ion-header>
+
+
+<ion-content class="bg-style add-style">
+
+    <ion-item>
+        <ion-label>申请人：</ion-label>
+        <ion-input disabled [(ngModel)]="shengQingRenName"></ion-input>
+    </ion-item>
+    <ion-item>
+        <ion-label>开始时间：</ion-label>
+        <ion-datetime type="datetime-local" displayFormat="YYYY-MM-DD HH:mm" pickerFormat="YYYY-MM-DD HH:mm" doneText="确定" [(ngModel)]="params.qjstime" cancelText="取消"></ion-datetime>
+    </ion-item>
+    <ion-item>
+        <ion-label>结束时间：</ion-label>
+        <ion-datetime type="datetime-local" displayFormat="YYYY-MM-DD HH:mm" pickerFormat="YYYY-MM-DD HH:mm" doneText="确定" [(ngModel)]="params.qjetime" cancelText="取消"></ion-datetime>
+    </ion-item>
+
+
+    <ion-item>
+        <ion-label>是否带车：</ion-label>
+        <ion-select [(ngModel)]="params.qjtype" cancelText="取消" okText="确定">
+            <ion-select-option value="是">是</ion-select-option>
+            <ion-select-option value="否">否</ion-select-option>
+        </ion-select>
+    </ion-item>
+    <ion-item>
+        <ion-label>外出事由：</ion-label>
+        <ion-textarea placeholder="请输入外出事由" [(ngModel)]="params.qjyy"></ion-textarea>
+    </ion-item>
+
+    <ion-item>
+        <ion-label>外出地点：</ion-label>
+        <ion-input placeholder="请输入外出地点" [(ngModel)]="params.addr"></ion-input>
+    </ion-item>
+    <ion-item>
+        <ion-label>费用支付单位：</ion-label>
+        <ion-input placeholder="请输入费用支付单位" [(ngModel)]="params.zfdw"></ion-input>
+    </ion-item>
+
+
+
+    <app-staff (click)="go('getSt', selectedStaff,false)" title="选择审批人" eventName="getSt" [(selectedStaff)]="selectedStaff"></app-staff>
+</ion-content>
+
+
+
+
+
+<ion-footer>
+    <ion-toolbar>
+        <ion-button expand="full" (click)="save()" style="flex: 1">
+            保  存
+        </ion-button>
+    </ion-toolbar>
+</ion-footer>
