@@ -24,10 +24,47 @@
     </ion-select>
   </ion-item>
   <ion-item>
-    <ion-label>请假事由：</ion-label>
+    <ion-label>请假原因：</ion-label>
     <ion-textarea placeholder="请输入请假事由" [(ngModel)]="params.qjyy"></ion-textarea>
   </ion-item>
-  <app-staff (click)="go('getSt', selectedStaff,false)" title="选择审批人" eventName="getSt" [(selectedStaff)]="selectedStaff"></app-staff>
+
+
+
+  <ion-item>
+    <ion-label>处室负责人：</ion-label>
+    <ion-select [(ngModel)]="params.signCreator1" cancelText="取消" okText="确定">
+      <ion-select-option *ngFor="let item of chuShiLingDaoList" [value]="item.id">{{item.name}}</ion-select-option>
+    </ion-select>
+  </ion-item>
+
+
+
+
+  <ion-item>
+    <ion-label>部室负责人：</ion-label>
+    <ion-select [(ngModel)]="params.signCreator2" cancelText="取消" okText="确定">
+      <ion-select-option *ngFor="let item of buShiLingDaoList" [value]="item.id">{{item.name}}</ion-select-option>
+    </ion-select>
+  </ion-item>
+
+
+  <ion-item>
+    <ion-label>分管领导：</ion-label>
+    <ion-select [(ngModel)]="params.signCreator3" cancelText="取消" okText="确定">
+      <ion-select-option *ngFor="let item of fenGuanLingDaoList" [value]="item.id">{{item.name}}</ion-select-option>
+    </ion-select>
+  </ion-item>
+
+  <ion-item>
+    <ion-label>主要领导：</ion-label>
+    <ion-select [(ngModel)]="params.signCreator4" cancelText="取消" okText="确定">
+      <ion-select-option *ngFor="let item of zhuYaoLingDaoList" [value]="item.id">{{item.name}}</ion-select-option>
+    </ion-select>
+  </ion-item>
+
+
+
+  <!--  <app-staff (click)="go('getSt', selectedStaff,false)" title="选择审批人" eventName="getSt" [(selectedStaff)]="selectedStaff"></app-staff>-->
   <app-file-viewer (getFileArray)="getFileArray($event)"></app-file-viewer>
 </ion-content>
 

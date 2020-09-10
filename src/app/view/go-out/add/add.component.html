@@ -45,9 +45,14 @@
         <ion-input placeholder="请输入费用支付单位" [(ngModel)]="params.zfdw"></ion-input>
     </ion-item>
 
+<!--    <app-staff (click)="go('getSt', selectedStaff,false)" title="选择审批人" eventName="getSt" [(selectedStaff)]="selectedStaff"></app-staff>-->
 
-
-    <app-staff (click)="go('getSt', selectedStaff,false)" title="选择审批人" eventName="getSt" [(selectedStaff)]="selectedStaff"></app-staff>
+    <ion-item>
+        <ion-label>分管领导：</ion-label>
+        <ion-select [(ngModel)]="params.signCreator1" cancelText="取消" okText="确定">
+            <ion-select-option *ngFor="let item of fenGuanLingDaoList" [value]="item.id">{{item.name}}</ion-select-option>
+        </ion-select>
+    </ion-item>
 </ion-content>
 
 

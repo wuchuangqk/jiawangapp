@@ -101,7 +101,7 @@ export class JPushModel {
             case 'article': { // 收文办理
                 this.nav('receive-document/receive-handle/'+id, {
                     id,
-                    title: '收发文系统',
+                    title: '收文系统',
                     url: '/receipt/anditdetail',
                     contentTitle,
                     document_type: 0,

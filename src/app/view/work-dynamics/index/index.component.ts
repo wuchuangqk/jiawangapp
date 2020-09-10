@@ -36,13 +36,13 @@ export class IndexComponent extends ListBasePage implements OnInit, OnDestroy {
     this.isCanCommit = this.query('isCanCommit') === 'true' ? true : false;
     this.addUrl = this.query('addUrl');
   }
-  ngOnInit() {
+  async ngOnInit() {
     this.events.subscribe(AppConfig.Exchange.List, () => {
       this.getListData();
       this.getMyListData();
     });
-    this.getListData();
-    this.getMyListData();
+    await this.getListData();
+    await this.getMyListData();
   }
   segmentChange(index) {
     this.index = index;
@@ -53,10 +53,9 @@ export class IndexComponent extends ListBasePage implements OnInit, OnDestroy {
     this.myList = res.data;
   }
   async change() {
-    const  index = await this.slides.getActiveIndex();
-    this.index = index;
-    this.getListData();
-    this.getMyListData();
+    this.index = await this.slides.getActiveIndex();
+    await this.getListData();
+    await this.getMyListData();
   }
 
   ngOnDestroy() {

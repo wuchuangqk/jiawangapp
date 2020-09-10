@@ -15,7 +15,6 @@ import { NavController } from '@ionic/angular';
   styleUrls: ['./detail.component.scss'],
 })
 export class DetailComponent  extends DetailBasePage implements OnInit {
-
   public title = '详情';
   public isShenPi: boolean;
   public handleUrl: string;

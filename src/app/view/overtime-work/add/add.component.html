@@ -9,19 +9,46 @@
 
 
 <ion-content class="bg-style add-style">
+
+
   <ion-item>
-    <ion-label>开始时间：</ion-label>
-    <ion-datetime type="datetime-local" displayFormat="YYYY-MM-DD HH:mm" pickerFormat="YYYY-MM-DD HH:mm" doneText="确定" [(ngModel)]="params.qjstime" cancelText="取消"></ion-datetime>
+    <ion-label>公司：</ion-label>
+    <ion-select  cancelText="取消" okText="确定" [(ngModel)]="type">
+      <ion-select-option  [value]="0">集团公司本部</ion-select-option>
+      <ion-select-option  [value]="1">子公司等</ion-select-option>
+    </ion-select>
   </ion-item>
+
   <ion-item>
-    <ion-label>结束时间：</ion-label>
-    <ion-datetime type="datetime-local" displayFormat="YYYY-MM-DD HH:mm" pickerFormat="YYYY-MM-DD HH:mm" doneText="确定" [(ngModel)]="params.qjetime" cancelText="取消"></ion-datetime>
+    <ion-label>加班日期：</ion-label>
+    <ion-datetime type="datetime-local" displayFormat="YYYY-MM-DD HH:mm" pickerFormat="YYYY-MM-DD HH:mm" doneText="确定" [(ngModel)]="params.jbtime" cancelText="取消"></ion-datetime>
   </ion-item>
+<!--  <ion-item>-->
+<!--    <ion-label>结束时间：</ion-label>-->
+<!--    <ion-datetime type="datetime-local" displayFormat="YYYY-MM-DD HH:mm" pickerFormat="YYYY-MM-DD HH:mm" doneText="确定" [(ngModel)]="params.qjetime" cancelText="取消"></ion-datetime>-->
+<!--  </ion-item>-->
   <ion-item>
-    <ion-label>加班事由：</ion-label>
-    <ion-textarea placeholder="请输入加班事由" [(ngModel)]="params.qjyy"></ion-textarea>
+    <ion-label>工作安排：</ion-label>
+    <ion-textarea placeholder="请输入工作安排" [(ngModel)]="params.qjyy"></ion-textarea>
   </ion-item>
-  <app-staff (click)="go('getSt', selectedStaff,false)" title="选择审批人" eventName="getSt" [(selectedStaff)]="selectedStaff"></app-staff>
+<!--  <app-staff (click)="go('getSt', selectedStaff,false)" title="选择审批人" eventName="getSt" [(selectedStaff)]="selectedStaff"></app-staff>-->
+
+
+
+  <ion-item *ngIf="type===0">
+    <ion-label>处室负责人：</ion-label>
+    <ion-select [(ngModel)]="params.signCreator1" cancelText="取消" okText="确定">
+      <ion-select-option *ngFor="let item of chuShiLingDaoList" [value]="item.id">{{item.name}}</ion-select-option>
+    </ion-select>
+  </ion-item>
+
+
+  <ion-item>
+    <ion-label>分管领导：</ion-label>
+    <ion-select [(ngModel)]="params.signCreator2" cancelText="取消" okText="确定">
+      <ion-select-option *ngFor="let item of fenGuanLingDaoList" [value]="item.id">{{item.name}}</ion-select-option>
+    </ion-select>
+  </ion-item>
 </ion-content>
 
 

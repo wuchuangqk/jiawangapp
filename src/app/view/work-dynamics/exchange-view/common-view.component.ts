@@ -52,9 +52,9 @@ export class ExchangeViewComponent extends DetailBasePage implements OnInit, OnD
         this.events.publish(AppConfig.Exchange.List);
         this.getDetail({}).then((res) => {
             this.events.publish(AppConfig.Home.Badge);
-            setTimeout(()=>{
-                this.getFileListByHtml()
-            },200)
+            // setTimeout(()=>{
+            //     this.getFileListByHtml()
+            // },200)
         });
     }
     ngOnDestroy() {
@@ -108,8 +108,8 @@ export class ExchangeViewComponent extends DetailBasePage implements OnInit, OnD
             workId: this.id
         };
         await this.setRequest('/work_dynamics/commitadd', params);
-        this.dialogService.toast('回复成功！');
+        await this.dialogService.toast('回复成功！');
         this.infoTitle = '';
-        this.GetCommitList();
+        await  this.GetCommitList();
     }
 }

@@ -105,10 +105,10 @@ export class ExchangeAddComponent extends BasePage implements OnInit {
       return;
     }
       // 如果选择科室
-      this.dialogService.loading('正在提交，请稍后！');
+      await this.dialogService.loading('正在提交，请稍后！');
       await this.uploadFiles('/work_dynamics/add', this.params, this.fileArray);
-      this.dialogService.dismiss();
-      this.dialogService.alert('提交成功！', () => {
+      await this.dialogService.dismiss();
+      await this.dialogService.alert('提交成功！', () => {
             this.event.publish(AppConfig.Notice.List);
             this.navController.back();
         });

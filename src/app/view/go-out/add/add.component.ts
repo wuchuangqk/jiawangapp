@@ -19,6 +19,7 @@ export class AddComponent extends BasePage implements OnInit {
     // 督办类别
     public id: string;
     qjtypeList: [];
+    public fenGuanLingDaoList=[];
     params = {
         // 开始时间
         qjstime: '',
@@ -32,6 +33,7 @@ export class AddComponent extends BasePage implements OnInit {
         staff_ids: '',
         addr: '',
         zfdw: '',
+        signCreator1:'',
 
     };
 
@@ -59,11 +61,18 @@ export class AddComponent extends BasePage implements OnInit {
     ngOnInit() {
         const userInfo =  JSON.parse(localStorage.getItem('userInfo'));
         this.shengQingRenName = userInfo.name;
+        this.getFenGuanLingDaoList();
     }
 
 
     ngModelChange(e) {
         console.log(e);
+    }
+
+    private getFenGuanLingDaoList(){
+        this.request("/waichu/signCreator1",{}).then((res)=>{
+            this.fenGuanLingDaoList = res.data;
+        })
     }
 
     go( eventName, selectedStaff, isSelectOne) {
@@ -91,7 +100,7 @@ export class AddComponent extends BasePage implements OnInit {
         } else if (!params.qjtype) {
             this.dialogService.toast('请输入外出类型!');
             return false;
-        } else if (!params.staff_ids) {
+        } else if (!params.signCreator1) {
             this.dialogService.toast('请选择审批人!');
             return false;
         }

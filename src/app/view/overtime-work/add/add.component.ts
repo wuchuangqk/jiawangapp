@@ -19,17 +19,21 @@ export class AddComponent extends BasePage implements OnInit {
     // 督办类别
     public id: string;
     qjtypeList: [];
+    public fenGuanLingDaoList=[];
+    public chuShiLingDaoList = []
+    type=0;
     params = {
-        // 开始时间
-        qjstime: '',
-        // 结束时间
-        qjetime: '',
+        // 加班时间
+        jbtime: '',
         // 加班事由
         qjyy: '',
         // 加班类别
         qjtype: '事假',
         // 处理人名单
-        staff_ids: ''
+        staff_ids: '',
+        signCreator1:'',
+        signCreator2:'',
+
     };
     constructor(
         public http: HttpService,
@@ -45,18 +49,43 @@ export class AddComponent extends BasePage implements OnInit {
         const date = new Date();
         const date2 = new Date().getTime() + 24 * 60 * 60 * 1000;
         const datePipe = new DatePipe('en-US');
-        this.params.qjstime = datePipe.transform(date, 'yyyy-MM-dd HH:mm');
-        this.params.qjetime = datePipe.transform(date2, 'yyyy-MM-dd HH:mm');
+        this.params.jbtime = datePipe.transform(date, 'yyyy-MM-dd HH:mm');
 
 
     }
     ngOnInit() {
+        this.fenGuanLingDao()
+        this.chuShiLingDao()
     }
 
 
     ngModelChange(e) {
         console.log(e);
     }
+
+
+
+
+
+
+    private chuShiLingDao(){
+        this.request('/jiaban/signCreator1', {}).then((res) => {
+            this.chuShiLingDaoList = res.data;
+        });
+    }
+    // private buShiLingDao(){
+    //     this.request('/qingjia/signCreator2', {}).then((res) => {
+    //         this.buShiLingDaoList = res.data;
+    //     });
+    // }
+
+    private fenGuanLingDao(){
+        this.request('/jiaban/signCreator2', {}).then((res) => {
+            this.fenGuanLingDaoList = res.data;
+        });
+    }
+
+
 
     go( eventName, selectedStaff, isSelectOne) {
         localStorage.num = 0;
@@ -71,39 +100,49 @@ export class AddComponent extends BasePage implements OnInit {
 
     // 检查参数
     private checkParams(params): boolean {
-        if (!params.qjstime) {
+        if (!params.jbtime) {
             this.dialogService.toast('请选择加班开始时间!');
             return false;
-        } else if (!params.qjetime) {
-            this.dialogService.toast('请选择加班结束时间!');
-            return false;
         } else if (!params.qjyy) {
-            this.dialogService.toast('请输入加班事由!');
+            this.dialogService.toast('请输入工作安排!');
             return false;
-        } else if (!params.qjtype) {
-            this.dialogService.toast('请输入加班类型!');
+        } else if (!params.signCreator2) {
+            this.dialogService.toast('请选择分管领导!');
             return false;
-        } else if (!params.staff_ids) {
-            this.dialogService.toast('请选择审批人!');
-            return false;
+        }
+        if(this.type===0){
+            if(!params.signCreator1){
+                this.dialogService.toast("请选择处室负责人");
+                return false;
+            }
         }
         return true;
     }
+    // 审核人名单列表
     getIds(arr): string {
         return  arr.map(item => item.id).join(',');
     }
-    save() {
+    public save(): void {
         this.params.staff_ids = this.getIds(this.selectedStaff);
         if (!this.checkParams(this.params)) {
             return;
         }
-        this.params.qjstime = this.dateProvider.DateTimeFormat(new Date(this.params.qjstime));
-        this.params.qjetime = this.dateProvider.DateTimeFormat(new Date(this.params.qjetime));
-        this.setRequest('/jiaban/jiaban_add', this.params).then((res) => {
+        this.params.jbtime = this.dateProvider.DateTimeFormat(new Date(this.params.jbtime));
+        // this.params.qjetime = this.dateProvider.DateTimeFormat(new Date(this.params.qjetime));
+        this.setRequest(this.getSaveUrl(), this.params).then((res) => {
             this.dialogService.toast('申请成功！');
             this.events.publish(AppConfig.OvertimeWork.ShenPiList);
             this.events.publish(AppConfig.OvertimeWork.List);
             this.navController.back();
         });
+    }
+
+    // 提交的URL
+    private getSaveUrl():string{
+        if(this.type===0){
+            return "/jiaban/jiaban_add";
+        }else{
+            return '/jiaban/jiaban_add2';
+        }
     }
 }

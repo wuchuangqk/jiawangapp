@@ -20,6 +20,10 @@ export class AddComponent extends BasePage implements OnInit {
     // 督办类别
     public id: string;
     qjtypeList: [];
+    public chuShiLingDaoList = [];
+    public buShiLingDaoList = [];
+    public fenGuanLingDaoList = [];
+    public zhuYaoLingDaoList = [];
     params = {
         // 开始时间
         qjstime: '',
@@ -30,7 +34,11 @@ export class AddComponent extends BasePage implements OnInit {
         // 请假类别
         qjtype: '事假',
         // 处理人名单
-        staff_ids: ''
+        staff_ids: '',
+        signCreator1:'',
+        signCreator2:'',
+        signCreator3:'',
+        signCreator4:'',
     };
     public fileArray = [];
     constructor(
@@ -54,6 +62,10 @@ export class AddComponent extends BasePage implements OnInit {
     }
     ngOnInit() {
         this.getQjtypeList();
+        this.chuShiLingDao();
+        this.buShiLingDao();
+        this.fenGuanLingDao();
+        this.zhuYaoLingDao();
     }
 
     getQjtypeList() {
@@ -61,8 +73,28 @@ export class AddComponent extends BasePage implements OnInit {
             this.qjtypeList = res.data;
         });
     }
+    private chuShiLingDao(){
+        this.request('/qingjia/signCreator1', {}).then((res) => {
+            this.chuShiLingDaoList = res.data;
+        });
+    }
+    private buShiLingDao(){
+        this.request('/qingjia/signCreator2', {}).then((res) => {
+            this.buShiLingDaoList = res.data;
+        });
+    }
 
+    private fenGuanLingDao(){
+        this.request('/qingjia/signCreator3', {}).then((res) => {
+            this.fenGuanLingDaoList = res.data;
+        });
+    }
 
+    private zhuYaoLingDao(){
+        this.request('/qingjia/signCreator4', {}).then((res) => {
+            this.zhuYaoLingDaoList = res.data;
+        });
+    }
     ngModelChange(e) {
         console.log(e);
     }
@@ -95,8 +127,24 @@ export class AddComponent extends BasePage implements OnInit {
         } else if (!params.qjtype) {
             this.dialogService.toast('请输入请假类型!');
             return false;
-        } else if (!params.staff_ids) {
-            this.dialogService.toast('请选择审批人!');
+        }
+        else if (!params.signCreator1) {
+            this.dialogService.toast('请选择处室负责人!');
+            return false;
+        }
+
+        else if (!params.signCreator1) {
+            this.dialogService.toast('请选择部室负责人!');
+            return false;
+        }
+
+        else if (!params.signCreator1) {
+            this.dialogService.toast('请选择分管领导!');
+            return false;
+        }
+
+        else if (!params.signCreator1) {
+            this.dialogService.toast('请选择主要领导!');
             return false;
         }
         return true;
