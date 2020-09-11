@@ -30,7 +30,9 @@
                     <ion-item *ngIf="woDeShenChaList.length<1">
                         <p class="primary"> 无数据！ </p>
                     </ion-item>
-                    <ion-item *ngFor="let item of woDeShenChaList" (click)="nav('he-tong-shen-cha/detail',{url:'/examine/tododetail',id:item.id,title:title,contentTitle:item.title,title:'合同审查', handleUrl:'/examine/todosave' })">
+                    <ion-item *ngFor="let item of woDeShenChaList" (click)="nav('he-tong-shen-cha/detail',{
+                    url:'/examine/tododetail',id:item.id,title:title,contentTitle:item.title,title:'合同审查', handleUrl:'/examine/todosave'
+                    })">
                         <section>
                             <div class="my-list-title">
                                 <h2  [ngClass]="item.qjstate=='已审批'?'primary':''">

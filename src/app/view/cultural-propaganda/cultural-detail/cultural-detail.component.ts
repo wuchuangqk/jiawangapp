@@ -5,6 +5,7 @@ import {ActivatedRoute, Router} from '@angular/router';
 import {DialogService} from '../../../service/dialog.service';
 import {DomSanitizer} from '@angular/platform-browser';
 import {NavController} from '@ionic/angular';
+import {FileService} from "../../../service/FileService";
 
 @Component({
   selector: 'app-cultural-detail',
@@ -19,9 +20,10 @@ export class CulturalDetailComponent extends DetailBasePage implements OnInit {
       public dialogService: DialogService,
       public sanitizer: DomSanitizer,
       public navController: NavController,
+      public fileService: FileService,
       public route?: ActivatedRoute,
   ) {
-    super(http, router, dialogService, sanitizer, navController);
+    super(http, router, dialogService, sanitizer, navController,fileService);
     this.id = this.query('id');
     this.title = '党建园地';
     this.url = this.query('url');

@@ -5,7 +5,6 @@ import {ActivatedRoute, Router} from '@angular/router';
 import {DialogService} from '../../../service/dialog.service';
 import {Events, NavController} from '@ionic/angular';
 import {AppConfig} from '../../../app.config';
-import {json} from '@angular-devkit/core';
 
 @Component({
   selector: 'app-document-handle',

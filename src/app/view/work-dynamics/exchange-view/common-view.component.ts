@@ -8,6 +8,7 @@ import {HttpService} from '../../../service/http.service';
 import {DialogService} from '../../../service/dialog.service';
 import {AppConfig} from '../../../app.config';
 import {path} from '@angular-devkit/core';
+import {FileService} from "../../../service/FileService";
 
 @Component({
     selector: 'app-common-view',
@@ -30,9 +31,10 @@ export class ExchangeViewComponent extends DetailBasePage implements OnInit, OnD
         public dialogService: DialogService,
         public sanitizer: DomSanitizer,
         public events: Events,
+        public fileService: FileService,
         public route?: ActivatedRoute,
     ) {
-        super(http, router, dialogService, sanitizer , navController);
+        super(http, router, dialogService, sanitizer , navController,fileService);
         this.title = this.query('title');
         this.url = this.query('url');
         this.id = this.query('id');

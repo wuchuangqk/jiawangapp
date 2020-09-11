@@ -76,6 +76,23 @@ export class JPushModel {
         // 是否返回到首页
         var isBackToHome = true;
         switch (type) {
+            // htsc
+            case 'htsc': {
+                this.nav(`he-tong-shen-cha/detail`, {
+                    // id,
+                    // title: itemTitle,
+                    // url: '/notices/list/',
+                    // contentTitle,
+                    id,
+                    url:'/examine/tododetail',
+                    title:itemTitle,
+                    contentTitle:contentTitle,
+                    handleUrl:'/examine/todosave',
+                    isBackToHome
+
+                });
+                break;
+            }
             case 'message': {
                 this.nav(`common_view/${id}`, {
                     id,

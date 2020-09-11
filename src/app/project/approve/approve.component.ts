@@ -7,6 +7,7 @@ import {DetailBasePage} from '../../base/detail-base-page';
 import {HttpService} from '../../service/http.service';
 import {DialogService} from '../../service/dialog.service';
 import {AppConfig} from '../../app.config';
+import {FileService} from "../../service/FileService";
 
 
 @Component({
@@ -67,9 +68,10 @@ export class ApproveComponent  extends DetailBasePage implements OnInit {
     public sanitizer: DomSanitizer,
     public events: Events,
     public alertController: AlertController,
+    public fileService: FileService,
     public route?: ActivatedRoute,
   ) {
-    super( http, router, dialogService, sanitizer, navController);
+    super( http, router, dialogService, sanitizer, navController,fileService);
     this.url = '/flowrun/tododetail';
     this.handleUrl = this.query('handleUrl');
     this.id = this.query('id');

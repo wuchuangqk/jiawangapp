@@ -7,6 +7,7 @@ import {DomSanitizer, SafeHtml} from '@angular/platform-browser';
 import {Events} from '@ionic/angular';
 import {AppConfig} from '../../../app.config';
 import { NavController } from '@ionic/angular';
+import {FileService} from "../../../service/FileService";
 
 
 @Component({
@@ -27,9 +28,10 @@ export class DetailComponent  extends DetailBasePage implements OnInit {
       public dialogService: DialogService,
       public sanitizer: DomSanitizer,
       public events: Events,
+      public fileService: FileService,
       public route?: ActivatedRoute,
   ) {
-    super( http, router, dialogService, sanitizer, navController);
+    super( http, router, dialogService, sanitizer, navController,fileService);
     this.url = this.query('url');
     this.id = this.query('id');
   }

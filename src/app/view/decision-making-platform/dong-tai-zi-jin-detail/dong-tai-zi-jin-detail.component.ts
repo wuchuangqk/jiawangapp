@@ -6,6 +6,7 @@ import {Events, NavController} from '@ionic/angular';
 import {HttpService} from '../../../service/http.service';
 import {ActivatedRoute, Router} from '@angular/router';
 import {AppConfig} from '../../../app.config';
+import {FileService} from "../../../service/FileService";
 
 @Component({
   selector: 'app-dong-tai-zi-jin-detail',
@@ -44,9 +45,10 @@ export class DongTaiZiJinDetailComponent extends DetailBasePage implements OnIni
       public dialogService: DialogService,
       public sanitizer: DomSanitizer,
       public events: Events,
+      public fileService: FileService,
       public route?: ActivatedRoute,
   ) {
-    super( http, router, dialogService, sanitizer, navController);
+    super( http, router, dialogService, sanitizer, navController,fileService);
     this.url = '/juece/dmoneydetail';
     this.handleUrl = this.query('handleUrl');
     this.id = this.query('id');

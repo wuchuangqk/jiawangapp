@@ -5,6 +5,7 @@ import { DialogService } from '../service/dialog.service';
 import {ActivatedRoute, Router} from '@angular/router';
 import {BasePage} from './base-page';
 import {DomSanitizer, SafeHtml} from '@angular/platform-browser';
+import {FileService} from "../service/FileService";
 interface IDetail {
     content: string;
     control?: string;
@@ -38,6 +39,7 @@ export class DetailBasePage extends BasePage {
         public dialogService: DialogService,
         public sanitizer: DomSanitizer,
         public navController: NavController,
+        public fileService: FileService,
         public route?: ActivatedRoute,
     ) {
         super(http, router, navController, dialogService);
@@ -75,8 +77,8 @@ export class DetailBasePage extends BasePage {
         console.log("是否回到首页!");
         console.log(this.isBackToHome);
     }
-    viewFile(item: IDownFile) {
-        this.nav('pdf', item);
+   public viewFile(item: IDownFile) {
+        this.fileService.openByApp(item, (res: any, filePath: string) => {});
     }
     public transform(content): SafeHtml {
         return this.sanitizer.bypassSecurityTrustHtml(content);

@@ -6,6 +6,7 @@ import {DialogService} from '../../../service/dialog.service';
 import {DomSanitizer} from '@angular/platform-browser';
 import {AppConfig} from '../../../app.config';
 import {DetailBasePage} from '../../../base/detail-base-page';
+import {FileService} from "../../../service/FileService";
 
 @Component({
   selector: 'app-receive-handle',
@@ -50,9 +51,10 @@ export class ReceiveHandleComponent  extends DetailBasePage implements OnInit, O
       public sanitizer: DomSanitizer,
       public events: Events,
       public alertController: AlertController,
+      public fileService: FileService,
       public route?: ActivatedRoute,
   ) {
-    super( http, router, dialogService, sanitizer, navController);
+    super( http, router, dialogService, sanitizer, navController,fileService);
     this.url = this.query('url');
     this.title = this.query('title');
     this.handleUrl = this.query('handleUrl');

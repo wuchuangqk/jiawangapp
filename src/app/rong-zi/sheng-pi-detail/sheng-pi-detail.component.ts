@@ -6,6 +6,7 @@ import {AlertController, Events, NavController} from "@ionic/angular";
 import {DialogService} from "../../service/dialog.service";
 import {AppConfig} from "../../app.config";
 import {DetailBasePage} from "../../base/detail-base-page";
+import {FileService} from "../../service/FileService";
 
 @Component({
   selector: 'app-sheng-pi-detail',
@@ -41,9 +42,10 @@ export class ShengPiDetailComponent extends DetailBasePage implements OnInit {
       public sanitizer: DomSanitizer,
       public alertController: AlertController,
       public events: Events,
+      public fileService: FileService,
       public route?: ActivatedRoute,
   ) {
-    super(http, router, dialogService, sanitizer, navController);
+    super(http, router, dialogService, sanitizer, navController,fileService);
     this.url = this.query('url');
     this.handleUrl = this.query('handleUrl');
     this.id = this.query('id');

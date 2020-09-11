@@ -6,6 +6,7 @@ import {Events, NavController} from '@ionic/angular';
 import {DialogService} from '../../service/dialog.service';
 import {AppConfig} from '../../app.config';
 import {DetailBasePage} from '../../base/detail-base-page';
+import {FileService} from "../../service/FileService";
 
 @Component({
   selector: 'app-tu-di-guan-li-detail',
@@ -44,9 +45,10 @@ export class TuDiGuanLiDetailComponent extends DetailBasePage implements OnInit 
       public dialogService: DialogService,
       public sanitizer: DomSanitizer,
       public events: Events,
+      public fileService: FileService,
       public route?: ActivatedRoute,
   ) {
-    super( http, router, dialogService, sanitizer, navController);
+    super( http, router, dialogService, sanitizer, navController,fileService);
     this.url = '/zichan/landdetail';
     this.handleUrl = this.query('handleUrl');
     this.id = this.query('id');

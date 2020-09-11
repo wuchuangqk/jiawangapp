@@ -7,6 +7,7 @@ import {DomSanitizer} from '@angular/platform-browser';
 import { NavController } from '@ionic/angular';
 import { Events } from '@ionic/angular';
 import {AppConfig} from '../../app.config';
+import {FileService} from "../../service/FileService";
 
 @Component({
     selector: 'app-common-view',
@@ -26,9 +27,10 @@ export class CommonViewComponent extends DetailBasePage implements OnInit, OnDes
         public dialogService: DialogService,
         public sanitizer: DomSanitizer,
         public events: Events,
+        public fileService: FileService,
         public route?: ActivatedRoute,
     ) {
-        super(http, router, dialogService, sanitizer , navController);
+        super(http, router, dialogService, sanitizer , navController,fileService);
         this.title = this.query('title');
         this.url = this.query('url');
         this.id = this.query('id');
@@ -61,7 +63,8 @@ export class CommonViewComponent extends DetailBasePage implements OnInit, OnDes
         });
     }
 
-    viewFile(item: IDownFile) {
-        this.nav('pdf', item);
-    }
+    // viewFile(item: IDownFile) {
+    //     this.nav('pdf', item);
+    // }
+
 }

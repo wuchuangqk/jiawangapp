@@ -4,13 +4,15 @@ import { File} from '@ionic-native/file/ngx';
 import {FileTransfer, FileTransferObject} from '@ionic-native/file-transfer/ngx';
 import {FileOpener} from '@ionic-native/file-opener/ngx';
 import { HttpService } from './http.service';
-import {AlertController, Platform} from '@ionic/angular';
+import {ActionSheetController, AlertController, NavController, Platform} from '@ionic/angular';
 import {AndroidPermissions} from '@ionic-native/android-permissions/ngx';
 import {DialogService} from './dialog.service';
 import { Base64 } from '@ionic-native/base64/ngx';
 import {NativeService} from './NativeService';
+import {Router} from "@angular/router";
+// import {DocumentViewer, DocumentViewerOptions} from "@ionic-native/document-viewer/ngx";
 @Injectable({
-    providedIn: 'root'
+    providedIn: 'root',
 })
 export class FileService {
     public num = 0;
@@ -87,7 +89,11 @@ export class FileService {
                 private file: File,
                 private fileOpener: FileOpener,
                 private service: HttpService,
+                public router: Router,
+                // private navController:NavController,
                 private dialogService: DialogService,
+                public actionSheetCtrl: ActionSheetController,
+                // private document: DocumentViewer,
                 private nativeService: NativeService,
                 private base64: Base64,
                 // private inAppBrowser: InAppBrowser
@@ -128,6 +134,62 @@ export class FileService {
         return array;
     }
 
+
+    /**
+     * 通过下载文件获取本地文件地址
+     */
+    public  async getFilePathByDownloadFile(file: IDownFile):Promise<string> {
+        if (this.isAndroid()) {
+            await this.nativeService.getPrmissions();
+            const fileTransfer: FileTransferObject = this.transfer.create();
+            // 本地文件路径
+            const filePath = this.file.externalRootDirectory + file.filename + file.fileext; // apk保存的目录
+            await fileTransfer.download(file.fileurl,  filePath)
+            return filePath;
+        }}
+
+
+    async presentActionSheet(resolve?: Function) {
+        const actionSheet = await this.actionSheetCtrl.create({
+            buttons: [{
+                text: '通过外部程序打开',
+                role: 'takePhoto',
+                handler: () => {
+                    if (resolve) {
+                        resolve('open');
+                    }
+                }
+            },
+                // {
+                //     text: '打开',
+                //     // role: 'chooseFromAlbum',
+                //     handler: () => {
+                //         if (resolve) {
+                //             resolve('open2');
+                //         }
+                //     }
+                // },
+                {
+                    text: '预览',
+                    handler: () => {
+                        if (resolve) {
+                            resolve('view');
+                        }
+                    }
+                },
+                {
+                    text: '取消',
+                    role: 'cancel',
+                    handler: () => {
+                        console.log('cancel');
+                    }
+                }]
+        });
+        await actionSheet.present();
+    }
+    nav(path, queryParams?) {
+        return this.router.navigate([path], { queryParams});
+    }
     /**
      * 文件下载
      */
@@ -135,12 +197,12 @@ export class FileService {
        if (this.isAndroid()) {
            await this.nativeService.getPrmissions();
            const fileTransfer: FileTransferObject = this.transfer.create();
-           const apk = this.file.externalRootDirectory + file.filename + file.fileext; // apk保存的目录
-           fileTransfer.download(file.fileurl, apk).then(() => {
-                // this.fileOpener.open(apk, this.getFileMIMEType(file.fileext.substring(1))).then(() => {}).catch(e => {});
-                this.base64.encodeFile(apk).then((base64File: string) => {
+           // 本地文件路径
+           const filePath = this.file.externalRootDirectory + file.filename + file.fileext; // apk保存的目录
+           fileTransfer.download(file.fileurl,  filePath).then(() => {
+                this.base64.encodeFile( filePath).then((base64File: string) => {
                     if (backFn) {
-                        backFn(this.convertDataURIToBinary(base64File), apk);
+                        backFn(this.convertDataURIToBinary(base64File),  filePath);
                     }
                 }, (err) => {
                     // alert('4' + err);
@@ -155,21 +217,29 @@ export class FileService {
     /**
      * 应用程序打开
      */
-    public openByApp(file: IDownFile, backFn) {
-        if (this.isAndroid()) {
-            const fileTransfer: FileTransferObject = this.transfer.create();
-            const apk = this.file.externalRootDirectory + file.filename + file.fileext; // apk保存的目录
-            fileTransfer.download(file.fileurl, apk).then(() => {
-                this.fileOpener.open(apk, this.getFileMIMEType(file.fileext.substring(1)
-                )).then(() => {
-                }).catch(e => {
-                    // alert(JSON.stringify(e));
-                });
-            }).catch(e => {
-                // alert('5' + JSON.stringify(e));
-            });
-
-        }}
+    public async openByApp(file: IDownFile, backFn) {
+        await this.presentActionSheet((res)=>{
+            console.log(res)
+            if(res=='open'){
+                if (this.isAndroid()) {
+                    this.dialogService.loading("文件加载中");
+                    const fileTransfer: FileTransferObject = this.transfer.create();
+                    const filePath = this.file.externalRootDirectory + file.filename + file.fileext; // apk保存的目录
+                    fileTransfer.download(file.fileurl, filePath).then(() => {
+                        // const options: DocumentViewerOptions = {
+                        //     title: file.filename
+                        // }
+                        // this.document.viewDocument(apk, 'application/pdf', options);
+                        this.dialogService.dismiss();
+                        this.fileOpener.open(filePath, this.getFileMIMEType(file.fileext.substring(1))).then(() => {}).catch(e => {});
+                    });
+                }
+            }else if(res=='view'){
+                this.nav('pdf',file)
+            }
+            // else if(res=='open2'){}
+        })
+    }
 
 }
 

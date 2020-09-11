@@ -7,10 +7,12 @@ import {HttpService} from '../service/http.service';
 import {ActivatedRoute, Router} from '@angular/router';
 import {Events, NavController} from '@ionic/angular';
 import {DialogService} from '../service/dialog.service';
+import {DocumentViewer, DocumentViewerOptions} from "@ionic-native/document-viewer/ngx";
 @Component({
   selector: 'app-pdf-viewer-page',
   templateUrl: './pdf-viewer-page.component.html',
   styleUrls: ['./pdf-viewer-page.component.scss'],
+  providers:[DocumentViewer]
 })
 export class PdfViewerPageComponent extends BasePage implements OnInit {
     public url = '';
@@ -25,6 +27,7 @@ export class PdfViewerPageComponent extends BasePage implements OnInit {
       public navController: NavController,
       public dialogService: DialogService,
       private events: Events,
+      private document: DocumentViewer,
       public fileService: FileService,
       public route?: ActivatedRoute,
   ) {
@@ -58,10 +61,20 @@ export class PdfViewerPageComponent extends BasePage implements OnInit {
     this.pdfViewer.nextPage();
   }
   ngOnInit() {
-    console.log(this.fullPageBtn.nativeElement);
+    const options: DocumentViewerOptions = {
+      title: '文件预览'
+    }
+    // console.log(this.fullPageBtn.nativeElement);
+    // this.dialogService.loading("文件加载中.....");
+    // this.fileService.getFilePathByDownloadFile(this.file).then((res)=>{
+    //   this.document.viewDocument(res, 'application/pdf', options);
+    // })
+      this.title= this.file.filename;
+    this.dialogService.loading("文件加载中.....");
     this.fileService.downloadFile(this.file, (res: any, filePath: string) => {
       this.localFilePath = filePath;
       this.pdfViewer.openDocument(res);
+      this.dialogService.dismiss();
       // 全屏点击时间
       setTimeout(()=>{
         this.pdfViewer.zoomFullPage()

@@ -7,6 +7,7 @@ import {DomSanitizer, SafeHtml} from '@angular/platform-browser';
 import {AlertController, Events} from '@ionic/angular';
 import {AppConfig} from '../../../app.config';
 import { NavController } from '@ionic/angular';
+import {FileService} from "../../../service/FileService";
 
 
 @Component({
@@ -38,9 +39,10 @@ export class ApproveComponent  extends DetailBasePage implements OnInit {
       public sanitizer: DomSanitizer,
       public alertController: AlertController,
       public events: Events,
+      public fileService: FileService,
       public route?: ActivatedRoute,
   ) {
-    super( http, router, dialogService, sanitizer, navController);
+    super( http, router, dialogService, sanitizer, navController,fileService);
     this.url = this.query('url');
     this.handleUrl = this.query('handleUrl');
     this.id = this.query('id');

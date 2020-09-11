@@ -8,6 +8,7 @@ import {AppConfig} from '../../../app.config';
 import {DetailBasePage} from '../../../base/detail-base-page';
 import { AlertController } from '@ionic/angular';
 import  AlloyFinger  from 'alloyfinger';
+import {FileService} from "../../../service/FileService";
 // alloyfinger
 @Component({
   selector: 'app-receive-detail',
@@ -49,9 +50,10 @@ export class ReceiveDetailComponent extends DetailBasePage implements OnInit, On
       public sanitizer: DomSanitizer,
       public events: Events,
       public alertController: AlertController,
+      public fileService: FileService,
       public route?: ActivatedRoute,
   ) {
-    super( http, router, dialogService, sanitizer, navController);
+    super( http, router, dialogService, sanitizer, navController,fileService);
     this.url = this.query('url');
     this.title = this.query('title');
     this.handleUrl = this.query('handleUrl');
