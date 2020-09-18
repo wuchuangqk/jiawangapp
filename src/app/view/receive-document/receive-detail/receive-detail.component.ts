@@ -290,9 +290,13 @@ export class ReceiveDetailComponent extends DetailBasePage implements OnInit, On
     if (!this.ldid && !staff_ids) {
 
       if (userId != 519) {
-        this.dialogService.toast('请选择主要领导或者分管领导！');
+        await this.dialogService.toast('请选择主要领导或者分管领导！');
         return false;
       }
+    }
+    if(!this.infoTitle){
+      await this.dialogService.toast("请输入意见");
+      return false;
     }
     await this.setRequest('/receipt/anditsave', {
       id: this.id,

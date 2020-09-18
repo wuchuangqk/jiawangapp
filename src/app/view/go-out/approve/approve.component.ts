@@ -30,7 +30,7 @@ export class ApproveComponent  extends DetailBasePage implements OnInit {
   public payload: {
     url: string;
     id: string;
-    comments: string;
+    option: string;
     staff_ids: string;
   };
 
@@ -127,7 +127,7 @@ export class ApproveComponent  extends DetailBasePage implements OnInit {
         }, {
           text: '确定',
           handler: (e) => {
-            this.payload.comments = e;
+            this.payload.option = e;
           }
         }
       ]
@@ -137,7 +137,7 @@ export class ApproveComponent  extends DetailBasePage implements OnInit {
   }
 
   back() {
-    if (!this.payload.comments) {
+    if (!this.payload.option) {
       this.dialogService.toast('请输入审批意见');
       return;
     }
@@ -154,7 +154,7 @@ export class ApproveComponent  extends DetailBasePage implements OnInit {
 
 
   save() {
-    if (!this.payload.comments) {
+    if (!this.payload.option) {
       this.dialogService.toast('请输入审批意见');
       return;
     }
