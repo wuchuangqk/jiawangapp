@@ -24,9 +24,14 @@ export class BasePage implements OnInit {
             // this.router.nav('login');
         }
     }
+
+    // 导航到。。。页面
     nav(path, queryParams?) {
         return this.router.navigate([path], { queryParams});
     }
+    /**
+     * 获取到querystring里面的请求参数
+     */
     query(name ) {
         return this.route.snapshot.queryParams[name];
     }

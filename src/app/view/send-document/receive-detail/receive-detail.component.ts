@@ -25,6 +25,7 @@ export class ReceiveDetailComponent extends DetailBasePage implements OnInit, On
   public isEdit = false;
   public tabIndex = -1;
   public commentList = [];
+  public isCommentOpen=false;
   public commentShort = '';
   public primarySignerList = [];
   public fenGuanLingDaoList = [];
@@ -92,6 +93,7 @@ export class ReceiveDetailComponent extends DetailBasePage implements OnInit, On
     }
   }
   private async  d() {
+    let _this=this;
     const af = new AlloyFinger(document.getElementById('detail'), {
       touchStart() { },
       touchMove() { },
@@ -110,15 +112,17 @@ export class ReceiveDetailComponent extends DetailBasePage implements OnInit, On
       },
       pinch(evt) {
         // e.scale代表两个手指缩放的比例
-        // console.log(evt.zoom);
-        // evt.target.style.transform = 'scale(' + evt.scale + ')';
+        console.log(evt.zoom);
+        evt.target.style.transform = 'scale(' + evt.scale + ')';
       },
       pressMove(evt) {
-        console.log(evt.deltaX);
-        console.log(evt.deltaY);
+        // console.log(evt.deltaX);
+        // console.log(evt.deltaY);
       },
       swipe(evt) {
         console.log('swipe' + evt.direction);
+        console.log(this);
+        // _this.isCommentOpen=false
       }
     });
   }
@@ -322,7 +326,7 @@ export class ReceiveDetailComponent extends DetailBasePage implements OnInit, On
   /**
    * 关联收文查看
    */
-  public viewReceipt(item) {
+  public viewReceipt(item){
     item.pid = item.id;
     item.url = '/receipt/anditdetail';
     item.title = '收文系统';
@@ -341,5 +345,13 @@ export class ReceiveDetailComponent extends DetailBasePage implements OnInit, On
   }
   public getCommentShort(e) {
     this.infoTitle = e;
+  }
+
+
+  public switchEditSatus(){
+    this.isEdit=!this.isEdit;
+    if(this.isEdit){
+      this.isCommentOpen=false;
+    }
   }
 }

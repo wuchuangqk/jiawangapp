@@ -8,6 +8,7 @@
 html{
   font-size:10px;
 }
+@import "styles/animate";
 @import "styles/placeholder";
 @import "styles/reset";
 @import "styles/scrollbar";
@@ -27,7 +28,7 @@ html{
 @import "styles/swiper";
 @import "styles/common-view";
 
-@import "styles/animate.css";
+@import "styles/animate";
 @import 'styles/quill.core.scss';
 @import 'styles/quill.snow.scss';
 @import 'styles/quill.bubble.scss';

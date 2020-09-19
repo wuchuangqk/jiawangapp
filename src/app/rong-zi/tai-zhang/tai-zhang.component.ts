@@ -5,6 +5,7 @@ import {ActivatedRoute, Router} from '@angular/router';
 import {DialogService} from '../../service/dialog.service';
 import {Events, NavController} from '@ionic/angular';
 import echarts from 'echarts';
+import 'echarts/theme/macarons'
 @Component({
   selector: 'app-tai-zhang',
   templateUrl: './tai-zhang.component.html',
@@ -40,7 +41,7 @@ export class TaiZhangComponent extends BasePage implements OnInit {
     // 月度
     this.request('/rongzi/monthhui', {}).then((res) => {
       const  { chart1, chart2, chart3} = res.data;
-      const myChart = echarts.init(document.getElementById('chart1'));
+      const myChart = echarts.init(document.getElementById('chart1'),'macarons');
       const option = {
         // title: {
         //   text: '单位（万元）'
@@ -76,30 +77,24 @@ export class TaiZhangComponent extends BasePage implements OnInit {
             name: '计划还款金额',
             type: 'bar',
             stack: '计划',
-            data: chart1,
-            itemStyle: {
-              color: '#FFB800'
-            }
+            data: chart1
+            // itemStyle: {color: '#FFB800'}
           },
 
           {
             name: '实际还款金额',
             type: 'bar',
             stack: '融资',
-            data: chart2,
-            itemStyle: {
-              color: '#FF0000'
-            }
+            data: chart2
+            // itemStyle: {color: '#FF0000'}
           },
 
           {
             name: '存单质押金额',
             type: 'bar',
             stack: '融资',
-            data: chart3,
-            itemStyle: {
-              color: '#1E90FF'
-            }
+            data: chart3
+            // itemStyle: {color: '#1E90FF'}
           }
 
         ]
@@ -112,7 +107,7 @@ export class TaiZhangComponent extends BasePage implements OnInit {
       // 基于准备好的dom，初始化echarts实例
 
       const  { chart1, chart2, chart3} = res.data;
-      const tmyChart = echarts.init(document.getElementById('chart2'));
+      const tmyChart = echarts.init(document.getElementById('chart2'),"macarons");
       const toption = {
         // title: {
         //   text: '单位（万元）'
@@ -148,29 +143,21 @@ export class TaiZhangComponent extends BasePage implements OnInit {
             name: '计划还款金额',
             type: 'bar',
             stack: '计划',
-            data: chart1,
-            itemStyle: {
-              color: '#FFB800'
-            }
+            data: chart1
           },
           {
             name: '实际还款金额',
             type: 'bar',
             stack: '融资',
-            data: chart2,
-            itemStyle: {
-              color: '#FF0000'
-            }
+            data: chart2
           },
 
           {
             name: '存单质押金额',
             type: 'bar',
             stack: '融资',
-            data: chart3,
-            itemStyle: {
-              color: '#1E90FF'
-            }
+            data: chart3
+            // itemStyle: {color: '#1E90FF'}
           }
         ]
       };

@@ -80,7 +80,7 @@ export class IndexComponent extends BasePage implements OnInit, OnDestroy {
   getDocumentList() {
     this.request('/zhsp/mylist', {}).then((res) => {
         this.itemList = res.data;
-        });
+    });
   }
   /*
   * 待办

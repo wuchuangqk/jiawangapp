@@ -67,8 +67,11 @@ export class IndexComponent extends BasePage implements OnInit, OnDestroy {
         this.keyword = e.detail.value;
         this.getRequst();
     }
+    /**
+     * 待办
+     * */
     async getDocumentList() {
-        const res = await this.request('/documents/flist', {
+        const res = await this.request('/dispatch/todo', {
             document_type: 1,
             keyword: this.keyword
         });

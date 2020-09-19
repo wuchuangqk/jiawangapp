@@ -40,7 +40,7 @@
                     <ion-item *ngFor="let item of itemList" (click)="nav('synthesize/detail',{url:'/zhsp/mydetail',id:item.id,title:title,contentTitle:item.title,title:'综合审批详情'})">
                         <section>
                             <div class="my-list-title">
-                                <h2>{{item.title}}</h2>
+                                <h2 class="primary">{{item.title}}</h2>
                             </div>
                             <div class="my-list-sub">
                                 <div class="my-list-sub-top flex-between">
@@ -65,7 +65,7 @@
                     id:item.id,title:title,contentTitle:item.title,title:'综合审批'})">
                         <section>
                             <div class="my-list-title">
-                                <h2>{{item.title}}</h2>
+                                <h2 class="primary">{{item.title}}</h2>
                             </div>
                             <div class="my-list-sub">
                                 <div class="my-list-sub-top flex-between">
@@ -89,7 +89,8 @@
                                 <h2  [ngClass]="item.qjstate=='已审批'?'primary':''">
                                     <span *ngIf="item.qjstate!=='已审批'" color="primary">[{{item.qjstate}}]</span>
                                     <span *ngIf="item.qjstate=='已审批'">[已审批]</span>
-                                    {{item.title}}</h2>
+                                    <span class="primary">{{item.title}}</span>
+                                </h2>
                             </div>
                             <div class="my-list-sub">
                                 <div class="my-list-sub-top flex-between">
