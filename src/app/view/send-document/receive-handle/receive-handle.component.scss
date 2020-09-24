@@ -21,7 +21,27 @@ textarea{
   height: 20rem;
   border: none;
 }
-
+.more-item-wrapper{
+  width: 50px;
+  background: #f6f6f6;
+  text-align: center;
+  margin-left: 5px;
+  .more-item{
+    width: 50px;
+    height: 50px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    background: #ffffff;
+    img{
+      width: 30px;
+      height: 30px;
+    }
+    .text{
+      text-align: center;
+    }
+  }
+}
 
 @media screen and (min-width: 360px) {
   .switch-title{
@@ -65,7 +85,7 @@ textarea{
 }
 
 input,button,select,textarea{ outline:none;} /*取消表单项聚焦时产生的边框*/
-textarea{resize:none;}/*取消textarea改变大小的功能*/
+textarea{resize:none;}  /*取消textarea改变大小的功能*/
 
 .table{
   width: 100%;

@@ -112,22 +112,25 @@
         </fieldset>
     </section>
 
-
 </ion-content>
 
-<ion-footer *ngIf="!isgned">
+<ion-footer [hidden]="isgned">
     <ion-toolbar>
         <!--        [rows]="flag?4:1" (ionFocus)="flag=true" (ionBlur)="flag=false"-->
         <div style="margin-bottom: 5px;">
             <div>
                 <div class="card-header">办理</div>
-                <div *ngIf="isEdit">
-                    <textarea placeholder="请输入处理意见" style="font-size: 1.4rem;" [(ngModel)]="infoTitle"></textarea>
-                    <div class="flex-between" style="padding-bottom: 10px;">
-                        <div></div>
-                        <div style="color: #96999e;padding-right: 5px;" class="font-14" (click)="presentAlertPrompt()">常用语</div>
+                <div [hidden]="!isEdit">
+                    <div [hidden]="userId!=519" style="overflow-x: auto">
+                    <signature-pad [options]="signaturePadOptions"    (onBeginEvent)="drawStart()"  (onEndEvent)="drawComplete()"></signature-pad>
                     </div>
-
+                    <div [hidden]="userId==519">
+                        <textarea placeholder="请输入处理意见" style="font-size: 1.4rem;" [(ngModel)]="infoTitle"></textarea>
+                        <div class="flex-between" style="padding-bottom: 10px;">
+                            <div></div>
+                            <div style="color: #96999e;padding-right: 5px;" class="font-14" (click)="presentAlertPrompt()">常用语</div>
+                        </div>
+                    </div>
                     <div class="flex-between font-14" *ngIf="SignIndex<2"  style="padding: 10px 0;border-bottom: 1px solid #eee;" (click)="selectFenGuanLingDao()">
                         <div>
                             选择分管领导
@@ -138,19 +141,14 @@
                             <ion-icon name="arrow-forward"></ion-icon>
                         </div>
                     </div>
-
-
                     <app-staff (click)="go('getStaffs')" [type]="false" *ngIf="SignIndex>=2" title="选择承办人" eventName="getStaffs" [(selectedStaff)]="selectedStaff"></app-staff>
-
-
-
-
-
                 </div>
                 <div class="flex-between">
-                    <ion-icon (click)="isEdit=!isEdit" name="create" size="20" style="font-size: 20px;"></ion-icon>
-                    <!--                    <ion-button size="small"  fill="outline">暂存</ion-button>-->
-                    <ion-button size="small" fill="outline" (click)="submit()">提交</ion-button>
+                    <ion-icon (click)="isEdit=!isEdit" name="create" size="20" style="font-size: 30px;"></ion-icon>
+                    <div>
+                        <ion-button size="small" fill="outline" (click)="signaturePad.clear()">清除</ion-button>
+                        <ion-button size="small" fill="outline" (click)="submit()">提交</ion-button>
+                    </div>
                 </div>
             </div>
         </div>

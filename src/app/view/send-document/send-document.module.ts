@@ -8,12 +8,19 @@ import {IonicModule} from '@ionic/angular';
 import {FormsModule} from '@angular/forms';
 import {ReceiveDetailComponent} from "./receive-detail/receive-detail.component";
 import {ReceiveHandleComponent} from "./receive-handle/receive-handle.component";
+import {ChuanYueComponent} from "./chuan-yue/chuan-yue.component";
+import {JiaQianComponent} from "./jia-qian/jia-qian.component";
 
 @NgModule({
   declarations: [
     IndexComponent,
     ReceiveDetailComponent,
     ReceiveHandleComponent,
+    ChuanYueComponent,
+    JiaQianComponent,
+  ],
+  entryComponents:[
+    JiaQianComponent
   ],
   imports: [
     CommonModule,

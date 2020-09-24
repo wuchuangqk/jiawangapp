@@ -1,12 +1,14 @@
 import {Component, OnDestroy, OnInit} from '@angular/core';
 import {HttpService} from '../../../service/http.service';
 import {ActivatedRoute, Router} from '@angular/router';
-import {AlertController, Events, NavController} from '@ionic/angular';
+import {AlertController, Events, ModalController, NavController} from '@ionic/angular';
 import {DialogService} from '../../../service/dialog.service';
 import {DomSanitizer} from '@angular/platform-browser';
 import {AppConfig} from '../../../app.config';
 import {DetailBasePage} from '../../../base/detail-base-page';
 import {FileService} from "../../../service/FileService";
+import {ChuanYueComponent} from "../chuan-yue/chuan-yue.component";
+import {JiaQianComponent} from "../jia-qian/jia-qian.component";
 
 @Component({
   selector: 'app-receive-handle',
@@ -14,14 +16,14 @@ import {FileService} from "../../../service/FileService";
   styleUrls: ['./receive-handle.component.scss'],
 })
 export class ReceiveHandleComponent  extends DetailBasePage implements OnInit, OnDestroy  {
-
-
+  public currentModal = null;
   public title = '详情';
   public isShenPi: boolean;
   public handle_status: string;
   public handleUrl: string;
   public infoTitle: string;
   public isEdit = false;
+  public isMore = false;
   public tabIndex = -1;
   public commentList = [];
   public commentShort = '';
@@ -52,6 +54,7 @@ export class ReceiveHandleComponent  extends DetailBasePage implements OnInit, O
       public events: Events,
       public alertController: AlertController,
       public fileService: FileService,
+      public modalController: ModalController,
       public route?: ActivatedRoute,
   ) {
     super( http, router, dialogService, sanitizer, navController,fileService);
@@ -97,6 +100,101 @@ export class ReceiveHandleComponent  extends DetailBasePage implements OnInit, O
     });
     this.fenGuanLingDaoList = res.data.staffs;
   }
+  public async document_back(){
+    let alert = await this.alertController.create({
+      mode:'md',
+      // header: '退回!',
+      inputs: [
+        {
+          name: 'comments',
+          type: 'text',
+          placeholder: '退回意见'
+        }
+      ],
+      buttons: [
+        {
+          text: '取消',
+          role: 'cancel',
+          cssClass: 'secondary',
+          handler: () => {
+            console.log('Confirm Cancel');
+          }
+        }, {
+          text: '确定',
+          handler: (e) => {
+            this.setRequest('/dispatch/signback', {
+              comments: e.comments,
+              id:this.id
+            })
+            .then((res)=>{
+              this.events.publish(AppConfig.Document.DocumentList);
+              this.events.publish(AppConfig.Home.Badge);
+              this.events.publish(AppConfig.Synthesize.List);
+              this.dialogService.alert('提交成功!', () => {
+                this.goBack();
+              });
+            })
+            ;
+          }
+        }
+      ]
+    })
+    await alert.present();
+  }
+
+
+  // 传阅
+  public async document_chaunYue(){
+    this.nav("send-document/chuan-yue",{id:this.id})
+  }
+  dismissModal() {
+    if (this.currentModal) {
+      this.currentModal.dismiss().then(() => { this.currentModal = null; });
+    }
+  }
+  public async document_stop(){
+    let alert = await this.alertController.create({
+      mode:'md',
+      // header: '退回!',
+      inputs: [
+        {
+          name: 'comments',
+          type: 'text',
+          placeholder: '终止意见'
+        }
+      ],
+      buttons: [
+        {
+          text: '取消',
+          role: 'cancel',
+          cssClass: 'secondary',
+          handler: () => {
+            console.log('Confirm Cancel');
+          }
+        }, {
+          text: '确定',
+          handler: (e) => {
+            this.setRequest('/dispatch/signstop', {
+              comments: e.comments,
+              id:this.id
+            })
+            .then((res)=>{
+              this.events.publish(AppConfig.Document.DocumentList);
+              this.events.publish(AppConfig.Home.Badge);
+              this.events.publish(AppConfig.Synthesize.List);
+              this.dialogService.alert('提交成功!', () => {
+                this.goBack();
+              });
+            })
+            ;
+          }
+        }
+      ]
+    })
+    await alert.present();
+  }
+
+
 
   private async getSignList() {
     const res = await this.request('/receipt/signlist', {item_id: this.id});
@@ -117,6 +215,24 @@ export class ReceiveHandleComponent  extends DetailBasePage implements OnInit, O
     this.linkDispathList = res.data.dispath;
   }
 
+  public async document_jiaqian(isJiaQian){
+    this.currentModal = await this.modalController.create({
+      component:JiaQianComponent,
+      showBackdrop:true,
+      componentProps:{
+        id:this.id,
+        signIndex: this.SignIndex,
+        isJiaQian
+      }
+    });
+    await this.currentModal.present();
+//监听销毁的事件，接收返回的值
+    const { data } = await this.currentModal.onDidDismiss();
+    console.log(data);
+    if(data.isBack){
+        this.navController.back();
+    }
+  }
 
   go(eventName) {
     localStorage.num = 0;
@@ -250,6 +366,50 @@ export class ReceiveHandleComponent  extends DetailBasePage implements OnInit, O
     await alert.present();
   }
 
+
+
+
+  /**
+   * 选择快捷语
+   */
+  async qianFaPresentAlertPrompt() {
+
+
+    let res =  await this.request("/dispatch/signCreator1",{})
+    let qianFaList = res.data;
+    const inputs: any = qianFaList.map(item => {
+      return {
+        name: item.name,
+        type: 'radio',
+        label: item.name,
+        value: item.id,
+      };
+    });
+    const alert = await this.alertController.create({
+      cssClass: 'my-custom-class',
+      header: '请选择签发人员!',
+      inputs,
+      buttons: [
+        {
+          text: '取消',
+          role: 'cancel',
+          cssClass: 'secondary',
+          handler: () => {
+            console.log('Confirm Cancel');
+          }
+        }, {
+          text: '确定',
+          handler: (e) => {
+            this.infoTitle = e;
+          }
+        }
+      ]
+    });
+
+    await alert.present();
+  }
+
+
   // 打开正文
   openZhengWen() {
     if (!this.zhengWen.fileurl) {
@@ -286,9 +446,9 @@ export class ReceiveHandleComponent  extends DetailBasePage implements OnInit, O
     this.nav('detail', item);
   }
 
-  public getIds(arr): string {
-    return  arr.map(item => item.id).join(',');
-  }
+  // public getIds(arr): string {
+  //   return  arr.map(item => item.id).join(',');
+  // }
 
   /**
    * 提交
@@ -299,29 +459,24 @@ export class ReceiveHandleComponent  extends DetailBasePage implements OnInit, O
     const userId = userInfo.id;
 
 
-
-    let staff_ids = this.staff_ids.join(',');
-    // 如果办理步骤大于于2 staff_ids 是承办人
-    if (this.SignIndex >= 2) {
-      staff_ids = this.getIds(this.selectedStaff);
-    }
-    // 如果办理步骤小于2 则要选择分管领导
-    if ( !staff_ids && this.SignIndex < 2) {
-      if (userId != 519) {
-        this.dialogService.toast('请选择分管领导！');
+    let user = this.getIds(this.selectedStaff);
+    console.log(user)
+    if(this.SignIndex==3){
+       // await this.qianFaPresentAlertPrompt()
+        await this.document_jiaqian(false);
         return false;
-      }
     }
-    await this.setRequest('/receipt/todosave', {
+    await this.setRequest('/dispatch/todosave', {
       id: this.id,
       comments: this.infoTitle,
       ldid: this.ldid,
-      staff_ids
+      index:this.SignIndex,
+      user
     });
     this.events.publish(AppConfig.Document.DocumentList);
     this.events.publish(AppConfig.Home.Badge);
     this.events.publish(AppConfig.Synthesize.List);
-    this.dialogService.alert('提交成功!', () => {
+    await this.dialogService.alert('提交成功!', () => {
         this.goBack();
     });
   }

@@ -30,7 +30,7 @@ export class AppComponent {
       public toastCtrl: ToastController,
   ) {
     this.initializeApp();
-    this.isLogin();
+    // this.isLogin();
     // this.platform.ready().then(() => {
     //   if (this.platform.is('android') || this.platform.is('ios')) {
     //       // console.log("平台："+this.device.platform)

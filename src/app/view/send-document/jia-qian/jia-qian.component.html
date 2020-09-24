@@ -1,0 +1,38 @@
+<ion-header translucent>
+    <ion-toolbar>
+        <ion-title>签发</ion-title>
+        <ion-buttons slot="end">
+            <ion-button (click)="dismissModal()">关闭</ion-button>
+        </ion-buttons>
+    </ion-toolbar>
+</ion-header>
+<ion-content>
+    <ion-item *ngIf="signIndex<=4">
+        <ion-label>签发人员：</ion-label>
+        <ion-select  cancelText="取消" okText="确定" [(ngModel)]="params.signCreator1">
+            <ion-select-option *ngFor="let item of qianFaList" [value]="item.id">{{item.name}}</ion-select-option>
+        </ion-select>
+    </ion-item>
+
+    <ion-item *ngIf="signIndex<=3">
+        <ion-label>审稿人员：</ion-label>
+        <ion-select  cancelText="取消" okText="确定" [(ngModel)]="params.signCreator2">
+            <ion-select-option *ngFor="let item of shenGaoList" [value]="item.id">{{item.name}}</ion-select-option>
+        </ion-select>
+    </ion-item>
+
+    <ion-item *ngIf="signIndex<=2">
+        <ion-label>核稿人员：</ion-label>
+        <ion-select  cancelText="取消" okText="确定" [(ngModel)]="params.signCreator3">
+            <ion-select-option *ngFor="let item of heGaoList" [value]="item.id">{{item.name}}</ion-select-option>
+        </ion-select>
+    </ion-item>
+</ion-content>
+<ion-footer>
+    <ion-toolbar>
+        <div style=" text-align: right;">
+            <ion-button  size="small"  fill="outline" (click)="save()">取消</ion-button>
+            <ion-button  style="margin-left: 20px;" size="small"  fill="outline" (click)="save()">提交</ion-button>
+        </div>
+    </ion-toolbar>
+</ion-footer>

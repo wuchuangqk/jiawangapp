@@ -7,6 +7,10 @@ import {DomSanitizer} from '@angular/platform-browser';
 import {AppConfig} from '../../../app.config';
 import {DetailBasePage} from '../../../base/detail-base-page';
 import {FileService} from "../../../service/FileService";
+import { ViewChild } from '@angular/core';
+import { SignaturePad } from 'angular2-signaturepad/signature-pad';
+import { v4 as uuidv4 } from 'uuid';
+
 
 @Component({
   selector: 'app-receive-handle',
@@ -15,7 +19,7 @@ import {FileService} from "../../../service/FileService";
 })
 export class ReceiveHandleComponent  extends DetailBasePage implements OnInit, OnDestroy  {
 
-
+  public userId = 0;
   public title = '详情';
   public isShenPi: boolean;
   public handle_status: string;
@@ -32,7 +36,6 @@ export class ReceiveHandleComponent  extends DetailBasePage implements OnInit, O
   public primarySignName = '';
   public fenGuanLingDaoNames = '';
   public signList = [];
-
   public selectedStaff = [];
   // 关联项目
   public linkProjectList = [];
@@ -43,6 +46,14 @@ export class ReceiveHandleComponent  extends DetailBasePage implements OnInit, O
   public payload: {
     document_type: string
   };
+  public cansFile = "";
+  @ViewChild(SignaturePad) signaturePad: SignaturePad;
+  public signaturePadOptions: Object = { // passed through to szimek/signature_pad constructor
+    'minWidth': 5,
+    'canvasWidth': 800,
+    'canvasHeight': 400
+  };
+
   constructor(
       public http: HttpService,
       public router: Router,
@@ -66,6 +77,8 @@ export class ReceiveHandleComponent  extends DetailBasePage implements OnInit, O
   }
 
   async ngOnInit() {
+    const userInfo = JSON.parse(localStorage.getItem('userInfo'));
+    this.userId = userInfo.id;
     await this.getDetail(this.payload);
     await this.getCommentList();
     await this.getPrimarySignerList();
@@ -78,8 +91,45 @@ export class ReceiveHandleComponent  extends DetailBasePage implements OnInit, O
       this.handle_status = '0';
     });
   }
+  ngAfterViewInit() {
+    // this.signaturePad is now available
+    this.signaturePad.set('minWidth', 0.5); // set szimek/signature_pad options at runtime
+    this.signaturePad.clear(); // invoke functions from szimek/signature_pad API
+  }
+
+  drawComplete() {
+    // will be notified of szimek/signature_pad's onEnd event
+    console.log();
+    let blob = this.dataURLtoFile(this.signaturePad.toDataURL());
+    console.log(blob)
+    let uuid = uuidv4();
+    this.cansFile= this.blobToFile(blob,uuid+".png");
+  }
+
+  drawStart() {
+    // will be notified of szimek/signature_pad's onBegin event
+    console.log('begin drawing');
+  }
+
+  //将base64转换为文件
+  dataURLtoFile(dataurl) {
+    var arr = dataurl.split(','),
+        mime = arr[0].match(/:(.*?);/)[1],
+        bstr = atob(arr[1]),
+        n = bstr.length,
+        u8arr = new Uint8Array(n);
+    while (n--) {
+      u8arr[n] = bstr.charCodeAt(n);
+    }
+    return new Blob([u8arr], { type: mime });
+    // return new File([u8arr], uuid+".png", { type: mime });
+  }
   viewFile(item: IDownFile) {
     this.nav('pdf', item);
+  }
+  // 清除
+  clearDraw(){
+    this.signaturePad.clear();
   }
   private async  getCommentList() {
     const res = await this.request('/receipt/commentStore', {});
@@ -300,6 +350,7 @@ export class ReceiveHandleComponent  extends DetailBasePage implements OnInit, O
 
 
 
+
     let staff_ids = this.staff_ids.join(',');
     // 如果办理步骤大于于2 staff_ids 是承办人
     if (this.SignIndex >= 2) {
@@ -312,22 +363,39 @@ export class ReceiveHandleComponent  extends DetailBasePage implements OnInit, O
         return false;
       }
     }
-    await this.setRequest('/receipt/todosave', {
+
+    let uuid = uuidv4();
+    await this.uploadFileByBlob("/receipt/todosave",{
+      SignId:this.SignId,
       id: this.id,
-      comments: this.infoTitle,
+      comments: this.infoTitle||"",
       ldid: this.ldid,
       staff_ids
-    });
+    },this.cansFile,uuid+".png");
+    // await this.setRequest('/receipt/todosave', {
+    //   id: this.id,
+    //   comments: this.infoTitle,
+    //   ldid: this.ldid,
+    //   staff_ids
+    // });
     this.events.publish(AppConfig.Document.DocumentList);
     this.events.publish(AppConfig.Home.Badge);
     this.events.publish(AppConfig.Synthesize.List);
-    this.dialogService.alert('提交成功!', () => {
+    await this.dialogService.alert('提交成功!', () => {
         this.goBack();
     });
   }
   public viewProject(item) {
     this.nav('/project-detail?pid=' + item.id, item);
   }
+
+  blobToFile(newBlob, fileName) {
+    newBlob.lastModifiedDate = new Date();
+    newBlob.name = fileName;
+    return newBlob;
+  };
+
+
   public getCommentShort(e) {
     this.infoTitle = e;
   }

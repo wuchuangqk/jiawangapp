@@ -84,6 +84,16 @@ export class BasePage implements OnInit {
             this.handleErr(error);
         });
     }
+
+    public  uploadFileByBlob(url: string, data, blob?,fileName?) {
+        return  this.http.uploadFileByBlob('/api/v2' + url, data, blob,fileName).catch((error) => {
+            this.handleErr(error);
+        });
+    }
+
+
+
+
     public doRefresh(event) {
         event.target.complete();
     }

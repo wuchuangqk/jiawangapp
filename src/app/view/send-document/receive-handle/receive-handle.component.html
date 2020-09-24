@@ -2,7 +2,7 @@
     <ion-toolbar color="primary">
         <app-back slot="start"></app-back>
         <ion-title>
-            {{title}}
+            发文系统
         </ion-title>
     </ion-toolbar>
 </ion-header>
@@ -121,6 +121,35 @@
         <div style="margin-bottom: 5px;">
             <div>
                 <div class="card-header">办理</div>
+                <div *ngIf="isMore" style="background: #f7f7f7; padding:5px; display: flex;">
+                    <div class="more-item-wrapper" (click)="document_stop()">
+                        <div class="more-item">
+                            <img src="assets/icon/zhongZhi.png" alt="">
+                        </div>
+                        <span class="text">终止</span>
+                    </div>
+
+                    <div class="more-item-wrapper" (click)="document_back()">
+                        <div class="more-item">
+                            <img src="assets/icon/back.png" alt="">
+                        </div>
+                        <span class="text">退回</span>
+                    </div>
+
+                    <div class="more-item-wrapper" (click)="document_chaunYue()">
+                        <div class="more-item">
+                            <img src="assets/icon/chuanyue.png" alt="">
+                        </div>
+                        <span class="text">传阅</span>
+                    </div>
+
+                    <div class="more-item-wrapper" (click)="document_jiaqian(true)">
+                        <div class="more-item">
+                            <img src="assets/icon/jiaqian.png" alt="">
+                        </div>
+                        <span class="text">加签</span>
+                    </div>
+                </div>
                 <div *ngIf="isEdit">
                     <textarea placeholder="请输入处理意见" style="font-size: 1.4rem;" [(ngModel)]="infoTitle"></textarea>
                     <div class="flex-between" style="padding-bottom: 10px;">
@@ -138,18 +167,15 @@
                             <ion-icon name="arrow-forward"></ion-icon>
                         </div>
                     </div>
-
-
-                    <app-staff (click)="go('getStaffs')" [type]="false" *ngIf="SignIndex>=2" title="选择承办人" eventName="getStaffs" [(selectedStaff)]="selectedStaff"></app-staff>
-
-
-
-
-
+                    <app-staff [hidden]="SignIndex==4" (click)="go('getStaffs')" [type]="false" *ngIf="SignIndex>=2" title="选择承办人" eventName="getStaffs" [(selectedStaff)]="selectedStaff"></app-staff>
                 </div>
                 <div class="flex-between">
-                    <ion-icon (click)="isEdit=!isEdit" name="create" size="20" style="font-size: 20px;"></ion-icon>
-                    <!--                    <ion-button size="small"  fill="outline">暂存</ion-button>-->
+                    <span>
+                        <ion-icon (click)="isMore=!isMore" name="more" size="20" style="font-size: 20px;color: #3880ff;"></ion-icon>
+                        &nbsp;
+                        &nbsp;
+                        <ion-icon (click)="isEdit=!isEdit" name="create" size="20" style="font-size: 20px;color: #3880ff;"></ion-icon>
+                    </span>
                     <ion-button size="small" fill="outline" (click)="submit()">提交</ion-button>
                 </div>
             </div>

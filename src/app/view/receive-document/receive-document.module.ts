@@ -11,6 +11,7 @@ import {AddComponent} from './add/add.component';
 import {ReceiveDetailComponent} from './receive-detail/receive-detail.component';
 import {ReceiveHandleComponent} from './receive-handle/receive-handle.component';
 import {ComponentsModule} from '../../components/components.module';
+import {SignaturePadModule} from "angular2-signaturepad";
 
 @NgModule({
     declarations: [
@@ -26,7 +27,8 @@ import {ComponentsModule} from '../../components/components.module';
         IonicModule,
         FormsModule,
         ReceiveDocumentRoutingModule,
-        ComponentsModule
+        ComponentsModule,
+        SignaturePadModule
     ]
 })
 export class ReceiveDocumentModule { }

@@ -50,6 +50,7 @@ import { SimplePdfViewerModule } from 'simple-pdf-viewer';
 import {LogService} from './service/LogService';
 import {PersionInfoComponent} from './view/persion-info/persion-info.component';
 // import {DocumentViewer} from "@ionic-native/document-viewer";
+import { SignaturePadModule } from 'angular2-signaturepad';
 
 @NgModule({
     declarations: [
@@ -71,6 +72,7 @@ import {PersionInfoComponent} from './view/persion-info/persion-info.component';
         HttpClientModule,
         ComponentsModule,
         CommonComponentsModule,
+        SignaturePadModule,
         // PdfViewerModule,
         SimplePdfViewerModule,
         QuillModule.forRoot(

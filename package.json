@@ -45,6 +45,7 @@
     "@types/es6-promise": "^3.3.0",
     "@types/swiper": "^4.4.3",
     "alloyfinger": "^0.1.16",
+    "angular2-signaturepad": "^2.11.0",
     "animate": "^1.0.0",
     "com-badrit-base64": "^0.2.0",
     "cordova": "^9.0.0",

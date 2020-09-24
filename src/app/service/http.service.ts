@@ -57,6 +57,12 @@ export class HttpService {
       this.handleError(error, url);
     });
   }
+
+    public uploadFileByBlob(url: string, data, blob?,filename?): Promise<any> {
+        return this.httpRequest.uploadFileByBlob(url, data, blob,filename).catch((error) => {
+            this.handleError(error, url);
+        });
+    }
   public uploadFiles(url: string, data, files): Promise<any> {
       return this.httpRequest.uploadFiles(url, data, files).toPromise().catch((error) => {
           this.handleError(error, url);

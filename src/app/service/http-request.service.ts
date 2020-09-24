@@ -81,7 +81,9 @@ export class HttpRequestService {
                         const reader = new FileReader();
                         reader.onloadend = () => {
                             const imgBlob = new Blob([reader.result], {type: blob.type});
-                            formData.append('file', imgBlob, (blob as any).name);
+                            let name = (blob as any).name;
+                            console.log(name)
+                            formData.append('file', imgBlob, name);
                             this.http.post(this.BaseUrl + url, formData).toPromise().then((res) => {
                                 resolve(res);
                             }).catch(error => {
@@ -100,4 +102,30 @@ export class HttpRequestService {
             }
         }));
     }
+
+
+
+
+
+    /**
+     * @param fileName 文件名称
+     * */
+    public uploadFileByBlob(url: string, data, blob?,fileName?) {
+        this.setBaseUrl();
+        data.access_token = localStorage.access_token;
+        data.timestamp = new Date().getTime() + '';
+        const signature = this.utilService.hamcsha1(this.utilService.sortParams(data), this.SECERET_KEY);
+        data.signature = signature;
+        const formData = new FormData();
+        for (const i in data) {
+            formData.append(i, encodeURIComponent(data[i]));
+        }
+        if(blob){
+            formData.append('file', blob,fileName);
+        }
+        return  this.http.post(this.BaseUrl + url, formData).toPromise();
+    }
+
+
+
 }

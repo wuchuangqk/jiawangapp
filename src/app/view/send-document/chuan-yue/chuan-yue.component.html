@@ -1,0 +1,27 @@
+<!--<ion-header translucent>-->
+<!--    <ion-toolbar>-->
+<!--        <ion-title>传阅</ion-title>-->
+<!--        <ion-buttons slot="end">-->
+<!--            <ion-button (click)="dismissModal()">关闭</ion-button>-->
+<!--        </ion-buttons>-->
+<!--    </ion-toolbar>-->
+<!--</ion-header>-->
+<ion-header>
+    <ion-toolbar color="primary">
+        <app-back slot="start"></app-back>
+        <ion-title>
+            {{title}}
+        </ion-title>
+    </ion-toolbar>
+</ion-header>
+<ion-content fullscreen>
+    <app-staff (click)="go('getStaffs')" title="选择人员" eventName="getStaffs" [(selectedStaff)]="selectedStaff"></app-staff>
+</ion-content>
+<ion-footer>
+    <ion-toolbar>
+        <div style=" text-align: right;">
+            <ion-button  size="small"  fill="outline" (click)="save()">取消</ion-button>
+            <ion-button  style="margin-left: 20px;" size="small"  fill="outline" (click)="save()">传阅</ion-button>
+        </div>
+    </ion-toolbar>
+</ion-footer>

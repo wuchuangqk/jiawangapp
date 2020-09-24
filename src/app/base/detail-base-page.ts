@@ -32,6 +32,7 @@ export class DetailBasePage extends BasePage {
     public content: SafeHtml = '';
     public comment_num: any;
     public isBackToHome:boolean = false;
+    public SignId ="";
     public fileList: Array<IDownFile> = [];
     constructor(
         public http: HttpService,
@@ -53,6 +54,7 @@ export class DetailBasePage extends BasePage {
             this.comment = res.data.comment === '1';
             this.zhengWen = res.data.pdfurl;
             this.comment_num = res.data.comment_num;
+            this.SignId = res.data.SignId;
             if (res.data.file) {
                 this.fileList = res.data.file;
             }
