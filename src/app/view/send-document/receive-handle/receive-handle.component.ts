@@ -468,7 +468,7 @@ export class ReceiveHandleComponent  extends DetailBasePage implements OnInit, O
     }
     await this.setRequest('/dispatch/todosave', {
       id: this.id,
-      comments: this.infoTitle,
+      comments: this.infoTitle||"",
       ldid: this.ldid,
       index:this.SignIndex,
       user
