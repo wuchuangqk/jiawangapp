@@ -50,6 +50,9 @@ export class ChuanYueComponent extends BasePage implements OnInit {
   public dismissModal(){
     this.modalCtrl.dismiss();
   }
+  public cancel(){
+    this.dismissModal()
+  }
   public async save(){
     let staff_ids = this.getIds(this.selectedStaff);
     await this.setRequest("/dispatch/signread",{
