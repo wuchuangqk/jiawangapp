@@ -12,6 +12,8 @@ import {ReceiveDetailComponent} from './receive-detail/receive-detail.component'
 import {ReceiveHandleComponent} from './receive-handle/receive-handle.component';
 import {ComponentsModule} from '../../components/components.module';
 import {SignaturePadModule} from "angular2-signaturepad";
+import {JiaQianComponent} from "./jia-qian/jia-qian.component";
+import {JianQianComponent} from "./jian-qian/jian-qian.component";
 
 @NgModule({
     declarations: [
@@ -20,7 +22,12 @@ import {SignaturePadModule} from "angular2-signaturepad";
         AddComponent,
         ReceiveDetailComponent,
         ReceiveHandleComponent,
+        JiaQianComponent,
+        JianQianComponent,
     ],
+    // entryComponents:[
+    //     JiaQianComponent
+    // ],
     imports: [
         CommonComponentsModule,
         CommonModule,

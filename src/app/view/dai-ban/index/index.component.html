@@ -2,7 +2,17 @@
     <ion-toolbar color="primary">
         <app-back></app-back>
         <ion-title style="padding:0 40px;">
-            待办事项
+            <span *ngIf="userId!=519">待办事项</span>
+            <div *ngIf="userId==519" class="segment-wrapper">
+                <ion-segment (ngModelChange)="segmentChange($event)" [(ngModel)]="index">
+                    <ion-segment-button [value]="0">
+                        待办事项
+                    </ion-segment-button>
+                    <ion-segment-button [value]="1">
+                        二次来文
+                    </ion-segment-button>
+                </ion-segment>
+            </div>
         </ion-title>
     </ion-toolbar>
 </ion-header>
@@ -22,13 +32,59 @@
     </ion-refresher>
     <section>
 
-        <ion-list class="my-list">
+        <ion-slides *ngIf="userId==519" (ionSlideWillChange)="change()">
+            <ion-slide>
+                <ion-list class="my-list">
+                    <ion-item *ngIf="itemList.length<1">
+                        <p class="primary"> 无数据！ </p>
+                    </ion-item>
+                    <ion-item *ngFor="let item of itemList" (click)="doDaiBan(item)">
+                        <section>
+                            <div class="my-list-title">
+                                <h2  [ngClass]="item.qjstate=='已审批'?'primary':''">
+                                    {{item.title}}</h2>
+                            </div>
+                            <div class="my-list-sub">
+                                <div class="my-list-sub-top flex-between">
+                                    <span>类别: {{item.type}}</span>
+                                    <span class="my-list-sub-top-last">{{item.time}}</span>
+                                </div>
+                            </div>
+                        </section>
+                    </ion-item>
+                </ion-list>
+            </ion-slide>
+            <ion-slide>
+
+                <ion-list class="my-list">
+                    <ion-item *ngIf="itemList.length<1">
+                        <p class="primary"> 无数据！ </p>
+                    </ion-item>
+                    <ion-item *ngFor="let item of erCiLaiWenList" (click)="doDaiBan(item)">
+                        <section>
+                            <div class="my-list-title">
+                                <h2  [ngClass]="item.qjstate=='已审批'?'primary':''">
+                                    {{item.title}}</h2>
+                            </div>
+                            <div class="my-list-sub">
+                                <div class="my-list-sub-top flex-between">
+                                    <span>类别: {{item.type}}</span>
+                                    <span class="my-list-sub-top-last">{{item.time}}</span>
+                                </div>
+                            </div>
+                        </section>
+                    </ion-item>
+                </ion-list>
+            </ion-slide>
+        </ion-slides>
+
+
+        <ion-list *ngIf="userId!=519" class="my-list">
             <ion-item *ngIf="itemList.length<1">
                 <p class="primary"> 无数据！ </p>
             </ion-item>
             <ion-item *ngFor="let item of itemList" (click)="doDaiBan(item)">
                 <section>
-
                     <div class="my-list-title">
                         <h2  [ngClass]="item.qjstate=='已审批'?'primary':''">
                             {{item.title}}</h2>
@@ -42,5 +98,7 @@
                 </section>
             </ion-item>
         </ion-list>
+
+
     </section>
 </ion-content>

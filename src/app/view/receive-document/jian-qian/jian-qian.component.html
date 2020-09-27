@@ -2,7 +2,7 @@
   <ion-toolbar color="primary">
     <ion-icon (click)="goBack()" style="font-size: 30px" name="arrow-back"></ion-icon>
     <ion-title>
-      {{title}}
+       选择减签人员
     </ion-title>
   </ion-toolbar>
 </ion-header>
@@ -14,12 +14,6 @@
   </ion-item>
 
   <ion-list class="list-style">
-    <!--选择部门-->
-    <ion-item ion-item *ngFor="let item of contact.departArray" detail (click)="departItemClick(item)">
-      {{item.name}}
-      <span slot="end">{{item.staff_num}}</span>
-    </ion-item>
-    <div style="margin-top: 2rem;"></div>
     <!--选择人-->
     <ion-item *ngFor="let item of staffArray">
       <ion-checkbox color="primary" (ngModelChange)="staffItemClick($event,item)" [(ngModel)]="item.isSelected"></ion-checkbox>
@@ -36,7 +30,6 @@
     <div class="footer-staff-wrapper">
       <app-circle-text *ngFor="let item of selectedStaff" [name]="item.name"></app-circle-text>
     </div>
-    <ion-button slot="end" size="small" (click)="goB()">确定</ion-button>
+    <ion-button slot="end" size="small" (click)="save()">确定</ion-button>
   </ion-toolbar>
 </ion-footer>
-

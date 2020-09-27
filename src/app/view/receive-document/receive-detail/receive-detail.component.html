@@ -54,20 +54,8 @@
         </fieldset>
     </section>
     <section *ngIf="tabIndex===2">
-        <table class="table">
-            <tr>
-                <th>处理人</th>
-                <th>处理状态</th>
-                <th>处理时间</th>
-            </tr>
-            <tr *ngFor="let item of signList">
-                <td>{{item.name}}</td>
-                <td>{{item.signed}}</td>
-                <td>{{item.time}}</td>
-            </tr>
-        </table>
-        <div *ngIf="signList.length==0">
-            <a >无流程</a>
+        <div style="overflow: auto">
+            <div [innerHTML]="signList"></div>
         </div>
     </section>
 
@@ -111,46 +99,25 @@
 
 </ion-content>
 
-<ion-footer *ngIf="!isgned">
+<ion-footer>
     <ion-toolbar>
-        <!--        [rows]="flag?4:1" (ionFocus)="flag=true" (ionBlur)="flag=false"-->
-        <div style="margin-bottom: 5px;">
-            <div>
-                <div class="card-header">办理</div>
-                <div *ngIf="isEdit">
-                <textarea placeholder="请输入处理意见" style="font-size: 1.4rem;" [(ngModel)]="infoTitle"></textarea>
-                    <div class="flex-between font-size-1" style="padding-bottom: 10px;">
-                        <div></div>
-                        <div style="color: #96999e;padding-right: 5px;" class="font-14" (click)="presentAlertPrompt()">常用语</div>
-                    </div>
-
-                    <div class="flex-between font-14" style="padding-bottom: 10px;border-bottom: 1px solid #eee;" (click)="selectPrimarySign()">
-                        <div>
-                            选择主要领导
-                        </div>
-                        <div style="color: #96999e;padding-right: 5px;">
-                            {{primarySignName}}
-                            <ion-icon name="arrow-forward"></ion-icon>
+        <div class="card-header" (click)="isCommentOpen=!isCommentOpen">意见</div>
+        <div id="details" [hidden]="!isCommentOpen">
+            <div class="comment-content">
+                <div *ngFor="let item of signLogList">
+                    <div style=" display: flex; padding: 10px; border-bottom: 1px solid  gainsboro;">
+                        <app-circle-text [name]="item.Creator"></app-circle-text>
+<!--                        <div style="margin-left: 10px;">-->
+                        <div style="margin-left: 10px;width: 80%;">
+                            <span style="font-size: 14px;">{{item.Creator}}</span>
+<!--                            <div>{{item.comments}}</div>-->
+                            <div class="flex-between">
+                                <span>{{item.comments}}</span>
+                                <span>{{item.actions}}</span>
+                            </div>
+                            <div style="margin-top: 5px;">{{item.time}}</div>
                         </div>
                     </div>
-
-
-
-                    <div class="flex-between font-14" style="padding: 10px 0;border-bottom: 1px solid #eee;" *ngIf="!ldid" (click)="selectFenGuanLingDao()">
-                        <div>
-                            选择分管领导
-                        </div>
-
-                        <div style="color: #96999e;padding-right: 5px;">
-                            {{fenGuanLingDaoNames}}
-                            <ion-icon name="arrow-forward"></ion-icon>
-                        </div>
-                    </div>
-                </div>
-                <div class="flex-between">
-                    <ion-icon (click)="isEdit=!isEdit" name="create" size="20" style="font-size: 20px;"></ion-icon>
-<!--                    <ion-button size="small"  fill="outline">暂存</ion-button>-->
-                    <ion-button size="small" fill="outline" (click)="submit()">提交</ion-button>
                 </div>
             </div>
         </div>

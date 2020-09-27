@@ -78,14 +78,15 @@ export class IndexComponent extends BasePage implements OnInit, OnDestroy {
         this.itemList = res.data;
     }
     async getYiBanList() {
-        const res = await this.request('/documents/flisted', {
+        // dispatch/hasdone
+        const res = await this.request('/dispatch/hasdone', {
             keyword: this.keyword
         });
         this.yiBanList = res.data;
         this.yiBanHasNext = res.hasnext;
     }
     async getGuiDangList() {
-        const res = await this.request('/documents/DisPatchArchive', {
+        const res = await this.request('/dispatch/archive', {
             keyword: this.keyword
         });
         this.guiDangList = res.data;

@@ -117,7 +117,21 @@
 
 <ion-footer *ngIf="!isgned">
     <ion-toolbar>
-        <!--        [rows]="flag?4:1" (ionFocus)="flag=true" (ionBlur)="flag=false"-->
+        <div class="card-header" (click)="isCommentOpen=!isCommentOpen">意见</div>
+        <div [hidden]="!isCommentOpen">
+            <div class="comment-content">
+                <div *ngFor="let item of signLogList">
+                    <div style=" display: flex; padding: 10px; border-bottom: 1px solid  gainsboro;">
+                        <app-circle-text [name]="item.Creator"></app-circle-text>
+                        <div style="margin-left: 10px;">
+                            <span style="font-size: 14px;">{{item.Creator}}</span>
+                            <div>{{item.comments}}</div>
+                            <div style="margin-top: 5px;">{{item.time}}</div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
         <div style="margin-bottom: 5px;">
             <div>
                 <div class="card-header">办理</div>
@@ -149,25 +163,26 @@
                         </div>
                         <span class="text">加签</span>
                     </div>
+
+                    <div class="more-item-wrapper" (click)="document_jianqian(true)">
+                        <div class="more-item">
+                            <img src="assets/icon/jianqian.png" alt="">
+                        </div>
+                        <span class="text">减签</span>
+                    </div>
+
                 </div>
+
+
+
+
                 <div *ngIf="isEdit">
                     <textarea placeholder="请输入处理意见" style="font-size: 1.4rem;" [(ngModel)]="infoTitle"></textarea>
                     <div class="flex-between" style="padding-bottom: 10px;">
                         <div></div>
                         <div style="color: #96999e;padding-right: 5px;" class="font-14" (click)="presentAlertPrompt()">常用语</div>
                     </div>
-
-                    <div class="flex-between font-14" *ngIf="SignIndex<2"  style="padding: 10px 0;border-bottom: 1px solid #eee;" (click)="selectFenGuanLingDao()">
-                        <div>
-                            选择分管领导
-                        </div>
-
-                        <div style="color: #96999e;padding-right: 5px;">
-                            {{fenGuanLingDaoNames}}
-                            <ion-icon name="arrow-forward"></ion-icon>
-                        </div>
-                    </div>
-                    <app-staff [hidden]="SignIndex==4" (click)="go('getStaffs')" [type]="false" *ngIf="SignIndex>=2" title="选择承办人" eventName="getStaffs" [(selectedStaff)]="selectedStaff"></app-staff>
+<!--                    <app-staff [hidden]="SignIndex==4" (click)="go('getStaffs')" [type]="false" *ngIf="SignIndex>=2" title="选择承办人" eventName="getStaffs" [(selectedStaff)]="selectedStaff"></app-staff>-->
                 </div>
                 <div class="flex-between">
                     <span>

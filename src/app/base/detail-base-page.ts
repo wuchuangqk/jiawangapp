@@ -17,8 +17,11 @@ export class DetailBasePage extends BasePage {
     public id: string;
     public comment: boolean;
     public SignIndex: number;
+    public doselect = true;
     // 是否已办理
     public isgned = false;
+    // 拟办 1,
+    public docState=0;
     public zhengWen: IDownFile = {
         filename: '',
         fileext: '',
@@ -55,6 +58,8 @@ export class DetailBasePage extends BasePage {
             this.zhengWen = res.data.pdfurl;
             this.comment_num = res.data.comment_num;
             this.SignId = res.data.SignId;
+            this.docState = res.data.DocState;
+            this.doselect = res.data.doselect;
             if (res.data.file) {
                 this.fileList = res.data.file;
             }

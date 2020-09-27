@@ -129,10 +129,10 @@ export class JPushModel {
                 break;
             }
             case 'fwtip': {
-                this.nav('detail', {
+                this.nav('send-document/receive-handle/'+id, {
                     id,
                     title: '发文系统',
-                    url: '/documents/flist',
+                    url: '/dispatch/tododetail',
                     contentTitle,
                     document_type: 1,
                     handle_status: 1,
@@ -141,10 +141,23 @@ export class JPushModel {
                 });
                 break;
             }
-
+            case 'ReceiptSee': { // 收文待阅
+                this.nav('receive-document/receive-handle/'+id, {
+                    id,
+                    title: '收文系统',
+                    url: '/receipt/anditdetail',
+                    contentTitle,
+                    isShenPi: false,
+                    handle_status: 0,
+                    document_type: 0,
+                    handleUrl: '/documents/handle_document',
+                    isBackToHome
+                });
+                break;
+            }
             // 回到首页^
             case 'swsh': { // 收文审核，收文拟办
-                this.nav('receive-document/receive-detail/'+id, {
+                this.nav('receive-document/receive-handle/'+id, {
                     id,
                     title: '收文系统',
                     url: '/receipt/anditdetail',

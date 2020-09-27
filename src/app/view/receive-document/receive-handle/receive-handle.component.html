@@ -22,8 +22,6 @@
     <section>
         <div class="switch-title flex-between">
 
-
-
             <div (click)="tabIndex=-1" style="width: 40px">
                 <ion-icon name="menu"></ion-icon>
             </div>
@@ -59,20 +57,8 @@
         </fieldset>
     </section>
     <section *ngIf="tabIndex===2">
-        <table class="table">
-            <tr>
-                <th>处理人</th>
-                <th>处理状态</th>
-                <th>处理时间</th>
-            </tr>
-            <tr *ngFor="let item of signList">
-                <td>{{item.name}}</td>
-                <td>{{item.signed}}</td>
-                <td>{{item.time}}</td>
-            </tr>
-        </table>
-        <div *ngIf="signList.length==0">
-            <a >无流程</a>
+        <div style="overflow: auto">
+            <div [innerHTML]="signList"></div>
         </div>
     </section>
 
@@ -116,13 +102,85 @@
 
 <ion-footer [hidden]="isgned">
     <ion-toolbar>
-        <!--        [rows]="flag?4:1" (ionFocus)="flag=true" (ionBlur)="flag=false"-->
+        <div class="card-header" (click)="isCommentOpen=!isCommentOpen">意见</div>
+        <div [hidden]="!isCommentOpen">
+            <div class="comment-content">
+                <div *ngFor="let item of signLogList">
+                    <div style=" display: flex; padding: 10px; border-bottom: 1px solid  gainsboro;">
+                        <app-circle-text [name]="item.Creator"></app-circle-text>
+                        <div style="margin-left: 10px;width: 80%;">
+                            <span style="font-size: 14px;">{{item.Creator}}</span>
+                            <div class="flex-between">
+                                <span>{{item.comments}}</span>
+                                <span>{{item.actions}}</span>
+                            </div>
+                            <div style="margin-top: 5px;">{{item.time}}</div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
         <div style="margin-bottom: 5px;">
             <div>
                 <div class="card-header">办理</div>
+                <div *ngIf="isMore" style="background: #f7f7f7; padding:5px; display: flex;">
+                    <div class="more-item-wrapper" (click)="document_stop()">
+                        <div class="more-item">
+                            <img src="assets/icon/zhongZhi.png" alt="">
+                        </div>
+                        <span class="text">终止</span>
+                    </div>
+
+                    <div class="more-item-wrapper" (click)="document_back()">
+                        <div class="more-item">
+                            <img src="assets/icon/back.png" alt="">
+                        </div>
+                        <span class="text">退回</span>
+                    </div>
+
+                    <div class="more-item-wrapper" (click)="document_chaunYue()">
+                        <div class="more-item">
+                            <img src="assets/icon/chuanyue.png" alt="">
+                        </div>
+                        <span class="text">传阅</span>
+                    </div>
+
+                    <div class="more-item-wrapper" (click)="document_jiaqian(true)">
+                        <div class="more-item">
+                            <img src="assets/icon/jiaqian.png" alt="">
+                        </div>
+                        <span class="text">加签</span>
+                    </div>
+
+                    <div class="more-item-wrapper" (click)="document_jianqian(true)">
+                        <div class="more-item">
+                            <img src="assets/icon/jianqian.png" alt="">
+                        </div>
+                        <span class="text">减签</span>
+                    </div>
+
+                    <div class="more-item-wrapper" (click)="document_banJie()">
+                        <div class="more-item">
+                            <img src="assets/icon/banjie.png" alt="">
+                        </div>
+                        <span class="text">办结</span>
+                    </div>
+                </div>
+
+
+
                 <div [hidden]="!isEdit">
                     <div [hidden]="userId!=519" style="overflow-x: auto">
-                    <signature-pad [options]="signaturePadOptions"    (onBeginEvent)="drawStart()"  (onEndEvent)="drawComplete()"></signature-pad>
+                        <div style="min-height: 30px;">
+                            <img style="width: 30px;height:30px;" *ngFor="let item of  BaseImgList" [src]="item" alt="">
+                        </div>
+                        <div style="width: 200px;height:200px;
+                        margin: 0 auto;
+                        background: url(assets/images/mizige.png);
+                        background-size:100% 100%;
+">
+                            <signature-pad [options]="signaturePadOptions"    (onBeginEvent)="drawStart()"  (onEndEvent)="drawComplete()"></signature-pad>
+                        </div>
                     </div>
                     <div [hidden]="userId==519">
                         <textarea placeholder="请输入处理意见" style="font-size: 1.4rem;" [(ngModel)]="infoTitle"></textarea>
@@ -131,22 +189,27 @@
                             <div style="color: #96999e;padding-right: 5px;" class="font-14" (click)="presentAlertPrompt()">常用语</div>
                         </div>
                     </div>
-                    <div class="flex-between font-14" *ngIf="SignIndex<2"  style="padding: 10px 0;border-bottom: 1px solid #eee;" (click)="selectFenGuanLingDao()">
-                        <div>
-                            选择分管领导
-                        </div>
+                    <!--                    <div class="flex-between font-14" *ngIf="SignIndex<2"  style="padding: 10px 0;border-bottom: 1px solid #eee;" (click)="selectFenGuanLingDao()">-->
+                    <!--                        <div>-->
+                    <!--                            选择分管领导-->
+                    <!--                        </div>-->
 
-                        <div style="color: #96999e;padding-right: 5px;">
-                            {{fenGuanLingDaoNames}}
-                            <ion-icon name="arrow-forward"></ion-icon>
-                        </div>
-                    </div>
-                    <app-staff (click)="go('getStaffs')" [type]="false" *ngIf="SignIndex>=2" title="选择承办人" eventName="getStaffs" [(selectedStaff)]="selectedStaff"></app-staff>
+                    <!--                        <div style="color: #96999e;padding-right: 5px;">-->
+                    <!--                            {{fenGuanLingDaoNames}}-->
+                    <!--                            <ion-icon name="arrow-forward"></ion-icon>-->
+                    <!--                        </div>-->
+                    <!--                    </div>-->
+                    <app-staff (click)="go('getStaffs')" [type]="false" *ngIf="doselect" title="选择办理人" eventName="getStaffs" [(selectedStaff)]="selectedStaff"></app-staff>
                 </div>
                 <div class="flex-between">
-                    <ion-icon (click)="isEdit=!isEdit" name="create" size="20" style="font-size: 30px;"></ion-icon>
+<span>
+                    <ion-icon (click)="isMore=!isMore" name="more" size="20" style="font-size: 20px;color: #3880ff;"></ion-icon>
+                    &nbsp;
+                    &nbsp;
+                    <ion-icon (click)="isEdit=!isEdit" name="create" size="20" style="font-size: 20px;color:#3880ff;"></ion-icon>
+</span>
                     <div>
-                        <ion-button size="small" fill="outline" (click)="signaturePad.clear()">清除</ion-button>
+                        <ion-button size="small"  [hidden]="userId!=519"  fill="outline" (click)="deleteAImg()">清除</ion-button>
                         <ion-button size="small" fill="outline" (click)="submit()">提交</ion-button>
                     </div>
                 </div>

@@ -37,9 +37,7 @@ export class Staff {
             } else {
                 s.circleText = s.name.substring(0, 2);
             }
-
             datas.push(s);
-
             i++;
         }
         return datas;

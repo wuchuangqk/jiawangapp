@@ -49,6 +49,7 @@ export class JiaQianComponent extends BasePage implements OnInit {
     await this.getHeGaoList()
     await this.getQianFaList()
     await this.getShenGaoList()
+    // await this.request("/receipt/handersign",{})
     if(!this.isJiaQian){
       this.signIndex=this.signIndex+1;
     }

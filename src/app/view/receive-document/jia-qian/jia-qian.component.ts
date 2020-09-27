@@ -1,5 +1,5 @@
 import { Component, OnInit } from '@angular/core';
-import {ModalController, NavController} from "@ionic/angular";
+import { NavController } from "@ionic/angular";
 import {BasePage} from "../../../base/base-page";
 import {HttpService} from "../../../service/http.service";
 import {ActivatedRoute, Router} from "@angular/router";
@@ -8,21 +8,24 @@ import {DomSanitizer} from "@angular/platform-browser";
 import {FileService} from "../../../service/FileService";
 
 @Component({
-  selector: 'app-chuan-yue',
-  templateUrl: './chuan-yue.component.html',
-  styleUrls: ['./chuan-yue.component.scss'],
+  selector: 'app-jia-qian',
+  templateUrl: './jia-qian.component.html',
+  styleUrls: ['./jia-qian.component.scss'],
 })
-export class ChuanYueComponent extends BasePage implements OnInit {
-  public currentModal = null;
-  public id = "";
+export class JiaQianComponent extends BasePage implements OnInit {
+  public signIndex = 0;
+  public id ="";
+  public isJiaQian = false;
   public selectedStaff = [];
-  public url="";
-  public params = {
-    noticetitle: '',
-    noticecontent: '',
-    roleType: 1,
-    infoType: '通知'
+  // 签发人员
+  public qianFaList=[];
+  public shenGaoList = [];
+  public heGaoList = [];
+  public params={
+    id: "",
+    staff_ids:""
   };
+
   constructor(
       public http: HttpService,
       public router: Router,
@@ -30,14 +33,14 @@ export class ChuanYueComponent extends BasePage implements OnInit {
       public sanitizer: DomSanitizer,
       public navController: NavController,
       public fileService: FileService,
-      public modalCtrl: ModalController,
       public route?: ActivatedRoute,
   ) {
     super(http, router, navController, dialogService);
-    this.title="传阅";
-    this.id= this.query('id');
-    this.url= this.query('url');
+    this.params.id = this.query("id")
+    console.log(this.id);
   }
+
+
 
   go(eventName) {
     localStorage.num = 0;
@@ -49,21 +52,17 @@ export class ChuanYueComponent extends BasePage implements OnInit {
       selectedStaff : JSON.stringify(this.selectedStaff)
     });
   }
-  public dismissModal(){
-    this.modalCtrl.dismiss();
-  }
-  public cancel(){
-    this.dismissModal()
+
+
+
+  async ngOnInit() {
   }
   public async save(){
-    let staff_ids = this.getIds(this.selectedStaff);
-    await this.setRequest(
-        this.url||"/dispatch/signread",{
-      id:this.id,
-      staff_ids
-    })
-    await this.dialogService.alert('提交成功!', () => {
+      this.params.staff_ids = this.getIds(this.selectedStaff);
+    await this.setRequest("/receipt/signadd",this.params)
+    await this.dialogService.alert("提交成功！",()=>{
       this.navController.back();
-    });
+    })
   }
+
 }

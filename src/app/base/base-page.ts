@@ -5,6 +5,7 @@ import { DialogService } from '../service/dialog.service';
 import {ActivatedRoute, Router} from '@angular/router';
 
 export class BasePage implements OnInit {
+    public userId = 0;
     public title: string;
     constructor(
         public http: HttpService,
@@ -13,11 +14,23 @@ export class BasePage implements OnInit {
         public dialogService: DialogService,
         public route?: ActivatedRoute,
     ) {
+        this.userId = this.getUserId();
     }
 
     ngOnInit() {}
     // 设置请求参数,子类实现
     public setParams() {
+    }
+
+    getUserId(){
+        let userInfoStr =localStorage.userInfo;
+        let userId= 0;
+        if(userInfoStr){
+            let userInfo = JSON.parse(userInfoStr)
+            userId = userInfo.id;
+        }
+        this.userId = userId;
+        return userId;
     }
     private isLogin() {
         if (!localStorage.isLogin) {

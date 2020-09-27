@@ -1,0 +1,18 @@
+<ion-header>
+    <ion-toolbar color="primary">
+        <app-back slot="start"></app-back>
+        <ion-title>
+            加签
+        </ion-title>
+    </ion-toolbar>
+</ion-header>
+<ion-content>
+    <app-staff (click)="go('getStaffs')" title="选择人员" eventName="getStaffs" [(selectedStaff)]="selectedStaff"></app-staff>
+</ion-content>
+<ion-footer>
+    <ion-toolbar>
+        <div style=" text-align: right;">
+            <ion-button  style="margin-left: 20px;" size="small"  fill="outline" (click)="save()">提交</ion-button>
+        </div>
+    </ion-toolbar>
+</ion-footer>

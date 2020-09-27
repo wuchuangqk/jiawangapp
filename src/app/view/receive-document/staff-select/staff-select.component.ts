@@ -1,12 +1,9 @@
 import {Component, OnDestroy, OnInit} from '@angular/core';
 import {BasePage} from '../../../base/base-page';
 import {HttpService} from '../../../service/http.service';
-import {ActivatedRoute, NavigationEnd, Router} from '@angular/router';
+import {ActivatedRoute,  Router} from '@angular/router';
 import {DialogService} from '../../../service/dialog.service';
-import { Staff } from './staff-model';
-import { Contact, Depart } from './staff-select.model';
-import {AppConfig} from '../../../app.config';
-import {filter, mergeMap} from 'rxjs/operators';
+import { Depart } from './staff-select.model';
 import {Events, NavController} from '@ionic/angular';
 @Component({
     selector: 'app-staff-select',

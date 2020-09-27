@@ -3,7 +3,7 @@ import {HttpService} from '../../../service/http.service';
 import {ActivatedRoute, Router} from '@angular/router';
 import {Events, NavController} from '@ionic/angular';
 import {DialogService} from '../../../service/dialog.service';
-import {DomSanitizer} from '@angular/platform-browser';
+import {DomSanitizer, SafeHtml} from '@angular/platform-browser';
 import {AppConfig} from '../../../app.config';
 import {DetailBasePage} from '../../../base/detail-base-page';
 import { AlertController } from '@ionic/angular';
@@ -16,7 +16,10 @@ import {FileService} from "../../../service/FileService";
   styleUrls: ['./receive-detail.component.scss'],
 })
 export class ReceiveDetailComponent extends DetailBasePage implements OnInit, OnDestroy {
-
+  // 办理日志是否展开
+  public isCommentOpen=false;
+  //操作日志列表
+  public signLogList=[];
   public title = '详情';
   public isShenPi: boolean;
   public handle_status: string;
@@ -32,7 +35,7 @@ export class ReceiveDetailComponent extends DetailBasePage implements OnInit, On
   public ldid = '';
   public primarySignName = '';
   public fenGuanLingDaoNames = '';
-  public signList = [];
+  public signList:SafeHtml = "";
   // 关联项目
   public linkProjectList = [];
   // 关联收文
@@ -72,6 +75,7 @@ export class ReceiveDetailComponent extends DetailBasePage implements OnInit, On
     await this.getFenGuanLingDaoList();
     await this.getSignList();
     await this.getLinkProjectList();
+    await this.getSingLog();
     this.events.subscribe(AppConfig.Document.DocumentDetail, () => {
       this.getDetail(this.payload);
       this.isShenPi = false;
@@ -141,7 +145,7 @@ export class ReceiveDetailComponent extends DetailBasePage implements OnInit, On
 
   private async getSignList() {
     const res = await this.request('/receipt/signlist', {item_id: this.id});
-    this.signList = res.data;
+    this.signList = this.transform(res.data.json);
     console.log(this.signList);
   }
 
@@ -307,7 +311,7 @@ export class ReceiveDetailComponent extends DetailBasePage implements OnInit, On
     this.events.publish(AppConfig.Document.DocumentList);
     this.events.publish(AppConfig.Home.Badge);
     this.events.publish(AppConfig.Synthesize.List);
-    this.dialogService.alert('提交成功!', () => {
+    await this.dialogService.alert('提交成功!', () => {
         this.goBack();
     });
 
@@ -318,8 +322,12 @@ export class ReceiveDetailComponent extends DetailBasePage implements OnInit, On
   }
 
 
+  async getSingLog(){
+    let res = await this.request("/receipt/signlog",{docid:this.id})
+    this.signLogList = res.data;
+  }
 
-  /**
+  /*
    * 关联收文查看
    */
   public viewReceipt(item) {
@@ -329,16 +337,18 @@ export class ReceiveDetailComponent extends DetailBasePage implements OnInit, On
     this.nav('/receive-document/receive-detail/' + item.id, item);
   }
 
-  /**
+  /*
    * 关联发文查看
    */
   public viewFaWen(item) {
     item.title = '发文系统';
-    item.url = '/documents/flist/';
+    item.url = '/dispatch/tododetail';
     item.handleUrl = '/documents/handle_document';
     item.document_type = 1;
-    this.nav('detail', item);
+    this.nav('send-document/receive-handle/'+item.id, item);
   }
+
+
   public getCommentShort(e) {
     this.infoTitle = e;
   }

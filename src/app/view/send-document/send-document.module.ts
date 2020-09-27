@@ -10,6 +10,7 @@ import {ReceiveDetailComponent} from "./receive-detail/receive-detail.component"
 import {ReceiveHandleComponent} from "./receive-handle/receive-handle.component";
 import {ChuanYueComponent} from "./chuan-yue/chuan-yue.component";
 import {JiaQianComponent} from "./jia-qian/jia-qian.component";
+import {JianQianComponent} from "./jian-qian/jian-qian.component";
 
 @NgModule({
   declarations: [
@@ -18,6 +19,7 @@ import {JiaQianComponent} from "./jia-qian/jia-qian.component";
     ReceiveHandleComponent,
     ChuanYueComponent,
     JiaQianComponent,
+    JianQianComponent,
   ],
   entryComponents:[
     JiaQianComponent

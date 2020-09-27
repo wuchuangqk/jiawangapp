@@ -14,16 +14,14 @@ import {JPushModel} from "../../home/jPush.model";
     styleUrls: ['./index.component.scss'],
 })
 export class IndexComponent extends BasePage implements OnInit {
+    public userId=0;
     @ViewChild(IonSlides) slides: IonSlides;
     itemList = [];
     shenPiList = [];
-    myShenPiList = [];
-    LiuChengJianKongList = [];
+    erCiLaiWenList = [];
     public menuList = [
-        { title: '我申请的' },
-        { title: '待我审批的' },
-        { title: '我已审批的' },
-        { title: '流程监控' },
+        { title: '待办事项' },
+        { title: '二次来文' },
     ];
     public index = 0;
     constructor(
@@ -38,13 +36,28 @@ export class IndexComponent extends BasePage implements OnInit {
         super(http, router, navController, dialogService);
 
     }
-    ngOnInit() {
+    async ngOnInit() {
+        console.log(this.userId)
+        this.userId = this.getUserId();
         this.getDocumentList();
+        this.getErCiLaiWen()
+        await this.getErCiLaiWen();
         this.events.subscribe(AppConfig.Home.Badge, () => {
             this.getDocumentList();
+            this.getErCiLaiWen()
         });
     }
     change() {
+        this.slides.getActiveIndex().then((index) => {
+            this.index = index;
+            this.getDocumentList();
+            this.getErCiLaiWen()
+        });
+    }
+
+    segmentChange(index) {
+        this.index = index;
+        this.slides.slideTo(index);
     }
     doDaiBan(item) {
         const id = item.id;
@@ -53,6 +66,12 @@ export class IndexComponent extends BasePage implements OnInit {
         const contentTitle = '';
         this.jPushModel.goToPage(id,type,contentTitle,itemTitle);
 
+    }
+    // home/TodoBosslist
+    async getErCiLaiWen(){
+         let res = await this.request("/home/TodoBosslist",{             nums:2})
+         this.erCiLaiWenList = res.data;
+        console.log(res);
     }
     getDocumentList() {
         this.request('/home/Todolist', {}).then((res) => {

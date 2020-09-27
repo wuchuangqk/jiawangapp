@@ -16,6 +16,8 @@ import {JiaQianComponent} from "../jia-qian/jia-qian.component";
   styleUrls: ['./receive-handle.component.scss'],
 })
 export class ReceiveHandleComponent  extends DetailBasePage implements OnInit, OnDestroy  {
+  public isCommentOpen=false;
+
   public currentModal = null;
   public title = '详情';
   public isShenPi: boolean;
@@ -35,6 +37,8 @@ export class ReceiveHandleComponent  extends DetailBasePage implements OnInit, O
   public fenGuanLingDaoNames = '';
   public signList = [];
 
+  //操作日志列表
+  public signLogList=[];
   public selectedStaff = [];
   // 关联项目
   public linkProjectList = [];
@@ -75,6 +79,7 @@ export class ReceiveHandleComponent  extends DetailBasePage implements OnInit, O
     await this.getFenGuanLingDaoList();
     await this.getSignList();
     await this.getLinkProjectList();
+    await this.getSingLog();
     this.events.subscribe(AppConfig.Document.DocumentDetail, () => {
       this.getDetail(this.payload);
       this.isShenPi = false;
@@ -94,11 +99,24 @@ export class ReceiveHandleComponent  extends DetailBasePage implements OnInit, O
     this.primarySignerList = res.data;
   }
 
+  public async getSingLog(){
+    let res = await this.request("/dispatch/signlog",{docid:this.id})
+    this.signLogList = res.data;
+  }
   private async  getFenGuanLingDaoList() {
     const  res = await  this.request('/staffs/list', {
       depart_id: 17
     });
     this.fenGuanLingDaoList = res.data.staffs;
+  }
+
+  /********************
+   * 减签
+   ********************/
+  public async document_jianqian(){
+    this.nav("send-document/jian-qian",{
+      id:this.id
+    })
   }
   public async document_back(){
     let alert = await this.alertController.create({
@@ -246,7 +264,7 @@ export class ReceiveHandleComponent  extends DetailBasePage implements OnInit, O
   }
 
 
-  /**
+  /*
    * 选择分管领导
    */
   async selectFenGuanLingDao() {
@@ -461,10 +479,15 @@ export class ReceiveHandleComponent  extends DetailBasePage implements OnInit, O
 
     let user = this.getIds(this.selectedStaff);
     console.log(user)
-    if(this.SignIndex==3){
-       // await this.qianFaPresentAlertPrompt()
+    if(this.SignIndex!=4){
         await this.document_jiaqian(false);
         return false;
+    }
+    if(!this.infoTitle){
+      // if(this.getUserId()!=519){
+      // }
+      this.dialogService.toast("请输入意见");
+      return false;
     }
     await this.setRequest('/dispatch/todosave', {
       id: this.id,
