@@ -13,6 +13,7 @@ import { v4 as uuidv4 } from 'uuid';
 import {JiaQianComponent} from "../jia-qian/jia-qian.component";
 
 import  AlloyFinger  from 'alloyfinger';
+import {JPushModel} from "../../home/jPush.model";
 
 
 @Component({
@@ -75,6 +76,7 @@ export class ReceiveHandleComponent  extends DetailBasePage implements OnInit, O
     public events: Events,
     public modalController: ModalController,
     public alertController: AlertController,
+    public jPushModel: JPushModel,
     public fileService: FileService,
     public route?: ActivatedRoute,
   ) {
@@ -113,6 +115,13 @@ export class ReceiveHandleComponent  extends DetailBasePage implements OnInit, O
     this.signLogList = res.data;
   }
 
+  doDaiBan(item) {
+    const id = item.id;
+    const type = item.activityname;
+    const itemTitle = '';
+    const contentTitle = '';
+    this.jPushModel.goToPage(id,type,contentTitle,itemTitle);
+  }
 
 
   private async  scale() {

@@ -3,12 +3,13 @@ import {HttpService} from '../../../service/http.service';
 import {ActivatedRoute, Router} from '@angular/router';
 import {Events, NavController} from '@ionic/angular';
 import {DialogService} from '../../../service/dialog.service';
-import {DomSanitizer} from '@angular/platform-browser';
+import {DomSanitizer, SafeHtml} from '@angular/platform-browser';
 import {AppConfig} from '../../../app.config';
 import {DetailBasePage} from '../../../base/detail-base-page';
 import { AlertController } from '@ionic/angular';
 import  AlloyFinger  from 'alloyfinger';
 import {FileService} from "../../../service/FileService";
+import {JPushModel} from "../../home/jPush.model";
 // alloyfinger
 @Component({
   selector: 'app-receive-detail',
@@ -33,7 +34,7 @@ export class ReceiveDetailComponent extends DetailBasePage implements OnInit, On
   public ldid = '';
   public primarySignName = '';
   public fenGuanLingDaoNames = '';
-  public signList = [];
+  public signList:SafeHtml= "";
   // 关联项目
   public linkProjectList = [];
   // 关联收文
@@ -52,6 +53,7 @@ export class ReceiveDetailComponent extends DetailBasePage implements OnInit, On
       public events: Events,
       public alertController: AlertController,
       public fileService: FileService,
+      public jPushModel: JPushModel,
       public route?: ActivatedRoute,
   ) {
     super( http, router, dialogService, sanitizer, navController,fileService);
@@ -79,6 +81,16 @@ export class ReceiveDetailComponent extends DetailBasePage implements OnInit, On
       this.handle_status = '0';
     });
   }
+
+
+  doDaiBan(item) {
+    const id = item.id;
+    const type = item.activityname;
+    const itemTitle = '';
+    const contentTitle = '';
+    this.jPushModel.goToPage(id,type,contentTitle,itemTitle);
+  }
+
   viewFile(item: IDownFile) {
     this.nav('pdf', item);
   }
@@ -145,7 +157,7 @@ export class ReceiveDetailComponent extends DetailBasePage implements OnInit, On
 
   private async getSignList() {
     const res = await this.request('/receipt/signlist', {item_id: this.id});
-    this.signList = res.data;
+    this.signList = this.transform(res.data.json);
     console.log(this.signList);
   }
 

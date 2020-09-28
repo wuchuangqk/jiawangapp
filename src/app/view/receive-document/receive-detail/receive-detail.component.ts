@@ -9,6 +9,7 @@ import {DetailBasePage} from '../../../base/detail-base-page';
 import { AlertController } from '@ionic/angular';
 import  AlloyFinger  from 'alloyfinger';
 import {FileService} from "../../../service/FileService";
+import {JPushModel} from "../../home/jPush.model";
 // alloyfinger
 @Component({
   selector: 'app-receive-detail',
@@ -54,6 +55,7 @@ export class ReceiveDetailComponent extends DetailBasePage implements OnInit, On
       public events: Events,
       public alertController: AlertController,
       public fileService: FileService,
+      public jPushModel: JPushModel,
       public route?: ActivatedRoute,
   ) {
     super( http, router, dialogService, sanitizer, navController,fileService);
@@ -153,6 +155,17 @@ export class ReceiveDetailComponent extends DetailBasePage implements OnInit, On
   ngOnDestroy(): void {
     this.events.unsubscribe(AppConfig.Document.DocumentDetail);
   }
+
+
+
+  doDaiBan(item) {
+    const id = item.id;
+    const type = item.activityname;
+    const itemTitle = '';
+    const contentTitle = '';
+    this.jPushModel.goToPage(id,type,contentTitle,itemTitle);
+  }
+
 
   /*
    * 关联项目，关联收发文
@@ -325,6 +338,7 @@ export class ReceiveDetailComponent extends DetailBasePage implements OnInit, On
   async getSingLog(){
     let res = await this.request("/receipt/signlog",{docid:this.id})
     this.signLogList = res.data;
+    console.log(this.signLogList);
   }
 
   /*

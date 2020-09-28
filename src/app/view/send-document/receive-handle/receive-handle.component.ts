@@ -9,6 +9,7 @@ import {DetailBasePage} from '../../../base/detail-base-page';
 import {FileService} from "../../../service/FileService";
 import {ChuanYueComponent} from "../chuan-yue/chuan-yue.component";
 import {JiaQianComponent} from "../jia-qian/jia-qian.component";
+import {JPushModel} from "../../home/jPush.model";
 
 @Component({
   selector: 'app-receive-handle',
@@ -58,6 +59,7 @@ export class ReceiveHandleComponent  extends DetailBasePage implements OnInit, O
       public events: Events,
       public alertController: AlertController,
       public fileService: FileService,
+      public jPushModel: JPushModel,
       public modalController: ModalController,
       public route?: ActivatedRoute,
   ) {
@@ -89,6 +91,21 @@ export class ReceiveHandleComponent  extends DetailBasePage implements OnInit, O
   viewFile(item: IDownFile) {
     this.nav('pdf', item);
   }
+
+
+
+  doDaiBan(item) {
+    const id = item.id;
+    const type = item.activityname;
+    const itemTitle = '';
+    const contentTitle = '';
+    this.jPushModel.goToPage(id,type,contentTitle,itemTitle);
+  }
+
+
+  /*****************
+   * 选择快捷语
+   * **************/
   private async  getCommentList() {
     const res = await this.request('/receipt/commentStore', {});
     this.commentList = res.data;
@@ -215,7 +232,7 @@ export class ReceiveHandleComponent  extends DetailBasePage implements OnInit, O
 
 
   private async getSignList() {
-    const res = await this.request('/receipt/signlist', {item_id: this.id});
+    const res = await this.request('/dispatch/signlist', {item_id: this.id});
     this.signList = this.transform(res.data.json);
     console.log(this.signList);
   }
@@ -227,7 +244,7 @@ export class ReceiveHandleComponent  extends DetailBasePage implements OnInit, O
 
 
   private async getLinkProjectList() {
-    const res = await this.request('/receipt/oarel/' + this.id, {});
+    const res = await this.request('/dispatch/oarel/' + this.id, {});
     this.linkProjectList = res.data.result;
     this.linkReceiptList = res.data.receipt;
     this.linkDispathList = res.data.dispath;

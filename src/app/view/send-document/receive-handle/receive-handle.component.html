@@ -129,10 +129,32 @@
                 <div *ngFor="let item of signLogList">
                     <div style=" display: flex; padding: 10px; border-bottom: 1px solid  gainsboro;">
                         <app-circle-text [name]="item.Creator"></app-circle-text>
-                        <div style="margin-left: 10px;">
+                        <div style="margin-left: 10px;width:80%;">
                             <span style="font-size: 14px;">{{item.Creator}}</span>
-                            <div>{{item.comments}}</div>
-                            <div style="margin-top: 5px;">{{item.time}}</div>
+<!--                            <div>{{item.comments}}</div>-->
+<!--                            <div style="margin-top: 5px;">{{item.time}}</div>-->
+
+
+
+
+                            <div class="flex-between primary" style="padding: 3px 0">
+                                <span>{{item.comments}}</span>
+                                <span>{{item.actions}}</span>
+                            </div>
+                            <div style="padding: 3px 0px">
+                                <a *ngFor="let file of item.File" (click)="viewFile(file)">
+                                    <img src="assets/icon/fujian.png"  style="width: 13px;height: 13px;" alt=""> {{file.filename}}
+                                </a>
+                            </div>
+
+                            <div style="padding: 3px 0px">
+                                <a   style="display: block;"  *ngFor="let file of item.relFile" (click)="doDaiBan(file)">
+                                    <img src="assets/icon/link.png"  style="width: 13px;height: 13px;" alt="">
+                                    {{file.title}}
+                                </a>
+                            </div>
+                            <div class="primary" style="margin-top: 5px;">{{item.time}}</div>
+
                         </div>
                     </div>
                 </div>
@@ -198,6 +220,43 @@
                         <ion-icon (click)="isEdit=!isEdit" name="create" size="20" style="font-size: 20px;color: #3880ff;"></ion-icon>
                     </span>
                     <ion-button size="small" fill="outline" (click)="submit()">提交</ion-button>
+                </div>
+            </div>
+        </div>
+    </ion-toolbar>
+</ion-footer>
+
+<ion-footer *ngIf="isgned">
+
+    <ion-toolbar>
+        <div class="card-header" (click)="isCommentOpen=!isCommentOpen">意见</div>
+        <div [hidden]="!isCommentOpen">
+            <div class="comment-content">
+                <div *ngFor="let item of signLogList">
+                    <div style=" display: flex; padding: 10px; border-bottom: 1px solid  gainsboro;">
+                        <app-circle-text [name]="item.Creator"></app-circle-text>
+                        <div style="margin-left: 10px;width: 80%;">
+                            <span style="font-size: 14px;">{{item.Creator}}</span>
+
+                            <div class="flex-between primary" style="padding: 3px 0">
+                                <span>{{item.comments}}</span>
+                                <span>{{item.actions}}</span>
+                            </div>
+                            <div style="padding: 3px 0px">
+                                <a *ngFor="let file of item.File" (click)="viewFile(file)">
+                                    <img src="assets/icon/fujian.png"  style="width: 13px;height: 13px;" alt=""> {{file.filename}}
+                                </a>
+                            </div>
+
+                            <div style="padding: 3px 0px">
+                                <a   style="display: block;"  *ngFor="let file of item.relFile" (click)="doDaiBan(file)">
+                                    <img src="assets/icon/link.png"  style="width: 13px;height: 13px;" alt="">
+                                    {{file.title}}
+                                </a>
+                            </div>
+                            <div class="primary" style="margin-top: 5px;">{{item.time}}</div>
+                        </div>
+                    </div>
                 </div>
             </div>
         </div>
