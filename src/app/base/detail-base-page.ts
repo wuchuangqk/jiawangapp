@@ -36,6 +36,13 @@ export class DetailBasePage extends BasePage {
     public comment_num: any;
     public isBackToHome:boolean = false;
     public SignId ="";
+    // 核稿人id
+    public hgUser="";
+    // 审稿人id
+    public sgUser = "";
+    // 签发人id
+    public qfUser = "";
+    // 附件
     public fileList: Array<IDownFile> = [];
     constructor(
         public http: HttpService,
@@ -61,6 +68,9 @@ export class DetailBasePage extends BasePage {
             this.SignId = res.data.SignId;
             this.docState = res.data.DocState;
             this.doselect = res.data.doselect;
+            this.hgUser=res.data.hgUser;
+            this.sgUser=res.data.sgUser;
+            this.qfUser=res.data.qfUser;
             if (res.data.file) {
                 this.fileList = res.data.file;
             }

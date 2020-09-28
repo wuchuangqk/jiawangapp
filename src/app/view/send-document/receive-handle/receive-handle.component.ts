@@ -38,6 +38,7 @@ export class ReceiveHandleComponent  extends DetailBasePage implements OnInit, O
   public fenGuanLingDaoNames = '';
   public signList:SafeHtml = "";
 
+  public isQianPi:boolean=false;
   //操作日志列表
   public signLogList=[];
   public selectedStaff = [];
@@ -82,6 +83,7 @@ export class ReceiveHandleComponent  extends DetailBasePage implements OnInit, O
     await this.getSignList();
     await this.getLinkProjectList();
     await this.getSingLog();
+    this.getUserId();
     this.events.subscribe(AppConfig.Document.DocumentDetail, () => {
       this.getDetail(this.payload);
       this.isShenPi = false;
@@ -256,6 +258,9 @@ export class ReceiveHandleComponent  extends DetailBasePage implements OnInit, O
       showBackdrop:true,
       componentProps:{
         id:this.id,
+        sgUser:this.sgUser,
+        qfUser:this.qfUser,
+        hgUser:this.hgUser,
         signIndex: this.SignIndex,
         isJiaQian
       }
@@ -408,8 +413,6 @@ export class ReceiveHandleComponent  extends DetailBasePage implements OnInit, O
    * 选择快捷语
    */
   async qianFaPresentAlertPrompt() {
-
-
     let res =  await this.request("/dispatch/signCreator1",{})
     let qianFaList = res.data;
     const inputs: any = qianFaList.map(item => {

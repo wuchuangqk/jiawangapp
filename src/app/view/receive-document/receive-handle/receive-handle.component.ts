@@ -56,6 +56,8 @@ export class ReceiveHandleComponent  extends DetailBasePage implements OnInit, O
   public linkDispathList = [];
   public BaseImgList = [];
   public fontFileList = [];
+
+  public isQianPi:boolean=false;
   public payload: {
     document_type: string
   };
@@ -101,6 +103,12 @@ export class ReceiveHandleComponent  extends DetailBasePage implements OnInit, O
     await this.getLinkProjectList();
     await this.getSingLog();
     await this.scale();
+
+    if(this.userId==519){
+      this.isQianPi=true;
+    }else{
+      this.isQianPi=false;
+    }
     this.signaturePad.set('minWidth', 5);
     this.events.subscribe(AppConfig.Document.DocumentDetail, () => {
       this.getDetail(this.payload);
@@ -110,6 +118,10 @@ export class ReceiveHandleComponent  extends DetailBasePage implements OnInit, O
   }
 
 
+  public setQianPiStatus(){
+    this.isQianPi=!this.isQianPi;
+    this.isEdit=true;
+  }
   async getSingLog(){
     let res = await this.request("/receipt/signlog",{docid:this.id})
     this.signLogList = res.data;

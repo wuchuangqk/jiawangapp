@@ -142,7 +142,7 @@ export class DetailComponent  extends DetailBasePage implements OnInit {
       return;
     }
     this.dialogService.toast('正在提交数据...');
-    this.setRequest("/zhsp/backsave", this.payload).then((res) => {
+    this.setRequest("/examine/todoback", this.payload).then((res) => {
       this.events.publish(AppConfig.Home.Badge);
       this.events.publish(AppConfig.Synthesize.List);
       this.events.publish(AppConfig.Synthesize.ShenPiList);

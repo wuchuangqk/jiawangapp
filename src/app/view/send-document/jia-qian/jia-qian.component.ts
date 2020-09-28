@@ -1,11 +1,12 @@
 import { Component, OnInit } from '@angular/core';
-import {ModalController, NavController, NavParams} from "@ionic/angular";
+import {Events, ModalController, NavController, NavParams} from "@ionic/angular";
 import {BasePage} from "../../../base/base-page";
 import {HttpService} from "../../../service/http.service";
 import {ActivatedRoute, Router} from "@angular/router";
 import {DialogService} from "../../../service/dialog.service";
 import {DomSanitizer} from "@angular/platform-browser";
 import {FileService} from "../../../service/FileService";
+import {AppConfig} from "../../../app.config";
 
 @Component({
   selector: 'app-jia-qian',
@@ -34,12 +35,15 @@ export class JiaQianComponent extends BasePage implements OnInit {
       public navController: NavController,
       public fileService: FileService,
       public modalCtrl: ModalController,
+      public events: Events,
       public navParams: NavParams,
       public route?: ActivatedRoute,
   ) {
     super(http, router, navController, dialogService);
     this.params.id = this.navParams.get("id");
-
+    this.params.signCreator3=this.navParams.get("hgUser")
+    this.params.signCreator2=this.navParams.get("sgUser")
+    this.params.signCreator1=this.navParams.get("qfUser")
     this.signIndex = this.navParams.get("signIndex")
     this.isJiaQian = this.navParams.get("isJiaQian");
     console.log(this.isJiaQian)
@@ -93,6 +97,10 @@ export class JiaQianComponent extends BasePage implements OnInit {
         );
       })
     }
+
+    this.events.publish(AppConfig.Document.DocumentList);
+    this.events.publish(AppConfig.Home.Badge);
+    this.events.publish(AppConfig.Synthesize.List);
   }
 
 }

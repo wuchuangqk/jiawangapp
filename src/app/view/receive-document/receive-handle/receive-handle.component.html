@@ -135,7 +135,14 @@
         </div>
         <div style="margin-bottom: 5px;">
             <div>
-                <div class="card-header">办理</div>
+                <div class="card-header">
+                    <div class="flex-between" style="width: 100%;">
+                        <div>办理</div>
+                        <div>
+                            <img *ngIf="userId==519" (click)="setQianPiStatus()" style="width: 15px;height: 15px;" src="assets/icon/edit.png" alt="">
+                        </div>
+                    </div>
+                </div>
                 <div *ngIf="isMore" style="background: #f7f7f7; padding:5px; display: flex;">
                     <div class="more-item-wrapper" (click)="document_stop()">
                         <div class="more-item">
@@ -183,7 +190,7 @@
 
 
                 <div [hidden]="!isEdit">
-                    <div [hidden]="userId!=519" style="overflow-x: auto">
+                    <div [hidden]="!isQianPi" style="overflow-x: auto">
                         <div style="min-height: 30px;">
                             <img style="width: 30px;height:30px;" *ngFor="let item of  BaseImgList" [src]="item" alt="">
                         </div>
@@ -194,8 +201,9 @@
 ">
                             <signature-pad [options]="signaturePadOptions"    (onBeginEvent)="drawStart()"  (onEndEvent)="drawComplete()"></signature-pad>
                         </div>
+
                     </div>
-                    <div [hidden]="userId==519">
+                    <div [hidden]="isQianPi">
                         <textarea placeholder="请输入处理意见" style="font-size: 1.4rem;" [(ngModel)]="infoTitle"></textarea>
                         <div class="flex-between" style="padding-bottom: 10px;">
                             <div></div>
