@@ -85,15 +85,6 @@ export class JianQianComponent extends BasePage implements OnInit {
 
       // this.events.unsubscribe('staff');
       this.contact.departArray = data.departs;
-      if (data.staffs.length !== 0) {
-        if (this.isSelectOne) {
-          this.hasSelectedAllButton = false;
-          console.log(1);
-        } else {
-          this.hasSelectedAllButton = true;
-        }
-      }
-
       // 初始化选中的状态
 
       this.checkIfSelectAll();

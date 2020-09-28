@@ -55,6 +55,7 @@ export class DetailBasePage extends BasePage {
             this.SignIndex = res.data.SignIndex;
             this.isgned = res.data.isgned;
             this.comment = res.data.comment === '1';
+            // 正文
             this.zhengWen = res.data.pdfurl;
             this.comment_num = res.data.comment_num;
             this.SignId = res.data.SignId;

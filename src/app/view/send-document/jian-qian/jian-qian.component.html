@@ -23,7 +23,14 @@
         <p>{{item.position}}</p>
       </ion-label>
     </ion-item>
+
+
+
   </ion-list>
+
+  <div *ngIf="staffArray.length<=0" style="padding:0 1rem;">
+    <p style="font-size: 1.5rem;">无数据！</p>
+  </div>
 </ion-content>
 <ion-footer>
   <ion-toolbar>

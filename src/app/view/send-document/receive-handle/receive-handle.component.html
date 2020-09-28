@@ -58,21 +58,27 @@
             </div>
         </fieldset>
     </section>
+<!--    <section *ngIf="tabIndex===2">-->
+<!--        <table class="table">-->
+<!--            <tr>-->
+<!--                <th>处理人</th>-->
+<!--                <th>处理状态</th>-->
+<!--                <th>处理时间</th>-->
+<!--            </tr>-->
+<!--            <tr *ngFor="let item of signList">-->
+<!--                <td>{{item.name}}</td>-->
+<!--                <td>{{item.signed}}</td>-->
+<!--                <td>{{item.time}}</td>-->
+<!--            </tr>-->
+<!--        </table>-->
+<!--        <div *ngIf="signList.length==0">-->
+<!--            <a >无流程</a>-->
+<!--        </div>-->
+<!--    </section>-->
+
     <section *ngIf="tabIndex===2">
-        <table class="table">
-            <tr>
-                <th>处理人</th>
-                <th>处理状态</th>
-                <th>处理时间</th>
-            </tr>
-            <tr *ngFor="let item of signList">
-                <td>{{item.name}}</td>
-                <td>{{item.signed}}</td>
-                <td>{{item.time}}</td>
-            </tr>
-        </table>
-        <div *ngIf="signList.length==0">
-            <a >无流程</a>
+        <div style="overflow: auto">
+            <div [innerHTML]="signList"></div>
         </div>
     </section>
 

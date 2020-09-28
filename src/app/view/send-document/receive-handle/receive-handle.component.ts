@@ -3,7 +3,7 @@ import {HttpService} from '../../../service/http.service';
 import {ActivatedRoute, Router} from '@angular/router';
 import {AlertController, Events, ModalController, NavController} from '@ionic/angular';
 import {DialogService} from '../../../service/dialog.service';
-import {DomSanitizer} from '@angular/platform-browser';
+import {DomSanitizer, SafeHtml} from '@angular/platform-browser';
 import {AppConfig} from '../../../app.config';
 import {DetailBasePage} from '../../../base/detail-base-page';
 import {FileService} from "../../../service/FileService";
@@ -35,7 +35,7 @@ export class ReceiveHandleComponent  extends DetailBasePage implements OnInit, O
   public ldid = '';
   public primarySignName = '';
   public fenGuanLingDaoNames = '';
-  public signList = [];
+  public signList:SafeHtml = "";
 
   //操作日志列表
   public signLogList=[];
@@ -216,7 +216,7 @@ export class ReceiveHandleComponent  extends DetailBasePage implements OnInit, O
 
   private async getSignList() {
     const res = await this.request('/receipt/signlist', {item_id: this.id});
-    this.signList = res.data;
+    this.signList = this.transform(res.data.json);
     console.log(this.signList);
   }
 
