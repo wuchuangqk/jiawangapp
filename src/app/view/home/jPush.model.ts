@@ -128,6 +128,21 @@ export class JPushModel {
                 });
                 break;
             }
+            // 发文待阅
+            case 'DispatchSee': {
+                this.nav('send-document/receive-handle/'+id, {
+                    id,
+                    title: '发文系统',
+                    url: '/dispatch/tododetail',
+                    contentTitle,
+                    document_type: 1,
+                    handle_status: 1,
+                    handleUrl: '/documents/handle_document',
+                    isBackToHome
+                });
+                break;
+            }
+            // 发文办理
             case 'fwtip': {
                 this.nav('send-document/receive-handle/'+id, {
                     id,

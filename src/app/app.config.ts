@@ -19,6 +19,10 @@ export class AppConfig {
         ShenPiList: 'SynthesizeShenPiList'
     };
 
+    public  static HeTongShenCha = {
+        List: 'HeTongShenCha',
+    };
+
     public  static GoOut = {
         List: 'GoOutList',
         ShenPiList: 'GoOutShenPiList'

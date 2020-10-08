@@ -5,6 +5,7 @@ import {ActivatedRoute, Router} from "@angular/router";
 import {DialogService} from "../../service/dialog.service";
 import {AppConfig} from "../../app.config";
 import {BasePage} from "../../base/base-page";
+import {DomSanitizer, SafeHtml} from "@angular/platform-browser";
 
 @Component({
   selector: 'app-rong-zi-sheng-pi',
@@ -31,6 +32,7 @@ export class RongZiShengPiComponent  extends BasePage implements OnInit {
       public http: HttpService,
       public router: Router,
       public navController: NavController,
+      public sanitizer: DomSanitizer,
       public dialogService: DialogService,
       private events: Events,
       public route?: ActivatedRoute,
@@ -61,6 +63,9 @@ export class RongZiShengPiComponent  extends BasePage implements OnInit {
       this.index = index;
       this.getRequest();
     });
+  }
+  public transform(content): SafeHtml {
+    return this.sanitizer.bypassSecurityTrustHtml(content);
   }
   segmentChange(index) {
     this.index = index;

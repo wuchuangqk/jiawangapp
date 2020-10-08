@@ -7,6 +7,7 @@ import { DateProvider } from '../../../service/Date';
 import {Events, IonSlides} from '@ionic/angular';
 import { NavController } from '@ionic/angular';
 import {AppConfig} from '../../../app.config';
+import {DomSanitizer, SafeHtml} from "@angular/platform-browser";
 
 @Component({
     selector: 'index',
@@ -32,6 +33,7 @@ export class IndexComponent extends BasePage implements OnInit, OnDestroy {
     constructor(
         public http: HttpService,
         public router: Router,
+        public sanitizer: DomSanitizer,
         public navController: NavController,
         public dialogService: DialogService,
         private events: Events,
@@ -45,16 +47,13 @@ export class IndexComponent extends BasePage implements OnInit, OnDestroy {
     ngOnInit() {
         this.getWoDeShenChaList();
         this.getDaiBanList();
-        this.events.subscribe(AppConfig.GoOut.List,()=>{
+        this.events.subscribe(AppConfig.HeTongShenCha.List,()=>{
             this.getWoDeShenChaList();
-        });
-        this.events.subscribe(AppConfig.GoOut.ShenPiList,()=>{
             this.getDaiBanList();
         });
     }
     ngOnDestroy(): void {
-        this.events.unsubscribe(AppConfig.GoOut.List);
-        this.events.unsubscribe(AppConfig.GoOut.ShenPiList);
+        this.events.unsubscribe(AppConfig.HeTongShenCha.List);
     }
     change() {
         this.slides.getActiveIndex().then((index) => {
@@ -100,6 +99,10 @@ export class IndexComponent extends BasePage implements OnInit, OnDestroy {
         } else if (this.index === 3){
             this.getLiuChengJianKongList();
         }
+    }
+
+    public transform(content): SafeHtml {
+        return this.sanitizer.bypassSecurityTrustHtml(content);
     }
     doRefresh(event) {
         super.doRefresh(event);

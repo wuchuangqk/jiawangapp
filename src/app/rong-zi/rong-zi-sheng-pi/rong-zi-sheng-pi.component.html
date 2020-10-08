@@ -47,6 +47,12 @@
                   <span>申请人:{{item.creater}}</span>
                   <span class="my-list-sub-top-last">{{item.jhhkrq}}</span>
                 </div>
+                <div *ngIf="item.docstate!=''" class="my-list-sub">
+                  <div>
+                    <div style="font-size: 1.4rem;margin-top: 5px;" [innerHTML]="transform(item.docstate)"></div>
+                  </div>
+                  <span class="my-list-sub-top-last"></span>
+                </div>
               </div>
             </section>
           </ion-item>
