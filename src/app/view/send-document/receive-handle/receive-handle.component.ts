@@ -252,7 +252,7 @@ export class ReceiveHandleComponent  extends DetailBasePage implements OnInit, O
     this.linkDispathList = res.data.dispath;
   }
 
-  public async document_jiaqian(isJiaQian){
+  public async document_jiaqian(isJiaQian,comments){
     this.currentModal = await this.modalController.create({
       component:JiaQianComponent,
       showBackdrop:true,
@@ -266,7 +266,7 @@ export class ReceiveHandleComponent  extends DetailBasePage implements OnInit, O
       }
     });
     await this.currentModal.present();
-//监听销毁的事件，接收返回的值
+    //监听销毁的事件，接收返回的值
     const { data } = await this.currentModal.onDidDismiss();
     console.log(data);
     if(data.isBack){
@@ -478,10 +478,10 @@ export class ReceiveHandleComponent  extends DetailBasePage implements OnInit, O
    */
   public viewFaWen(item) {
     item.title = '发文系统';
-    item.url = '/documents/flist/';
+    item.url = '/dispatch/tododetail';
     item.handleUrl = '/documents/handle_document';
     item.document_type = 1;
-    this.nav('detail', item);
+    this.nav('/send-document/receive-detail/'+item.id, item);
   }
 
   // public getIds(arr): string {
@@ -500,13 +500,17 @@ export class ReceiveHandleComponent  extends DetailBasePage implements OnInit, O
     let user = this.getIds(this.selectedStaff);
     console.log(user)
     if(this.SignIndex!=4){
-        await this.document_jiaqian(false);
+      let comment = this.infoTitle;
+      if(!comment){
+        await this.dialogService.toast("请输入意见");
         return false;
+      }
+      await this.document_jiaqian(false,comment);
     }
     if(!this.infoTitle){
       // if(this.getUserId()!=519){
       // }
-      this.dialogService.toast("请输入意见");
+      await this.dialogService.toast("请输入意见");
       return false;
     }
     await this.setRequest('/dispatch/todosave', {
