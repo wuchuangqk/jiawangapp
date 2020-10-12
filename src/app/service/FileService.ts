@@ -150,42 +150,46 @@ export class FileService {
 
 
     async presentActionSheet(resolve?: Function) {
-        const actionSheet = await this.actionSheetCtrl.create({
-            buttons: [{
-                text: '通过外部程序打开',
-                role: 'takePhoto',
-                handler: () => {
-                    if (resolve) {
-                        resolve('open');
-                    }
-                }
-            },
-                // {
-                //     text: '打开',
-                //     // role: 'chooseFromAlbum',
-                //     handler: () => {
-                //         if (resolve) {
-                //             resolve('open2');
-                //         }
-                //     }
-                // },
-                {
-                    text: '预览',
-                    handler: () => {
-                        if (resolve) {
-                            resolve('view');
-                        }
-                    }
-                },
-                {
-                    text: '取消',
-                    role: 'cancel',
-                    handler: () => {
-                        console.log('cancel');
-                    }
-                }]
-        });
-        await actionSheet.present();
+
+        if (resolve) {
+            resolve('open');
+        }
+        // const actionSheet = await this.actionSheetCtrl.create({
+        //     buttons: [{
+        //         text: '通过外部程序打开',
+        //         role: 'takePhoto',
+        //         handler: () => {
+        //             if (resolve) {
+        //                 resolve('open');
+        //             }
+        //         }
+        //     },
+        //         // {
+        //         //     text: '打开',
+        //         //     // role: 'chooseFromAlbum',
+        //         //     handler: () => {
+        //         //         if (resolve) {
+        //         //             resolve('open2');
+        //         //         }
+        //         //     }
+        //         // },
+        //         {
+        //             text: '预览',
+        //             handler: () => {
+        //                 if (resolve) {
+        //                     resolve('view');
+        //                 }
+        //             }
+        //         },
+        //         {
+        //             text: '取消',
+        //             role: 'cancel',
+        //             handler: () => {
+        //                 console.log('cancel');
+        //             }
+        //         }]
+        // });
+        // await actionSheet.present();
     }
     nav(path, queryParams?) {
         return this.router.navigate([path], { queryParams});

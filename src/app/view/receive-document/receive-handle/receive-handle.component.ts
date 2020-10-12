@@ -10,7 +10,6 @@ import {FileService} from "../../../service/FileService";
 import { ViewChild } from '@angular/core';
 import { SignaturePad } from 'angular2-signaturepad/signature-pad';
 import { v4 as uuidv4 } from 'uuid';
-import {JiaQianComponent} from "../jia-qian/jia-qian.component";
 
 import  AlloyFinger  from 'alloyfinger';
 import {JPushModel} from "../../home/jPush.model";
@@ -65,8 +64,8 @@ export class ReceiveHandleComponent  extends DetailBasePage implements OnInit, O
   @ViewChild(SignaturePad) signaturePad: SignaturePad;
   public signaturePadOptions: Object = { // passed through to szimek/signature_pad constructor
     'minWidth': 15,
-    'canvasWidth': 200,
-    'canvasHeight': 200
+    'canvasWidth': 320,
+    'canvasHeight': 320
   };
 
   constructor(
@@ -274,7 +273,6 @@ export class ReceiveHandleComponent  extends DetailBasePage implements OnInit, O
       this.timer = setTimeout(()=>{
         console.log("生成一张图片")
         this.BaseImgList.push(base64Img)
-
         let blob = this.dataURLtoFile(base64Img);
         let uuid = uuidv4();
         this.cansFile= this.blobToFile(blob,uuid+".png");
@@ -424,9 +422,9 @@ export class ReceiveHandleComponent  extends DetailBasePage implements OnInit, O
     return new Blob([u8arr], { type: mime });
     // return new File([u8arr], uuid+".png", { type: mime });
   }
-  viewFile(item: IDownFile) {
-    this.nav('pdf', item);
-  }
+  // viewFile(item: IDownFile) {
+  //   this.nav('pdf', item);
+  // }
   // 清除
   clearDraw(){
     this.signaturePad.clear();

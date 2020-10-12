@@ -91,9 +91,9 @@ export class ReceiveDetailComponent extends DetailBasePage implements OnInit, On
     this.jPushModel.goToPage(id,type,contentTitle,itemTitle);
   }
 
-  viewFile(item: IDownFile) {
-    this.nav('pdf', item);
-  }
+  // viewFile(item: IDownFile) {
+  //   this.nav('pdf', item);
+  // }
   // 打开正文
   openZhengWen() {
     if (!this.zhengWen.fileurl) {

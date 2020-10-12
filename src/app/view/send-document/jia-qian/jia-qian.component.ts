@@ -25,7 +25,7 @@ export class JiaQianComponent extends BasePage implements OnInit {
     signCreator1: '',
     signCreator2: '',
     signCreator3: '',
-    comment:'',
+    comments:'',
   };
 
   constructor(
@@ -45,7 +45,7 @@ export class JiaQianComponent extends BasePage implements OnInit {
     this.params.signCreator3=this.navParams.get("hgUser")
     this.params.signCreator2=this.navParams.get("sgUser")
     this.params.signCreator1=this.navParams.get("qfUser")
-    this.params.comment=this.navParams.get("comment")
+    this.params.comments=this.navParams.get("comments")
     this.signIndex = this.navParams.get("signIndex")
     this.isJiaQian = this.navParams.get("isJiaQian");
     console.log(this.isJiaQian)

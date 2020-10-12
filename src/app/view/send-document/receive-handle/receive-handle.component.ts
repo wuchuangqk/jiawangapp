@@ -90,9 +90,9 @@ export class ReceiveHandleComponent  extends DetailBasePage implements OnInit, O
       this.handle_status = '0';
     });
   }
-  viewFile(item: IDownFile) {
-    this.nav('pdf', item);
-  }
+  // viewFile(item: IDownFile) {
+  //   this.nav('pdf', item);
+  // }
 
 
 
@@ -258,6 +258,7 @@ export class ReceiveHandleComponent  extends DetailBasePage implements OnInit, O
       showBackdrop:true,
       componentProps:{
         id:this.id,
+        comments,
         sgUser:this.sgUser,
         qfUser:this.qfUser,
         hgUser:this.hgUser,
@@ -505,6 +506,7 @@ export class ReceiveHandleComponent  extends DetailBasePage implements OnInit, O
         await this.dialogService.toast("请输入意见");
         return false;
       }
+      console.log(comment)
       await this.document_jiaqian(false,comment);
     }
     if(!this.infoTitle){

@@ -84,9 +84,9 @@ export class ReceiveDetailComponent extends DetailBasePage implements OnInit, On
       this.handle_status = '0';
     });
   }
-  viewFile(item: IDownFile) {
-    this.nav('pdf', item);
-  }
+  // viewFile(item: IDownFile) {
+  //   this.nav('pdf', item);
+  // }
   // 打开正文
   openZhengWen() {
     if (!this.zhengWen.fileurl) {
