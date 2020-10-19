@@ -108,7 +108,10 @@ export class ReceiveHandleComponent  extends DetailBasePage implements OnInit, O
     }else{
       this.isQianPi=false;
     }
-    this.signaturePad.set('minWidth', 5);
+    this.signaturePad.set('minWidth', 3);
+    this.signaturePad.set('maxWidth', 100);
+    this.signaturePad.set('throttle', 500);
+    
     this.events.subscribe(AppConfig.Document.DocumentDetail, () => {
       this.getDetail(this.payload);
       this.isShenPi = false;
@@ -174,7 +177,7 @@ export class ReceiveHandleComponent  extends DetailBasePage implements OnInit, O
 
   ngAfterViewInit() {
     // this.signaturePad is now available
-    this.signaturePad.set('minWidth', 5); // set szimek/signature_pad options at runtime
+    this.signaturePad.set('minWidth', 3); // set szimek/signature_pad options at runtime
     this.signaturePad.clear(); // invoke functions from szimek/signature_pad API
   }
 
