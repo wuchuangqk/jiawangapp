@@ -222,20 +222,21 @@ export class FileService {
      * 应用程序打开
      */
     public async openByApp(file: IDownFile, backFn) {
-        await this.presentActionSheet((res)=>{
-            console.log(res)
+        await this.presentActionSheet((res) =>{
             if(res=='open'){
                 if (this.isAndroid()) {
-                    this.dialogService.loading("文件加载中");
-                    const fileTransfer: FileTransferObject = this.transfer.create();
-                    const filePath = this.file.externalRootDirectory + file.filename + file.fileext; // apk保存的目录
-                    fileTransfer.download(file.fileurl, filePath).then(() => {
-                        // const options: DocumentViewerOptions = {
-                        //     title: file.filename
-                        // }
-                        // this.document.viewDocument(apk, 'application/pdf', options);
-                        this.dialogService.dismiss();
-                        this.fileOpener.open(filePath, this.getFileMIMEType(file.fileext.substring(1))).then(() => {}).catch(e => {});
+                    this.nativeService.getPrmissions().then(()=>{
+                        this.dialogService.loading("文件加载中");
+                        const fileTransfer: FileTransferObject = this.transfer.create();
+                        const filePath = this.file.externalRootDirectory + file.filename + file.fileext; // apk保存的目录
+                        fileTransfer.download(file.fileurl, filePath).then(() => {
+                            // const options: DocumentViewerOptions = {
+                            //     title: file.filename
+                            // }
+                            // this.document.viewDocument(apk, 'application/pdf', options);
+                            this.dialogService.dismiss();
+                            this.fileOpener.open(filePath, this.getFileMIMEType(file.fileext.substring(1))).then(() => {}).catch(e => {});
+                        });
                     });
                 }
             }else if(res=='view'){

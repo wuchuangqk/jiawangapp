@@ -93,6 +93,7 @@ export class ReceiveHandleComponent  extends DetailBasePage implements OnInit, O
   }
 
   async ngOnInit() {
+
     const userInfo = JSON.parse(localStorage.getItem('userInfo'));
     this.userId = userInfo.id;
     await this.getDetail(this.payload);
@@ -101,17 +102,17 @@ export class ReceiveHandleComponent  extends DetailBasePage implements OnInit, O
     await this.getSignList();
     await this.getLinkProjectList();
     await this.getSingLog();
-    await this.scale();
+    // await this.scale();
 
     if(this.userId==519){
       this.isQianPi=true;
     }else{
       this.isQianPi=false;
     }
-    this.signaturePad.set('minWidth', 3);
-    this.signaturePad.set('maxWidth', 100);
-    this.signaturePad.set('throttle', 500);
-    
+
+    let res= await this.request("/receipt/HandWriteu",{});
+    let data = res.data;
+    this.signaturePad.set('minWidth', data.n);
     this.events.subscribe(AppConfig.Document.DocumentDetail, () => {
       this.getDetail(this.payload);
       this.isShenPi = false;
