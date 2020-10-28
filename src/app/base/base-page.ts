@@ -105,24 +105,23 @@ export class BasePage implements OnInit {
     }
 
 
-
-
     public doRefresh(event) {
         event.target.complete();
     }
 
-    // public viewFile(item: IDownFile) {
-    //     this.nav('pdf', item);
-    // }
     public handleErr(data: Iresponse) {
         if (data.status_code === '10000') {
             this.dialogService.toast(data.msg);
             this.dialogService.dismiss();
         } else if (data.status_code === '30000') {
-            this.dialogService.alert(data.msg, () => {
-                // this.navController.navigateRoot('login');
-                this.http.logout();
-            });
+            var isLogin=localStorage.isLogin;
+            if(isLogin){
+                localStorage.removeItem("isLogin")
+                this.dialogService.alert(data.msg, () => {
+                    // this.navController.navigateRoot('login');
+                    this.http.logout();
+                });
+            }
         } else if (data.status_code === '30002') {
             this.dialogService.toast('参数错误！');
         } else if (data.status_code === '100') {
