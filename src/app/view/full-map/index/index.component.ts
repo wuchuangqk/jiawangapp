@@ -5,7 +5,6 @@ import {HttpService} from '../../../service/http.service';
 import {ActivatedRoute, Router} from '@angular/router';
 import {NavController} from '@ionic/angular';
 import {DialogService} from '../../../service/dialog.service';
-// declare const BMap;
 
 @Component({
   selector: 'app-index',

@@ -35,10 +35,12 @@ export class AddComponent extends BasePage implements OnInit {
         qjtype: '事假',
         // 处理人名单
         staff_ids: '',
-        signCreator1:'',
-        signCreator2:'',
-        signCreator3:'',
-        signCreator4:'',
+        // signCreator1:'',
+        // signCreator2:'',
+        // signCreator3:'',
+        // signCreator4:'',
+        index:1,
+        user: '',
     };
     public fileArray = [];
     constructor(
@@ -73,24 +75,24 @@ export class AddComponent extends BasePage implements OnInit {
             this.qjtypeList = res.data;
         });
     }
-    private chuShiLingDao(){
+    private chuShiLingDao() {
         this.request('/qingjia/signCreator1', {}).then((res) => {
             this.chuShiLingDaoList = res.data;
         });
     }
-    private buShiLingDao(){
+    private buShiLingDao() {
         this.request('/qingjia/signCreator2', {}).then((res) => {
             this.buShiLingDaoList = res.data;
         });
     }
 
-    private fenGuanLingDao(){
+    private fenGuanLingDao() {
         this.request('/qingjia/signCreator3', {}).then((res) => {
             this.fenGuanLingDaoList = res.data;
         });
     }
 
-    private zhuYaoLingDao(){
+    private zhuYaoLingDao() {
         this.request('/qingjia/signCreator4', {}).then((res) => {
             this.zhuYaoLingDaoList = res.data;
         });
@@ -127,24 +129,8 @@ export class AddComponent extends BasePage implements OnInit {
         } else if (!params.qjtype) {
             this.dialogService.toast('请输入请假类型!');
             return false;
-        }
-        else if (!params.signCreator1) {
-            this.dialogService.toast('请选择处室负责人!');
-            return false;
-        }
-
-        else if (!params.signCreator1) {
-            this.dialogService.toast('请选择部室负责人!');
-            return false;
-        }
-
-        else if (!params.signCreator1) {
-            this.dialogService.toast('请选择分管领导!');
-            return false;
-        }
-
-        else if (!params.signCreator1) {
-            this.dialogService.toast('请选择主要领导!');
+        } else if (!params.user) {
+            this.dialogService.toast('请选择审批领导!');
             return false;
         }
         return true;
@@ -152,14 +138,13 @@ export class AddComponent extends BasePage implements OnInit {
     getIds(arr): string {
         return  arr.map(item => item.id).join(',');
     }
-    save() {
-        this.params.staff_ids = this.getIds(this.selectedStaff);
+    async save() {
         if (!this.checkParams(this.params)) {
             return;
         }
         this.params.qjstime = this.dateProvider.DateTimeFormat(new Date(this.params.qjstime));
         this.params.qjetime = this.dateProvider.DateTimeFormat(new Date(this.params.qjetime));
-        this.dialogService.loading('正在提交，请稍候....');
+        await this.dialogService.loading('正在提交，请稍候....');
         this.uploadFiles('/qingjia/qingjia_add', this.params, this.fileArray).then((res) => {
             this.dialogService.dismiss();
             this.events.publish(AppConfig.Leave.ShenPiList);

@@ -29,10 +29,35 @@
   </ion-item>
 
 
+  <ion-radio-group [(ngModel)]="params.index">
+    <ion-list-header>
+      <ion-label>选择审批领导</ion-label>
+    </ion-list-header>
+    <ion-item>
+      <ion-label>处室负责人</ion-label>
+      <ion-radio [value]="1"></ion-radio>
+    </ion-item>
 
-  <ion-item>
+    <ion-item>
+      <ion-label>部室负责人</ion-label>
+      <ion-radio [value]="2"></ion-radio>
+    </ion-item>
+
+    <ion-item>
+      <ion-label>分管领导</ion-label>
+      <ion-radio [value]="3"></ion-radio>
+    </ion-item>
+
+    <ion-item>
+      <ion-label>主要领导</ion-label>
+      <ion-radio [value]="4"></ion-radio>
+    </ion-item>
+  </ion-radio-group>
+
+
+  <ion-item *ngIf="params.index==1">
     <ion-label>处室负责人：</ion-label>
-    <ion-select [(ngModel)]="params.signCreator1" cancelText="取消" okText="确定">
+    <ion-select [(ngModel)]="params.user" cancelText="取消" okText="确定">
       <ion-select-option *ngFor="let item of chuShiLingDaoList" [value]="item.id">{{item.name}}</ion-select-option>
     </ion-select>
   </ion-item>
@@ -40,24 +65,24 @@
 
 
 
-  <ion-item>
+  <ion-item *ngIf="params.index==2">
     <ion-label>部室负责人：</ion-label>
-    <ion-select [(ngModel)]="params.signCreator2" cancelText="取消" okText="确定">
+    <ion-select [(ngModel)]="params.user" cancelText="取消" okText="确定">
       <ion-select-option *ngFor="let item of buShiLingDaoList" [value]="item.id">{{item.name}}</ion-select-option>
     </ion-select>
   </ion-item>
 
 
-  <ion-item>
+  <ion-item *ngIf="params.index==3">
     <ion-label>分管领导：</ion-label>
-    <ion-select [(ngModel)]="params.signCreator3" cancelText="取消" okText="确定">
+    <ion-select [(ngModel)]="params.user" cancelText="取消" okText="确定">
       <ion-select-option *ngFor="let item of fenGuanLingDaoList" [value]="item.id">{{item.name}}</ion-select-option>
     </ion-select>
   </ion-item>
 
-  <ion-item>
+  <ion-item *ngIf="params.index==4">
     <ion-label>主要领导：</ion-label>
-    <ion-select [(ngModel)]="params.signCreator4" cancelText="取消" okText="确定">
+    <ion-select [(ngModel)]="params.user" cancelText="取消" okText="确定">
       <ion-select-option *ngFor="let item of zhuYaoLingDaoList" [value]="item.id">{{item.name}}</ion-select-option>
     </ion-select>
   </ion-item>
