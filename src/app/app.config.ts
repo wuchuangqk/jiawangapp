@@ -69,4 +69,10 @@ export class AppConfig {
     public static CulturalPropaganda = {
         List: 'CulturalPropagandaList'
     };
+
+    // 资金支付
+    public static ZiJinZhiFu = {
+        List:'ZiJinZhiFuList',
+        ShenPiList:'ZiJinZhiFuShenPiList'
+    }
 }

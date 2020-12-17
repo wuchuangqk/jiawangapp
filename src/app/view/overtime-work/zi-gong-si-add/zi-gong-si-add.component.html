@@ -1,0 +1,60 @@
+<section style="min-height: calc(100% - 60px);">
+  <ion-item>
+    <ion-label>加班日期：</ion-label>
+    <ion-datetime type="datetime-local" displayFormat="YYYY-MM-DD HH:mm" pickerFormat="YYYY-MM-DD HH:mm" doneText="确定" [(ngModel)]="params.jbtime" cancelText="取消"></ion-datetime>
+  </ion-item>
+  <!--  <ion-item>-->
+  <!--    <ion-label>结束时间：</ion-label>-->
+  <!--    <ion-datetime type="datetime-local" displayFormat="YYYY-MM-DD HH:mm" pickerFormat="YYYY-MM-DD HH:mm" doneText="确定" [(ngModel)]="params.qjetime" cancelText="取消"></ion-datetime>-->
+  <!--  </ion-item>-->
+  <ion-item>
+    <ion-label>工作安排：</ion-label>
+    <ion-textarea placeholder="请输入工作安排" [(ngModel)]="params.qjyy"></ion-textarea>
+  </ion-item>
+  <!--<ion-item>
+    <ion-label>人员安排</ion-label>
+    <span>{{username}}</span>
+  </ion-item>-->
+  <app-staff (click)="go('getSt', selectedStaff,false)" title="人员安排" eventName="getSt" [(selectedStaff)]="selectedStaff"></app-staff>
+
+  <ion-radio-group [(ngModel)]="params.index">
+    <ion-list-header>
+      <ion-label>选择审批领导</ion-label>
+    </ion-list-header>
+    <ion-item>
+      <ion-label>公司负责人</ion-label>
+      <ion-radio [value]="1"></ion-radio>
+    </ion-item>
+
+    <ion-item>
+      <ion-label>集团公司分管领导</ion-label>
+      <ion-radio [value]="2"></ion-radio>
+    </ion-item>
+
+  </ion-radio-group>
+
+
+  <ion-item *ngIf="params.index == 1">
+    <ion-label>公司负责人：</ion-label>
+    <ion-select [(ngModel)]="params.user" cancelText="取消" okText="确定">
+      <ion-select-option *ngFor="let item of chuShiLingDaoList" [value]="item.id">{{item.name}}</ion-select-option>
+    </ion-select>
+  </ion-item>
+
+
+  <ion-item *ngIf="params.index == 2">
+    <ion-label>集团公司分管领导：</ion-label>
+    <ion-select [(ngModel)]="params.user" cancelText="取消" okText="确定">
+      <ion-select-option *ngFor="let item of fenGuanLingDaoList" [value]="item.id">{{item.name}}</ion-select-option>
+    </ion-select>
+  </ion-item>
+
+</section>
+
+<ion-footer *ngIf="index == 1">
+  <ion-toolbar>
+    <ion-button expand="full" (click)="save()" style="flex: 1">
+      保  存
+    </ion-button>
+  </ion-toolbar>
+</ion-footer>

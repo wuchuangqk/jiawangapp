@@ -28,6 +28,7 @@ export class OfficeTabPage extends BasePage implements OnInit {
     { icon: 'logo-twitch', color: '#6cd7ff', name: 'synthesize', title: '综合管理' },
     { icon: 'ios-folder', color: '#6cd7ff', name: 'property', title: '资产购置' },
     { icon: 'ios-folder', color: '#6cd7ff', name: 'he-tong-shen-cha', title: '合同审查' },
+    { icon: 'list-box', color: '#c1a6f0', name: 'zi-jin-zhi-fu', title: '资金支付' },
     // { icon: 'ios-folder', color: '#6cd7ff', name: 'finance-detail', title: '资产明细' },
     // { icon: 'megaphone', color: '#6cd7ff', name: 'cultural-propaganda', title: '党建园地', url: '/notices/wenxuan_list' },
     // { icon: 'logo-twitch', color: '#6cd7ff', name: 'bao-xiao', title: '报销管理' },

@@ -15,10 +15,9 @@
             refreshingSpinner="circles"
             refreshingText="刷新...">
     </ion-refresher-content>
-    <ion-refresher-content >
+    <ion-refresher-content>
     </ion-refresher-content>
   </ion-refresher>
-
 
 
   <section>
@@ -28,26 +27,27 @@
         表单
       </div>
       <div (click)="tabIndex=1">
-        <ion-icon name="link"></ion-icon>附件</div>
+        <ion-icon name="link"></ion-icon>
+        附件
+      </div>
       <div (click)="tabIndex=2">
         <ion-icon name="git-network"></ion-icon>
-        流程</div>
+        流程
+      </div>
     </div>
     <app-divider></app-divider>
   </section>
 
 
-
-
   <section *ngIf="tabIndex==0">
-    <div class="detail-style" [innerHTML]="content"></div>
+    <div class="detail-style tableNoWrap" [innerHTML]="content"></div>
   </section>
   <section *ngIf="tabIndex==1">
     <section *ngIf="fileList.length>0" class="detail-style">
       <fieldset>
         <legend><b>附件：</b></legend>
         <div *ngFor="let item of fileList;let i = index;" (click)="viewFile(item)">
-          <a>{{i+1}}、{{item.filename}}{{item.fileext}}</a>
+          <a>{{i + 1}}、{{item.filename}}{{item.fileext}}</a>
         </div>
       </fieldset>
     </section>
@@ -76,14 +76,14 @@
       </tr>
     </table>
     <div *ngIf="signList.length==0">
-      <a >无流程</a>
+      <a>无流程</a>
     </div>
   </section>
 
 </ion-content>
 
 
-<ion-footer>
+<ion-footer *ngIf="!isgned">
   <ion-toolbar>
     <div style="margin-bottom: 5px;">
       <div>
@@ -99,8 +99,8 @@
         <div class="flex-between">
           <ion-icon (click)="isEdit=!isEdit" name="create" size="20" style="font-size: 20px;"></ion-icon>
           <div>
-          <ion-button size="small" type="default" fill="outline" (click)="back()">退回</ion-button>
-          <ion-button size="small" fill="outline" (click)="save()">提交</ion-button>
+            <!--            <ion-button size="small" type="default" fill="outline" (click)="back()">退回</ion-button>-->
+            <ion-button size="small" fill="outline" (click)="save()">提交</ion-button>
           </div>
         </div>
       </div>

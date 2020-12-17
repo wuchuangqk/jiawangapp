@@ -68,7 +68,10 @@ const routes: Routes = [
 
     // 项目模块
     {path: 'project', loadChildren: './project/project.module#ProjectModule'},
-    { path: 'he-tong-shen-cha', loadChildren: './view/he-tong-shen-cha/he-tong-shen-cha.module#HeTongShenChaModule'}
+    { path: 'he-tong-shen-cha', loadChildren: './view/he-tong-shen-cha/he-tong-shen-cha.module#HeTongShenChaModule'},
+
+    // 资金支付
+  {path: 'zi-jin-zhi-fu', loadChildren: './view/zi-jin-zhi-fu/zi-jin-zhi-fu.module#ZiJinZhiFuModule'},
 
 ];
 

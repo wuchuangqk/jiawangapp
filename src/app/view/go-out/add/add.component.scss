@@ -31,3 +31,28 @@ ion-footer{
     border-radius:5px;
   }
 }
+
+
+.addr-wrapper{
+  padding: 1rem;
+  .addr-title{
+    padding: 0.5rem;
+    font-size: 1.7rem;
+  }
+}
+.addr-input{
+  display: inline-block;
+  width: 100%;
+  height: 32px;
+  line-height: 1.5;
+  padding: 4px 7px;
+  font-size: 14px;
+  border: 1px solid #dcdee2;
+  border-radius: 4px;
+  color: #515a6e;
+  background-color: #fff;
+  background-image: none;
+  position: relative;
+  cursor: text;
+  transition: border .2s ease-in-out,background .2s ease-in-out,box-shadow .2s ease-in-out;
+}

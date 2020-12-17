@@ -3,7 +3,7 @@ import {HttpService} from "../../service/http.service";
 import {ActivatedRoute, Router} from "@angular/router";
 import {NavController} from "@ionic/angular";
 import {DialogService} from "../../service/dialog.service";
-import {MP} from "../../plugins/map";
+// import {MP} from "../../plugins/map";
 import {BasePage} from "../../base/base-page";
 import {strategy} from "@angular-devkit/core/src/experimental/jobs";
 interface mapData {
@@ -45,11 +45,12 @@ export class ZiChanFenBuComponent extends BasePage implements OnInit {
     this.getData();
   }
   async getData() {
-    const BMap = await MP.init();
+    // let-todo 缺少百度地图插件
+    // const BMap = await MP.init();
     const res = await this.request('/zichan/maplist', { diname: this.diname});
     // document.getElementById('allmap').innerHTML = '';
     // await this.dialogService.dismiss();
-    this.init(BMap, res.data);
+    // this.init(BMap, res.data);
   }
   addMarker(point, map, BMap, content) {
     const marker = new BMap.Marker(point);

@@ -266,8 +266,8 @@ export class JPushModel {
                     id,
                     title: itemTitle,
                     contentTitle,
-                    url: '/zhsp/mydetail',
-                    handleUrl: '/zhsp/todosave',
+                    url: '/zhsp/shenpi_detail',
+                    handleUrl: '/zhsp/shenpi_save',
                     isBackToHome
                 });
                 break;

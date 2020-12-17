@@ -10,10 +10,12 @@
 
 <ion-content class="bg-style add-style">
 
-    <ion-item>
+<!--    <ion-item>
         <ion-label>申请人：</ion-label>
         <ion-input disabled [(ngModel)]="shengQingRenName"></ion-input>
-    </ion-item>
+    </ion-item>-->
+    <app-staff (click)="go('getSt', selectedStaff,false)" title="申请人" eventName="getSt" [(selectedStaff)]="selectedStaff"></app-staff>
+
     <ion-item>
         <ion-label>开始时间：</ion-label>
         <ion-datetime type="datetime-local" displayFormat="YYYY-MM-DD HH:mm" pickerFormat="YYYY-MM-DD HH:mm" doneText="确定" [(ngModel)]="params.qjstime" cancelText="取消"></ion-datetime>
@@ -36,10 +38,41 @@
         <ion-textarea placeholder="请输入外出事由" [(ngModel)]="params.qjyy"></ion-textarea>
     </ion-item>
 
-    <ion-item>
+<!--    <ion-item>
         <ion-label>外出地点：</ion-label>
         <ion-input placeholder="请输入外出地点" [(ngModel)]="params.addr"></ion-input>
-    </ion-item>
+    </ion-item>-->
+    <div class="addr-wrapper">
+        <div class="addr-title">
+            外出地点
+        </div>
+        <div>
+            <ion-row>
+                <ion-col size="5.5">
+                    <input class="addr-input" width-100 [(ngModel)]="params.saddr1" type="text">
+                </ion-col>
+                <ion-col size="0.5">
+                    <span>至</span>
+                </ion-col>
+                <ion-col size="5.5">
+                    <input class="addr-input" width-100 [(ngModel)]="params.eaddr1" type="text">
+                </ion-col>
+            </ion-row>
+
+            <ion-row>
+                <ion-col size="5.5">
+                    <input class="addr-input" width-100 [(ngModel)]="params.saddr2" type="text">
+                </ion-col>
+                <ion-col size="0.5">
+                    <span>至</span>
+                </ion-col>
+                <ion-col size="5.5">
+                    <input class="addr-input" width-100 [(ngModel)]="params.eaddr2" type="text">
+                </ion-col>
+            </ion-row>
+
+        </div>
+    </div>
     <ion-item>
         <ion-label>费用支付单位：</ion-label>
         <ion-input placeholder="请输入费用支付单位" [(ngModel)]="params.zfdw"></ion-input>

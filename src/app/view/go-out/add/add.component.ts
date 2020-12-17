@@ -29,11 +29,15 @@ export class AddComponent extends BasePage implements OnInit {
         qjyy: '',
         // 外出类别
         qjtype: '事假',
-        // 处理人名单
+        // 申请人
         staff_ids: '',
         addr: '',
         zfdw: '',
         signCreator1:'',
+        saddr1:"",
+        eaddr1:'',
+        saddr2:"",
+        eaddr2:''
 
     };
 
@@ -60,7 +64,14 @@ export class AddComponent extends BasePage implements OnInit {
     }
     ngOnInit() {
         const userInfo =  JSON.parse(localStorage.getItem('userInfo'));
-        this.shengQingRenName = userInfo.name;
+        // this.shengQingRenName = userInfo.name;
+        // this.selectedStaff = [userInfo.id];
+        this.selectedStaff = [{
+            id:userInfo.id,
+            isSelected: true,
+            name: userInfo.name,
+            position: userInfo.position
+        }];
         this.getFenGuanLingDaoList();
     }
 

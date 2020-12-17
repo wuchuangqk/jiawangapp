@@ -9,6 +9,9 @@ import {ApproveComponent} from './approve/approve.component';
 import {IonicModule} from '@ionic/angular';
 import {FormsModule} from '@angular/forms';
 import {CommonComponentsModule} from '../../common-components/common-components.module';
+import {NgZorroAntdMobileModule} from 'ng-zorro-antd-mobile';
+import {JiTuanAddComponent} from './ji-tuan-add/ji-tuan-add.component';
+import {ZiGongSiAddComponent} from './zi-gong-si-add/zi-gong-si-add.component';
 
 @NgModule({
   declarations: [
@@ -16,13 +19,16 @@ import {CommonComponentsModule} from '../../common-components/common-components.
     AddComponent,
     DetailComponent,
     ApproveComponent,
+    JiTuanAddComponent,
+    ZiGongSiAddComponent
   ],
   imports: [
     CommonModule,
     IonicModule,
     FormsModule,
     CommonComponentsModule,
-    OvertimeWorkRoutingModule
+    OvertimeWorkRoutingModule,
+    NgZorroAntdMobileModule
   ]
 })
 export class OvertimeWorkModule { }

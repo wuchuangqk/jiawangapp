@@ -1,7 +1,7 @@
 <ion-header>
   <ion-toolbar color="primary">
     <app-back></app-back>
-    <ion-title style="padding:0 40px;">
+    <ion-title style="padding: 0 40px">
       <div class="segment-wrapper">
         <ion-segment (ngModelChange)="segmentChange($event)" [(ngModel)]="index">
           <ion-segment-button *ngFor="let item of menuList;let i=index" [value]="i">
@@ -12,7 +12,6 @@
     </ion-title>
   </ion-toolbar>
 </ion-header>
-
 
 <ion-content>
   <ion-refresher (ionRefresh)="doRefresh($event)">
@@ -26,82 +25,72 @@
   <section>
 
     <ion-slides (ionSlideWillChange)="change()">
-
       <ion-slide>
         <ion-list class="my-list">
           <ion-item *ngIf="itemList.length<1">
-            <p class="primary">
-              无数据！
-            </p>
-          </ion-item>
-          <ion-item *ngFor="let item of itemList"
-                    (click)="nav('synthesize/detail',{url:'/zhsp/shenpi_detail',id:item.id,title:title,contentTitle:item.title,title:'综合审批详情'})">
-            <section>
-              <div class="my-list-title">
-                <h2 [ngClass]="item.qjstate=='已审批'?'primary':''">
-                  <span *ngIf="item.qjstate!=='已审批'" [innerHTML]="item.qjstate"></span>
-                  <span *ngIf="item.qjstate=='已审批'">[已审批]</span>
-                  {{item.title}}</h2>
-
-              </div>
-              <div class="my-list-sub">
-                <div class="my-list-sub-top flex-between">
-                  <span>申请人:{{item.qjr}}</span>
-                  <span *ngIf="item.qjstate!=='已审批'" [innerHTML]="item.qjstate"></span>
-                  <span *ngIf="item.qjstate=='已审批'">[已审批]</span>
-                </div>
-              </div>
-            </section>
-          </ion-item>
-        </ion-list>
-      </ion-slide>
-
-      <ion-slide>
-        <ion-list class="my-list">
-          <ion-item *ngIf="daiBanList.length<1">
-            <p class="primary">
-              无数据！
-            </p>
-          </ion-item>
-          <ion-item *ngFor="let item of daiBanList" (click)="nav('synthesize/approve',{
-                    url:'/zhsp/shenpi_detail',handleUrl: '/zhsp/shenpi_save',
-                    id:item.id,title:title,contentTitle:item.title,title:'综合审批'})">
-            <section>
-              <div class="my-list-title">
-                <h2 class="primary">{{item.title}}</h2>
-              </div>
-              <div class="my-list-sub">
-                <div class="my-list-sub-top flex-between">
-                  <span>申请人:{{item.qjr}}</span>
-                  <span *ngIf="item.qjstate!=='已审批'" [innerHTML]="item.qjstate"></span>
-                  <span *ngIf="item.qjstate=='已审批'">[已审批]</span>
-                </div>
-              </div>
-            </section>
-          </ion-item>
-        </ion-list>
-      </ion-slide>
-      <ion-slide>
-        <ion-list class="my-list">
-          <ion-item *ngIf="yiBanList.length<1">
             <p class="primary"> 无数据！ </p>
           </ion-item>
-          <ion-item *ngFor="let item of yiBanList"
-                    (click)="nav('synthesize/detail',{url:'/zhsp/shenpi_detail',id:item.id,title:title,contentTitle:item.title,title:'综合审批详情'})">
+          <ion-item *ngFor="let item of itemList"
+                    (click)="nav('zi-jin-zhi-fu/detail',{url:'/zhifu/shenpi_detail',id:item.id,title:title,contentTitle:item.title,title:'资金支付审批详情'})">
             <section>
 
               <div class="my-list-title">
                 <h2 [ngClass]="item.qjstate=='已审批'?'primary':''">
                   <span *ngIf="item.qjstate!=='已审批'" [innerHTML]="item.qjstate"></span>
                   <span *ngIf="item.qjstate=='已审批'">[已审批]</span>
-                  <span class="primary">{{item.title}}</span>
-                </h2>
+                  {{item.doctitle}}</h2>
               </div>
               <div class="my-list-sub">
                 <div class="my-list-sub-top flex-between">
-                  <span>{{item.qjr}}</span>
+                  <span>{{item.zhifutype}}</span>
+                  <span>{{item.created}}</span>
+                </div>
+              </div>
+            </section>
+          </ion-item>
+        </ion-list>
+      </ion-slide>
+      <ion-slide>
+        <ion-list class="my-list">
+          <ion-item *ngIf="shenPiList.length<1">
+            <p class="primary">
+              无数据！
+            </p>
+          </ion-item>
+          <ion-item *ngFor="let item of shenPiList"
+                    (click)="nav('zi-jin-zhi-fu/approve',{url:'/zhifu/shenpi_detail',handleUrl: '/zhifu/shenpi_save',id:item.id,title:title,contentTitle:item.title,title:'资金支付审批'})">
+            <section>
+              <div class="my-list-title">
+                <h2>{{item.doctitle}}</h2>
+              </div>
+              <div class="my-list-sub">
+                <div class="my-list-sub-top flex-between">
+                  <span>{{item.zhifutype}}</span>
+                  <span>{{item.created}}</span>
+                </div>
+              </div>
+            </section>
+          </ion-item>
+        </ion-list>
+      </ion-slide>
+      <ion-slide>
+        <ion-list class="my-list">
+          <ion-item *ngIf="myShenPiList.length<1">
+            <p class="primary"> 无数据！ </p>
+          </ion-item>
+          <ion-item *ngFor="let item of myShenPiList"
+                    (click)="nav('zi-jin-zhi-fu/detail',{url:'/zhifu/shenpi_detail',id:item.id,title:title,contentTitle:item.title,title:'资金支付审批详情'})">
+            <section>
+              <div class="my-list-title">
+                <h2 [ngClass]="item.qjstate=='已审批'?'primary':''">
                   <span *ngIf="item.qjstate!=='已审批'" [innerHTML]="item.qjstate"></span>
                   <span *ngIf="item.qjstate=='已审批'">[已审批]</span>
+                  {{item.doctitle}}</h2>
+              </div>
+              <div class="my-list-sub">
+                <div class="my-list-sub-top flex-between">
+                  <span>{{item.zhifutype}}</span>
+                  <span>{{item.created}}</span>
                 </div>
               </div>
             </section>
@@ -111,10 +100,4 @@
 
     </ion-slides>
   </section>
-
-<!--      <ion-fab vertical="bottom" horizontal="end" slot="fixed">
-          <ion-fab-button (click)="nav('synthesize/add',{title:'综合审批',url:'b'})">
-              <ion-icon name="add"></ion-icon>
-          </ion-fab-button>
-      </ion-fab>-->
 </ion-content>

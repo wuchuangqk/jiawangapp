@@ -21,6 +21,7 @@ export class StaffComponent implements OnInit {
     this.events.subscribe(this.eventName, (selectedStaff) => {
       this.selectedStaff = selectedStaff;
       this.selectName = this.selectedStaff.map(item => item.name).join(' ');
+      console.log('selectedStaff',this.selectedStaff);
       this.selectedStaffChange.emit(this.selectedStaff);
     });
   }

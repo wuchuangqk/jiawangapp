@@ -6,7 +6,6 @@ import {DetailComponent} from './detail/detail.component';
 import {ApproveComponent} from './approve/approve.component';
 import {ZhspYinzhangAddComponent} from './zhsp-yinzhang-add/zhsp-yinzhang-add.component';
 
-
 const routes: Routes = [
   { path: '', component: IndexComponent },
   { path: 'add', component: AddComponent },
