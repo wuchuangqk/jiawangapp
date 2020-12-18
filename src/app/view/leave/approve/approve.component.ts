@@ -144,8 +144,8 @@ export class ApproveComponent  extends DetailBasePage implements OnInit {
     this.dialogService.toast('正在提交数据...');
     this.setRequest('/qingjia/shepi_back', this.payload).then((res) => {
       this.events.publish(AppConfig.Home.Badge);
-      this.events.publish(AppConfig.Synthesize.List);
-      this.events.publish(AppConfig.Synthesize.ShenPiList);
+      this.events.publish(AppConfig.Leave.List);
+      this.events.publish(AppConfig.Leave.ShenPiList);
       this.dialogService.alert('提交成功', () => {
         this.goBack();
       });
@@ -160,8 +160,8 @@ export class ApproveComponent  extends DetailBasePage implements OnInit {
     this.dialogService.toast('正在提交数据...');
     this.setRequest('/qingjia/shenpi_over', this.payload).then((res) => {
       this.events.publish(AppConfig.Home.Badge);
-      this.events.publish(AppConfig.Synthesize.List);
-      this.events.publish(AppConfig.Synthesize.ShenPiList);
+      this.events.publish(AppConfig.Leave.List);
+      this.events.publish(AppConfig.Leave.ShenPiList);
       this.dialogService.alert('提交成功', () => {
         this.goBack();
       });
@@ -176,8 +176,8 @@ export class ApproveComponent  extends DetailBasePage implements OnInit {
     this.dialogService.toast('正在提交数据...');
     this.setRequest(this.payload.url, this.payload).then((res) => {
       this.events.publish(AppConfig.Home.Badge);
-      this.events.publish(AppConfig.Synthesize.List);
-      this.events.publish(AppConfig.Synthesize.ShenPiList);
+      this.events.publish(AppConfig.Leave.List);
+      this.events.publish(AppConfig.Leave.ShenPiList);
       this.dialogService.alert('提交成功', () => {
         this.goBack();
       });

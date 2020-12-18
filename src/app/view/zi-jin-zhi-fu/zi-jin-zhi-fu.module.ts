@@ -8,19 +8,23 @@ import {DetailComponent} from './detail/detail.component';
 import {ApprovalComponent} from './approval/approval.component';
 import {IonicModule} from '@ionic/angular';
 import {CommonComponentsModule} from '../../common-components/common-components.module';
+import {SignaturePadModule} from 'angular2-signaturepad';
+import {JiaQianComponent} from './jia-qian/jia-qian.component';
 
 @NgModule({
   declarations: [
     IndexComponent,
     DetailComponent,
-    ApprovalComponent
+    ApprovalComponent,
+    JiaQianComponent
   ],
   imports: [
     CommonModule,
     ZiJinZhiFuRoutingModule,
     IonicModule,
     CommonComponentsModule,
-    FormsModule
+    FormsModule,
+    SignaturePadModule
   ]
 })
 export class ZiJinZhiFuModule { }

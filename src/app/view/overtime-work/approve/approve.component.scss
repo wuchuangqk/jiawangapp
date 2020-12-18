@@ -12,52 +12,6 @@
 .title-ios{
   height: 44px;
 }
-
-
-
-.title-end{
-  padding: 6px;
-  user-select: none;
-  font-size: 1.5rem;
-}
-.header-ios{
-  //height: 44px;
-}
-.toolbar-segment{
-  //height: 44px;
-}
-.title-ios{
-  //height: 44px;
-}
-
-.title-end{
-  padding: 6px;
-  user-select: none;
-  font-size: 1.5rem;
-}
-.header-ios{
-  height: 44px;
-}
-.toolbar-segment{
-  height: 44px;
-}
-.title-ios{
-  height: 44px;
-}
-.title-end{
-  padding: 6px;
-  user-select: none;
-  font-size: 1.5rem;
-}
-.header-ios{
-  height: 44px;
-}
-.toolbar-segment{
-  height: 44px;
-}
-.title-ios{
-  height: 44px;
-}
 .fileList-wrapper{
   padding: 0 2rem;
   border: 1px solid #ff0000;
@@ -68,6 +22,27 @@ textarea{
   border: none;
 }
 
+.more-item-wrapper{
+  width: 50px;
+  background: #f6f6f6;
+  text-align: center;
+  margin-left: 5px;
+  .more-item{
+    width: 50px;
+    height: 50px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    background: #ffffff;
+    img{
+      width: 30px;
+      height: 30px;
+    }
+    .text{
+      text-align: center;
+    }
+  }
+}
 
 @media screen and (min-width: 360px) {
   .switch-title{
@@ -105,7 +80,7 @@ textarea{
 
 
 .card-header{
-  font-size: 18px;
+  font-size: 15px;
   padding: 5px;
   background: #f8f8f8;
 }
@@ -130,4 +105,22 @@ textarea{resize:none;}/*取消textarea改变大小的功能*/
   tr:nth-child(even){background:#f0f9ff}
 
 }
+
+.comment-content{
+  height:200px;
+  animation:mycolor 0.3s ease-in-out;
+  overflow:auto;
+}
+
+
+@keyframes mycolor
+{
+  0%   {
+    height: 0;
+  }
+  100% {
+    height: 200px;
+  }
+}
+
 

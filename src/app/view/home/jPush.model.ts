@@ -397,7 +397,15 @@ export class JPushModel {
                 });
                 break;
             }
-
+            // 支付审批
+            case 'zhifudo':
+                this.nav('zi-jin-zhi-fu/approve',{
+                    url:'/zhifu/shenpi_detail',
+                    handleUrl: '/zhifu/shenpi_save',
+                    id:id,
+                    title:'资金支付审批'
+                });
+                break;
 
         }
     }

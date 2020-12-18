@@ -34,6 +34,10 @@ export class ApproveComponent  extends DetailBasePage implements OnInit {
 
   // 0 = 王晴，1 = 业务部室，2 = 分管领导，3 = 党委书记
   public signIndex: number = null;
+  // 单步骤(标识是王晴)
+  isSingle: boolean = false;
+  isMore:boolean = false;
+
   constructor(
       public http: HttpService,
       public router: Router,
@@ -82,6 +86,11 @@ export class ApproveComponent  extends DetailBasePage implements OnInit {
       return  this.request(this.url + '/' + this.id, {}).then((res) => {
         this.content = this.transform(res.data.json);
         this.signIndex = Number(res.data.index);
+        // this.isSingle = this.signIndex === 4;
+        // 王晴
+        if(this.signIndex === 4){
+          this.isSingle = true;
+        }
         if (res.data.file) {
           this.fileList = res.data.file;
         }
@@ -94,6 +103,11 @@ export class ApproveComponent  extends DetailBasePage implements OnInit {
   private async getSignList() {
     const res = await this.request('/zhsp/signlist', {item_id: this.id});
     this.signList = res.data;
+    // this.isSingle = this.signList.length === 1
+    // 王晴
+    if(this.signList.length === 1){
+      this.isSingle = true;
+    }
   }
   /**
    * 选择快捷语
@@ -173,8 +187,9 @@ export class ApproveComponent  extends DetailBasePage implements OnInit {
       this.dialogService.toast('请输入审批意见');
       return;
     }
-    this.dialogService.toast('正在提交数据...');
+    this.dialogService.loading('正在提交，请稍候……');
     this.setRequest("/zhsp/shepi_back", this.payload).then((res) => {
+      this.dialogService.dismiss();
       this.events.publish(AppConfig.Home.Badge);
       this.events.publish(AppConfig.Synthesize.List);
       this.events.publish(AppConfig.Synthesize.ShenPiList);
@@ -184,6 +199,49 @@ export class ApproveComponent  extends DetailBasePage implements OnInit {
     });
   }
 
+  // 办结
+  public async end(){
+    let alert = await this.alertController.create({
+      mode:'md',
+      header: '办结!',
+      message:"注意：办结操作无法撤销",
+      inputs: [
+        {
+          name: 'comments',
+          type: 'text',
+          placeholder: '办结意见'
+        }
+      ],
+      buttons: [
+        {
+          text: '取消',
+          role: 'cancel',
+          cssClass: 'secondary',
+          handler: () => {
+            console.log('Confirm Cancel');
+          }
+        }, {
+          text: '确定',
+          handler: (e) => {
+            this.setRequest('/zhsp/shenpi_over', {
+              id:this.id,
+              option: e.comments,
+            })
+              .then((res)=>{
+                this.events.publish(AppConfig.Home.Badge);
+                this.events.publish(AppConfig.Synthesize.List);
+                this.events.publish(AppConfig.Synthesize.ShenPiList);
+                this.dialogService.alert('提交成功!', () => {
+                  this.goBack();
+                });
+              })
+            ;
+          }
+        }
+      ]
+    });
+    await alert.present();
+  }
 
   save() {
     if (!this.payload.option) {
@@ -191,7 +249,7 @@ export class ApproveComponent  extends DetailBasePage implements OnInit {
       return;
     }
     // 王晴
-    if(this.signIndex === 0){
+    if(this.signIndex === 0 || this.signIndex === 4){
       // 提交
       this.doApproval()
     }else {
@@ -223,6 +281,7 @@ export class ApproveComponent  extends DetailBasePage implements OnInit {
     console.log(this.payload);
     this.dialogService.loading('正在提交，请稍候……');
     this.setRequest('/zhsp/shenpi_save', this.payload).then((res) => {
+      this.dialogService.dismiss();
       this.events.publish(AppConfig.Home.Badge);
       this.events.publish(AppConfig.Synthesize.List);
       this.events.publish(AppConfig.Synthesize.ShenPiList);

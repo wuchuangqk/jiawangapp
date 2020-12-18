@@ -1,0 +1,25 @@
+<ion-header>
+  <ion-toolbar color="primary">
+    <app-back slot="start"></app-back>
+    <ion-title>
+      加签
+    </ion-title>
+  </ion-toolbar>
+</ion-header>
+<ion-content>
+
+  <ion-item>
+    <ion-label>审批人</ion-label>
+    <ion-select [ngModel]="signer" okText="确定" cancelText="取消" multiple>
+      <ion-select-option *ngFor="let item of signerList" [value]="item.id">{{item.name}}</ion-select-option>
+    </ion-select>
+  </ion-item>
+
+</ion-content>
+<ion-footer>
+  <ion-toolbar>
+    <ion-button expand="full" (click)="save()" style="flex: 1">
+      保  存
+    </ion-button>
+  </ion-toolbar>
+</ion-footer>

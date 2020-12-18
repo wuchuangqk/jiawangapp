@@ -27,12 +27,19 @@ export class ApproveComponent  extends DetailBasePage implements OnInit {
   public signList = [];
   // 是否已审批
   public isgned = false;
-  public payload: {
-    url: string;
-    id: string;
-    option: string;
-    staff_ids: string;
+  public payload = {
+    id:'', // 用印id
+    option:'', // 意见
+    index:'', // 下一个审批序号
+    user:'', // 下一个审批人
   };
+  // 1 = 公司负责人，2 = 集团公司分管领导
+  public signIndex:number = null;
+  // 是集团公司总部直接提交
+  public type:string = null;
+  // 孙中亚
+  isBoss: boolean = false;
+  isMore: boolean = false;
 
   constructor(
       public http: HttpService,
@@ -50,7 +57,6 @@ export class ApproveComponent  extends DetailBasePage implements OnInit {
     this.handleUrl = this.query('handleUrl');
     this.id = this.query('id');
     this.payload.id = this.query('id');
-    this.payload.url = this.query('handleUrl');
     this.isShenPi = this.getQueryParams().isShenPi;
     this.title = this.query('title');
     this.getIsBackToHome();
@@ -85,6 +91,9 @@ export class ApproveComponent  extends DetailBasePage implements OnInit {
     return this.request(this.url + '/' + this.id, {}).then((res) => {
       this.content = this.transform(res.data.json);
       this.isgned = res.data.isgned;
+      this.signIndex = Number(res.data.ShowIndex);
+      this.type = res.data.type;
+      this.isBoss  = Number(res.data.index) === 2 && res.data.type === '集团公司本部';
       if (res.data.file) {
         this.fileList = res.data.file;
       }
@@ -136,13 +145,94 @@ export class ApproveComponent  extends DetailBasePage implements OnInit {
     await alert.present();
   }
 
+  // 选下级领导
+  async showNextSigner(){
+    // ShowIndex = 1
+    const signList:any = await this.getSigner();
+    const inputs = signList.map(v => {
+      return {
+        name: v.name,
+        type: 'radio',
+        label: v.name,
+        value: v.id
+      }
+    });
+    const alert = await this.alertController.create({
+      cssClass: 'my-custom-class',
+      header:'请选择集团公司分管领导',
+      inputs,
+      buttons: [
+        {
+          text: '取消',
+          role: 'cancel',
+          cssClass: 'secondary',
+          handler: () => {
+            console.log('Confirm Cancel');
+          }
+        }, {
+          text: '确定',
+          handler: (e) => {
+            this.payload.user = e;
+            this.payload.index = String(this.signIndex++);
+          }
+        }
+      ]
+    });
+    await alert.present();
+  }
+
+  // 终止
+  async stop() {
+    let alert = await this.alertController.create({
+      mode: 'md',
+      header: '终止',
+      inputs: [
+        {
+          name: 'comments',
+          type: 'text',
+          placeholder: '请输入终止意见'
+        }
+      ],
+      buttons: [
+        {
+          text: '取消',
+          role: 'cancel',
+          cssClass: 'secondary',
+          handler: () => {
+            console.log('Confirm Cancel');
+          }
+        }, {
+          text: '确定',
+          handler: (e) => {
+            // let-todo 缺少加班终止接口
+            this.setRequest('', {
+              comments: e.comments,
+              id: this.id
+            })
+              .then((res) => {
+                this.events.publish(AppConfig.Home.Badge);
+                this.events.publish(AppConfig.OvertimeWork.List);
+                this.events.publish(AppConfig.OvertimeWork.ShenPiList);
+                this.dialogService.alert('提交成功!', () => {
+                  this.goBack();
+                });
+              })
+            ;
+          }
+        }
+      ]
+    });
+    await alert.present();
+  }
+
   back() {
     if (!this.payload.option) {
       this.dialogService.toast('请输入审批意见');
       return;
     }
-    this.dialogService.toast('正在提交数据...');
-    this.setRequest("/zhsp/backsave", this.payload).then((res) => {
+    this.dialogService.loading('正在提交，请稍候……');
+    this.setRequest("/jiaban/shepi_bak", this.payload).then((res) => {
+      this.dialogService.dismiss();
       this.events.publish(AppConfig.Home.Badge);
       this.events.publish(AppConfig.OvertimeWork.List);
       this.events.publish(AppConfig.OvertimeWork.ShenPiList);
@@ -154,12 +244,35 @@ export class ApproveComponent  extends DetailBasePage implements OnInit {
 
 
   save() {
+    // 直接提交
+    if(this.isBoss){
+      this.doApproval();
+      return;
+    }
     if (!this.payload.option) {
       this.dialogService.toast('请输入审批意见');
       return;
     }
-    this.dialogService.toast('正在提交数据...');
-    this.setRequest(this.payload.url, this.payload).then((res) => {
+
+    if(this.type === '集团公司本部'){
+      this.doApproval();
+    }else{
+      if(this.signIndex === 1 && !this.payload.index){
+        // 选集团公司分管领导
+        this.showNextSigner();
+      }else{
+        // 直接提交
+        this.doApproval();
+      }
+    }
+
+
+  }
+
+  doApproval(){
+    this.dialogService.loading('正在提交，请稍候……');
+    this.setRequest('/jiaban/shenpi_save', this.payload).then((res) => {
+      this.dialogService.dismiss();
       this.events.publish(AppConfig.Home.Badge);
       this.events.publish(AppConfig.OvertimeWork.List);
       this.events.publish(AppConfig.OvertimeWork.ShenPiList);
@@ -167,5 +280,13 @@ export class ApproveComponent  extends DetailBasePage implements OnInit {
         this.goBack();
       });
     });
+  }
+
+  getSigner(){
+    return new Promise(resolve => {
+      this.request('/jiaban/signCreator2',{}).then(res=>{
+        resolve(res.data);
+      })
+    })
   }
 }

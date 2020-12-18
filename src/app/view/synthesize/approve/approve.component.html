@@ -15,10 +15,9 @@
             refreshingSpinner="circles"
             refreshingText="刷新...">
     </ion-refresher-content>
-    <ion-refresher-content >
+    <ion-refresher-content>
     </ion-refresher-content>
   </ion-refresher>
-
 
 
   <section>
@@ -28,15 +27,16 @@
         表单
       </div>
       <div (click)="tabIndex=1">
-        <ion-icon name="link"></ion-icon>附件</div>
+        <ion-icon name="link"></ion-icon>
+        附件
+      </div>
       <div (click)="tabIndex=2">
         <ion-icon name="git-network"></ion-icon>
-        流程</div>
+        流程
+      </div>
     </div>
     <app-divider></app-divider>
   </section>
-
-
 
 
   <section *ngIf="tabIndex==0">
@@ -47,7 +47,7 @@
       <fieldset>
         <legend><b>附件：</b></legend>
         <div *ngFor="let item of fileList;let i = index;" (click)="viewFile(item)">
-          <a>{{i+1}}、{{item.filename}}{{item.fileext}}</a>
+          <a>{{i + 1}}、{{item.filename}}{{item.fileext}}</a>
         </div>
       </fieldset>
     </section>
@@ -76,7 +76,7 @@
       </tr>
     </table>
     <div *ngIf="signList.length==0">
-      <a >无流程</a>
+      <a>无流程</a>
     </div>
   </section>
 
@@ -88,6 +88,22 @@
     <div style="margin-bottom: 5px;">
       <div>
         <div class="card-header">办理</div>
+        <div *ngIf="isMore" style="background: #f7f7f7; padding:5px; display: flex;">
+
+          <div class="more-item-wrapper"  (click)="back()">
+            <div class="more-item">
+              <img src="assets/icon/back.png" alt="">
+            </div>
+            <span class="text">退回</span>
+          </div>
+
+          <div class="more-item-wrapper"  (click)="end()">
+            <div class="more-item">
+              <img src="assets/icon/banjie.png" alt="">
+            </div>
+            <span class="text">办结</span>
+          </div>
+        </div>
         <div *ngIf="isEdit">
           <textarea placeholder="请输入处理意见" style="font-size: 1.4rem;" [(ngModel)]="payload.option"></textarea>
 
@@ -97,10 +113,17 @@
           </div>
         </div>
         <div class="flex-between">
-          <ion-icon (click)="isEdit=!isEdit" name="create" size="20" style="font-size: 20px;"></ion-icon>
+          <span *ngIf="!isSingle">
+            <ion-icon (click)="isMore=!isMore" name="more" size="20" style="font-size: 20px;color: #3880ff;"></ion-icon>&nbsp;&nbsp;
+            <ion-icon (click)="isEdit=!isEdit" name="create" size="20" style="font-size: 20px;color: #3880ff;"></ion-icon>
+          </span>
+          <span *ngIf="isSingle">
+            <ion-icon (click)="isEdit=!isEdit" name="create" size="20" style="font-size: 20px;color: #3880ff;"></ion-icon>
+          </span>
           <div>
-          <ion-button size="small" type="default" fill="outline" (click)="back()">退回</ion-button>
-          <ion-button size="small" fill="outline" (click)="save()">提交</ion-button>
+            <!--王晴没有退回-->
+            <!--          <ion-button size="small" type="default" fill="outline" (click)="back()" *ngIf="!isSingle">退回</ion-button>-->
+            <ion-button size="small" fill="outline" (click)="save()">提交</ion-button>
           </div>
         </div>
       </div>
