@@ -1,5 +1,5 @@
 import { Component, OnInit } from '@angular/core';
-// import { MP } from '../../../plugins/map';
+import { MP } from './map';
 import {BasePage} from '../../../base/base-page';
 import {HttpService} from '../../../service/http.service';
 import {ActivatedRoute, Router} from '@angular/router';
@@ -41,9 +41,9 @@ export class IndexComponent extends BasePage implements OnInit {
     const res = await this.request('/home/maplist', {});
     document.getElementById('allmap').innerHTML = '';
     // let-todo 缺少百度地图插件
-    // const BMap = await MP.init();
+     const BMap = await MP.init();
     this.dialogService.dismiss();
-    // this.init(BMap, res.data);
+     this.init(BMap, res.data);
   }
   addMarker(point, map, BMap, content) {
     const marker = new BMap.Marker(point);
