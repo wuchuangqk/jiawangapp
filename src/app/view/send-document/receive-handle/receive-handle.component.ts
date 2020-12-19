@@ -6,10 +6,10 @@ import {DialogService} from '../../../service/dialog.service';
 import {DomSanitizer, SafeHtml} from '@angular/platform-browser';
 import {AppConfig} from '../../../app.config';
 import {DetailBasePage} from '../../../base/detail-base-page';
-import {FileService} from "../../../service/FileService";
-import {ChuanYueComponent} from "../chuan-yue/chuan-yue.component";
-import {JiaQianComponent} from "../jia-qian/jia-qian.component";
-import {JPushModel} from "../../home/jPush.model";
+import {FileService} from '../../../service/FileService';
+import {ChuanYueComponent} from '../chuan-yue/chuan-yue.component';
+import {JiaQianComponent} from '../jia-qian/jia-qian.component';
+import {JPushModel} from '../../home/jPush.model';
 
 @Component({
   selector: 'app-receive-handle',
@@ -17,7 +17,7 @@ import {JPushModel} from "../../home/jPush.model";
   styleUrls: ['./receive-handle.component.scss'],
 })
 export class ReceiveHandleComponent  extends DetailBasePage implements OnInit, OnDestroy  {
-  public isCommentOpen=false;
+  public isCommentOpen = false;
 
   public currentModal = null;
   public title = '详情';
@@ -36,11 +36,11 @@ export class ReceiveHandleComponent  extends DetailBasePage implements OnInit, O
   public ldid = '';
   public primarySignName = '';
   public fenGuanLingDaoNames = '';
-  public signList:SafeHtml = "";
+  public signList: SafeHtml = '';
 
-  public isQianPi:boolean=false;
-  //操作日志列表
-  public signLogList=[];
+  public isQianPi = false;
+  // 操作日志列表
+  public signLogList = [];
   public selectedStaff = [];
   // 关联项目
   public linkProjectList = [];
@@ -64,7 +64,7 @@ export class ReceiveHandleComponent  extends DetailBasePage implements OnInit, O
       public modalController: ModalController,
       public route?: ActivatedRoute,
   ) {
-    super( http, router, dialogService, sanitizer, navController,fileService);
+    super( http, router, dialogService, sanitizer, navController, fileService);
     this.url = this.query('url');
     this.title = this.query('title');
     this.handleUrl = this.query('handleUrl');
@@ -101,7 +101,7 @@ export class ReceiveHandleComponent  extends DetailBasePage implements OnInit, O
     const type = item.activityname;
     const itemTitle = '';
     const contentTitle = '';
-    this.jPushModel.goToPage(id,type,contentTitle,itemTitle);
+    this.jPushModel.goToPage(id, type, contentTitle, itemTitle);
   }
 
 
@@ -118,8 +118,8 @@ export class ReceiveHandleComponent  extends DetailBasePage implements OnInit, O
     this.primarySignerList = res.data;
   }
 
-  public async getSingLog(){
-    let res = await this.request("/dispatch/signlog",{docid:this.id})
+  public async getSingLog() {
+    const res = await this.request('/dispatch/signlog', {docid: this.id});
     this.signLogList = res.data;
   }
   private async  getFenGuanLingDaoList() {
@@ -132,14 +132,14 @@ export class ReceiveHandleComponent  extends DetailBasePage implements OnInit, O
   /********************
    * 减签
    ********************/
-  public async document_jianqian(){
-    this.nav("send-document/jian-qian",{
-      id:this.id
-    })
+  public async document_jianqian() {
+    this.nav('send-document/jian-qian', {
+      id: this.id
+    });
   }
-  public async document_back(){
-    let alert = await this.alertController.create({
-      mode:'md',
+  public async document_back() {
+    const alert = await this.alertController.create({
+      mode: 'md',
       // header: '退回!',
       inputs: [
         {
@@ -161,9 +161,9 @@ export class ReceiveHandleComponent  extends DetailBasePage implements OnInit, O
           handler: (e) => {
             this.setRequest('/dispatch/signback', {
               comments: e.comments,
-              id:this.id
+              id: this.id
             })
-            .then((res)=>{
+            .then((res) => {
               this.events.publish(AppConfig.Document.DocumentList);
               this.events.publish(AppConfig.Home.Badge);
               this.events.publish(AppConfig.Synthesize.List);
@@ -175,23 +175,23 @@ export class ReceiveHandleComponent  extends DetailBasePage implements OnInit, O
           }
         }
       ]
-    })
+    });
     await alert.present();
   }
 
 
   // 传阅
-  public async document_chaunYue(){
-    this.nav("send-document/chuan-yue",{id:this.id})
+  public async document_chaunYue() {
+    this.nav('send-document/chuan-yue', {id: this.id});
   }
   dismissModal() {
     if (this.currentModal) {
       this.currentModal.dismiss().then(() => { this.currentModal = null; });
     }
   }
-  public async document_stop(){
-    let alert = await this.alertController.create({
-      mode:'md',
+  public async document_stop() {
+    const alert = await this.alertController.create({
+      mode: 'md',
       // header: '退回!',
       inputs: [
         {
@@ -213,9 +213,9 @@ export class ReceiveHandleComponent  extends DetailBasePage implements OnInit, O
           handler: (e) => {
             this.setRequest('/dispatch/signstop', {
               comments: e.comments,
-              id:this.id
+              id: this.id
             })
-            .then((res)=>{
+            .then((res) => {
               this.events.publish(AppConfig.Document.DocumentList);
               this.events.publish(AppConfig.Home.Badge);
               this.events.publish(AppConfig.Synthesize.List);
@@ -227,7 +227,7 @@ export class ReceiveHandleComponent  extends DetailBasePage implements OnInit, O
           }
         }
       ]
-    })
+    });
     await alert.present();
   }
 
@@ -252,25 +252,25 @@ export class ReceiveHandleComponent  extends DetailBasePage implements OnInit, O
     this.linkDispathList = res.data.dispath;
   }
 
-  public async document_jiaqian(isJiaQian,comments){
+  public async document_jiaqian(isJiaQian, comments) {
     this.currentModal = await this.modalController.create({
-      component:JiaQianComponent,
-      showBackdrop:true,
-      componentProps:{
-        id:this.id,
+      component: JiaQianComponent,
+      showBackdrop: true,
+      componentProps: {
+        id: this.id,
         comments,
-        sgUser:this.sgUser,
-        qfUser:this.qfUser,
-        hgUser:this.hgUser,
+        sgUser: this.sgUser,
+        qfUser: this.qfUser,
+        hgUser: this.hgUser,
         signIndex: this.SignIndex,
         isJiaQian
       }
     });
     await this.currentModal.present();
-    //监听销毁的事件，接收返回的值
+    // 监听销毁的事件，接收返回的值
     const { data } = await this.currentModal.onDidDismiss();
     console.log(data);
-    if(data.isBack){
+    if (data.isBack) {
         this.navController.back();
     }
   }
@@ -414,8 +414,8 @@ export class ReceiveHandleComponent  extends DetailBasePage implements OnInit, O
    * 选择快捷语
    */
   async qianFaPresentAlertPrompt() {
-    let res =  await this.request("/dispatch/signCreator1",{})
-    let qianFaList = res.data;
+    const res =  await this.request('/dispatch/signCreator1', {});
+    const qianFaList = res.data;
     const inputs: any = qianFaList.map(item => {
       return {
         name: item.name,
@@ -482,7 +482,7 @@ export class ReceiveHandleComponent  extends DetailBasePage implements OnInit, O
     item.url = '/dispatch/tododetail';
     item.handleUrl = '/documents/handle_document';
     item.document_type = 1;
-    this.nav('/send-document/receive-detail/'+item.id, item);
+    this.nav('/send-document/receive-detail/' + item.id, item);
   }
 
   // public getIds(arr): string {
@@ -498,28 +498,28 @@ export class ReceiveHandleComponent  extends DetailBasePage implements OnInit, O
     const userId = userInfo.id;
 
 
-    let user = this.getIds(this.selectedStaff);
-    console.log(user)
-    if(this.SignIndex!=4){
-      let comment = this.infoTitle;
-      if(!comment){
-        await this.dialogService.toast("请输入意见");
+    const user = this.getIds(this.selectedStaff);
+    console.log(user);
+    if (this.SignIndex != 4) {
+      const comment = this.infoTitle;
+      if (!comment) {
+        await this.dialogService.toast('请输入意见');
         return false;
       }
-      console.log(comment)
-      await this.document_jiaqian(false,comment);
+      console.log(comment);
+      await this.document_jiaqian(false, comment);
     }
-    if(!this.infoTitle){
+    if (!this.infoTitle) {
       // if(this.getUserId()!=519){
       // }
-      await this.dialogService.toast("请输入意见");
+      await this.dialogService.toast('请输入意见');
       return false;
     }
     await this.setRequest('/dispatch/todosave', {
       id: this.id,
-      comments: this.infoTitle||"",
+      comments: this.infoTitle || '',
       ldid: this.ldid,
-      index:this.SignIndex,
+      index: this.SignIndex,
       user
     });
     this.events.publish(AppConfig.Document.DocumentList);
