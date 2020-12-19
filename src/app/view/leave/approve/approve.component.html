@@ -135,10 +135,23 @@
             <div style="color: #96999e;padding-right: 5px;" (click)="presentAlertPrompt()">常用语</div>
           </div>
         </div>
+        <div *ngIf="isMore" style="background: #f7f7f7; padding:5px; display: flex;">
+
+          <div class="more-item-wrapper"  (click)="back()">
+            <div class="more-item">
+              <img src="assets/icon/back.png" alt="">
+            </div>
+            <span class="text">退回</span>
+          </div>
+        </div>
         <div class="flex-between" [style.justifyContent]="isBoss ? 'flex-end' : 'space-between'">
-          <ion-icon *ngIf="!isBoss" (click)="isEdit=!isEdit" name="create" size="20" style="font-size: 20px;"></ion-icon>
+          <span *ngIf="!isBoss">
+            <ion-icon (click)="isMore=!isMore" name="more" size="20" style="font-size: 20px;color: #3880ff;"></ion-icon>&nbsp;&nbsp;
+            <ion-icon  (click)="isEdit=!isEdit" name="create" size="20" style="font-size: 20px;color: #3880ff;"></ion-icon>
+          </span>
+
           <div *ngIf="!isBoss">
-            <ion-button size="small" type="default" fill="outline" (click)="back()">退回</ion-button>
+<!--            <ion-button size="small" type="default" fill="outline" (click)="back()">退回</ion-button>-->
             <ion-button size="small" fill="outline" (click)="save()">提交</ion-button>
             <ion-button size="small" fill="outline" (click)="shenpi_over()">办结</ion-button>
           </div>

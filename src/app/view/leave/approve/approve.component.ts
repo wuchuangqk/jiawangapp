@@ -1,21 +1,21 @@
-import { Component, OnInit } from '@angular/core';
+import {Component, OnDestroy, OnInit} from '@angular/core';
 import {DetailBasePage} from '../../../base/detail-base-page';
 import {HttpService} from '../../../service/http.service';
 import {ActivatedRoute, Router} from '@angular/router';
 import {DialogService} from '../../../service/dialog.service';
 import {DomSanitizer, SafeHtml} from '@angular/platform-browser';
-import {AlertController, Events} from '@ionic/angular';
+import {AlertController, Events, ModalController} from '@ionic/angular';
 import {AppConfig} from '../../../app.config';
-import { NavController } from '@ionic/angular';
+import {NavController} from '@ionic/angular';
 import {FileService} from '../../../service/FileService';
-
+import {SelectFlowComponent} from '../select-flow/select-flow.component';
 
 @Component({
   selector: 'app-detail',
   templateUrl: './approve.component.html',
   styleUrls: ['./approve.component.scss'],
 })
-export class ApproveComponent  extends DetailBasePage implements OnInit {
+export class ApproveComponent extends DetailBasePage implements OnInit,OnDestroy {
   public title = '详情';
   public isShenPi: boolean;
   public handleUrl: string;
@@ -27,31 +27,35 @@ export class ApproveComponent  extends DetailBasePage implements OnInit {
   public signList = [];
   // 是否已审批
   public isgned = false;
-  public payload: {
-    url: string;
-    id: string;
-    option: string;
-    staff_ids: string;
+  public payload = {
+    id: '',
+    option: '',
+    index:'',
+    user:''
   };
   // 孙中亚
   isBoss: boolean = false;
+  curIndex = null; // 当前步骤
+  isMore = false;
+
   constructor(
-      public http: HttpService,
-      public router: Router,
-      public navController: NavController,
-      public dialogService: DialogService,
-      public sanitizer: DomSanitizer,
-      public alertController: AlertController,
-      public events: Events,
-      public fileService: FileService,
-      public route?: ActivatedRoute,
+    public http: HttpService,
+    public router: Router,
+    public navController: NavController,
+    public dialogService: DialogService,
+    public sanitizer: DomSanitizer,
+    public alertController: AlertController,
+    public events: Events,
+    public fileService: FileService,
+    public modalController: ModalController,
+    public route?: ActivatedRoute,
   ) {
     super(http, router, dialogService, sanitizer, navController, fileService);
     this.url = this.query('url');
     this.handleUrl = this.query('handleUrl');
     this.id = this.query('id');
     this.payload.id = this.query('id');
-    this.payload.url = this.query('handleUrl');
+    // this.payload.url = this.query('handleUrl');
     this.isShenPi = this.getQueryParams().isShenPi;
     this.title = this.query('title');
     this.getIsBackToHome();
@@ -64,7 +68,18 @@ export class ApproveComponent  extends DetailBasePage implements OnInit {
     this.events.subscribe(AppConfig.Document.DocumentDetail, () => {
       this.getDetail();
     });
+    this.events.subscribe(AppConfig.Leave.flow,(params)=>{
+      console.log('params',params);
+      this.payload.index = params.index;
+      this.payload.user = params.user;
+      this.doApproval();
+    })
   }
+
+  ngOnDestroy(): void {
+    this.events.unsubscribe(AppConfig.Leave.flow);
+  }
+
 
   private async getCommentList() {
     const res = await this.request('/receipt/commentStore', {});
@@ -87,8 +102,9 @@ export class ApproveComponent  extends DetailBasePage implements OnInit {
       this.content = this.transform(res.data.json);
       this.isgned = res.data.isgned;
       this.isBoss = Number(res.data.ShowIndex) === 5;
-      if (res.data.filelist) {
-        this.fileList = res.data.filelist;
+      this.curIndex = Number(res.data.ShowIndex);
+      if (res.data.file) {
+        this.fileList = res.data.file;
       }
     });
   }
@@ -171,7 +187,7 @@ export class ApproveComponent  extends DetailBasePage implements OnInit {
   }
 
   save() {
-    if(this.isBoss){
+    if (this.isBoss) {
       this.doApproval();
       return;
     }
@@ -179,12 +195,23 @@ export class ApproveComponent  extends DetailBasePage implements OnInit {
       this.dialogService.toast('请输入审批意见');
       return;
     }
-    this.doApproval();
+    // 判断当前步骤，如果不是最后一步，需要选人
+    if(this.curIndex !== 4){
+      this.showNextFlow();
+    }else{
+      this.doApproval();
+    }
   }
 
-  doApproval(){
+  async showNextFlow() {
+    this.nav('/leave/flow',{
+      index:this.curIndex
+    })
+  }
+
+  doApproval() {
     this.dialogService.toast('正在提交数据...');
-    this.setRequest(this.payload.url, this.payload).then((res) => {
+    this.setRequest('/qingjia/shenpi_save', this.payload).then((res) => {
       this.events.publish(AppConfig.Home.Badge);
       this.events.publish(AppConfig.Leave.List);
       this.events.publish(AppConfig.Leave.ShenPiList);

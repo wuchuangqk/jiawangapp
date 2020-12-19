@@ -28,7 +28,7 @@ export class AddComponent extends BasePage implements OnInit {
         // 外出事由
         qjyy: '',
         // 外出类别
-        qjtype: '事假',
+        qjtype: '',
         // 申请人
         staff_ids: '',
         addr: '',
@@ -108,11 +108,8 @@ export class AddComponent extends BasePage implements OnInit {
         } else if (!params.qjyy) {
             this.dialogService.toast('请输入外出事由!');
             return false;
-        } else if (!params.qjtype) {
-            this.dialogService.toast('请输入外出类型!');
-            return false;
-        } else if (!params.signCreator1) {
-            this.dialogService.toast('请选择审批人!');
+        }else if (!params.signCreator1) {
+            this.dialogService.toast('请选择分管领导!');
             return false;
         }
         return true;

@@ -29,7 +29,8 @@ export class AppConfig {
     };
     public  static Leave = {
         List: 'LeaveList',
-        ShenPiList: 'LeaveShenPiList'
+        ShenPiList: 'LeaveShenPiList',
+        flow:'LeaveFlow'
     };
     public  static OvertimeWork = {
         List: 'OverTimeList',

@@ -153,22 +153,7 @@
         </div>
         <div class="flex-between" [style.justifyContent]="isBoss ? 'flex-end' : 'space-between'">
                     <span *ngIf="!isBoss">
-            <div *ngIf="isMore" style="background: #f7f7f7; padding:5px; display: flex;">
-
-          <div class="more-item-wrapper" (click)="back()">
-            <div class="more-item">
-              <img src="assets/icon/back.png" alt="">
-            </div>
-            <span class="text">退回</span>
-          </div>
-
-          <div class="more-item-wrapper" (click)="stop()">
-            <div class="more-item">
-              <img src="assets/icon/banjie.png" alt="">
-            </div>
-            <span class="text">终止</span>
-          </div>
-        </div>
+            <ion-icon (click)="isMore=!isMore" name="more" size="20" style="font-size: 20px;color: #3880ff;"></ion-icon>&nbsp;&nbsp;
             <ion-icon (click)="isEdit=!isEdit" name="create" size="20"
                       style="font-size: 20px;color: #3880ff;"></ion-icon>
           </span>

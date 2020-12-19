@@ -10,13 +10,15 @@ import {IonicModule} from '@ionic/angular';
 import {CommonComponentsModule} from '../../common-components/common-components.module';
 import {SignaturePadModule} from 'angular2-signaturepad';
 import {JiaQianComponent} from './jia-qian/jia-qian.component';
+import {NextFlowComponent} from './next-flow/next-flow.component';
 
 @NgModule({
   declarations: [
     IndexComponent,
     DetailComponent,
     ApprovalComponent,
-    JiaQianComponent
+    JiaQianComponent,
+    NextFlowComponent
   ],
   imports: [
     CommonModule,

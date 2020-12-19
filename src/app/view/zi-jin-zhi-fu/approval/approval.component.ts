@@ -3,11 +3,13 @@ import {DetailBasePage} from '../../../base/detail-base-page';
 import {DomSanitizer, SafeHtml} from '@angular/platform-browser';
 import {HttpService} from '../../../service/http.service';
 import {ActivatedRoute, Router} from '@angular/router';
-import {AlertController, Events, NavController} from '@ionic/angular';
+import {AlertController, Events, NavController,ModalController} from '@ionic/angular';
 import {DialogService} from '../../../service/dialog.service';
 import {JPushModel} from '../../home/jPush.model';
 import {FileService} from '../../../service/FileService';
 import {AppConfig} from '../../../app.config';
+import {NextFlowComponent} from '../next-flow/next-flow.component';
+import {promise} from 'selenium-webdriver';
 
 @Component({
   selector: 'app-approval',
@@ -29,11 +31,13 @@ export class ApprovalComponent extends DetailBasePage implements OnInit {
     id:'', // 用印id
     option:'', // 意见
     index:'', // 下一个审批序号
-    user:'', // 下一个审批人
+    staff_ids:'', // 下一个审批人
   };
   isMore:boolean = false;
   isCommentOpen:boolean = false;
   currid = null; // 当前步骤
+  signIndex = null;
+  nextid = null; // nextid = 0 标识是最后一步
   constructor(
     public http: HttpService,
     public router: Router,
@@ -44,6 +48,7 @@ export class ApprovalComponent extends DetailBasePage implements OnInit {
     public alertController: AlertController,
     public jPushModel: JPushModel,
     public fileService: FileService,
+    public modalController: ModalController,
     public route?: ActivatedRoute,
   ) {
     super( http, router, dialogService, sanitizer, navController,fileService);
@@ -66,7 +71,8 @@ export class ApprovalComponent extends DetailBasePage implements OnInit {
     }).then((res) => {
       this.content = this.transform(res.data.json);
       this.zhengWen = res.data.pdfurl;
-      this.currid = res.data.currid
+      this.currid = res.data.currid;
+      this.nextid = Number(res.data.nextid)
     });
   }
 
@@ -284,7 +290,23 @@ export class ApprovalComponent extends DetailBasePage implements OnInit {
       this.dialogService.toast('请输入审批意见');
       return;
     }
-    this.dialogService.loading('正在提交，请稍候……');
+    if(this.nextid !== 0){
+      this.showNextSigner();
+    }else{
+      // this.payload.index = String(Number(this.currid)+1);
+      // this.payload.staff_ids = '';
+      this.dialogService.loading('正在提交，请稍候……');
+      this.setRequest('/zhifu/shenpi_save', this.payload).then((res) => {
+        this.dialogService.dismiss();
+        this.events.publish(AppConfig.Home.Badge);
+        this.events.publish(AppConfig.ZiJinZhiFu.List);
+        this.events.publish(AppConfig.ZiJinZhiFu.ShenPiList);
+        this.dialogService.alert('提交成功',()=>{
+          this.goBack();
+        });
+      });
+    }
+    /*this.dialogService.loading('正在提交，请稍候……');
     this.setRequest('/zhifu/shenpi_save', this.payload).then((res) => {
       this.dialogService.dismiss();
       this.events.publish(AppConfig.Home.Badge);
@@ -293,8 +315,92 @@ export class ApprovalComponent extends DetailBasePage implements OnInit {
       this.dialogService.alert('提交成功',()=>{
         this.goBack();
       });
-    });
+    });*/
 
+  }
+
+  getNextSigner(){
+    return new Promise(resolve => {
+      this.request('/zhifu/getSignCreator', {signtype: this.currid}).then(res => {
+        resolve(res.data)
+      })
+    })
+
+  }
+
+  async showNextSigner(){
+    // signIndex:1 = 处室，处室 => 分管 => 党委
+    const signList:any = await this.getNextSigner();
+    console.log('signList',signList);
+    const inputs = signList.map(v => {
+      return {
+        name: v.name,
+        type: 'checkbox',
+        label: v.name,
+        value: v.id
+      }
+    });
+    const header = '请选择下个流程的执行人';
+    const alert = await this.alertController.create({
+      cssClass: 'my-custom-class',
+      header,
+      inputs,
+      buttons: [
+        {
+          text: '取消',
+          role: 'cancel',
+          cssClass: 'secondary',
+          handler: () => {
+            console.log('Confirm Cancel');
+          }
+        }, {
+          text: '确定',
+          handler: (e) => {
+            console.log('showNextSigner',e);
+            if(!e.length){
+              this.dialogService.toast('请选择流程执行人');
+              return
+            }
+            this.payload.index = this.nextid;
+            this.payload.staff_ids = e.join(',');
+            this.dialogService.loading('正在提交，请稍候……');
+            this.setRequest('/zhifu/shenpi_save', this.payload).then((res) => {
+              this.dialogService.dismiss();
+              this.events.publish(AppConfig.Home.Badge);
+              this.events.publish(AppConfig.ZiJinZhiFu.List);
+              this.events.publish(AppConfig.ZiJinZhiFu.ShenPiList);
+              this.dialogService.alert('提交成功',()=>{
+                this.goBack();
+              });
+            });
+          }
+        }
+      ]
+    });
+    await alert.present();
+  }
+
+
+  // 选人
+  async selectNext(){
+    const modal = await this.modalController.create({
+      component:NextFlowComponent,
+      cssClass: 'my-custom-class',
+    });
+    await modal.present();
+/*    const modal = await this.modalController.create({
+      component: StaffSelectComponent,
+      cssClass: 'my-custom-class',
+      componentProps:{
+        title: '选择人员', url: 'bbb', depart_id: '0000',
+        isSelectOne: false,
+        eventName,
+        selected_staff: selected,
+        selectedStaff:selected
+      }
+    });
+    // return
+    await modal.present();*/
   }
 
 }

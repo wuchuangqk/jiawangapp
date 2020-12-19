@@ -173,7 +173,7 @@ export class ApproveComponent  extends DetailBasePage implements OnInit {
           text: '确定',
           handler: (e) => {
             this.payload.user = e;
-            this.payload.index = String(this.signIndex++);
+            this.payload.index = String(this.signIndex+1);
           }
         }
       ]

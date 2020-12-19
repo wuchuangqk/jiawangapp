@@ -33,7 +33,7 @@ export class ApproveComponent  extends DetailBasePage implements OnInit {
     option: string;
     staff_ids: string;
   };
-
+  isMore: boolean = false;
   constructor(
       public http: HttpService,
       public router: Router,
@@ -142,14 +142,57 @@ export class ApproveComponent  extends DetailBasePage implements OnInit {
       return;
     }
     this.dialogService.toast('正在提交数据...');
-    this.setRequest("/waichu/backsave", this.payload).then((res) => {
+    this.setRequest("/waichu/shepi_back", this.payload).then((res) => {
       this.events.publish(AppConfig.Home.Badge);
-      this.events.publish(AppConfig.Synthesize.List);
-      this.events.publish(AppConfig.Synthesize.ShenPiList);
+      this.events.publish(AppConfig.GoOut.List);
+      this.events.publish(AppConfig.GoOut.ShenPiList);
       this.dialogService.alert('提交成功', () => {
         this.goBack();
       });
     });
+  }
+
+  // 终止
+  async stop() {
+    let alert = await this.alertController.create({
+      mode: 'md',
+      header: '终止',
+      inputs: [
+        {
+          name: 'comments',
+          type: 'text',
+          placeholder: '请输入终止意见'
+        }
+      ],
+      buttons: [
+        {
+          text: '取消',
+          role: 'cancel',
+          cssClass: 'secondary',
+          handler: () => {
+            console.log('Confirm Cancel');
+          }
+        }, {
+          text: '确定',
+          handler: (e) => {
+            this.setRequest('/waichu/shepi_stop', {
+              option: e.comments,
+              id: this.id
+            })
+              .then((res) => {
+                this.events.publish(AppConfig.Home.Badge);
+                this.events.publish(AppConfig.GoOut.List);
+                this.events.publish(AppConfig.GoOut.ShenPiList);
+                this.dialogService.alert('提交成功!', () => {
+                  this.goBack();
+                });
+              })
+            ;
+          }
+        }
+      ]
+    });
+    await alert.present();
   }
 
 
