@@ -55,18 +55,10 @@ export class DetailComponent extends DetailBasePage implements OnInit {
 
   async ngOnInit() {
     await this.getDetail();
-    // let-todo 缺少审批意见接口
-    await this.getCommentList();
-    // let-todo 缺少流程接口
     await this.getSignList();
     this.events.subscribe(AppConfig.Document.DocumentDetail, () => {
       this.getDetail();
     });
-  }
-
-  private async getCommentList() {
-    const res = await this.request('/receipt/commentStore', {});
-    this.commentList = res.data;
   }
 
   go(eventName, selectedStaff, isSelectOne) {
@@ -97,7 +89,7 @@ export class DetailComponent extends DetailBasePage implements OnInit {
   }
 
   private async getSignList() {
-    const res = await this.request('/jiaban/signlist', {item_id: this.id});
+    const res = await this.request('/zhifu/signlist', {item_id: this.id});
     this.signList = res.data;
   }
 

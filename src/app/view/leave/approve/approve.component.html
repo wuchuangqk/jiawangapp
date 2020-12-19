@@ -135,12 +135,15 @@
             <div style="color: #96999e;padding-right: 5px;" (click)="presentAlertPrompt()">常用语</div>
           </div>
         </div>
-        <div class="flex-between">
-          <ion-icon (click)="isEdit=!isEdit" name="create" size="20" style="font-size: 20px;"></ion-icon>
-          <div>
+        <div class="flex-between" [style.justifyContent]="isBoss ? 'flex-end' : 'space-between'">
+          <ion-icon *ngIf="!isBoss" (click)="isEdit=!isEdit" name="create" size="20" style="font-size: 20px;"></ion-icon>
+          <div *ngIf="!isBoss">
             <ion-button size="small" type="default" fill="outline" (click)="back()">退回</ion-button>
             <ion-button size="small" fill="outline" (click)="save()">提交</ion-button>
             <ion-button size="small" fill="outline" (click)="shenpi_over()">办结</ion-button>
+          </div>
+          <div *ngIf="isBoss">
+            <ion-button size="small" fill="outline" (click)="save()">已收悉</ion-button>
           </div>
         </div>
       </div>

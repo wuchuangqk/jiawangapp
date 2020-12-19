@@ -204,9 +204,8 @@ export class ApproveComponent  extends DetailBasePage implements OnInit {
         }, {
           text: '确定',
           handler: (e) => {
-            // let-todo 缺少加班终止接口
-            this.setRequest('', {
-              comments: e.comments,
+            this.setRequest('/jiaban/shenpi_stop', {
+              option: e.comments,
               id: this.id
             })
               .then((res) => {

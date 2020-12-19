@@ -33,7 +33,8 @@ export class ApproveComponent  extends DetailBasePage implements OnInit {
     option: string;
     staff_ids: string;
   };
-
+  // 孙中亚
+  isBoss: boolean = false;
   constructor(
       public http: HttpService,
       public router: Router,
@@ -85,6 +86,7 @@ export class ApproveComponent  extends DetailBasePage implements OnInit {
     return this.request(this.url + '/' + this.id, {}).then((res) => {
       this.content = this.transform(res.data.json);
       this.isgned = res.data.isgned;
+      this.isBoss = Number(res.data.ShowIndex) === 5;
       if (res.data.filelist) {
         this.fileList = res.data.filelist;
       }
@@ -169,10 +171,18 @@ export class ApproveComponent  extends DetailBasePage implements OnInit {
   }
 
   save() {
+    if(this.isBoss){
+      this.doApproval();
+      return;
+    }
     if (!this.payload.option) {
       this.dialogService.toast('请输入审批意见');
       return;
     }
+    this.doApproval();
+  }
+
+  doApproval(){
     this.dialogService.toast('正在提交数据...');
     this.setRequest(this.payload.url, this.payload).then((res) => {
       this.events.publish(AppConfig.Home.Badge);
