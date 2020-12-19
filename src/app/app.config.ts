@@ -72,7 +72,7 @@ export class AppConfig {
 
     // 资金支付
     public static ZiJinZhiFu = {
-        List:'ZiJinZhiFuList',
-        ShenPiList:'ZiJinZhiFuShenPiList'
-    }
+        List: 'ZiJinZhiFuList',
+        ShenPiList: 'ZiJinZhiFuShenPiList'
+    };
 }

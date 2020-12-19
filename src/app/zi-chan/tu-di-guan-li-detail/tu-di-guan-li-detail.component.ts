@@ -6,7 +6,7 @@ import {Events, NavController} from '@ionic/angular';
 import {DialogService} from '../../service/dialog.service';
 import {AppConfig} from '../../app.config';
 import {DetailBasePage} from '../../base/detail-base-page';
-import {FileService} from "../../service/FileService";
+import {FileService} from '../../service/FileService';
 
 @Component({
   selector: 'app-tu-di-guan-li-detail',
@@ -48,7 +48,7 @@ export class TuDiGuanLiDetailComponent extends DetailBasePage implements OnInit 
       public fileService: FileService,
       public route?: ActivatedRoute,
   ) {
-    super( http, router, dialogService, sanitizer, navController,fileService);
+    super( http, router, dialogService, sanitizer, navController, fileService);
     this.url = '/zichan/landdetail';
     this.handleUrl = this.query('handleUrl');
     this.id = this.query('id');
@@ -70,7 +70,7 @@ export class TuDiGuanLiDetailComponent extends DetailBasePage implements OnInit 
     }).then((res) => {
       this.itemDetail = res.data;
       this.content = res.data.json;
-      this.fileList = res.data.file
+      this.fileList = res.data.file;
     });
   }
 }

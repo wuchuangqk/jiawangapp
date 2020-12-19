@@ -153,11 +153,6 @@
         "PACKAGENAME": "com.bnp.yuansong",
         "CPID": "102108765"
       },
-      "cordova-plugin-mixPush": {
-        "ANDROID_PACKAGE_NAME": "com.bnp.yuansong",
-        "MI_PUSH_APP_IOS_ID": "2882303761518409126",
-        "MI_PUSH_APP_IOS_KEY": "5141840975126"
-      },
       "cordova-plugin-mipush": {
         "MI_PUSH_APP_KEY": "5141840975126",
         "MI_PUSH_APP_ID": "2882303761518409126",
