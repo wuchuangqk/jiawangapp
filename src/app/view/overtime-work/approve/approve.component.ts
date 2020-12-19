@@ -230,7 +230,7 @@ export class ApproveComponent  extends DetailBasePage implements OnInit {
       return;
     }
     this.dialogService.loading('正在提交，请稍候……');
-    this.setRequest("/jiaban/shepi_bak", this.payload).then((res) => {
+    this.setRequest("/jiaban/shepi_back", this.payload).then((res) => {
       this.dialogService.dismiss();
       this.events.publish(AppConfig.Home.Badge);
       this.events.publish(AppConfig.OvertimeWork.List);

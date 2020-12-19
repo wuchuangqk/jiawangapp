@@ -97,12 +97,12 @@
             <span class="text">退回</span>
           </div>
 
-          <div class="more-item-wrapper"  (click)="end()">
+          <!--<div class="more-item-wrapper"  (click)="end()">
             <div class="more-item">
               <img src="assets/icon/banjie.png" alt="">
             </div>
             <span class="text">办结</span>
-          </div>
+          </div>-->
         </div>
         <div *ngIf="isEdit">
           <textarea placeholder="请输入处理意见" style="font-size: 1.4rem;" [(ngModel)]="payload.option"></textarea>
@@ -124,6 +124,7 @@
             <!--王晴没有退回-->
             <!--          <ion-button size="small" type="default" fill="outline" (click)="back()" *ngIf="!isSingle">退回</ion-button>-->
             <ion-button size="small" fill="outline" (click)="save()">提交</ion-button>
+            <ion-button size="small" fill="outline" (click)="end()">办结</ion-button>
           </div>
         </div>
       </div>
