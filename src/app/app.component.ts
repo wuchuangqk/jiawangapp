@@ -55,6 +55,7 @@ export class AppComponent {
 
   registerBackButtonAction() {
     this.customBackActionSubscription = this.platform.backButton.subscribe(() => {
+      // tslint:disable-next-line:max-line-length
       if (this.url === '/tabs/home-tab' || this.url === '/login' || this.url === '/tabs/office' || this.url === '/tabs/project' || this.url === '/tabs/person-info') {
         if (this.backButtonPressed) {
           this.appMinimize.minimize();

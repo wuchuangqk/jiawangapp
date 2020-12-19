@@ -9,7 +9,7 @@ import {AndroidPermissions} from '@ionic-native/android-permissions/ngx';
 import {DialogService} from './dialog.service';
 import { Base64 } from '@ionic-native/base64/ngx';
 import {NativeService} from './NativeService';
-import {Router} from "@angular/router";
+import {Router} from '@angular/router';
 // import {DocumentViewer, DocumentViewerOptions} from "@ionic-native/document-viewer/ngx";
 @Injectable({
     providedIn: 'root',
@@ -138,13 +138,13 @@ export class FileService {
     /**
      * 通过下载文件获取本地文件地址
      */
-    public  async getFilePathByDownloadFile(file: IDownFile):Promise<string> {
+    public  async getFilePathByDownloadFile(file: IDownFile): Promise<string> {
         if (this.isAndroid()) {
             await this.nativeService.getPrmissions();
             const fileTransfer: FileTransferObject = this.transfer.create();
             // 本地文件路径
             const filePath = this.file.externalRootDirectory + file.filename + file.fileext; // apk保存的目录
-            await fileTransfer.download(file.fileurl,  filePath)
+            await fileTransfer.download(file.fileurl,  filePath);
             return filePath;
         }}
 
@@ -222,11 +222,11 @@ export class FileService {
      * 应用程序打开
      */
     public async openByApp(file: IDownFile, backFn) {
-        await this.presentActionSheet((res) =>{
-            if(res=='open'){
+        await this.presentActionSheet((res) => {
+            if (res == 'open') {
                 if (this.isAndroid()) {
-                    this.nativeService.getPrmissions().then(()=>{
-                        this.dialogService.loading("文件加载中");
+                    this.nativeService.getPrmissions().then(() => {
+                        this.dialogService.loading('文件加载中');
                         const fileTransfer: FileTransferObject = this.transfer.create();
                         const filePath = this.file.externalRootDirectory + file.filename + file.fileext; // apk保存的目录
                         fileTransfer.download(file.fileurl, filePath).then(() => {
@@ -239,11 +239,11 @@ export class FileService {
                         });
                     });
                 }
-            }else if(res=='view'){
-                this.nav('pdf',file)
+            } else if (res == 'view') {
+                this.nav('pdf', file);
             }
             // else if(res=='open2'){}
-        })
+        });
     }
 
 }

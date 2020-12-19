@@ -6,7 +6,7 @@ import {ProjectPage} from '../project/project-page.component';
 import {Tabs} from './tabs.component';
 import {PersionInfoComponent} from '../view/persion-info/persion-info.component';
 import {RongZiComponent} from '../rong-zi/rong-zi.component';
-import {ZiChanComponent} from "../zi-chan/zi-chan.component";
+import {ZiChanComponent} from '../zi-chan/zi-chan.component';
 // import {RongZiComponent} from '../rong-zi/rong-zi.component';
 // import {ZiChanComponent} from '../zi-chan/zi-chan.component';
 

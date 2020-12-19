@@ -6,7 +6,7 @@ import {Events, NavController} from '@ionic/angular';
 import {DialogService} from '../../service/dialog.service';
 import {AppConfig} from '../../app.config';
 import {DetailBasePage} from '../../base/detail-base-page';
-import {FileService} from "../../service/FileService";
+import {FileService} from '../../service/FileService';
 
 @Component({
   selector: 'app-fang-chan-guan-li-detail',
@@ -48,7 +48,7 @@ export class FangChanGuanLiDetailComponent extends DetailBasePage implements OnI
       public fileService: FileService,
       public route?: ActivatedRoute,
   ) {
-    super( http, router, dialogService, sanitizer, navController,fileService);
+    super( http, router, dialogService, sanitizer, navController, fileService);
     this.url = '/zichan/fangchandetail';
     this.handleUrl = this.query('handleUrl');
     this.id = this.query('id');
