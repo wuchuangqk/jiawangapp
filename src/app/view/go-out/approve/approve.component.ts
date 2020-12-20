@@ -96,6 +96,7 @@ export class ApproveComponent  extends DetailBasePage implements OnInit {
     return this.request(this.url + '/' + this.id, {}).then((res) => {
       this.content = this.transform(res.data.json);
       this.isgned = res.data.isgned;
+      this.zhengWen = res.data.pdfurl;
       // 是经办人登记还是多级审批登记
       this.qjtype = res.data.qjtype;
       if (res.data.file) {

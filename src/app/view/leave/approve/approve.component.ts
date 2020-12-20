@@ -73,7 +73,21 @@ export class ApproveComponent extends DetailBasePage implements OnInit,OnDestroy
       this.payload.index = params.index;
       this.payload.user = params.user;
       this.doApproval();
-    })
+    });
+  }
+
+
+  // 打开正文
+  openZhengWen() {
+      console.log(this.zhengWen);
+    if (!this.zhengWen || !this.zhengWen.fileurl) {
+      this.dialogService.alert('无正文！');
+      return false;
+    }
+    if (this.zhengWen.fileurl && this.zhengWen.fileurl.length > 0) {
+      this.viewFile(this.zhengWen);
+    }
+
   }
 
   ngOnDestroy(): void {
@@ -103,6 +117,7 @@ export class ApproveComponent extends DetailBasePage implements OnInit,OnDestroy
       this.isgned = res.data.isgned;
       this.isBoss = Number(res.data.ShowIndex) === 5;
       this.curIndex = Number(res.data.ShowIndex);
+      this.zhengWen = res.data.pdfurl;
       if (res.data.file) {
         this.fileList = res.data.file;
       }

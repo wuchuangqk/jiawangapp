@@ -7,7 +7,7 @@ import {DomSanitizer, SafeHtml} from '@angular/platform-browser';
 import {AlertController, Events} from '@ionic/angular';
 import {AppConfig} from '../../../app.config';
 import { NavController } from '@ionic/angular';
-import {FileService} from "../../../service/FileService";
+import {FileService} from '../../../service/FileService';
 
 
 @Component({
@@ -45,7 +45,7 @@ export class DetailComponent  extends DetailBasePage implements OnInit {
       public fileService: FileService,
       public route?: ActivatedRoute,
   ) {
-    super(http, router, dialogService, sanitizer, navController,fileService);
+    super(http, router, dialogService, sanitizer, navController, fileService);
     this.url = this.query('url');
     this.handleUrl = this.query('handleUrl');
     this.id = this.query('id');
@@ -142,7 +142,7 @@ export class DetailComponent  extends DetailBasePage implements OnInit {
       return;
     }
     this.dialogService.toast('正在提交数据...');
-    this.setRequest("/waichu/backsave", this.payload).then((res) => {
+    this.setRequest('/waichu/backsave', this.payload).then((res) => {
       this.events.publish(AppConfig.Home.Badge);
       this.events.publish(AppConfig.Synthesize.List);
       this.events.publish(AppConfig.Synthesize.ShenPiList);

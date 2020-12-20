@@ -93,6 +93,7 @@ export class ApproveComponent  extends DetailBasePage implements OnInit {
       this.isgned = res.data.isgned;
       this.signIndex = Number(res.data.ShowIndex);
       this.type = res.data.type;
+      this.zhengWen = res.data.pdfurl;
       // tslint:disable-next-line:variable-name
       const _userInfo = localStorage.getItem('userInfo');
       const userInfo = JSON.parse(_userInfo);

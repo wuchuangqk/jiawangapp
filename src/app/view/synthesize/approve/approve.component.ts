@@ -91,6 +91,8 @@ export class ApproveComponent  extends DetailBasePage implements OnInit {
         this.content = this.transform(res.data.json);
         this.signIndex = Number(res.data.index);
         this.qjtype = res.data.qjtype;
+        this.zhengWen = res.data.pdfurl;
+
         // this.isSingle = this.signIndex === 4;
         // 王晴
         if (this.signIndex === 4) {
