@@ -112,7 +112,12 @@ textarea{resize:none;}/*取消textarea改变大小的功能*/
   overflow:auto;
 }
 
-
+.detail-style{
+  padding: 0;
+  //transform: scale(0.9);
+  //transform-origin:center;
+  //-webkit-transform-origin:center center;
+}
 @keyframes mycolor
 {
   0%   {

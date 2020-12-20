@@ -26,7 +26,7 @@ export class JiaQianComponent extends BasePage implements OnInit {
   ) {
     super(http, router, navController, dialogService);
     this.signtype = this.query('signtype');
-    this.id = this.query('id')
+    this.id = this.query('id');
   }
 
   ngOnInit() {
@@ -35,15 +35,15 @@ export class JiaQianComponent extends BasePage implements OnInit {
 
   getSigner() {
     this.request('/zhifu/getSignCreator', {signtype: this.signtype}).then(res => {
-      this.signerList = res.data
-    })
+      this.signerList = res.data;
+    });
   }
 
   save() {
     console.log(this.signer);
     if (this.signer.length === 0) {
       this.dialogService.toast('请选择审批人');
-      return
+      return false;
     }
     this.dialogService.loading('正在提交，请稍候……');
     this.setRequest('/zhifu/add_sign', {
@@ -54,6 +54,6 @@ export class JiaQianComponent extends BasePage implements OnInit {
       this.dialogService.dismiss();
       this.dialogService.toast('提交成功');
       this.navController.back();
-    })
+    });
   }
 }

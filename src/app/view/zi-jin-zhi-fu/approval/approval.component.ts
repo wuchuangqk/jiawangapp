@@ -3,7 +3,7 @@ import {DetailBasePage} from '../../../base/detail-base-page';
 import {DomSanitizer, SafeHtml} from '@angular/platform-browser';
 import {HttpService} from '../../../service/http.service';
 import {ActivatedRoute, Router} from '@angular/router';
-import {AlertController, Events, NavController,ModalController} from '@ionic/angular';
+import {AlertController, Events, NavController, ModalController} from '@ionic/angular';
 import {DialogService} from '../../../service/dialog.service';
 import {JPushModel} from '../../home/jPush.model';
 import {FileService} from '../../../service/FileService';
@@ -26,15 +26,15 @@ export class ApprovalComponent extends DetailBasePage implements OnInit {
   public selectedStaff = [];
   public commentList = [];
   public isEdit = false;
-  public signList:any = [];
+  public signList: any = [];
   public payload = {
-    id:'', // 用印id
-    option:'', // 意见
-    index:'', // 下一个审批序号
-    staff_ids:'', // 下一个审批人
+    id: '', // 用印id
+    option: '', // 意见
+    index: '', // 下一个审批序号
+    staff_ids: '', // 下一个审批人
   };
-  isMore:boolean = false;
-  isCommentOpen:boolean = false;
+  isMore = false;
+  isCommentOpen = false;
   currid = null; // 当前步骤
   signIndex = null;
   nextid = null; // nextid = 0 标识是最后一步
@@ -51,7 +51,7 @@ export class ApprovalComponent extends DetailBasePage implements OnInit {
     public modalController: ModalController,
     public route?: ActivatedRoute,
   ) {
-    super( http, router, dialogService, sanitizer, navController,fileService);
+    super( http, router, dialogService, sanitizer, navController, fileService);
     this.url = this.query('url');
     this.title = this.query('title');
     this.handleUrl = this.query('handleUrl');
@@ -72,7 +72,7 @@ export class ApprovalComponent extends DetailBasePage implements OnInit {
       this.content = this.transform(res.data.json);
       this.zhengWen = res.data.pdfurl;
       this.currid = res.data.currid;
-      this.nextid = Number(res.data.nextid)
+      this.nextid = Number(res.data.nextid);
     });
   }
 
@@ -122,18 +122,18 @@ export class ApprovalComponent extends DetailBasePage implements OnInit {
   }*/
 
   // 退回
-  back(){
-    if(!this.payload.option){
+  back() {
+    if (!this.payload.option) {
       this.dialogService.toast('请输入退回意见');
       return;
     }
     this.dialogService.loading('正在提交，请稍候……');
-    this.setRequest("/zhifu/shepi_back", this.payload).then((res) => {
+    this.setRequest('/zhifu/shepi_back', this.payload).then((res) => {
       this.dialogService.dismiss();
       this.events.publish(AppConfig.Home.Badge);
       this.events.publish(AppConfig.ZiJinZhiFu.List);
       this.events.publish(AppConfig.ZiJinZhiFu.ShenPiList);
-      this.dialogService.alert('提交成功',()=>{
+      this.dialogService.alert('提交成功', () => {
         this.goBack();
       });
     });
@@ -142,11 +142,11 @@ export class ApprovalComponent extends DetailBasePage implements OnInit {
   /********************
    * 加签
    ********************/
-  public async document_jiaqian(isJiaQian){
-    this.nav("zi-jin-zhi-fu/jia-qian",{
-      signtype:this.currid,
-      id:this.payload.id
-    })
+  public async document_jiaqian(isJiaQian) {
+    this.nav('zi-jin-zhi-fu/jia-qian', {
+      signtype: this.currid,
+      id: this.payload.id
+    });
     // this.currentModal = await this.modalController.create({
     //   component:JiaQianComponent,
     //   showBackdrop:true,
@@ -169,9 +169,9 @@ export class ApprovalComponent extends DetailBasePage implements OnInit {
   /********************
    *终止
    ********************/
-  public async document_stop(){
-    let alert = await this.alertController.create({
-      mode:'md',
+  public async document_stop() {
+    const alert = await this.alertController.create({
+      mode: 'md',
       header: '终止',
       inputs: [
         {
@@ -193,9 +193,9 @@ export class ApprovalComponent extends DetailBasePage implements OnInit {
           handler: (e) => {
             this.setRequest('/zhifu/shepi_stop', {
               option: e.comments,
-              id:this.payload.id
+              id: this.payload.id
             })
-              .then((res)=>{
+              .then((res) => {
                 this.events.publish(AppConfig.Home.Badge);
                 this.events.publish(AppConfig.ZiJinZhiFu.List);
                 this.events.publish(AppConfig.ZiJinZhiFu.ShenPiList);
@@ -213,9 +213,9 @@ export class ApprovalComponent extends DetailBasePage implements OnInit {
 
   // 流程
   private async getSignList() {
-    this.request('/zhifu/signlist',{item_id: this.payload.id}).then(res=>{
+    this.request('/zhifu/signlist', {item_id: this.payload.id}).then(res => {
       this.signList = res.data;
-    })
+    });
   }
 
 
@@ -286,13 +286,13 @@ export class ApprovalComponent extends DetailBasePage implements OnInit {
    * 提交
    */
   async submit() {
-    if(!this.payload.option){
+    if (!this.payload.option) {
       this.dialogService.toast('请输入审批意见');
       return;
     }
-    if(this.nextid !== 0){
+    if (this.nextid !== 0) {
       this.showNextSigner();
-    }else{
+    } else {
       // this.payload.index = String(Number(this.currid)+1);
       // this.payload.staff_ids = '';
       this.dialogService.loading('正在提交，请稍候……');
@@ -301,7 +301,7 @@ export class ApprovalComponent extends DetailBasePage implements OnInit {
         this.events.publish(AppConfig.Home.Badge);
         this.events.publish(AppConfig.ZiJinZhiFu.List);
         this.events.publish(AppConfig.ZiJinZhiFu.ShenPiList);
-        this.dialogService.alert('提交成功',()=>{
+        this.dialogService.alert('提交成功', () => {
           this.goBack();
         });
       });
@@ -319,26 +319,26 @@ export class ApprovalComponent extends DetailBasePage implements OnInit {
 
   }
 
-  getNextSigner(){
+  getNextSigner() {
     return new Promise(resolve => {
       this.request('/zhifu/getSignCreator', {signtype: this.currid}).then(res => {
-        resolve(res.data)
-      })
-    })
+        resolve(res.data);
+      });
+    });
 
   }
 
-  async showNextSigner(){
+  async showNextSigner() {
     // signIndex:1 = 处室，处室 => 分管 => 党委
-    const signList:any = await this.getNextSigner();
-    console.log('signList',signList);
+    const signList: any = await this.getNextSigner();
+    console.log('signList', signList);
     const inputs = signList.map(v => {
       return {
         name: v.name,
         type: 'checkbox',
         label: v.name,
         value: v.id
-      }
+      };
     });
     const header = '请选择下个流程的执行人';
     const alert = await this.alertController.create({
@@ -356,10 +356,10 @@ export class ApprovalComponent extends DetailBasePage implements OnInit {
         }, {
           text: '确定',
           handler: (e) => {
-            console.log('showNextSigner',e);
-            if(!e.length){
+            console.log('showNextSigner', e);
+            if (!e.length) {
               this.dialogService.toast('请选择流程执行人');
-              return
+              return;
             }
             this.payload.index = this.nextid;
             this.payload.staff_ids = e.join(',');
@@ -369,7 +369,7 @@ export class ApprovalComponent extends DetailBasePage implements OnInit {
               this.events.publish(AppConfig.Home.Badge);
               this.events.publish(AppConfig.ZiJinZhiFu.List);
               this.events.publish(AppConfig.ZiJinZhiFu.ShenPiList);
-              this.dialogService.alert('提交成功',()=>{
+              this.dialogService.alert('提交成功', () => {
                 this.goBack();
               });
             });
@@ -382,9 +382,9 @@ export class ApprovalComponent extends DetailBasePage implements OnInit {
 
 
   // 选人
-  async selectNext(){
+  async selectNext() {
     const modal = await this.modalController.create({
-      component:NextFlowComponent,
+      component: NextFlowComponent,
       cssClass: 'my-custom-class',
     });
     await modal.present();

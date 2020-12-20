@@ -26,6 +26,10 @@
         <ion-icon name="menu"></ion-icon>
         表单
       </div>
+      <div (click)="openZhengWen()">
+        <ion-icon name="journal"></ion-icon>
+        正文
+      </div>
       <div (click)="tabIndex=1">
         <ion-icon name="link"></ion-icon>
         附件
@@ -116,12 +120,17 @@
 
         <div class="flex-between">
           <span>
+
+          <span *ngIf="!isDongShuang">
             <ion-icon (click)="isMore=!isMore" name="more" size="20" style="font-size: 20px;color: #3880ff;"></ion-icon>&nbsp;&nbsp;
           <ion-icon (click)="isEdit=!isEdit" name="create" size="20" style="font-size: 20px;color: #3880ff;"></ion-icon>
           </span>
+          </span>
           <div>
             <!--            <ion-button size="small" type="default" fill="outline" (click)="back()">退回</ion-button>-->
-            <ion-button size="small" fill="outline" (click)="save()">提交</ion-button>
+            <ion-button size="small" fill="outline" (click)="save()">
+              {{isDongShuang?'已收悉':'提交'}}
+            </ion-button>
           </div>
         </div>
       </div>

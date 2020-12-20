@@ -10,7 +10,7 @@
 
   <ion-item>
     <ion-label>审批人</ion-label>
-    <ion-select [ngModel]="signer" okText="确定" cancelText="取消" multiple>
+    <ion-select [(ngModel)]="signer" okText="确定" cancelText="取消" multiple>
       <ion-select-option *ngFor="let item of signerList" [value]="item.id">{{item.name}}</ion-select-option>
     </ion-select>
   </ion-item>

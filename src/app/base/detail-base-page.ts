@@ -5,7 +5,7 @@ import { DialogService } from '../service/dialog.service';
 import {ActivatedRoute, Router} from '@angular/router';
 import {BasePage} from './base-page';
 import {DomSanitizer, SafeHtml} from '@angular/platform-browser';
-import {FileService} from "../service/FileService";
+import {FileService} from '../service/FileService';
 interface IDetail {
     content: string;
     control?: string;
@@ -21,7 +21,7 @@ export class DetailBasePage extends BasePage {
     // 是否已办理
     public isgned = false;
     // 拟办 1,
-    public docState=0;
+    public docState = 0;
     public zhengWen: IDownFile = {
         filename: '',
         fileext: '',
@@ -34,14 +34,14 @@ export class DetailBasePage extends BasePage {
     };
     public content: SafeHtml = '';
     public comment_num: any;
-    public isBackToHome:boolean = false;
-    public SignId ="";
+    public isBackToHome = false;
+    public SignId = '';
     // 核稿人id
-    public hgUser="";
+    public hgUser = '';
     // 审稿人id
-    public sgUser = "";
+    public sgUser = '';
     // 签发人id
-    public qfUser = "";
+    public qfUser = '';
     // 附件
     public fileList: Array<IDownFile> = [];
     constructor(
@@ -68,9 +68,9 @@ export class DetailBasePage extends BasePage {
             this.SignId = res.data.SignId;
             this.docState = res.data.DocState;
             this.doselect = res.data.doselect;
-            this.hgUser=res.data.hgUser;
-            this.sgUser=res.data.sgUser;
-            this.qfUser=res.data.qfUser;
+            this.hgUser = res.data.hgUser;
+            this.sgUser = res.data.sgUser;
+            this.qfUser = res.data.qfUser;
             if (res.data.file) {
                 this.fileList = res.data.file;
             }
@@ -85,14 +85,14 @@ export class DetailBasePage extends BasePage {
         super.doRefresh(event);
         this.getDetail(this.payload);
     }
-    getIsBackToHome(){
-        let isBackToHome = this.query('isBackToHome')
-        if(isBackToHome==='true'){
-            this.isBackToHome = true
-        }else{
+    getIsBackToHome() {
+        const isBackToHome = this.query('isBackToHome');
+        if (isBackToHome === 'true') {
+            this.isBackToHome = true;
+        } else {
             this.isBackToHome = false;
         }
-        console.log("是否回到首页!");
+        console.log('是否回到首页!');
         console.log(this.isBackToHome);
     }
    public viewFile(item: IDownFile) {
@@ -101,11 +101,22 @@ export class DetailBasePage extends BasePage {
     public transform(content): SafeHtml {
         return this.sanitizer.bypassSecurityTrustHtml(content);
     }
+    // 打开正文
+    openZhengWen() {
+        if (!this.zhengWen || !this.zhengWen.fileurl) {
+            this.dialogService.alert('无正文！');
+            return false;
+        }
+        if (this.zhengWen.fileurl && this.zhengWen.fileurl.length > 0) {
+            this.viewFile(this.zhengWen);
+        }
+
+    }
     // 返回
-    public goBack():void{
-        if(this.isBackToHome){
+    public goBack(): void {
+        if (this.isBackToHome) {
             this.navController.navigateBack('tabs/home-tab');
-        }else{
+        } else {
             this.navController.back();
         }
     }

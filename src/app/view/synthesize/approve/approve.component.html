@@ -7,7 +7,8 @@
   </ion-toolbar>
 </ion-header>
 <ion-content>
-
+  <style>
+  </style>
   <ion-refresher (ionRefresh)="doRefresh($event)">
     <ion-refresher-content
             pullingIcon="arrow-dropdown"
@@ -25,6 +26,10 @@
       <div (click)="tabIndex=0">
         <ion-icon name="menu"></ion-icon>
         表单
+      </div>
+      <div (click)="openZhengWen()">
+        <ion-icon name="journal"></ion-icon>
+        正文
       </div>
       <div (click)="tabIndex=1">
         <ion-icon name="link"></ion-icon>
@@ -122,7 +127,7 @@
           </span>
           <div>
             <!--王晴没有退回-->
-            <!--          <ion-button size="small" type="default" fill="outline" (click)="back()" *ngIf="!isSingle">退回</ion-button>-->
+            <ion-button size="small" type="default" fill="outline" (click)="back()">退回</ion-button>
             <ion-button size="small" fill="outline" (click)="save()">提交</ion-button>
             <ion-button size="small" fill="outline" (click)="end()">办结</ion-button>
           </div>

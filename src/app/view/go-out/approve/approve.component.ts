@@ -7,7 +7,7 @@ import {DomSanitizer, SafeHtml} from '@angular/platform-browser';
 import {AlertController, Events} from '@ionic/angular';
 import {AppConfig} from '../../../app.config';
 import { NavController } from '@ionic/angular';
-import {FileService} from "../../../service/FileService";
+import {FileService} from '../../../service/FileService';
 
 
 @Component({
@@ -33,7 +33,14 @@ export class ApproveComponent  extends DetailBasePage implements OnInit {
     option: string;
     staff_ids: string;
   };
-  isMore: boolean = false;
+  isMore = false;
+
+  // 是经办人登记还是多级审批登记
+  public qjtype = '';
+
+
+  // 是不是董爽
+  public isDongShuang = false;
   constructor(
       public http: HttpService,
       public router: Router,
@@ -45,7 +52,7 @@ export class ApproveComponent  extends DetailBasePage implements OnInit {
       public fileService: FileService,
       public route?: ActivatedRoute,
   ) {
-    super(http, router, dialogService, sanitizer, navController,fileService);
+    super(http, router, dialogService, sanitizer, navController, fileService);
     this.url = this.query('url');
     this.handleUrl = this.query('handleUrl');
     this.id = this.query('id');
@@ -57,6 +64,10 @@ export class ApproveComponent  extends DetailBasePage implements OnInit {
   }
 
   async ngOnInit() {
+    const _userInfo = localStorage.getItem('userInfo');
+    const userInfo = JSON.parse(_userInfo);
+    this.isDongShuang  = userInfo.id == 532;
+
     await this.getDetail();
     await this.getCommentList();
     await this.getSignList();
@@ -85,6 +96,8 @@ export class ApproveComponent  extends DetailBasePage implements OnInit {
     return this.request(this.url + '/' + this.id, {}).then((res) => {
       this.content = this.transform(res.data.json);
       this.isgned = res.data.isgned;
+      // 是经办人登记还是多级审批登记
+      this.qjtype = res.data.qjtype;
       if (res.data.file) {
         this.fileList = res.data.file;
       }
@@ -142,7 +155,7 @@ export class ApproveComponent  extends DetailBasePage implements OnInit {
       return;
     }
     this.dialogService.toast('正在提交数据...');
-    this.setRequest("/waichu/shepi_back", this.payload).then((res) => {
+    this.setRequest('/waichu/shepi_back', this.payload).then((res) => {
       this.events.publish(AppConfig.Home.Badge);
       this.events.publish(AppConfig.GoOut.List);
       this.events.publish(AppConfig.GoOut.ShenPiList);
@@ -154,7 +167,7 @@ export class ApproveComponent  extends DetailBasePage implements OnInit {
 
   // 终止
   async stop() {
-    let alert = await this.alertController.create({
+    const alert = await this.alertController.create({
       mode: 'md',
       header: '终止',
       inputs: [
@@ -197,7 +210,7 @@ export class ApproveComponent  extends DetailBasePage implements OnInit {
 
 
   save() {
-    if (!this.payload.option) {
+    if (!this.payload.option && !this.isDongShuang) {
       this.dialogService.toast('请输入审批意见');
       return;
     }

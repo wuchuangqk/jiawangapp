@@ -7,7 +7,7 @@ import {DomSanitizer, SafeHtml} from '@angular/platform-browser';
 import {AlertController, Events} from '@ionic/angular';
 import {AppConfig} from '../../../app.config';
 import { NavController } from '@ionic/angular';
-import {FileService} from "../../../service/FileService";
+import {FileService} from '../../../service/FileService';
 
 
 @Component({
@@ -28,18 +28,18 @@ export class ApproveComponent  extends DetailBasePage implements OnInit {
   // 是否已审批
   public isgned = false;
   public payload = {
-    id:'', // 用印id
-    option:'', // 意见
-    index:'', // 下一个审批序号
-    user:'', // 下一个审批人
+    id: '', // 用印id
+    option: '', // 意见
+    index: '', // 下一个审批序号
+    user: '', // 下一个审批人
   };
   // 1 = 公司负责人，2 = 集团公司分管领导
-  public signIndex:number = null;
+  public signIndex: number = null;
   // 是集团公司总部直接提交
-  public type:string = null;
+  public type: string = null;
   // 孙中亚
-  isBoss: boolean = false;
-  isMore: boolean = false;
+  isBoss = false;
+  isMore = false;
 
   constructor(
       public http: HttpService,
@@ -52,7 +52,7 @@ export class ApproveComponent  extends DetailBasePage implements OnInit {
       public fileService: FileService,
       public route?: ActivatedRoute,
   ) {
-    super(http, router, dialogService, sanitizer, navController,fileService);
+    super(http, router, dialogService, sanitizer, navController, fileService);
     this.url = this.query('url');
     this.handleUrl = this.query('handleUrl');
     this.id = this.query('id');
@@ -93,7 +93,12 @@ export class ApproveComponent  extends DetailBasePage implements OnInit {
       this.isgned = res.data.isgned;
       this.signIndex = Number(res.data.ShowIndex);
       this.type = res.data.type;
-      this.isBoss  = Number(res.data.index) === 2 && res.data.type === '集团公司本部';
+      // tslint:disable-next-line:variable-name
+      const _userInfo = localStorage.getItem('userInfo');
+      const userInfo = JSON.parse(_userInfo);
+      this.isBoss  =
+          // Number(res.data.index) === 2 &&
+          userInfo.id == 425;
       if (res.data.file) {
         this.fileList = res.data.file;
       }
@@ -146,20 +151,20 @@ export class ApproveComponent  extends DetailBasePage implements OnInit {
   }
 
   // 选下级领导
-  async showNextSigner(){
+  async showNextSigner() {
     // ShowIndex = 1
-    const signList:any = await this.getSigner();
+    const signList: any = await this.getSigner();
     const inputs = signList.map(v => {
       return {
         name: v.name,
         type: 'radio',
         label: v.name,
         value: v.id
-      }
+      };
     });
     const alert = await this.alertController.create({
       cssClass: 'my-custom-class',
-      header:'请选择集团公司分管领导',
+      header: '请选择集团公司分管领导',
       inputs,
       buttons: [
         {
@@ -173,7 +178,7 @@ export class ApproveComponent  extends DetailBasePage implements OnInit {
           text: '确定',
           handler: (e) => {
             this.payload.user = e;
-            this.payload.index = String(this.signIndex+1);
+            this.payload.index = String(this.signIndex + 1);
           }
         }
       ]
@@ -183,7 +188,7 @@ export class ApproveComponent  extends DetailBasePage implements OnInit {
 
   // 终止
   async stop() {
-    let alert = await this.alertController.create({
+    const alert = await this.alertController.create({
       mode: 'md',
       header: '终止',
       inputs: [
@@ -230,7 +235,7 @@ export class ApproveComponent  extends DetailBasePage implements OnInit {
       return;
     }
     this.dialogService.loading('正在提交，请稍候……');
-    this.setRequest("/jiaban/shepi_back", this.payload).then((res) => {
+    this.setRequest('/jiaban/shepi_back', this.payload).then((res) => {
       this.dialogService.dismiss();
       this.events.publish(AppConfig.Home.Badge);
       this.events.publish(AppConfig.OvertimeWork.List);
@@ -244,7 +249,7 @@ export class ApproveComponent  extends DetailBasePage implements OnInit {
 
   save() {
     // 直接提交
-    if(this.isBoss){
+    if (this.isBoss) {
       this.doApproval();
       return;
     }
@@ -253,13 +258,13 @@ export class ApproveComponent  extends DetailBasePage implements OnInit {
       return;
     }
 
-    if(this.type === '集团公司本部'){
+    if (this.type === '集团公司本部') {
       this.doApproval();
-    }else{
-      if(this.signIndex === 1 && !this.payload.index){
+    } else {
+      if (this.signIndex === 1 && !this.payload.index) {
         // 选集团公司分管领导
         this.showNextSigner();
-      }else{
+      } else {
         // 直接提交
         this.doApproval();
       }
@@ -268,7 +273,7 @@ export class ApproveComponent  extends DetailBasePage implements OnInit {
 
   }
 
-  doApproval(){
+  doApproval() {
     this.dialogService.loading('正在提交，请稍候……');
     this.setRequest('/jiaban/shenpi_save', this.payload).then((res) => {
       this.dialogService.dismiss();
@@ -281,11 +286,11 @@ export class ApproveComponent  extends DetailBasePage implements OnInit {
     });
   }
 
-  getSigner(){
+  getSigner() {
     return new Promise(resolve => {
-      this.request('/jiaban/signCreator2',{}).then(res=>{
+      this.request('/jiaban/signCreator2', {}).then(res => {
         resolve(res.data);
-      })
-    })
+      });
+    });
   }
 }

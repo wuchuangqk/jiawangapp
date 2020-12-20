@@ -65,6 +65,10 @@
         <ion-icon name="menu"></ion-icon>
         表单
       </div>
+      <div (click)="openZhengWen()">
+        <ion-icon name="journal"></ion-icon>
+        正文
+      </div>
       <div (click)="tabIndex=1">
         <ion-icon name="link"></ion-icon>
         附件
@@ -153,7 +157,7 @@
           <div *ngIf="!isBoss">
 <!--            <ion-button size="small" type="default" fill="outline" (click)="back()">退回</ion-button>-->
             <ion-button size="small" fill="outline" (click)="save()">提交</ion-button>
-            <ion-button size="small" fill="outline" (click)="shenpi_over()">办结</ion-button>
+            <ion-button size="small" fill="outline" (click)="end()">办结</ion-button>
           </div>
           <div *ngIf="isBoss">
             <ion-button size="small" fill="outline" (click)="save()">已收悉</ion-button>

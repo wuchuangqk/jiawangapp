@@ -15,8 +15,8 @@ import {AppConfig} from '../../../app.config';
 export class SelectFlowComponent extends BasePage implements OnInit {
 
   params = {
-    index :1,
-    user:""
+    index : 1,
+    user: ''
   };
 
   curIndex = null;
@@ -69,9 +69,13 @@ export class SelectFlowComponent extends BasePage implements OnInit {
     });
   }
 
-  save(){
-    this.events.publish(AppConfig.Leave.flow,this.params);
-    this.navController.back();
+  save() {
+      if (!this.params.user) {
+        this.dialogService.toast('请选择审批领导');
+        return false;
+      }
+      this.events.publish(AppConfig.Leave.flow, this.params);
+      this.navController.back();
   }
 
 }
