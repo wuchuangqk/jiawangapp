@@ -20,6 +20,7 @@
     <preference name="SplashScreenDelay" value="3000" />
     <preference name="iosPersistentFileLocation" value="Library" />
     <preference name="iosPersistentFileLocation" value="Compatibility" />
+    <preference name="ShowSplashScreenSpinner" value="false" />
     <preference name="iosExtraFilesystems" value="library,library-nosync,documents,documents-nosync,cache,bundle,root" />
     <network-security-config>
         <base-config cleartextTrafficPermitted="true" />

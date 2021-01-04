@@ -15,7 +15,7 @@ import {SelectFlowComponent} from '../select-flow/select-flow.component';
   templateUrl: './approve.component.html',
   styleUrls: ['./approve.component.scss'],
 })
-export class ApproveComponent extends DetailBasePage implements OnInit,OnDestroy {
+export class ApproveComponent extends DetailBasePage implements OnInit, OnDestroy {
   public title = '详情';
   public isShenPi: boolean;
   public handleUrl: string;
@@ -30,11 +30,11 @@ export class ApproveComponent extends DetailBasePage implements OnInit,OnDestroy
   public payload = {
     id: '',
     option: '',
-    index:'',
-    user:''
+    index: '',
+    user: ''
   };
   // 孙中亚
-  isBoss: boolean = false;
+  isBoss = false;
   curIndex = null; // 当前步骤
   isMore = false;
 
@@ -68,8 +68,8 @@ export class ApproveComponent extends DetailBasePage implements OnInit,OnDestroy
     this.events.subscribe(AppConfig.Document.DocumentDetail, () => {
       this.getDetail();
     });
-    this.events.subscribe(AppConfig.Leave.flow,(params)=>{
-      console.log('params',params);
+    this.events.subscribe(AppConfig.Leave.flow, (params) => {
+      console.log('params', params);
       this.payload.index = params.index;
       this.payload.user = params.user;
       this.doApproval();
@@ -80,11 +80,11 @@ export class ApproveComponent extends DetailBasePage implements OnInit,OnDestroy
   // 打开正文
   openZhengWen() {
       console.log(this.zhengWen);
-    if (!this.zhengWen || !this.zhengWen.fileurl) {
+      if (!this.zhengWen || !this.zhengWen.fileurl) {
       this.dialogService.alert('无正文！');
       return false;
     }
-    if (this.zhengWen.fileurl && this.zhengWen.fileurl.length > 0) {
+      if (this.zhengWen.fileurl && this.zhengWen.fileurl.length > 0) {
       this.viewFile(this.zhengWen);
     }
 
@@ -174,46 +174,24 @@ export class ApproveComponent extends DetailBasePage implements OnInit,OnDestroy
 
   // 办结
   public async end() {
-    const alert = await this.alertController.create({
-      mode: 'md',
-      header: '办结!',
-      message: '注意：办结操作无法撤销',
-      inputs: [
-        {
-          name: 'comments',
-          type: 'text',
-          placeholder: '办结意见'
-        }
-      ],
-      buttons: [
-        {
-          text: '取消',
-          role: 'cancel',
-          cssClass: 'secondary',
-          handler: () => {
-            console.log('Confirm Cancel');
-          }
-        }, {
-          text: '确定',
-          handler: (e) => {
-            this.setRequest('/qingjia/shenpi_over', {
-              id: this.id,
-              option: e.comments,
-            })
-                .then((res) => {
-                  this.events.publish(AppConfig.Home.Badge);
-                  this.events.publish(AppConfig.Leave.List);
-                  this.events.publish(AppConfig.Leave.ShenPiList);
-                  this.dialogService.alert('提交成功!', () => {
-                    this.goBack();
-                  });
-                })
-            ;
-          }
-        }
-      ]
-    });
-    await alert.present();
+    if (!this.payload.option) {
+      await this.dialogService.toast('请输入意见');
+      return false;
+    }
+
+    this.setRequest('/qingjia/shenpi_over', {
+      id: this.id,
+      option: this.payload.option,
+    })
+        .then((res) => {
+          this.events.publish(AppConfig.Home.Badge);
+          this.events.publish(AppConfig.Leave.List);
+          this.events.publish(AppConfig.Leave.ShenPiList);
+          this.dialogService.alert('提交成功!', () => {
+            this.goBack();
+          });
+        })
+    ;
   }
 
 
@@ -259,17 +237,17 @@ export class ApproveComponent extends DetailBasePage implements OnInit,OnDestroy
       return;
     }
     // 判断当前步骤，如果不是最后一步，需要选人
-    if(this.curIndex !== 4){
+    if (this.curIndex !== 4) {
       this.showNextFlow();
-    }else{
+    } else {
       this.doApproval();
     }
   }
 
   async showNextFlow() {
-    this.nav('/leave/flow',{
-      index:this.curIndex
-    })
+    this.nav('/leave/flow', {
+      index: this.curIndex
+    });
   }
 
   doApproval() {
