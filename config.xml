@@ -124,7 +124,7 @@
         <variable name="CPID" value="102108765" />
     </plugin>
     <plugin name="jpush-phonegap-plugin" spec="~3.7.3">
-        <variable name="APP_KEY" value="2dfbed0a944f7c616e5cc78c" />
+        <variable name="APP_KEY" value="1613d6f6a1c6d2fd94c9ffda" />
     </plugin>
     <plugin name="cordova-plugin-mipush" spec="^2.0.3">
         <variable name="MI_PUSH_APP_KEY" value="5141840975126" />

@@ -42,6 +42,7 @@ export class ApproveComponent  extends DetailBasePage implements OnInit {
   isSingle = false;
   isMore = false;
 
+  public ShowIndex = 0;
   public signCount = 0;
   constructor(
       public http: HttpService,
@@ -91,6 +92,7 @@ export class ApproveComponent  extends DetailBasePage implements OnInit {
       return  this.request(this.url + '/' + this.id, {}).then((res) => {
         this.content = this.transform(res.data.json);
         this.signIndex = Number(res.data.index);
+        this.ShowIndex = res.data.ShowIndex;
         this.qjtype = res.data.qjtype;
         this.zhengWen = res.data.pdfurl;
         this.signCount = res.data.signCount;
@@ -234,6 +236,7 @@ export class ApproveComponent  extends DetailBasePage implements OnInit {
           text: '确定',
           handler: (e) => {
             this.payload.user = e;
+            // this.payload.index = String(this.signIndex + 1);
           }
         }
       ]
@@ -326,6 +329,7 @@ export class ApproveComponent  extends DetailBasePage implements OnInit {
       }
     }
     this.dialogService.loading('正在提交，请稍候……');
+    this.payload.index = String(this.ShowIndex + 1);
     this.setRequest('/zhsp/shenpi_save', this.payload).then((res) => {
       this.dialogService.dismiss();
       this.events.publish(AppConfig.Home.Badge);
