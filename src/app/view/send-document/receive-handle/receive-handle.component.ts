@@ -508,26 +508,27 @@ export class ReceiveHandleComponent  extends DetailBasePage implements OnInit, O
       }
       console.log(comment);
       await this.document_jiaqian(false, comment);
-    }
-    if (!this.infoTitle) {
-      // if(this.getUserId()!=519){
-      // }
-      await this.dialogService.toast('请输入意见');
-      return false;
-    }
-    await this.setRequest('/dispatch/todosave', {
-      id: this.id,
-      comments: this.infoTitle || '',
-      ldid: this.ldid,
-      index: this.SignIndex,
-      user
-    });
-    this.events.publish(AppConfig.Document.DocumentList);
-    this.events.publish(AppConfig.Home.Badge);
-    this.events.publish(AppConfig.Synthesize.List);
-    await this.dialogService.alert('提交成功!', () => {
+    } else {
+      if (!this.infoTitle) {
+        // if(this.getUserId()!=519){
+        // }
+        await this.dialogService.toast('请输入意见');
+        return false;
+      }
+      await this.setRequest('/dispatch/todosave', {
+        id: this.id,
+        comments: this.infoTitle || '',
+        ldid: this.ldid,
+        index: this.SignIndex,
+        user
+      });
+      this.events.publish(AppConfig.Document.DocumentList);
+      this.events.publish(AppConfig.Home.Badge);
+      this.events.publish(AppConfig.Synthesize.List);
+      await this.dialogService.alert('提交成功!', () => {
         this.goBack();
-    });
+      });
+    }
   }
   public viewProject(item) {
     this.nav('/project-detail?pid=' + item.id, item);
