@@ -3,6 +3,7 @@ import { NavController } from '@ionic/angular';
 import { HttpService } from '../service/http.service';
 import { DialogService } from '../service/dialog.service';
 import {ActivatedRoute, Router} from '@angular/router';
+import {sendLog} from '../service/sys-log';
 
 export class BasePage implements OnInit {
     public userId = 0;
@@ -22,11 +23,11 @@ export class BasePage implements OnInit {
     public setParams() {
     }
 
-    getUserId(){
-        let userInfoStr =localStorage.userInfo;
-        let userId= 0;
-        if(userInfoStr){
-            let userInfo = JSON.parse(userInfoStr)
+    getUserId() {
+        const userInfoStr = localStorage.userInfo;
+        let userId = 0;
+        if (userInfoStr) {
+            const userInfo = JSON.parse(userInfoStr);
             userId = userInfo.id;
         }
         this.userId = userId;
@@ -98,8 +99,8 @@ export class BasePage implements OnInit {
         });
     }
 
-    public  uploadFileByBlob(url: string, data, blob?,fileName?) {
-        return  this.http.uploadFileByBlob('/api/v2' + url, data, blob,fileName).catch((error) => {
+    public  uploadFileByBlob(url: string, data, blob?, fileName?) {
+        return  this.http.uploadFileByBlob('/api/v2' + url, data, blob, fileName).catch((error) => {
             this.handleErr(error);
         });
     }
@@ -111,12 +112,16 @@ export class BasePage implements OnInit {
 
     public handleErr(data: Iresponse) {
         if (data.status_code === '10000') {
-            this.dialogService.toast(data.msg);
+            // this.dialogService.toast(data.msg);
+            sendLog({
+                first: `贾汪app报错,uid=${this.getUserId()}`,
+                remark: data.msg
+            });
             this.dialogService.dismiss();
         } else if (data.status_code === '30000') {
-            var isLogin=localStorage.isLogin;
-            if(isLogin){
-                localStorage.removeItem("isLogin")
+            const isLogin = localStorage.isLogin;
+            if (isLogin) {
+                localStorage.removeItem('isLogin');
                 this.dialogService.alert(data.msg, () => {
                     // this.navController.navigateRoot('login');
                     this.http.logout();
@@ -126,6 +131,10 @@ export class BasePage implements OnInit {
             this.dialogService.toast('参数错误！');
         } else if (data.status_code === '100') {
             this.dialogService.toast(data.msg);
+            sendLog({
+                first: `贾汪app报错,uid=${this.getUserId()}`,
+                remark: data.msg
+            });
         }
     }
 }

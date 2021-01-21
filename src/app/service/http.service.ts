@@ -6,6 +6,7 @@ import {NavController, Platform} from '@ionic/angular';
 import {Device} from '@ionic-native/device/ngx';
 import {HuaWeiPushProvider} from './hua-wei-push';
 import {JPushModel} from '../view/home/jPush.model';
+import {sendLog} from './sys-log';
 
 
 @Injectable({
@@ -58,8 +59,8 @@ export class HttpService {
         });
     }
 
-    public uploadFileByBlob(url: string, data, blob?,filename?): Promise<any> {
-        return this.httpRequest.uploadFileByBlob(url, data, blob,filename).catch((error) => {
+    public uploadFileByBlob(url: string, data, blob?, filename?): Promise<any> {
+        return this.httpRequest.uploadFileByBlob(url, data, blob, filename).catch((error) => {
             this.handleError(error, url);
         });
     }
@@ -71,6 +72,11 @@ export class HttpService {
 
     private handleError(error, url): void {
         this.dialogService.toast(this.failCodeMap.get(error.status).msg + url);
+        sendLog({
+            first: `贾汪app报错`,
+            remark: this.failCodeMap.get(error.status).msg + url
+        });
+
     }
 
     logout() {

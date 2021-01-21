@@ -4,8 +4,8 @@
 
 export const environment = {
   production: false,
-  host: 'http://192.168.0.108:8098', // 甲旺
-  // host: 'http://36.153.74.234:10081', // 甲旺
+  // host: 'http://192.168.0.108:8098', // 甲旺
+  host: 'http://36.153.74.234:10081', // 甲旺
 };
 
 /*
