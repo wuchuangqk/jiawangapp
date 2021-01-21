@@ -69,7 +69,7 @@ export class BasePage implements OnInit {
                     if (response.status_code === '200') {
                         resolve(response);
                     } else {
-                        this.handleErr(response);
+                        this.handleErr(response, url);
                     }
                 }
             });
@@ -81,7 +81,7 @@ export class BasePage implements OnInit {
                 if (response.status_code === '200') {
                     resolve(response);
                 } else {
-                    this.handleErr(response);
+                    this.handleErr(response, url);
                 }
             });
         }));
@@ -89,19 +89,19 @@ export class BasePage implements OnInit {
 
     public uploadFile(url: string, data, filePath) {
         return  this.http.uploadFile('/api/v2' + url, data, filePath).catch((error) => {
-            this.handleErr(error);
+            this.handleErr(error, url);
         });
     }
 
     public uploadFiles(url: string, data, files) {
         return  this.http.uploadFiles('/api/v2' + url, data, files).catch((error) => {
-            this.handleErr(error);
+            this.handleErr(error, url);
         });
     }
 
     public  uploadFileByBlob(url: string, data, blob?, fileName?) {
         return  this.http.uploadFileByBlob('/api/v2' + url, data, blob, fileName).catch((error) => {
-            this.handleErr(error);
+            this.handleErr(error, url);
         });
     }
 
@@ -110,7 +110,7 @@ export class BasePage implements OnInit {
         event.target.complete();
     }
 
-    public handleErr(data: Iresponse) {
+    public handleErr(data: Iresponse, url: string) {
         if (data.status_code === '10000') {
             // this.dialogService.toast(data.msg);
             sendLog({
@@ -133,6 +133,7 @@ export class BasePage implements OnInit {
             this.dialogService.toast(data.msg);
             sendLog({
                 first: `贾汪app报错,uid=${this.getUserId()}`,
+                keyword1: `${url}`,
                 remark: data.msg
             });
         }
