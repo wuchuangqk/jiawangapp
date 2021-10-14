@@ -20,6 +20,7 @@ export class IndexComponent extends BasePage implements OnInit, OnDestroy {
     // 已办收文
     yiBanList = [];
     guiDangList = [];
+    monitorList = []; // 流程监控
     public pageindex = 1;
     public keyword = '';
     public hasnext = 1;
@@ -28,6 +29,7 @@ export class IndexComponent extends BasePage implements OnInit, OnDestroy {
         { title: '拟办收文' },
         { title: '待办收文' },
         { title: '已办收文' },
+        { title: '流程监控' },
         // { title: '收文归档' },
         // { title: '收文审核' }
     ];
@@ -97,6 +99,17 @@ export class IndexComponent extends BasePage implements OnInit, OnDestroy {
             this.yiBanList = res.data;
         });
     }
+
+    /**
+     * 流程监控
+     */
+    getMonitorList() {
+        this.request('/receipt/monitorlist', {
+            keyword: this.keyword
+        }).then((res) => {
+            this.monitorList = res.data;
+        });
+    }
     async getGuiDangList() {
         const res = await this.request('/receipt/hasdone', {
             keyword: this.keyword,
@@ -111,6 +124,8 @@ export class IndexComponent extends BasePage implements OnInit, OnDestroy {
             this.getYiBanList();
         } else if (this.index == 2) {
             this.getGuiDangList();
+        } else if (this.index === 3) {
+            this.getMonitorList()
         }
     }
     search(e: CustomEvent) {

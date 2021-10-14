@@ -18,6 +18,7 @@ export class IndexComponent extends BasePage implements OnInit, OnDestroy {
     itemList = [];
     yiBanList = [];
     guiDangList = [];
+    monitorList = []; // 流程监控
     public guiDangPageIndex = 1;
     public yiBanPageIndex = 1;
     public keyword = '';
@@ -25,11 +26,15 @@ export class IndexComponent extends BasePage implements OnInit, OnDestroy {
     public guiDangPayload: any = {};
     public yiBanHasNext = 1;
     public yiBanPayload: any = {};
+    public monitorIndex = 1;
+    public monitorHasNext = 1;
+    public monitorPayload: any = {};
 
     public menuList = [
         { title: '待办发文' },
         { title: '已办发文' },
         { title: '发文归档' },
+        { title: '流程监控' },
         // { title: '收文审核' }
     ];
     public index = 0;
@@ -63,7 +68,6 @@ export class IndexComponent extends BasePage implements OnInit, OnDestroy {
         });
     }
     search(e: CustomEvent) {
-        console.log(e.detail.value);
         this.keyword = e.detail.value;
         this.getRequst();
     }
@@ -92,6 +96,16 @@ export class IndexComponent extends BasePage implements OnInit, OnDestroy {
         this.guiDangList = res.data;
         this.guiDangHasNext = res.hasnext;
     }
+    /**
+     * 流程监控
+     */
+    getMonitorList() {
+        this.request('/dispatch/monitorlist', {
+            keyword: this.keyword
+        }).then((res) => {
+            this.monitorList = res.data;
+        });
+    }
     async getRequst() {
         if (this.index == 0) {
             this.getDocumentList();
@@ -100,6 +114,8 @@ export class IndexComponent extends BasePage implements OnInit, OnDestroy {
             await this.getYiBanList();
         } else if (this.index == 2) {
           await  this.getGuiDangList();
+        }else if (this.index == 3) {
+             this.getMonitorList();
         }
     }
     segmentChange(index) {
@@ -138,13 +154,30 @@ export class IndexComponent extends BasePage implements OnInit, OnDestroy {
     async loadGuiDangData(event) {
         this.guiDangPageIndex++;
         const isHasNext = Number(this.guiDangHasNext) === 1;
-        console.log(isHasNext);
         if (isHasNext) {
             this.guiDangPayload.pageindex = this.guiDangPageIndex;
             this.guiDangPayload.keyword = this.keyword;
             const res = (await this.request('/documents/DisPatchArchive', this.guiDangPayload));
             this.guiDangList = this.guiDangList.concat(res.data);
             this.guiDangHasNext = res.hasnext;
+        } else {
+            // await this.dialogService.toast('已加载所有数据！');
+        }
+        event.target.complete();
+    }
+
+    /*
+    * 流程监控
+    */
+    async loadMonitorData(event) {
+        this.monitorIndex++;
+        const isHasNext = Number(this.monitorHasNext) === 1;
+        if (isHasNext) {
+            this.monitorPayload.pageindex = this.monitorIndex;
+            this.monitorPayload.keyword = this.keyword;
+            const res = (await this.request('/dispatch/monitorlist', this.monitorPayload));
+            this.monitorList = this.monitorList.concat(res.data);
+            this.monitorHasNext = res.hasnext;
         } else {
             // await this.dialogService.toast('已加载所有数据！');
         }

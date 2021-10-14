@@ -108,6 +108,34 @@
           </ion-item>
         </ion-list>
       </ion-slide>
+      <ion-slide *ngIf="isHasMonitor">
+        <ion-searchbar placeholder="请输入申请人姓名" (ionChange)="doSearch($event)"></ion-searchbar>
+        <ion-list class="my-list">
+          <ion-item *ngIf="LiuChengJianKongList.length<1">
+            <p class="primary"> 无数据！ </p>
+          </ion-item>
+          <ion-item *ngFor="let item of LiuChengJianKongList"
+                    (click)="nav('synthesize/detail',{url:'/zhsp/shenpi_detail',id:item.id,title:title,contentTitle:item.title,title:'综合审批详情'})">
+            <section>
+
+              <div class="my-list-title">
+                <h2 [ngClass]="item.qjstate=='已审批'?'primary':''">
+                  <span *ngIf="item.qjstate!=='已审批'" [innerHTML]="item.qjstate"></span>
+                  <span *ngIf="item.qjstate=='已审批'">[已审批]</span>
+                  <span class="primary">{{item.title}}</span>
+                </h2>
+              </div>
+              <div class="my-list-sub">
+                <div class="my-list-sub-top flex-between">
+                  <span>{{item.qjr}}</span>
+                  <span *ngIf="item.qjstate!=='已审批'" [innerHTML]="item.qjstate"></span>
+                  <span *ngIf="item.qjstate=='已审批'">[已审批]</span>
+                </div>
+              </div>
+            </section>
+          </ion-item>
+        </ion-list>
+      </ion-slide>
 
     </ion-slides>
   </section>

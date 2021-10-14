@@ -21,6 +21,8 @@ export class IndexComponent extends BasePage implements OnInit, OnDestroy {
     shenPiList = [];
     myShenPiList = [];
     LiuChengJianKongList = [];
+    isHasMonitor: boolean = false;
+    keyword = '';
     public menuList = [
         { title: '我申请的' },
         { title: '待我审批的' },
@@ -42,6 +44,15 @@ export class IndexComponent extends BasePage implements OnInit, OnDestroy {
 
     }
     ngOnInit() {
+        // 查询是否有流程监控权限
+        this.request('/qingjia/isMonitor', {}).then((res) => {
+            if(res.data) {
+                this.isHasMonitor = true;
+                this.menuList.push({
+                    title: '流程监控'
+                });
+            }
+        });
         this.getDocumentList();
         this.getShenPiList();
         this.events.subscribe(AppConfig.Leave.List, () => {
@@ -98,10 +109,20 @@ export class IndexComponent extends BasePage implements OnInit, OnDestroy {
     }
 
     getLiuChengJianKongList() {
-        this.request('/qingjia/liuChengJianKong', {type: 1}).then((res) => {
+        this.request('/qingjia/monitorlist', {keyword: this.keyword}).then((res) => {
             this.LiuChengJianKongList = res.data;
         });
     }
+
+    /**
+     * 流程监控根据申请人姓名查询
+     * @param event
+     */
+    doSearch(event) {
+        this.keyword = event.detail.value;
+        this.getLiuChengJianKongList()
+    }
+
     doRefresh(event) {
         super.doRefresh(event);
         this.getRequest();

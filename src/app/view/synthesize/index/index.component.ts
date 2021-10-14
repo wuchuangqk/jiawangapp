@@ -18,6 +18,8 @@ export class IndexComponent extends BasePage implements OnInit, OnDestroy {
   daiBanList = [];
   yiBanList = [];
   LiuChengJianKongList = [];
+  isHasMonitor: boolean = false;
+  keyword = '';
   public menuList = [
     {title: '我的申请'},
     {title: '待办'},
@@ -42,7 +44,15 @@ export class IndexComponent extends BasePage implements OnInit, OnDestroy {
   }
 
   ngOnInit() {
-
+    // 查询是否有流程监控权限
+    this.request('/zhsp/isMonitor', {}).then((res) => {
+      if(res.data) {
+        this.isHasMonitor = true;
+        this.menuList.push({
+          title: '流程监控'
+        });
+      }
+    });
     this.getDocumentList();
     this.getDaiBanList();
     this.events.subscribe(AppConfig.Synthesize.List, () => {
@@ -78,6 +88,8 @@ export class IndexComponent extends BasePage implements OnInit, OnDestroy {
     } else if (this.index === 2) {
       // this.getLiuChengJianKongList();
       this.getMyShenPiList();
+    } else if (this.index === 3) {
+      this.getLiuChengJianKongList();
     }
   }
 
@@ -109,7 +121,7 @@ export class IndexComponent extends BasePage implements OnInit, OnDestroy {
   }
 
   getLiuChengJianKongList() {
-    this.request('/qingjia/liuChengJianKong', {type: 4}).then((res) => {
+    this.request('/zhsp/monitorlist', {keyword: this.keyword}).then((res) => {
       this.LiuChengJianKongList = res.data;
     });
   }
@@ -117,5 +129,14 @@ export class IndexComponent extends BasePage implements OnInit, OnDestroy {
   doRefresh(event) {
     super.doRefresh(event);
     this.getRequest();
+  }
+
+  /**
+   * 流程监控根据申请人姓名查询
+   * @param event
+   */
+  doSearch(event) {
+    this.keyword = event.detail.value;
+    this.getLiuChengJianKongList()
   }
 }
