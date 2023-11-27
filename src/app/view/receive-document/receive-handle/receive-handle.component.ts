@@ -8,7 +8,7 @@ import {AppConfig} from '../../../app.config';
 import {DetailBasePage} from '../../../base/detail-base-page';
 import {FileService} from "../../../service/FileService";
 import { ViewChild } from '@angular/core';
-import { SignaturePad } from 'angular2-signaturepad/signature-pad';
+import { SignaturePad } from 'angular2-signaturepad';
 import { v4 as uuidv4 } from 'uuid';
 
 import  AlloyFinger  from 'alloyfinger';

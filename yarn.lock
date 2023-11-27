@@ -2271,9 +2271,9 @@ cordova-fetch@^2.0.0:
     semver "^5.6.0"
     which "^1.3.1"
 
-"cordova-huawei-hms@https://gitee.com/hui1421/cordova-huawei-hms.git":
+"cordova-huawei-hms@https://github.com/wuchuangqk/cordova-huawei-hms.git":
   version "2.6.1"
-  resolved "https://gitee.com/hui1421/cordova-huawei-hms.git#3278871bcdb127349d91578b133ad5d7261c0a16"
+  resolved "https://github.com/wuchuangqk/cordova-huawei-hms.git#3278871bcdb127349d91578b133ad5d7261c0a16"
 
 cordova-ios@5.0.1:
   version "5.0.1"
@@ -2402,9 +2402,9 @@ cordova-plugin-statusbar@^2.4.3:
   resolved "https://registry.npm.taobao.org/cordova-plugin-statusbar/download/cordova-plugin-statusbar-2.4.3.tgz#cc557aef66c27484e0f7f045004040d03321f82d"
   integrity sha1-zFV672bCdITg9/BFAEBA0DMh+C0=
 
-"cordova-plugin-umengpush@https://gitee.com/hui1421/cordova-plugin-umengpush.git":
+"cordova-plugin-umengpush@https://github.com/wuchuangqk/cordova-plugin-umengpush.git":
   version "2.5.3"
-  resolved "https://gitee.com/hui1421/cordova-plugin-umengpush.git#1bbaf7513fce6b953488ea5f1eed4e15d1774a5c"
+  resolved "https://github.com/wuchuangqk/cordova-plugin-umengpush.git#1bbaf7513fce6b953488ea5f1eed4e15d1774a5c"
   dependencies:
     async "^3.1.0"
 

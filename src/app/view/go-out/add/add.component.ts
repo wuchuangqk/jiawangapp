@@ -20,6 +20,7 @@ export class AddComponent extends BasePage implements OnInit {
     public id: string;
     qjtypeList: [];
     public fenGuanLingDaoList=[];
+    public zhuYaoLingDaoList=[];
     params = {
         // 开始时间
         qjstime: '',
@@ -34,6 +35,7 @@ export class AddComponent extends BasePage implements OnInit {
         addr: '',
         zfdw: '',
         signCreator1:'',
+        signCreator2:'', // 主要领导
         saddr1:"",
         eaddr1:'',
         saddr2:"",
@@ -73,6 +75,7 @@ export class AddComponent extends BasePage implements OnInit {
             position: userInfo.position
         }];
         this.getFenGuanLingDaoList();
+        this.getZhuYaoLingDaoList();
     }
 
 
@@ -83,6 +86,12 @@ export class AddComponent extends BasePage implements OnInit {
     private getFenGuanLingDaoList(){
         this.request("/waichu/signCreator1",{}).then((res)=>{
             this.fenGuanLingDaoList = res.data;
+        })
+    }
+
+    private getZhuYaoLingDaoList(){
+        this.request("/waichu/signCreator2",{}).then((res)=>{
+            this.zhuYaoLingDaoList = res.data;
         })
     }
 

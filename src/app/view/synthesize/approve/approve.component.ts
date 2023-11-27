@@ -44,6 +44,8 @@ export class ApproveComponent  extends DetailBasePage implements OnInit {
 
   public ShowIndex = 0;
   public signCount = 0;
+  isJump = false // 选择下一步时是否跳级
+  isFirstSigner = false // 当第一步选择两个审批人时，第一个审批的人不能选下一步
   constructor(
       public http: HttpService,
       public router: Router,
@@ -118,6 +120,9 @@ export class ApproveComponent  extends DetailBasePage implements OnInit {
     if (this.signList.length === 1) {
       this.isSingle = true;
     }
+    // 第一步是否有两个人
+    const twoPeople = this.signIndex === 1 && this.signList.length === 3
+    this.isFirstSigner = twoPeople && !this.signList.some(val => val.signed === '已签署')
   }
   /**
    * 选择快捷语
@@ -157,21 +162,21 @@ export class ApproveComponent  extends DetailBasePage implements OnInit {
  async _getSignList() {
   if (this.signIndex === 1 ) {
     if (this.signCount === 4) {
-      return this.getSigner1();
+      return this.isJump ? this.getSign3() : this.getSign2();
     } else if (this.signCount === 3) {
-      return this.getSign2();
+      return this.getSign3();
     } else if (this.signCount === 2) {
-      return this.getSign2();
+      return this.getSign3();
     }
   } else {
-    return this.getSign2();
+    return this.getSign3();
   }
  }
 
    _getHeader() {
     if (this.signIndex === 1 ) {
       if (this.signCount === 4) {
-        return '青选择分管领导';
+        return '请选择分管领导';
       } else if (this.signCount === 3) {
         return '请选择党委书记';
       } else if (this.signCount === 2) {
@@ -207,10 +212,7 @@ export class ApproveComponent  extends DetailBasePage implements OnInit {
 
   // 选下级领导
   async showNextSigner() {
-    // signIndex:1 = 处室，处室 => 分管 => 党委
     const signList: any = await this._getSignList();
-        // this.signIndex == 1 ? await this.getSigner1() : await this.getSign2();
-    console.log('signList', signList);
     const inputs = signList.map(v => {
       return {
         name: v.name,
@@ -237,6 +239,47 @@ export class ApproveComponent  extends DetailBasePage implements OnInit {
           handler: (e) => {
             this.payload.user = e;
             // this.payload.index = String(this.signIndex + 1);
+          }
+        }
+      ]
+    });
+    await alert.present();
+  }
+
+  async showSelect() {
+    const inputs: any = [
+      {
+        name: '分管领导审批',
+        type: 'radio',
+        label: '分管领导审批',
+        value: 2
+      },
+      {
+        name: '主要领导审批',
+        type: 'radio',
+        label: '主要领导审批',
+        value: 3
+      }
+    ]
+    const alert = await this.alertController.create({
+      cssClass: 'my-custom-class',
+      header: '请选择节点执行人',
+      inputs,
+      buttons: [
+        {
+          text: '取消',
+          role: 'cancel',
+          cssClass: 'secondary',
+          handler: () => {
+            console.log('Confirm Cancel');
+          }
+        }, {
+          text: '确定',
+          handler: async (e) => {
+            console.log(e);
+            this.isJump = e == 3
+            this.payload.index = String(e);
+            this.showNextSigner()
           }
         }
       ]
@@ -300,8 +343,23 @@ export class ApproveComponent  extends DetailBasePage implements OnInit {
         } else {
           // 选择下一步
           if (this._getIsHasUser() && !this.payload.user) {
-            this.payload.index = String(this.signIndex + 1);
-            this.showNextSigner();
+            // 第一步审批在选择下级审批人时，可以选择第二步或是跳转到第三步
+            if (this.signIndex === 1) {
+              // 第一步可以选择两个人，由最后一个审批的人选择下一步
+              if (this.isFirstSigner) {
+                this.doApproval();
+              } else {
+                this.showSelect()
+              }
+            } else {
+              // 跳转到第三步，审批时无需选人
+              if (this.ShowIndex === 3) {
+                this.doApproval();
+              } else {
+                this.payload.index = String(this.signIndex + 1);
+                this.showNextSigner();
+              }
+            }
           } else {
             this.doApproval();
           }
@@ -320,16 +378,17 @@ export class ApproveComponent  extends DetailBasePage implements OnInit {
   }
 
   doApproval() {
-    console.log(this.payload);
-    if (this._getIsHasUser() ) {
+    if (this._getIsHasUser() && (!this.isFirstSigner) && this.ShowIndex !== 3) {
       if (!this.payload.user) {
         this.dialogService.toast('请选择领导！');
         this.showNextSigner();
         return false;
       }
     }
+    if (this.isFirstSigner) {
+      this.payload.index = '1'
+    }
     this.dialogService.loading('正在提交，请稍候……');
-    this.payload.index = String(this.ShowIndex + 1);
     this.setRequest('/zhsp/shenpi_save', this.payload).then((res) => {
       this.dialogService.dismiss();
       this.events.publish(AppConfig.Home.Badge);
@@ -341,8 +400,8 @@ export class ApproveComponent  extends DetailBasePage implements OnInit {
     });
   }
 
-  // 获取分管领导下拉框
-  getSigner1() {
+  // 第二步骤
+  getSign2() {
     return new Promise(resolve => {
       this.request('/zhsp/signCreator2', {}).then(res => {
         resolve(res.data);
@@ -350,8 +409,8 @@ export class ApproveComponent  extends DetailBasePage implements OnInit {
     });
   }
 
-  // 获取党委书记下拉框
-  getSign2() {
+  // 第三步骤
+  getSign3() {
     return new Promise(resolve => {
       this.request('/zhsp/signCreator3', {}).then(res => {
         resolve(res.data);

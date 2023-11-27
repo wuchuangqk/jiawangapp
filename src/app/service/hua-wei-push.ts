@@ -18,7 +18,7 @@ export class HuaWeiPushProvider {
   ) {
 
     this.platform.ready().then(() => {
-      const cordova: any = window.cordova || {};
+      const cordova: any = (window as any).cordova || {};
       const plugins: any = cordova.plugins || {};
       this.huaweipush = plugins.huaweipush;
     });
