@@ -23,11 +23,18 @@ export class HomeTabComponent  extends BasePage implements OnInit {
     public weather: any = {};
     public  itemList: Array<any> = [
         // tslint:disable-next-line:max-line-length
-        { icon: 'ios-notifications', color: '#7dc6ff', name: 'notice', title: '通知公告', url: '/notices/list', bage: '' , addUrl: 'add', isCanCommit: false , access: true},
-        { icon: 'ios-bookmarks', color: '#7dc6ff', name: 'work-diary', title: '工作日志' , url: '/work_logs/list', access: true},
-        { icon: 'ios-paper', color: '#73d1d1', name: 'dai-ban', title: '待办事项' , access: true},
-        { icon: 'ios-paper', color: '#73d1d1', name: 'dai-yue', title: '待阅事项' , access: true},
-        // { icon: 'send', color: '#fa7c92', name: 'tabs/rong-zi', title: '融资管理', access: false },
+        // { icon: 'ios-notifications', color: '#7dc6ff', name: 'notice', title: '通知公告', url: '/notices/list', bage: '' , addUrl: 'add', isCanCommit: false , access: true},
+        // { icon: 'ios-bookmarks', color: '#7dc6ff', name: 'work-diary', title: '工作日志' , url: '/work_logs/list', access: true},
+        { icon: 'list-box', color: '#c1a6f0', name: 'dai-ban', title: '待办事项' , access: true},
+        { icon: 'ios-paper', color: '#6cd7ff', name: 'dai-yue', title: '待阅事项' , access: true},
+        { icon: 'ios-paper', color: '#73d1d1', name: 'receive-document', title: '收文系统', access: true },
+        { icon: 'send', color: '#fa7c92', name: 'send-document', title: '发文系统', access: true },
+        { icon: 'ios-people', color: '#fbbd6d', name: 'assign', title: '交办督办', access: true },
+        { icon: 'calendar', color: '#b2d76a', name: 'leave', title: '请假管理', access: true },
+        { icon: 'md-pin', color: '#a3bdb9', name: 'go-out', title: '外出管理', access: true },
+        { icon: 'logo-twitch', color: '#6cd7ff', name: 'synthesize', title: '用印审批', access: true },
+        { icon: 'logo-twitch', color: '#89d4af', name: 'rong-zi/rong-zi-shen-pi', title: '融资审批', access: true },
+        // { icon: 'send', color: '#fa7c92', name: 'tabs/rong-zi', title: '融资管理', access: true },
         // tslint:disable-next-line:max-line-length
         // { icon: 'ios-chatbubbles', color: '#7dc6ff', name: 'zi-chan', title: '资产管理', url: '/work_dynamics/list', addUrl: 'exchange-add', isCanCommit: true, access: false },
         // { icon: 'md-radio', color: '#fb8862', name: 'decision-making-platform', title: '决策平台', access: false },
@@ -168,14 +175,18 @@ export class HomeTabComponent  extends BasePage implements OnInit {
         this.request('/home/homeaccess', {}).then((res) => {
             console.log(res);
             const data = res.data;
-            // this.itemList[4].access = data.rz;
+            this.itemList[8].access = data.rz;
             // this.itemList[5].access = data.zc;
             // this.itemList[6].access = data.jc;
         });
         this.request('/home/homecont', {}).then((res) => {
-            this.itemList[0].badge = Number(res.data.noticecount);  //  通知公告
-            this.itemList[2].badge = Number(res.data.todocount);    //  收文系统
-            this.itemList[3].badge = Number(res.data.toreadcount);    //  发文系统
+            this.itemList[0].badge = Number(res.data.todocount);  //  待办事项
+            this.itemList[1].badge = Number(res.data.toreadcount);  //  待阅事项
+            this.itemList[2].badge = Number(res.data.receiptcount);    //  收文系统
+            this.itemList[3].badge = Number(res.data.dispatchcount);    //  发文系统
+            this.itemList[4].badge = Number(res.data.jbdb);  //  交办督办
+            this.itemList[5].badge = Number(res.data.qjsp);  //  请假管理
+            this.itemList[6].badge = Number(res.data.wcsp);  //  外出管理
         }).catch((err) => {
             console.log(err);
         });
