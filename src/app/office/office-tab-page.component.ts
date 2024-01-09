@@ -86,7 +86,7 @@ export class OfficeTabPage extends BasePage implements OnInit {
       this.setAccess('请假管理', data['请假管理'])
       this.setAccess('加班管理', data['加班管理'])
       this.setAccess('外出管理', data['外出管理'])
-      this.setAccess('用印审批', data['用印申请'])
+      this.setAccess('用印审批', data['用印管理'])
   });
     this.request('/home/homecont', {}).then((res) => {
       this.setBadge('通知公告', Number(res.data.noticecontent))

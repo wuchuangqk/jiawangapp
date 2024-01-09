@@ -105,14 +105,24 @@ export class IndexComponent extends BasePage implements OnInit, OnDestroy {
         });
     }
     getRequest() {
-        if (this.index == 0) {
-            this.getDocumentList();
-        } else if (this.index == 1) {
-            this.getShenPiList();
-        } else if (this.index == 2){
-            this.getMyShenPiList();
-        } else if (this.index === 3){
-            this.getLiuChengJianKongList();
+        if (this.isHasShenQing) {
+            if (this.index == 0) {
+                this.getDocumentList();
+            } else if (this.index == 1) {
+                this.getShenPiList();
+            } else if (this.index == 2){
+                this.getMyShenPiList();
+            } else if (this.index === 3){
+                this.getLiuChengJianKongList();
+            }
+        } else {
+            if (this.index == 0) {
+                this.getShenPiList();
+            } else if (this.index == 1) {
+                this.getMyShenPiList();
+            } else if (this.index == 2){
+                this.getLiuChengJianKongList();
+            }
         }
     }
     doRefresh(event) {

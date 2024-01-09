@@ -19,14 +19,16 @@ export class IndexComponent extends BasePage implements OnInit, OnDestroy {
   yiBanList = [];
   LiuChengJianKongList = [];
   isHasMonitor: boolean = false;
+  isHasShenQing: boolean = false;
   keyword = '';
   public menuList = [
-    {title: '我的申请'},
+    // {title: '我的申请'},
     {title: '待办'},
     {title: '已办'},
     // { title: '流程监控' },
   ];
   public index = 0;
+  isGetPermission = false
 
   constructor(
     public http: HttpService,
@@ -53,6 +55,13 @@ export class IndexComponent extends BasePage implements OnInit, OnDestroy {
         });
       }
     });
+    this.request('/home/homeaccess', {}).then((res) => {
+      this.isHasShenQing = res.data['用印申请']
+      if (this.isHasShenQing) {
+          this.menuList.unshift({ title: '我的申请' })
+      }
+      this.isGetPermission = true
+    })
     this.getDocumentList();
     this.getDaiBanList();
     this.events.subscribe(AppConfig.Synthesize.List, () => {
@@ -81,16 +90,28 @@ export class IndexComponent extends BasePage implements OnInit, OnDestroy {
   }
 
   getRequest() {
-    if (this.index == 0) {
-      this.getDocumentList();
-    } else if (this.index == 1) {
-      this.getDaiBanList();
-    } else if (this.index === 2) {
-      // this.getLiuChengJianKongList();
-      this.getMyShenPiList();
-    } else if (this.index === 3) {
-      this.getLiuChengJianKongList();
+    if (this.isHasShenQing) {
+      if (this.index == 0) {
+        this.getDocumentList();
+      } else if (this.index == 1) {
+        this.getDaiBanList();
+      } else if (this.index === 2) {
+        // this.getLiuChengJianKongList();
+        this.getMyShenPiList();
+      } else if (this.index === 3) {
+        this.getLiuChengJianKongList();
+      }
+    } else {
+      if (this.index == 0) {
+        this.getDaiBanList();
+      } else if (this.index == 1) {
+        this.getMyShenPiList();
+      } else if (this.index === 2) {
+        // this.getLiuChengJianKongList();
+        this.getLiuChengJianKongList();
+      }
     }
+    
   }
 
   /*

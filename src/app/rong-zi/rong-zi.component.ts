@@ -13,7 +13,7 @@ import { AppConfig} from '../app.config';
 })
 export class RongZiComponent extends BasePage implements OnInit {
 
-  public itemList = [
+  public itemList: Array<any> = [
     // { icon: 'logo-twitch', color: '#6cd7ff', name: 'bao-xiao', title: '报销管理' },
     // { icon: 'ios-create', color: '#b2d76a', name: 'archive-management/00000000-0000-0000-0000-000000000000', title: '档案管理' },
     // { icon: 'ios-briefcase-outline', color: '#b6c3b9', name: '', title: '项目库' },

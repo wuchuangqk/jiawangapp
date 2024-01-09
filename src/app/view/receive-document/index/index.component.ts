@@ -59,6 +59,7 @@ export class IndexComponent extends BasePage implements OnInit, OnDestroy {
             this.getShenPiList();
         });
         this.getDocumentList();
+        this.getDaiBanList()
         this.getShenPiList();
         this.request('/home/homeaccess', {}).then(res => {
             this.isHasNiBan = res.data['拟办收文']
@@ -102,7 +103,7 @@ export class IndexComponent extends BasePage implements OnInit, OnDestroy {
             this.shenPiList = res.data;
         });
     }
-    getYiBanList() {
+    getDaiBanList() {
         this.request('/receipt/todo', {
             keyword: this.keyword
         }).then((res) => {
@@ -120,23 +121,33 @@ export class IndexComponent extends BasePage implements OnInit, OnDestroy {
             this.monitorList = res.data;
         });
     }
-    async getGuiDangList() {
+    async getYiBanList() {
         const res = await this.request('/receipt/hasdone', {
             keyword: this.keyword,
         });
         this.guiDangList = res.data;
     }
     getRequst() {
-        if (this.index == 0) {
-            this.getDocumentList();
-        } else if (this.index == 1) {
-            // this.getShenPiList();
-            this.getYiBanList();
-        } else if (this.index == 2) {
-            this.getGuiDangList();
-        } else if (this.index === 3) {
-            this.getMonitorList()
+        if (this.isHasNiBan) {
+            if (this.index == 0) {
+                this.getDocumentList();
+            } else if (this.index == 1) {
+                this.getDaiBanList();
+            } else if (this.index == 2) {
+                this.getYiBanList();
+            } else if (this.index === 3) {
+                this.getMonitorList()
+            }
+        } else {
+            if (this.index == 0) {
+                this.getDaiBanList();
+            } else if (this.index == 1) {
+                this.getYiBanList();
+            } else if (this.index == 2) {
+                this.getMonitorList();
+            }
         }
+        
     }
     search(e: CustomEvent) {
         console.log(e.detail.value);

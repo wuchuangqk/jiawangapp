@@ -81,13 +81,20 @@ export class RongZiShengPiComponent  extends BasePage implements OnInit {
     this.slides.slideTo(index);
   }
   getRequest() {
-    if (this.index == 0) {
-      this.getDocumentList();
-    } else if( this.index == 1){
-      this.getDaiBanList();
-    }else if( this.index === 2 ){
-      // this.getLiuChengJianKongList();
-      this.getMyShenPiList();
+    if (this.isHasShenQing) {
+      if (this.index == 0) {
+        this.getDocumentList();
+      } else if( this.index == 1){
+        this.getDaiBanList();
+      }else if( this.index === 2 ){
+        this.getMyShenPiList();
+      }
+    } else {
+      if (this.index == 0) {
+        this.getDaiBanList();
+      } else if( this.index == 1){
+        this.getMyShenPiList();
+      }
     }
   }
   /*

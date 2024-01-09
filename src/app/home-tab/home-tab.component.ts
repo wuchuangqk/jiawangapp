@@ -31,6 +31,7 @@ export class HomeTabComponent  extends BasePage implements OnInit {
         { icon: 'send', color: '#fa7c92', name: 'send-document', title: '发文系统', access: true },
         { icon: 'ios-people', color: '#fbbd6d', name: 'assign', title: '交办督办', access: true },
         { icon: 'calendar', color: '#b2d76a', name: 'leave', title: '请假管理', access: true },
+        { icon: 'ios-alarm', color: '#c1a6f0', name: 'overtime-work', title: '加班管理', access: true },
         { icon: 'md-pin', color: '#a3bdb9', name: 'go-out', title: '外出管理', access: true },
         { icon: 'logo-twitch', color: '#6cd7ff', name: 'synthesize', title: '用印审批', access: true },
         { icon: 'logo-twitch', color: '#89d4af', name: 'rong-zi/rong-zi-shen-pi', title: '融资审批', access: true },
@@ -193,8 +194,9 @@ export class HomeTabComponent  extends BasePage implements OnInit {
             this.setAccess('发文系统', data['发文系统'])
             this.setAccess('交办督办', data['交办督办'])
             this.setAccess('请假管理', data['请假管理'])
+            this.setAccess('加班管理', data['加班管理'])
             this.setAccess('外出管理', data['外出管理'])
-            this.setAccess('用印审批', data['用印申请'])
+            this.setAccess('用印审批', data['用印管理'])
             this.setAccess('融资审批', data['融资审批'])
         });
         this.request('/home/homecont', {}).then((res) => {
@@ -204,6 +206,7 @@ export class HomeTabComponent  extends BasePage implements OnInit {
             this.setBadge('发文系统', Number(res.data.dispatchcount))
             this.setBadge('交办督办', Number(res.data['交办督办个数']))
             this.setBadge('请假管理', Number(res.data['请假管理个数']))
+            this.setBadge('加班管理', Number(res.data['加班管理个数']))
             this.setBadge('外出管理', Number(res.data['外出管理个数']))
             this.setBadge('用印审批', Number(res.data['用印申请个数']))
             this.setBadge('融资审批', Number(res.data['融资审批个数']))
