@@ -19,14 +19,16 @@ export class IndexComponent extends BasePage implements OnInit , OnDestroy {
     myShenPiList = [];
     LiuChengJianKongList = [];
     isHasMonitor: boolean = false;
+    isHasShenQing: boolean = false;
     keyword = '';
     public menuList = [
-        { title: '我申请的' },
+        // { title: '我申请的' },
         { title: '待我审批的' },
         { title: '我已审批的' },
         // { title: '流程监控' },
     ];
     public index = 0;
+    isGetPermission = false
     constructor(
         public http: HttpService,
         public router: Router,
@@ -50,6 +52,13 @@ export class IndexComponent extends BasePage implements OnInit , OnDestroy {
                 });
             }
         });
+        this.request('/home/homeaccess', {}).then((res) => {
+            this.isHasShenQing = res.data['加班申请']
+            if (this.isHasShenQing) {
+                this.menuList.unshift({ title: '我申请的' })
+            }
+            this.isGetPermission = true
+        })
         this.getDocumentList();
         this.getShenPiList();
         this.events.subscribe(AppConfig.OvertimeWork.List, () => {

@@ -25,14 +25,16 @@
         </ion-refresher-content>
     </ion-refresher>
     <div class="item-wrapper">
-        <div class="item" *ngFor="let item of itemList" (click)="nav(item.name,{url:item.url||'',title:item.title,addUrl:item.addUrl,isCanCommit:item.isCanCommit})">
-            <div class="cicle" [ngStyle] = "{background:item.color}">
-                <ion-badge *ngIf="item.badge" class="icon-badge"  color="danger">
-                    {{item.badge}}
-                </ion-badge>
-                <ion-icon [name]="item.icon"></ion-icon>
+        <ng-container *ngFor="let item of itemList">
+            <div *ngIf="item.access" class="item" (click)="nav(item.name,{url:item.url||'',title:item.title,addUrl:item.addUrl,isCanCommit:item.isCanCommit})">
+                <div class="cicle" [ngStyle] = "{background:item.color}">
+                    <ion-badge *ngIf="item.badge" class="icon-badge"  color="danger">
+                        {{item.badge}}
+                    </ion-badge>
+                    <ion-icon [name]="item.icon"></ion-icon>
+                </div>
+                <div class="ion-text-center">{{item.title}}</div>
             </div>
-            <div class="ion-text-center">{{item.title}}</div>
-        </div>
+        </ng-container>
     </div>
 </ion-content>

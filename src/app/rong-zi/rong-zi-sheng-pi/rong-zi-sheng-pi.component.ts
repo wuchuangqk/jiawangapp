@@ -21,13 +21,15 @@ export class RongZiShengPiComponent  extends BasePage implements OnInit {
   daiBanList = [];
   yiBanList= [];
   LiuChengJianKongList = [];
+  isHasShenQing: boolean = false;
   public menuList = [
-    { title: '我的申请' },
+    // { title: '我的申请' },
     { title: '待办' },
     { title: '已办' },
     // { title: '流程监控' },
   ];
   public index = 0;
+  isGetPermission = false
   constructor(
       public http: HttpService,
       public router: Router,
@@ -53,6 +55,13 @@ export class RongZiShengPiComponent  extends BasePage implements OnInit {
     this.events.subscribe(AppConfig.Synthesize.ShenPiList, () => {
       this.getDaiBanList();
     });
+    this.request('/home/homeaccess', {}).then((res) => {
+      this.isHasShenQing = res.data['融资审批申请']
+      if (this.isHasShenQing) {
+          this.menuList.unshift({ title: '我申请的' })
+      }
+      this.isGetPermission = true
+    })
   }
   ngOnDestroy(): void {
     this.events.unsubscribe(AppConfig.Synthesize.List);

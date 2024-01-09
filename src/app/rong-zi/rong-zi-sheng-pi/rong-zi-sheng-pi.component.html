@@ -3,7 +3,7 @@
     <app-back></app-back>
     <ion-title style="padding:0 40px;">
       <div class="segment-wrapper">
-        <ion-segment (ngModelChange)="segmentChange($event)" [(ngModel)]="index">
+        <ion-segment *ngIf="isGetPermission" (ngModelChange)="segmentChange($event)" [(ngModel)]="index">
           <ion-segment-button *ngFor="let item of menuList;let i=index" [value]="i">
             {{item.title}}
           </ion-segment-button>
@@ -30,7 +30,7 @@
 
     <ion-slides (ionSlideWillChange)="change()">
 
-      <ion-slide>
+      <ion-slide *ngIf="isHasShenQing">
         <ion-list class="my-list">
           <ion-item *ngIf="itemList.length<1">
             <p class="primary">

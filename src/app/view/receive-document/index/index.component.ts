@@ -26,7 +26,7 @@ export class IndexComponent extends BasePage implements OnInit, OnDestroy {
     public hasnext = 1;
     public payload: any = {};
     public menuList = [
-        { title: '拟办收文' },
+        // { title: '拟办收文' },
         { title: '待办收文' },
         { title: '已办收文' },
         { title: '流程监控' },
@@ -34,6 +34,8 @@ export class IndexComponent extends BasePage implements OnInit, OnDestroy {
         // { title: '收文审核' }
     ];
     public index = 0;
+    isHasNiBan: boolean = false
+    isGetPermission = false
     constructor(
         public http: HttpService,
         public router: Router,
@@ -58,6 +60,14 @@ export class IndexComponent extends BasePage implements OnInit, OnDestroy {
         });
         this.getDocumentList();
         this.getShenPiList();
+        this.request('/home/homeaccess', {}).then(res => {
+            this.isHasNiBan = res.data['拟办收文']
+            if (this.isHasNiBan) {
+                this.menuList.unshift({ title: '拟办收文' })
+                this.index = 0
+            }
+            this.isGetPermission = true
+        })
     }
     ngOnDestroy(): void {
         this.events.unsubscribe((AppConfig.Document.DocumentList));

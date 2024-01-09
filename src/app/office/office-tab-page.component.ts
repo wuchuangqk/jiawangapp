@@ -4,6 +4,7 @@ import {HttpService} from '../service/http.service';
 import {ActivatedRoute, Router} from '@angular/router';
 import {DialogService} from '../service/dialog.service';
 import {Events, NavController} from '@ionic/angular';
+import { AppConfig} from '../app.config';
 
 @Component({
   selector: 'app-tab2',
@@ -14,21 +15,21 @@ export class OfficeTabPage extends BasePage implements OnInit {
 
   public itemList: Array<any> = [
     { icon: 'ios-notifications', color: '#7dc6ff', name: 'notice',
-      title: '通知公告', url: '/notices/list', bage: '' , addUrl: 'add', isCanCommit: false },
-    { icon: 'ios-bookmarks', color: '#7dc6ff', name: 'work-diary', title: '工作日志' , url: '/work_logs/list'},
+      title: '通知公告', url: '/notices/list', bage: '' , addUrl: 'add', isCanCommit: false, access: true },
+    { icon: 'ios-bookmarks', color: '#7dc6ff', name: 'work-diary', title: '工作日志' , url: '/work_logs/list', access: true},
     // { icon: 'megaphone', color: '#6cd7ff', name: 'work-plan', title: '工作计划', url: '/workplan/list' },
-    { icon: 'ios-paper', color: '#73d1d1', name: 'receive-document', title: '收文系统' },
-    { icon: 'send', color: '#fa7c92', name: 'send-document', title: '发文系统' },
+    { icon: 'ios-paper', color: '#73d1d1', name: 'receive-document', title: '收文系统', access: true },
+    { icon: 'send', color: '#fa7c92', name: 'send-document', title: '发文系统', access: true },
     { icon: 'ios-chatbubbles', color: '#7dc6ff', name: 'work-dynamics',
-      title: '工作交流', url: '/work_dynamics/list', addUrl: 'exchange-add', isCanCommit: true },
-    { icon: 'ios-people', color: '#fbbd6d', name: 'assign', title: '交办督办' },
-    { icon: 'calendar', color: '#b2d76a', name: 'leave', title: '请假管理' },
-    { icon: 'ios-alarm', color: '#c1a6f0', name: 'overtime-work', title: '加班管理' },
-    { icon: 'md-pin', color: '#a3bdb9', name: 'go-out', title: '外出管理' },
-    { icon: 'logo-twitch', color: '#6cd7ff', name: 'synthesize', title: '用印审批' },
-    { icon: 'ios-folder', color: '#6cd7ff', name: 'property', title: '资产购置' },
-    { icon: 'ios-folder', color: '#6cd7ff', name: 'he-tong-shen-cha', title: '合同审查' },
-    { icon: 'list-box', color: '#c1a6f0', name: 'zi-jin-zhi-fu', title: '资金支付' },
+      title: '工作交流', url: '/work_dynamics/list', addUrl: 'exchange-add', isCanCommit: true, access: true },
+    { icon: 'ios-people', color: '#fbbd6d', name: 'assign', title: '交办督办', access: true },
+    { icon: 'calendar', color: '#b2d76a', name: 'leave', title: '请假管理', access: true },
+    { icon: 'ios-alarm', color: '#c1a6f0', name: 'overtime-work', title: '加班管理', access: true },
+    { icon: 'md-pin', color: '#a3bdb9', name: 'go-out', title: '外出管理', access: true },
+    { icon: 'logo-twitch', color: '#6cd7ff', name: 'synthesize', title: '用印审批', access: true },
+    { icon: 'ios-folder', color: '#6cd7ff', name: 'property', title: '资产购置', access: true },
+    { icon: 'ios-folder', color: '#6cd7ff', name: 'he-tong-shen-cha', title: '合同审查', access: true },
+    { icon: 'list-box', color: '#c1a6f0', name: 'zi-jin-zhi-fu', title: '资金支付', access: true },
     // { icon: 'ios-folder', color: '#6cd7ff', name: 'finance-detail', title: '资产明细' },
     // { icon: 'megaphone', color: '#6cd7ff', name: 'cultural-propaganda', title: '党建园地', url: '/notices/wenxuan_list' },
     // { icon: 'logo-twitch', color: '#6cd7ff', name: 'bao-xiao', title: '报销管理' },
@@ -57,22 +58,46 @@ export class OfficeTabPage extends BasePage implements OnInit {
   ngOnInit() {
     // super.ngOnInit();
       this.getHomeConfigData()
+      this.events.subscribe(AppConfig.Home.Badge, () => {
+          this.getHomeConfigData();
+      });
+  }
+
+  setBadge(type: string, count: number) {
+    const item = this.itemList.find(val => val.title === type)
+    if (typeof item !== 'undefined') {
+      item.badge = count
+    }
+  }
+
+  setAccess(type: string, access: boolean) {
+    const item = this.itemList.find(val => val.title === type)
+    if (typeof item !== 'undefined') {
+      item.access = access
+    }
   }
 
   getHomeConfigData() {
+    this.request('/home/homeaccess', {}).then((res) => {
+      const data = res.data;
+      this.setAccess('收文系统', data['收文系统'])
+      this.setAccess('发文系统', data['发文系统'])
+      this.setAccess('交办督办', data['交办督办'])
+      this.setAccess('请假管理', data['请假管理'])
+      this.setAccess('加班管理', data['加班管理'])
+      this.setAccess('外出管理', data['外出管理'])
+      this.setAccess('用印审批', data['用印申请'])
+  });
     this.request('/home/homecont', {}).then((res) => {
-      this.itemList[0].badge = Number(res.data.noticecontent);  //  通知公告
-      this.itemList[1].badge = Number(res.data.gzrz);  //  工作日志(该项没有推送)
-      this.itemList[2].badge = Number(res.data.receiptcount);    //  收文系统
-      this.itemList[3].badge = Number(res.data.dispatchcount);    //  发文系统
-      this.itemList[4].badge = Number(res.data.workcount);  //  工作交流
-      this.itemList[6].badge = Number(res.data.jbdb);  //  交办督办
-      this.itemList[7].badge = Number(res.data.qjsp);  //  请假管理
-      this.itemList[8].badge = Number(res.data.jbsp);  //  加班管理
-      this.itemList[9].badge = Number(res.data.wcsp);  //  外出管理
-      this.itemList[10].bdage = Number(res.data.zhsp);  //  综合管理
-      // this.itemList[10].bage = Number(res.data.zcgz); //  资产购置
-      // this.itemList[11].bage = Number(res.data.whxc); //  文化宣传
+      this.setBadge('通知公告', Number(res.data.noticecontent))
+      this.setBadge('收文系统', Number(res.data.receiptcount))
+      this.setBadge('发文系统', Number(res.data.dispatchcount))
+      this.setBadge('工作交流', Number(res.data.workcount))
+      this.setBadge('交办督办', Number(res.data['交办督办个数']))
+      this.setBadge('请假管理', Number(res.data['请假管理个数']))
+      this.setBadge('加班管理', Number(res.data['加班管理个数']))
+      this.setBadge('外出管理', Number(res.data['外出管理个数']))
+      this.setBadge('用印审批', Number(res.data['用印申请个数']))
     }).catch((err) => {
       console.log(err);
     });

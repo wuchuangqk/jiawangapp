@@ -4,6 +4,7 @@ import {HttpService} from '../service/http.service';
 import {ActivatedRoute, Router} from '@angular/router';
 import {DialogService} from '../service/dialog.service';
 import {Events, NavController} from '@ionic/angular';
+import { AppConfig} from '../app.config';
 
 @Component({
   selector: 'app-rong-zi',
@@ -22,9 +23,9 @@ export class RongZiComponent extends BasePage implements OnInit {
     // // { icon: 'ios-calendar', color: '#75bcd8', name: '', title: '节点监控' },
     // { icon: 'md-radio', color: '#fb8862', name: 'decision-making-platform', title: '决策平台' },
     // // { icon: 'ios-school', color: '#babda7', name: 'GongChengShenPiPage', title: '工程相关管理' },
-    { icon: 'md-trending-up', color: '#6dbbff', name: 'rong-zi/tai-zhang', title: '融资台账' },
-    { icon: 'logo-usd', color: '#f9a970', name: 'finance-reimbursement', title: '还款预警' },
-    { icon: 'logo-twitch', color: '#89d4af', name: 'rong-zi/rong-zi-shen-pi', title: '融资审批' },
+    { icon: 'md-trending-up', color: '#6dbbff', name: 'rong-zi/tai-zhang', title: '融资台账', access: true },
+    { icon: 'logo-usd', color: '#f9a970', name: 'finance-reimbursement', title: '还款预警', access: true },
+    { icon: 'logo-twitch', color: '#89d4af', name: 'rong-zi/rong-zi-shen-pi', title: '融资审批', access: true },
     // { icon: 'ios-pin', color: '#94aac1', name: 'full-map', title: '全景地图' },
   ];
   constructor(
@@ -38,4 +39,36 @@ export class RongZiComponent extends BasePage implements OnInit {
     super(http, router, navController, dialogService);
   }
 
+  ngOnInit() {
+      this.getHomeConfigData()
+      this.events.subscribe(AppConfig.Home.Badge, () => {
+          this.getHomeConfigData();
+      });
+  }
+
+  setBadge(type: string, count: number) {
+    const item = this.itemList.find(val => val.title === type)
+    if (typeof item !== 'undefined') {
+      item.badge = count
+    }
+  }
+
+  setAccess(type: string, access: boolean) {
+    const item = this.itemList.find(val => val.title === type)
+    if (typeof item !== 'undefined') {
+      item.access = access
+    }
+  }
+
+  getHomeConfigData() {
+    this.request('/home/homeaccess', {}).then((res) => {
+      const data = res.data;
+      this.setAccess('融资审批', data['融资审批'])
+    });
+    this.request('/home/homecont', {}).then((res) => {
+      this.setBadge('融资审批', Number(res.data['融资审批个数']))
+    }).catch((err) => {
+      console.log(err);
+    });
+  }
 }

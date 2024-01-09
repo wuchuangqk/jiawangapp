@@ -168,25 +168,45 @@ export class HomeTabComponent  extends BasePage implements OnInit {
         this.getHomeConfigData();
         this.getWeather();
     }
+
+    setBadge(type: string, count: number) {
+        const item = this.itemList.find(val => val.title === type)
+        if (typeof item !== 'undefined') {
+          item.badge = count
+        }
+    }
+
+    setAccess(type: string, access: boolean) {
+        const item = this.itemList.find(val => val.title === type)
+        if (typeof item !== 'undefined') {
+          item.access = access
+        }
+    }
+
     /**
      * @description 获取角标
      */
     getHomeConfigData() {
         this.request('/home/homeaccess', {}).then((res) => {
-            console.log(res);
             const data = res.data;
-            this.itemList[8].access = data.rz;
-            // this.itemList[5].access = data.zc;
-            // this.itemList[6].access = data.jc;
+            this.setAccess('收文系统', data['收文系统'])
+            this.setAccess('发文系统', data['发文系统'])
+            this.setAccess('交办督办', data['交办督办'])
+            this.setAccess('请假管理', data['请假管理'])
+            this.setAccess('外出管理', data['外出管理'])
+            this.setAccess('用印审批', data['用印申请'])
+            this.setAccess('融资审批', data['融资审批'])
         });
         this.request('/home/homecont', {}).then((res) => {
-            this.itemList[0].badge = Number(res.data.todocount);  //  待办事项
-            this.itemList[1].badge = Number(res.data.toreadcount);  //  待阅事项
-            this.itemList[2].badge = Number(res.data.receiptcount);    //  收文系统
-            this.itemList[3].badge = Number(res.data.dispatchcount);    //  发文系统
-            this.itemList[4].badge = Number(res.data.jbdb);  //  交办督办
-            this.itemList[5].badge = Number(res.data.qjsp);  //  请假管理
-            this.itemList[6].badge = Number(res.data.wcsp);  //  外出管理
+            this.setBadge('待办事项', Number(res.data.todocount))
+            this.setBadge('待阅事项', Number(res.data.toreadcount))
+            this.setBadge('收文系统', Number(res.data.receiptcount))
+            this.setBadge('发文系统', Number(res.data.dispatchcount))
+            this.setBadge('交办督办', Number(res.data['交办督办个数']))
+            this.setBadge('请假管理', Number(res.data['请假管理个数']))
+            this.setBadge('外出管理', Number(res.data['外出管理个数']))
+            this.setBadge('用印审批', Number(res.data['用印申请个数']))
+            this.setBadge('融资审批', Number(res.data['融资审批个数']))
         }).catch((err) => {
             console.log(err);
         });

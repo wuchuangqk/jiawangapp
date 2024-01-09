@@ -5,7 +5,7 @@
 <!--        收文系统-->
 <!--      {{item.title}}-->
       <div class="segment-wrapper">
-        <ion-segment (ngModelChange)="segmentChange($event)" [(ngModel)]="index">
+        <ion-segment *ngIf="isGetPermission" (ngModelChange)="segmentChange($event)" [(ngModel)]="index">
           <ion-segment-button *ngFor="let item of menuList;let i=index" [value]="i">
               {{item.title}}
           </ion-segment-button>
@@ -29,7 +29,7 @@
   <section>
     <ion-searchbar placeholder="请输入..." (ionChange)="search($event)"></ion-searchbar>
     <ion-slides (ionSlideWillChange)="change()">
-      <ion-slide>
+      <ion-slide *ngIf="isHasNiBan">
         <!--拟办列表-->
         <ion-list class="my-list">
           <ion-item *ngIf="itemList.length<=0" >

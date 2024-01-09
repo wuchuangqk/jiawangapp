@@ -4,7 +4,6 @@
 
 export const environment = {
   production: false,
-  // host: 'http://36.153.74.234:10081', // 甲旺
   host: 'http://xz.jwcljt.com:10081'
   // host: 'https://36q635g350.zicp.fun', // 甲旺
 };
