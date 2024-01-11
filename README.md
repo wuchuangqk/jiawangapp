@@ -1,7 +1,13 @@
 # 运行项目
-安装依赖
+## 安装依赖
+
+项目依赖
 ```
 npm i
+```
+全局依赖
+```
+npm install -g @ionic/cli@7.1.1
 ```
 package.json
 
@@ -13,13 +19,13 @@ package.json
   }
 }
 ```
-启动项目
+## 启动项目
 ```
 npm start
 ```
 浏览器输入项目地址，例如192.168.0.103:8300（不能用localhost）
 # 打包
-更新版本号
+## 更新版本号
 
 config.xml，修改version字段
 ```xml
@@ -38,7 +44,7 @@ config.xml，修改version字段
 ```
 .\build_android.bat
 ```
-apk签名
+## apk签名
 
 打包完成的apk默认没有签名，无法安装到手机。将未签名的apk（app-release-unsigned.apk）复制到项目根目录，执行以下命令。密钥库密码短语: mlh1421
 ```
